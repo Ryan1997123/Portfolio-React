@@ -1,4 +1,5 @@
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { projects } from '../data/projects'
 import './portfolio-pages.css'
@@ -12,15 +13,48 @@ const navItems = [
 ]
 
 function SiteLayout({ children }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="portfolio-shell min-h-screen bg-[#101112] text-zinc-100">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-10 lg:px-14">
+      <header className="relative z-30 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-10 lg:px-14">
         <Link to="/" className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-100">Ryan / Studio</Link>
-        <nav className="flex flex-wrap justify-end gap-x-5 gap-y-2" aria-label="Main navigation">
+        <nav className="hidden flex-wrap justify-end gap-x-5 gap-y-2 md:flex" aria-label="Main navigation">
           {navItems.map(([path, label]) => (
             <Link key={path} to={path} className="text-sm text-zinc-400 transition-colors hover:text-cyan-300">{label}</Link>
           ))}
         </nav>
+        <button
+          type="button"
+          className="relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span className={`block h-px w-4 bg-current transition-transform ${menuOpen ? 'translate-y-1 rotate-45' : ''}`} />
+          <span className={`block h-px w-4 bg-current transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block h-px w-4 bg-current transition-transform ${menuOpen ? '-translate-y-1 -rotate-45' : ''}`} />
+        </button>
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.nav
+              id="mobile-navigation"
+              aria-label="Mobile navigation"
+              className="absolute inset-x-0 top-0 -z-10 border-b border-white/10 bg-[#101112] px-6 pb-8 pt-24 shadow-2xl sm:px-10"
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -18 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="mx-auto flex max-w-7xl flex-col gap-5">
+                {navItems.map(([path, label]) => (
+                  <Link key={path} to={path} className="border-b border-white/10 pb-3 text-2xl tracking-tight text-zinc-200 transition-colors hover:text-cyan-300" onClick={() => setMenuOpen(false)}>{label}</Link>
+                ))}
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
       {children}
       <footer className="mx-auto flex w-full max-w-7xl justify-between border-t border-white/10 px-6 py-6 text-xs text-zinc-500 sm:px-10 lg:px-14">
