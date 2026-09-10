@@ -1,0 +1,11 @@
+@layer theme, base, components;
+
+.velocity-bento {
+  --motion-ui-transition-snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ui-transition-snap-duration: 0.15s;
+  --velocity-bento-hover-border: color-mix(in srgb, var(--primary) 40%, var(--card));
+
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}

@@ -1,7 +1,7 @@
-import FeatureBento from './components/ui/feature-bento'
+import PageCurtainsContent from './components/ui/page-curtains'
 
 function App() {
-  return <FeatureBento />
+  return <PageCurtainsContent />
 }
 
 export default App

@@ -1,0 +1,19 @@
+@layer theme, base, components;
+
+.velocity-curtains {
+  --motion-ui-transition-snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ui-transition-snap-duration: 0.15s;
+  isolation: isolate;
+}
+
+.velocity-curtains-glow {
+  position: absolute;
+  inset: 12% auto auto 50%;
+  width: min(70vw, 560px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgb(34 211 238 / 0.12), transparent 68%);
+  filter: blur(18px);
+  pointer-events: none;
+  transform: translateX(-50%);
+}

@@ -1,4 +1,5 @@
 import { motion, useMotionValue, useSpring } from 'motion/react'
+import './feature-bento.css'
 
 const tiles = [
   {
@@ -67,7 +68,7 @@ function EventRow({ name, time, tone }) {
 
 function FeatureBento() {
   return (
-    <main className="min-h-screen bg-[#101112] px-6 py-10 font-sans text-zinc-100 sm:px-10 lg:px-16 lg:py-16">
+    <main className="velocity-bento min-h-screen bg-[#101112] px-6 py-10 text-left font-sans text-zinc-100 sm:px-10 lg:px-16 lg:py-16">
       <motion.div
         className="mx-auto flex w-full max-w-6xl flex-col gap-10"
         initial="hidden"
@@ -95,7 +96,7 @@ function FeatureBento() {
           className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:auto-rows-fr lg:grid-cols-3"
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
         >
-          <TiltCard className="group flex min-h-[360px] flex-col justify-between border border-zinc-800 bg-zinc-900 p-6 sm:col-span-2 lg:row-span-2 lg:min-h-[420px]">
+          <TiltCard className="group flex min-h-[360px] flex-col justify-between border border-zinc-800 bg-zinc-900 p-6 transition-colors duration-[var(--motion-ui-transition-snap-duration)] ease-[var(--motion-ui-transition-snap)] hover:border-(--velocity-bento-hover-border) sm:col-span-2 lg:row-span-2 lg:min-h-[420px]">
             <div className="flex flex-col gap-3">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">Real-time product intelligence</p>
               <h2 className="max-w-md text-2xl font-medium tracking-tight sm:text-3xl">Every event, the moment it happens.</h2>
@@ -108,7 +109,7 @@ function FeatureBento() {
             </ul>
           </TiltCard>
 
-          <TiltCard className="flex min-h-[205px] flex-col justify-between border border-zinc-800 bg-zinc-900 p-5">
+          <TiltCard className="flex min-h-[205px] flex-col justify-between border border-zinc-800 bg-zinc-900 p-5 transition-colors duration-[var(--motion-ui-transition-snap-duration)] ease-[var(--motion-ui-transition-snap)] hover:border-(--velocity-bento-hover-border)">
             <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-500">Events captured today</span>
             <div>
               <p className="text-4xl font-medium tracking-tight">1,284,502</p>
@@ -116,7 +117,7 @@ function FeatureBento() {
             </div>
           </TiltCard>
 
-          <TiltCard className="flex min-h-[205px] flex-col justify-between border border-zinc-800 bg-zinc-900 p-5">
+          <TiltCard className="flex min-h-[205px] flex-col justify-between border border-zinc-800 bg-zinc-900 p-5 transition-colors duration-[var(--motion-ui-transition-snap-duration)] ease-[var(--motion-ui-transition-snap)] hover:border-(--velocity-bento-hover-border)">
             <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-500">Active workspaces</span>
             <div>
               <p className="text-4xl font-medium tracking-tight">12,480</p>
@@ -125,7 +126,7 @@ function FeatureBento() {
           </TiltCard>
 
           {tiles.map((tile) => (
-            <TiltCard key={tile.title} className="group flex min-h-[235px] flex-col border border-zinc-800 bg-zinc-900 p-5 transition-colors hover:border-cyan-400/60">
+            <TiltCard key={tile.title} className="group flex min-h-[235px] flex-col border border-zinc-800 bg-zinc-900 p-5 transition-colors duration-[var(--motion-ui-transition-snap-duration)] ease-[var(--motion-ui-transition-snap)] hover:border-(--velocity-bento-hover-border)">
               <div className="flex items-center gap-3 border-b border-zinc-800 pb-4">
                 <span className="text-xl text-cyan-400" aria-hidden="true">{tile.icon}</span>
                 <h2 className="text-lg tracking-tight">{tile.title}</h2>
