@@ -132,7 +132,7 @@ function FeatureBento() {
                 <h2 className="text-lg tracking-tight">{tile.title}</h2>
               </div>
               <p className="mt-5 max-w-[34ch] text-sm leading-relaxed text-zinc-400">{tile.body}</p>
-              <span className="mt-auto border-t border-zinc-800 pt-4 text-sm text-zinc-200">Learn more <span className="text-cyan-400">→</span></span>
+              <span className="mt-auto border-t border-zinc-800 pt-4 text-sm text-zinc-200">See more <span className="text-cyan-400">→</span></span>
             </TiltCard>
           ))}
         </motion.div>
