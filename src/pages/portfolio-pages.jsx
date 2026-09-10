@@ -106,8 +106,12 @@ export function HomePage() {
           <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="flex flex-col gap-7">
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-300">Portfolio / 2026</p>
             <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">Ideas with a pulse.</h1>
-            <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">I am Ryan, a designer and developer building identities, digital experiences, and visual stories for people with something worth saying.</p>
+            <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">I'm Ryan, a designer and developer building identities, digital experiences, and visual stories for people with something worth saying.</p>
+             {/* Work link button example*/}
             <Link to="/work" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore the work <span className="ml-3">↗</span></Link>
+            {/* Photography link button example*/}
+            <Link to="/photography" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore my photography <span className="ml-3">↗</span></Link>
+
           </motion.div>
           <div className="flex flex-col gap-4 border-l border-white/10 pl-5 text-sm text-zinc-500 lg:mb-3">
             <span>Based between places.</span>
