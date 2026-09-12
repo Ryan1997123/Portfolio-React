@@ -120,6 +120,7 @@ export function HomePage() {
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-300">Portfolio / 2026</p>
             <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">Ideas with a pulse.</h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">I'm Ryan, a designer and developer building identities, digital experiences, and visual stories for people with something worth saying.</p>
+           
             {/*Ticker code*/}
             <div className="overflow-hidden border-y border-white/10 py-3">
               <Ticker velocity={40} className="flex items-center gap-6 text-zinc-300">
