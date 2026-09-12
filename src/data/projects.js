@@ -51,7 +51,7 @@ export const projects = [
   {
     slug: 'gl-hcp-ectrims-booth',
     title: 'GL HCP ECTRIMS Booth',
-    category: 'PRODUCT DESIGN / INTERACTIVE EXPERIENCE',
+    category: 'PRODUCT DESIGN / INTERACTIVE VISUAL AID',
     year: '2026',
     summary: 'An interactive visual aid built for a conference booth, helping HCPs explore key clinical information in a hands-on, engaging format.',
     description: 'GL HCP ECTRIMS Booth is an interactive touchscreen experience designed for the ECTRIMS conference, giving healthcare professionals a self-guided way to explore clinical data and treatment information at the booth.',
@@ -62,10 +62,12 @@ export const projects = [
     heroImage: 'ectrims-booth-hero',
     problem: 'Conference booths often rely on static posters or rep-led conversations, making it hard for HCPs to engage with clinical information on their own terms in a busy, high-traffic environment.',
     research: 'I looked at how HCPs move through booths at conferences like ECTRIMS, what pulls their attention in a few seconds, and how much information they realistically absorb standing at a kiosk.',
+    researchImages: [{ label: 'Functional annotations', image: 'func-anno' }, { label: 'Sitemap', image: 'ectrims-sitemap' }],
     process: 'I designed a touchscreen flow that breaks clinical content into short, visual modules, prioritizing quick orientation over dense reading, then tested pacing and navigation for a booth setting.',
-    processImages: ['Booth interaction flow studies', 'Touchscreen wireframes'],
+    processImages: [{ label: 'Patient Alice clicked on', image: 'alice' }, { label: 'Touchscreen wireframes', image: 'wires' }],
     solution: 'The final experience gives HCPs an interactive, self-paced way to explore clinical information at the booth, making the conversation with reps more focused and the takeaway more memorable.',
     solutionImage: 'Final GL HCP ECTRIMS Booth experience',
+    figmaEmbed: 'https://embed.figma.com/design/KsQ7OzQkvb9HgF10CooYHD/Ryan_Local_Toleb-GL_HCP_ECTRIMS_Booth?node-id=625-4879&embed-host=share',
   },
 ]
 

@@ -24,6 +24,10 @@ import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Pag
 import sitemapImage from "../assets/gaming_gear/map.png";
 import gamingGearHighFidelity from "../assets/gaming_gear/Highfidelity.png";
 import ectrimsBoothHero from "../assets/ectrims_booth/Cenrifki2.png";
+import aliceImage from "../assets/ectrims_booth/Alice.png";
+import wiresImage from "../assets/ectrims_booth/Wires.png";
+import funcAnnoImage from "../assets/ectrims_booth/funcanno.png";
+import ectrimsSitemapImage from "../assets/ectrims_booth/sitemap.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
@@ -1325,6 +1329,14 @@ function CaseStudyImage({
           ? researchStudyPlan
           : image === "sitemap"
             ? sitemapImage
+            : image === "alice"
+              ? aliceImage
+              : image === "wires"
+                ? wiresImage
+                : image === "func-anno"
+                  ? funcAnnoImage
+                  : image === "ectrims-sitemap"
+                    ? ectrimsSitemapImage
         : image
           ? `/src/assets/jnj-ico/${image}`
           : null;
@@ -1416,6 +1428,14 @@ function CaseStudyLightbox({ image, onClose }) {
           ? researchStudyPlan
           : image.image === "sitemap"
             ? sitemapImage
+            : image.image === "alice"
+              ? aliceImage
+              : image.image === "wires"
+                ? wiresImage
+                : image.image === "func-anno"
+                  ? funcAnnoImage
+                  : image.image === "ectrims-sitemap"
+                    ? ectrimsSitemapImage
         : image.image
           ? `/src/assets/jnj-ico/${image.image}`
           : null;
