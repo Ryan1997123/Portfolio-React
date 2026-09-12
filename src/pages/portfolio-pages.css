@@ -998,6 +998,10 @@
   letter-spacing: 0.12em;
 }
 
+.photography-planes-hint-mobile {
+  display: none;
+}
+
 .photography-planes-viewport {
   display: flex;
   align-items: center;
@@ -1257,6 +1261,14 @@
   .photography-planes-hint {
     right: 24px;
     bottom: 24px;
+  }
+
+  .photography-planes-hint-desktop {
+    display: none;
+  }
+
+  .photography-planes-hint-mobile {
+    display: block;
   }
 
   .photography-plane {

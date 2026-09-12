@@ -411,8 +411,9 @@ function ScrollVelocityPlanes() {
     const container = containerRef.current
     if (!container || prefersReducedMotion) return undefined
     const handleWheel = (event) => {
+      if (Math.abs(event.deltaY) >= Math.abs(event.deltaX)) return
       event.preventDefault()
-      rawScrollX.set(rawScrollX.get() - (event.deltaX || event.deltaY))
+      rawScrollX.set(rawScrollX.get() - event.deltaX)
     }
     container.addEventListener('wheel', handleWheel, { passive: false })
     return () => container.removeEventListener('wheel', handleWheel)
@@ -432,7 +433,8 @@ function ScrollVelocityPlanes() {
         <span>ALL PHOTOS / 2026</span>
         <strong>MY BEST SHOTS <sup>({photographyPlaneCount})</sup></strong>
       </div>
-      <span className="photography-planes-hint">SCROLL TO SURF</span>
+      <span className="photography-planes-hint photography-planes-hint-desktop">HOLD + DRAG OR SCROLL TO VIEW ALL PHOTOS</span>
+      <span className="photography-planes-hint photography-planes-hint-mobile">SWIPE TO VIEW ALL PHOTOS</span>
       <div className="photography-planes-viewport">
         <div className="photography-planes-stage">
           {Array.from({ length: photographyPlaneCount }, (_, index) => (
