@@ -429,7 +429,7 @@ export function PhotographyPage() {
 }
 
 export function ContactPage() {
-  return <SiteLayout><main><PageIntro eyebrow="CONTACT" title="Have a good problem? Let’s talk." body="For collaborations, commissions, and thoughtful questions, email me directly." /><section className="mx-auto max-w-7xl px-6 pb-32 sm:px-10 lg:px-14"><a href="mailto:hello@ryanstudio.example" className="group inline-flex items-center gap-4 border-b border-[#B10E1E] pb-3 text-2xl text-zinc-100 transition-colors hover:text-[#B10E1E] sm:text-4xl">hello@ryanstudio.example <span className="text-[#B10E1E] transition-transform group-hover:translate-x-2">↗</span></a></section></main></SiteLayout>
+  return <SiteLayout><main><PageIntro eyebrow="CONTACT" title="Have a good problem? Let’s talk." body="For collaborations, commissions, and thoughtful questions, email me directly." /><section className="mx-auto max-w-7xl px-6 pb-32 sm:px-10 lg:px-14"><a href="mailto:ryandesigns970501@gmail.com" className="group inline-flex items-center gap-4 border-b border-[#B10E1E] pb-3 text-2xl text-zinc-100 transition-colors hover:text-[#B10E1E] sm:text-4xl">hello@ryanstudio.example <span className="text-[#B10E1E] transition-transform group-hover:translate-x-2">↗</span></a></section></main></SiteLayout>
 }
 
 export function CaseStudyPage() {
