@@ -1,10 +1,11 @@
 import { AnimatePresence, motion, stagger, useMotionTemplate, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, useVelocity, wrap } from 'motion/react'
-import { ScrambleText, Ticker } from 'motion-plus/react'
+import { Cursor, ScrambleText, Ticker } from 'motion-plus/react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import behanceLogo from '../assets/Ionicons_logo-behance logo.svg'
 import githubLogo from '../assets/Ionicons_logo-github logo.svg'
 import linkedinLogo from '../assets/LinkedIn_logo_In-Black logo.svg'
+import icotydeOverview from '../assets/icotyde-overview.webp'
 import meImage from '../assets/me.png'
 import { projects } from '../data/projects'
 import './portfolio-pages.css'
@@ -43,8 +44,23 @@ function SiteLayout({ children }) {
 
   return (
     <div className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100">
+      <Cursor
+        magnetic
+        className="portfolio-cursor"
+        aria-hidden="true"
+        style={{ background: 'transparent', border: '0' }}
+        variants={{
+          default: { rotate: -18, scale: 1 },
+          pointer: { rotate: -12, scale: 1.08 },
+          pressed: { rotate: -30, scale: 0.78 },
+        }}
+      >
+        <span className="portfolio-cursor-handle" />
+        <span className="portfolio-cursor-bristles" />
+        <motion.span className="portfolio-cursor-spark" variants={{ default: { opacity: 0, scale: 0 }, pressed: { opacity: 1, scale: 1 } }} />
+      </Cursor>
       <header className="relative z-30 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-10 lg:px-14">
-        <Link to="/" className="logo-wordmark text-zinc-100">Ryan Monaghan</Link>
+        <Link to="/" data-cursor="pointer" className="logo-wordmark text-zinc-100">Ryan Monaghan</Link>
         <nav className="hidden flex-wrap justify-end gap-x-2 gap-y-2 md:flex" aria-label="Main navigation">
           {navItems.map(([path, label]) => (
             <Link key={path} to={path} className="site-nav-link text-zinc-400">{label}</Link>
@@ -52,6 +68,7 @@ function SiteLayout({ children }) {
         </nav>
         <button
           type="button"
+          data-cursor="pointer"
           className="relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
@@ -75,7 +92,7 @@ function SiteLayout({ children }) {
             >
               <div className="mx-auto flex max-w-7xl flex-col gap-5">
                 {navItems.map(([path, label]) => (
-                  <Link key={path} to={path} className="border-b border-white/10 pb-3 text-2xl tracking-tight text-zinc-200 transition-colors hover:text-[#B10E1E]" onClick={() => setMenuOpen(false)}>{label}</Link>
+                  <Link key={path} to={path} data-cursor="pointer" className="border-b border-white/10 pb-3 text-2xl tracking-tight text-zinc-200 transition-colors hover:text-[#B10E1E]" onClick={() => setMenuOpen(false)}>{label}</Link>
                 ))}
               </div>
             </motion.nav>
@@ -518,6 +535,41 @@ export function ContactPage() {
 export function CaseStudyPage() {
   const { slug } = useParams()
   const project = projects.find((item) => item.slug === slug)
+  const prefersReducedMotion = useReducedMotion()
+  const [lightboxImage, setLightboxImage] = useState(null)
   if (!project) return <SiteLayout><PageIntro eyebrow="404" title="Project not found." body="That case study does not exist yet." /></SiteLayout>
-  return <SiteLayout><main><PageIntro eyebrow={`${project.category} / ${project.year}`} title={project.title} body={project.description} /><section className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 sm:px-10 lg:grid-cols-[1fr_0.6fr] lg:px-14"><div className={`case-study-visual case-study-visual-${project.color} min-h-[420px] border border-white/10 p-8`}><span className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-300">Case study / {project.title}</span></div><div className="space-y-10"><div><p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">Role</p><p className="text-zinc-200">{project.role}</p></div><div><p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">Outcomes</p><ul className="space-y-3">{project.outcomes.map((outcome) => <li key={outcome} className="border-b border-white/10 pb-3 text-zinc-300">{outcome}</li>)}</ul></div><Link to="/work" className="inline-block text-sm text-[#B10E1E] hover:text-zinc-100">← Back to work</Link></div></section></main></SiteLayout>
+  const revealTransition = prefersReducedMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+  useEffect(() => {
+    if (!lightboxImage) return undefined
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setLightboxImage(null)
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [lightboxImage])
+
+  const openLightbox = (image) => setLightboxImage(image)
+
+  return <SiteLayout><main><PageIntro eyebrow={`${project.category} / ${project.year}`} title={project.title} body={project.description} /><section className="case-study-content mx-auto max-w-7xl px-6 pb-24 sm:px-10 lg:px-14"><motion.div className="case-study-hero" initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }} animate={{ opacity: 1, y: 0 }} transition={revealTransition}><div className={`case-study-visual case-study-visual-clickable case-study-visual-${project.color}${project.heroImage ? ' case-study-visual-image' : ''}`} role="button" tabIndex="0" aria-label="Open hero image" onClick={() => project.heroImage && openLightbox({ type: 'hero', label: project.title })} onKeyDown={(event) => event.key === 'Enter' && project.heroImage && openLightbox({ type: 'hero', label: project.title })}>{project.heroImage ? <img src={icotydeOverview} alt="ICOTYDE withMe HCP responsive website screens" /> : <span className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-300">Case study / {project.title}</span>}</div><div className="case-study-meta"><div><p className="case-study-label">Role</p><p>{project.role}</p></div>{project.timeline && <div><p className="case-study-label">Timeline</p><p>{project.timeline}</p></div>}{project.tools && <div><p className="case-study-label">Tools</p><p>{project.tools}</p></div>}<div><p className="case-study-label">Outcomes</p><ul>{project.outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul></div></div></motion.div><CaseStudySection number="01" title="Overview" body={project.overview} index={0} prefersReducedMotion={prefersReducedMotion} /><CaseStudySection number="02" title="The Problem" body={project.problem} index={1} prefersReducedMotion={prefersReducedMotion} /><CaseStudySection number="03" title="Context & Research" body={project.research} index={2} prefersReducedMotion={prefersReducedMotion} /><motion.section className="case-study-section case-study-process" initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60, x: prefersReducedMotion ? 0 : 28 }} whileInView={{ opacity: 1, y: 0, x: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.08 }}><div className="case-study-section-heading"><motion.p className="case-study-label" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.16 }}>04 / Process & Iterations</motion.p><motion.h2 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.22 }}>Finding the clearest path through the work.</motion.h2></div><motion.p className="case-study-section-copy" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.28 }}>{project.process}</motion.p><div className="case-study-image-grid">{project.processImages.map((image, index) => <CaseStudyImage key={image} color={project.color} label={image} index={index} prefersReducedMotion={prefersReducedMotion} onOpen={() => openLightbox({ type: 'panel', label: image, color: project.color, index })} />)}</div></motion.section><motion.section className="case-study-section case-study-solution" initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60, x: prefersReducedMotion ? 0 : -28 }} whileInView={{ opacity: 1, y: 0, x: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.08 }}><div className="case-study-section-heading"><motion.p className="case-study-label" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.16 }}>05 / The Solution</motion.p><motion.h2 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.22 }}>A system designed to make the important parts easier to see.</motion.h2></div><motion.p className="case-study-section-copy" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...revealTransition, delay: prefersReducedMotion ? 0 : 0.28 }}>{project.solution}</motion.p><CaseStudyImage color={project.color} label={project.solutionImage} index={2} prefersReducedMotion={prefersReducedMotion} onOpen={() => openLightbox({ type: 'panel', label: project.solutionImage, color: project.color, index: 2 })} /></motion.section><Link to="/work" className="case-study-back">← Back to work</Link></section>{lightboxImage && <CaseStudyLightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />}</main></SiteLayout>
+}
+
+function CaseStudySection({ number, title, body, index, prefersReducedMotion }) {
+  const direction = index % 2 === 0 ? -1 : 1
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.06 }
+
+  return <motion.section className="case-study-section" initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60, x: prefersReducedMotion ? 0 : direction * 28 }} whileInView={{ opacity: 1, y: 0, x: 0 }} viewport={{ once: true, amount: 0.25 }} transition={transition}><div className="case-study-section-heading"><motion.p className="case-study-label" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : direction * -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...transition, delay: prefersReducedMotion ? 0 : 0.14 }}>{number} / {title}</motion.p><motion.h2 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : direction * -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...transition, delay: prefersReducedMotion ? 0 : 0.2 }}>{title}</motion.h2></div><motion.p className="case-study-section-copy" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : direction * 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ ...transition, delay: prefersReducedMotion ? 0 : 0.26 }}>{body}</motion.p></motion.section>
+}
+
+function CaseStudyImage({ color, label, index, prefersReducedMotion, onOpen }) {
+  const [isVisible, setIsVisible] = useState(false)
+
+  return <motion.figure className={`case-study-image case-study-image-${color} case-study-image-${index}`} role="button" tabIndex="0" aria-label={`Open ${label}`} initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.92, rotate: prefersReducedMotion ? 0 : index % 2 === 0 ? -2 : 2 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: prefersReducedMotion ? 0 : 0.9, ease: [0.22, 1, 0.36, 1], delay: prefersReducedMotion ? 0 : index * 0.1 }} onViewportEnter={() => setIsVisible(true)} onClick={onOpen} onKeyDown={(event) => event.key === 'Enter' && onOpen()}><ScrambleText active={isVisible && !prefersReducedMotion} duration={0.7} chars="!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█">{label}</ScrambleText></motion.figure>
+}
+
+function CaseStudyLightbox({ image, onClose }) {
+  return <motion.div className="case-study-lightbox" role="dialog" aria-modal="true" aria-label={`${image.label} enlarged`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}><button type="button" className="case-study-lightbox-close" aria-label="Close image" onClick={onClose}>×</button><div className="case-study-lightbox-content" onClick={(event) => event.stopPropagation()}>{image.type === 'hero' ? <img src={icotydeOverview} alt="ICOTYDE withMe HCP responsive website screens" /> : <div className={`case-study-lightbox-panel case-study-image-${image.color} case-study-image-${image.index}`}><span>{image.label}</span></div>}<p>{image.label}</p></div></motion.div>
 }
