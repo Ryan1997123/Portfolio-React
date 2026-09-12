@@ -13,6 +13,10 @@
   background: var(--portfolio-red) !important;
 }
 
+.portfolio-cursor[data-motion-cursor="pointer"] {
+  background-color: var(--portfolio-red) !important;
+}
+
 .portfolio-cursor-icon {
   position: absolute;
   top: 8px;
