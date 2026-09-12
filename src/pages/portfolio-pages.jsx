@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import behanceLogo from '../assets/Ionicons_logo-behance logo.svg'
 import githubLogo from '../assets/Ionicons_logo-github logo.svg'
 import linkedinLogo from '../assets/LinkedIn_logo_In-Black logo.svg'
+import googleWires from '../assets/gaming_gear/Google_wires.png'
 import icotydeOverview from '../assets/icotyde-overview.webp'
 import meImage from '../assets/me.png'
 import mouseIcon from '../assets/mouse_icon.svg'
@@ -583,8 +584,9 @@ function CaseStudyImage({ color, label, image, index, prefersReducedMotion, onOp
     return <FigmaEmbed src="https://embed.figma.com/design/0HbcrG7IhOSYnJDqIkoZDb/Ryan_local_SRX_ICO-HCP-FD?node-id=12818-31282&embed-host=share" title="ICOTYDE withMe HCP final design in Figma" />
   }
 
-  const figureStyle = image ? {
-    backgroundImage: `url(/src/assets/jnj-ico/${image})`,
+  const imageSource = image === 'google-wires' ? googleWires : image ? `/src/assets/jnj-ico/${image}` : null
+  const figureStyle = imageSource ? {
+    backgroundImage: `url(${imageSource})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     position: 'relative'
@@ -608,5 +610,6 @@ function FigmaEmbed({ src, title }) {
 }
 
 function CaseStudyLightbox({ image, onClose }) {
-  return <motion.div className="case-study-lightbox" role="dialog" aria-modal="true" aria-label={`${image.label} enlarged`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}><button type="button" className="case-study-lightbox-close" aria-label="Close image" onClick={onClose}>×</button><div className="case-study-lightbox-content" onClick={(event) => event.stopPropagation()}>{image.type === 'hero' ? <img src={icotydeOverview} alt="ICOTYDE withMe HCP responsive website screens" /> : image.image ? <img src={`/src/assets/jnj-ico/${image.image}`} alt={image.label} style={{ width: '100%', height: '100%', objectFit: 'contain' }} /> : <div className={`case-study-lightbox-panel case-study-image-${image.color} case-study-image-${image.index}`}><span>{image.label}</span></div>}<p>{image.label}</p></div></motion.div>
+  const imageSource = image.image === 'google-wires' ? googleWires : image.image ? `/src/assets/jnj-ico/${image.image}` : null
+  return <motion.div className="case-study-lightbox" role="dialog" aria-modal="true" aria-label={`${image.label} enlarged`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}><button type="button" className="case-study-lightbox-close" aria-label="Close image" onClick={onClose}>×</button><div className="case-study-lightbox-content" onClick={(event) => event.stopPropagation()}>{image.type === 'hero' ? <img src={icotydeOverview} alt="ICOTYDE withMe HCP responsive website screens" /> : imageSource ? <img src={imageSource} alt={image.label} style={{ width: '100%', height: '100%', objectFit: 'contain' }} /> : <div className={`case-study-lightbox-panel case-study-image-${image.color} case-study-image-${image.index}`}><span>{image.label}</span></div>}<p>{image.label}</p></div></motion.div>
 }

@@ -23,7 +23,7 @@ export const projects = [
   },
   {
     slug: 'gaming-gear',
-    title: 'Gaming Gear',
+    title: 'Gaming Gear / Google UX Course',
     category: 'PRODUCT DESIGN / MOBILE APP',
     year: '2025',
     summary: 'A personalized gear-discovery app built around trusted reviews, useful comparisons, and community.',
@@ -35,7 +35,7 @@ export const projects = [
     problem: 'Shopping for gaming gear often means sorting through broad retail catalogs with little help deciding what actually suits a player. The experience needed to make discovery feel more relevant and trustworthy.',
     research: 'I explored how players research equipment, compare specifications, and look for real-world feedback before buying. The strongest opportunity was to bring recommendations, peer reviews, and product comparison into one focused flow.',
     process: 'I mapped the gear-discovery journey, then designed and tested flows for personalized recommendations, side-by-side comparisons, and community discussion. Each iteration prioritized quick decisions without losing the detail players need.',
-    processImages: ['Gear discovery flow', 'Product comparison and community screens'],
+    processImages: [{ label: 'Gear discovery flow', image: 'google-wires' }, 'Maze usability study'],
     solution: 'The final concept gives players a clearer path from browsing to confidence. Personalized suggestions surface relevant gear, while reviews, comparisons, and community feedback support more informed decisions.',
     solutionImage: 'Final Gaming Gear app',
   },
