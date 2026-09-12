@@ -22,6 +22,7 @@ import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
 import sitemapImage from "../assets/gaming_gear/map.png";
+import gamingGearHighFidelity from "../assets/gaming_gear/Highfidelity.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
@@ -851,24 +852,78 @@ export function ContactPage() {
       <main>
         <PageIntro
           eyebrow="CONTACT"
-          title="Have a good problem? Let’s talk."
-          body="For collaborations, commissions, and thoughtful questions, email me directly."
+          title="Hiring or building something great? Let’s talk."
+          body="For roles, collaborations, commissions, and thoughtful questions, email me directly."
         />
         <section className="mx-auto max-w-7xl px-6 pb-32 sm:px-10 lg:px-14">
           <a
             href="mailto:ryandesigns970501@gmail.com"
             className="group inline-flex items-center gap-4 border-b border-[#B10E1E] pb-3 text-2xl text-zinc-100 transition-colors hover:text-[#B10E1E] sm:text-4xl"
           >
-            hello@ryanstudio.example{" "}
+            Email me here{" "}
             <span className="text-[#B10E1E] transition-transform group-hover:translate-x-2">
               ↗
             </span>
           </a>
+          <div className="mt-10 flex flex-col gap-4 text-lg text-zinc-300 sm:text-xl">
+            <div className="flex items-center gap-3">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span>631-655-8827</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              <span>New York, NY</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 6-10 7L2 6" />
+              </svg>
+              <span>ryandesigns970501@gmail.com</span>
+            </div>
+          </div>
         </section>
       </main>
     </SiteLayout>
   );
 }
+
 
 export function CaseStudyPage() {
   const { slug } = useParams();
@@ -925,18 +980,18 @@ export function CaseStudyPage() {
               aria-label="Open hero image"
               onClick={() =>
                 project.heroImage &&
-                openLightbox({ type: "hero", label: project.title })
+                openLightbox({ type: "hero", label: project.title, heroImage: project.heroImage })
               }
               onKeyDown={(event) =>
                 event.key === "Enter" &&
                 project.heroImage &&
-                openLightbox({ type: "hero", label: project.title })
+                openLightbox({ type: "hero", label: project.title, heroImage: project.heroImage })
               }
             >
               {project.heroImage ? (
                 <img
-                  src={icotydeOverview}
-                  alt="ICOTYDE withMe HCP responsive website screens"
+                  src={getHeroImageSource(project.heroImage)}
+                  alt={`${project.title} hero image`}
                 />
               ) : (
                 <span className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-300">
@@ -1108,20 +1163,27 @@ export function CaseStudyPage() {
             >
               {project.solution}
             </motion.p>
-            <CaseStudyImage
-              color={project.color}
-              label={project.solutionImage}
-              index={2}
-              prefersReducedMotion={prefersReducedMotion}
-              onOpen={() =>
-                openLightbox({
-                  type: "panel",
-                  label: project.solutionImage,
-                  color: project.color,
-                  index: 2,
-                })
-              }
-            />
+            {project.figmaEmbed ? (
+              <FigmaEmbed
+                src={project.figmaEmbed}
+                title={`${project.title} final design in Figma`}
+              />
+            ) : (
+              <CaseStudyImage
+                color={project.color}
+                label={project.solutionImage}
+                index={2}
+                prefersReducedMotion={prefersReducedMotion}
+                onOpen={() =>
+                  openLightbox({
+                    type: "panel",
+                    label: project.solutionImage,
+                    color: project.color,
+                    index: 2,
+                  })
+                }
+              />
+            )}
           </motion.section>
           <Link to="/work" className="case-study-back">
             ← Back to work
@@ -1203,6 +1265,8 @@ function CaseStudySection({
 }
 
 function CaseStudyImageGrid({ items, project, prefersReducedMotion, onOpen }) {
+  if (!items || items.length === 0) return null;
+
   return (
     <div className="case-study-image-grid">
       {items.map((item, index) => {
@@ -1233,6 +1297,12 @@ function CaseStudyImageGrid({ items, project, prefersReducedMotion, onOpen }) {
   );
 }
 
+function getHeroImageSource(heroImage) {
+  return heroImage === "gaming-gear-highfidelity"
+    ? gamingGearHighFidelity
+    : icotydeOverview;
+}
+
 function CaseStudyImage({
   color,
   label,
@@ -1242,15 +1312,6 @@ function CaseStudyImage({
   onOpen,
 }) {
   const [isVisible, setIsVisible] = useState(false);
-
-  if (color === "cyan" && index === 2) {
-    return (
-      <FigmaEmbed
-        src="https://embed.figma.com/design/0HbcrG7IhOSYnJDqIkoZDb/Ryan_local_SRX_ICO-HCP-FD?node-id=12818-31282&embed-host=share"
-        title="ICOTYDE withMe HCP final design in Figma"
-      />
-    );
-  }
 
   const imageSource =
     image === "google-wires"
@@ -1380,8 +1441,8 @@ function CaseStudyLightbox({ image, onClose }) {
       >
         {image.type === "hero" ? (
           <img
-            src={icotydeOverview}
-            alt="ICOTYDE withMe HCP responsive website screens"
+            src={getHeroImageSource(image.heroImage)}
+            alt={`${image.label} hero image`}
           />
         ) : imageSource ? (
           <img
