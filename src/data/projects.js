@@ -58,3 +58,23 @@ export const projects = [
     solutionImage: 'Final Field Notes archive',
   },
 ]
+
+export const photography = [
+  { id: 1, label: 'Afterglow' },
+  { id: 2, label: 'Drift Frame' },
+  { id: 3, label: 'Peripheral' },
+  { id: 4, label: 'Standstill' },
+  { id: 5, label: 'Threshold' },
+  { id: 6, label: 'Windowline' },
+  { id: 7, label: 'Afterglow' },
+  { id: 8, label: 'Drift Frame' },
+  { id: 9, label: 'Peripheral' },
+  { id: 10, label: 'Standstill' },
+  { id: 11, label: 'Threshold' },
+  { id: 12, label: 'Windowline' },
+  { id: 13, label: 'Afterglow' },
+  { id: 14, label: 'Drift Frame' },
+  { id: 15, label: 'Peripheral' },
+  { id: 16, label: 'Standstill' },
+  { id: 17, label: 'Threshold' },
+]
