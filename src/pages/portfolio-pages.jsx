@@ -23,6 +23,7 @@ import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
 import sitemapImage from "../assets/gaming_gear/map.png";
 import gamingGearHighFidelity from "../assets/gaming_gear/Highfidelity.png";
+import ectrimsBoothHero from "../assets/ectrims_booth/Cenrifki2.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
@@ -1300,7 +1301,9 @@ function CaseStudyImageGrid({ items, project, prefersReducedMotion, onOpen }) {
 function getHeroImageSource(heroImage) {
   return heroImage === "gaming-gear-highfidelity"
     ? gamingGearHighFidelity
-    : icotydeOverview;
+    : heroImage === "ectrims-booth-hero"
+      ? ectrimsBoothHero
+      : icotydeOverview;
 }
 
 function CaseStudyImage({

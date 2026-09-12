@@ -59,6 +59,7 @@ export const projects = [
     color: 'green',
     outcomes: ['A self-guided booth experience for HCPs', 'Clearer presentation of clinical data', 'A more memorable, hands-on touchpoint at ECTRIMS'],
     overview: 'GL HCP ECTRIMS Booth turns dense clinical content into an interactive visual aid that HCPs can explore at their own pace on the conference floor.',
+    heroImage: 'ectrims-booth-hero',
     problem: 'Conference booths often rely on static posters or rep-led conversations, making it hard for HCPs to engage with clinical information on their own terms in a busy, high-traffic environment.',
     research: 'I looked at how HCPs move through booths at conferences like ECTRIMS, what pulls their attention in a few seconds, and how much information they realistically absorb standing at a kiosk.',
     process: 'I designed a touchscreen flow that breaks clinical content into short, visual modules, prioritizing quick orientation over dense reading, then tested pacing and navigation for a booth setting.',
