@@ -1,6 +1,6 @@
-import { AnimatePresence, motion, stagger, useMotionValue, useMotionValueEvent, useReducedMotion, useSpring, useTransform, useVelocity, wrap } from 'motion/react'
+import { AnimatePresence, motion, stagger, useMotionTemplate, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, useVelocity, wrap } from 'motion/react'
 import { ScrambleText, Ticker } from 'motion-plus/react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import behanceLogo from '../assets/Ionicons_logo-behance logo.svg'
 import githubLogo from '../assets/Ionicons_logo-github logo.svg'
@@ -82,10 +82,71 @@ function SiteLayout({ children }) {
           )}
         </AnimatePresence>
       </header>
-      {children}
-      <footer className="mx-auto flex w-full max-w-7xl justify-between border-t border-white/10 px-6 py-6 text-xs text-zinc-500 sm:px-10 lg:px-14">
-        <span>Independent designer / developer</span>
-        <span>2026</span>
+      <FooterReveal>{children}</FooterReveal>
+    </div>
+  )
+}
+
+function FooterReveal({ children }) {
+  const contentRef = useRef(null)
+  const footerRef = useRef(null)
+  const [revealAt, setRevealAt] = useState(0.35)
+  const prefersReducedMotion = useReducedMotion()
+
+  useLayoutEffect(() => {
+    const footer = footerRef.current
+    if (!footer) return undefined
+
+    const updateRevealPoint = () => {
+      setRevealAt(Math.min(0.95, Math.max(0.05, footer.offsetHeight / (window.innerHeight || 1))))
+    }
+
+    updateRevealPoint()
+    const observer = new ResizeObserver(updateRevealPoint)
+    observer.observe(footer)
+    window.addEventListener('resize', updateRevealPoint)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateRevealPoint)
+    }
+  }, [])
+
+  const { scrollYProgress } = useScroll({ target: contentRef, offset: ['end end', 'end start'] })
+  const opacity = useTransform(scrollYProgress, [0, revealAt], [0, 1])
+  const scale = useTransform(scrollYProgress, [0, revealAt], [0.9, 1])
+  const blur = useTransform(scrollYProgress, [0, revealAt], [6, 0])
+  const filter = useMotionTemplate`blur(${blur}px)`
+
+  return (
+    <div className="footer-reveal-shell">
+      <main ref={contentRef} className="footer-reveal-content">{children}</main>
+      <footer ref={footerRef} className="reveal-footer">
+        <motion.div className="reveal-footer-fade" style={{ opacity: prefersReducedMotion ? 1 : opacity }}>
+          <motion.div className="reveal-footer-scale" style={{ scale: prefersReducedMotion ? 1 : scale, filter: prefersReducedMotion ? 'blur(0px)' : filter }}>
+            <div className="reveal-footer-inner">
+              <div className="reveal-footer-columns">
+                <section>
+                  <h2>QUICK LINKS</h2>
+                  <nav aria-label="Footer navigation">
+                    {navItems.map(([path, label]) => <Link key={path} to={path}>{label}</Link>)}
+                  </nav>
+                </section>
+                <section>
+                  <h2>GET IN TOUCH</h2>
+                  <div className="reveal-footer-socials">
+                    <a href="https://github.com" aria-label="GitHub"><img src={githubLogo} alt="" /></a>
+                    <a href="https://www.behance.net" aria-label="Behance"><img src={behanceLogo} alt="" /></a>
+                    <a href="https://www.linkedin.com" aria-label="LinkedIn"><img src={linkedinLogo} alt="" /></a>
+                  </div>
+                </section>
+              </div>
+              <div className="reveal-footer-bottom">
+                <span>Coded and designed by Ryan Monaghan</span>
+                <span>© 2026</span>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </footer>
     </div>
   )
@@ -111,6 +172,25 @@ function RotatingIdentity() {
       >
         {identityWords[wordIndex]}
       </ScrambleText>
+    </div>
+  )
+}
+
+function MotionPathDesk() {
+  const prefersReducedMotion = useReducedMotion()
+  const drawTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 3.2, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }
+
+  return (
+    <div className="motion-path-desk" aria-hidden="true">
+      <svg viewBox="0 0 160 140" role="presentation">
+        <motion.path className="motion-path-drawing" d="M 18 16 H 132 Q 138 16 138 22 V 78 Q 138 84 132 84 H 18 Q 12 84 12 78 V 22 Q 12 16 18 16 Z" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={drawTransition} />
+        <motion.path className="motion-path-drawing" d="M 75 84 V 105 M 51 112 H 99" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...drawTransition, delay: 0.25 }} />
+        <motion.path className="motion-path-drawing" d="M 26 113 H 126 L 143 128 H 9 Z" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...drawTransition, delay: 0.5 }} />
+        <motion.path className="motion-path-drawing motion-path-keys" d="M 25 119 H 126 M 34 124 H 116" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...drawTransition, delay: 0.7 }} />
+        <text className="motion-path-screen-text" x="75" y="55">RYAN</text>
+      </svg>
     </div>
   )
 }
@@ -227,7 +307,7 @@ function PhotographyIndex() {
 }
 
 const photographyPlaneLabels = ['Afterglow', 'Drift Frame', 'Peripheral', 'Standstill', 'Threshold', 'Windowline']
-const photographyPlaneCount = 18
+const photographyPlaneCount = 17
 const photographyPlaneWidth = 300
 const photographyPlaneGap = -56
 
@@ -339,8 +419,8 @@ function ScrollVelocityPlanes() {
       aria-label="Interactive photography collection"
     >
       <div className="photography-planes-heading">
-        <span>HERITAGE / 2026</span>
-        <strong>COLLECTION <sup>({photographyPlaneLabels.length})</sup></strong>
+        <span>ALL PHOTOS / 2026</span>
+        <strong>MY BEST SHOTS <sup>({photographyPlaneCount})</sup></strong>
       </div>
       <span className="photography-planes-hint">SCROLL TO SURF</span>
       <div className="photography-planes-viewport">
@@ -376,15 +456,18 @@ export function HomePage() {
               <Link to="/work" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-[#B10E1E] hover:text-[#B10E1E]">Explore the work <span className="ml-3">↗</span></Link></div>
           </motion.div>
           <div className="hero-proof lg:mb-3 lg:h-full">
-            <div className="hero-portrait-wrap">
-              <motion.span
-                className="hero-portrait-tag"
-                animate={{ y: [0, -5, 0], rotate: [-3, 3, -3] }}
-                transition={{ duration: 3.2, ease: 'easeInOut', repeat: Infinity }}
-              >
-                ME
-              </motion.span>
-              <img className="hero-proof-image" src={meImage} alt="Ryan Monaghan" />
+            <div className="hero-portrait-scene">
+              <div className="hero-portrait-wrap">
+                <motion.span
+                  className="hero-portrait-tag"
+                  animate={{ y: [0, -5, 0], rotate: [-3, 3, -3] }}
+                  transition={{ duration: 3.2, ease: 'easeInOut', repeat: Infinity }}
+                >
+                  ME
+                </motion.span>
+                <img className="hero-proof-image" src={meImage} alt="Ryan Monaghan" />
+              </div>
+              <MotionPathDesk />
             </div>
             <blockquote>Ryan is dedicated to his craft. He takes careful effort to design for software applications, and helped keep our team organized rolling out new initiatives.</blockquote>
             <div className="hero-proof-logos" aria-label="Social profiles">
@@ -421,7 +504,7 @@ export function AboutPage() {
 }
 
 export function WorkPage() {
-  return <SiteLayout><main><PageIntro eyebrow="WORK" title="Selected projects." body="A mix of identity, interaction, and image-making. Open a project to see the thinking behind it." /><section className="mx-auto grid max-w-7xl gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</section></main></SiteLayout>
+  return <SiteLayout><main><PageIntro className="work-page-intro" eyebrow="WORK" title="Selected projects." body="A mix of identity, interaction, and image-making. Open a project to see the thinking behind it." /><section className="mx-auto grid max-w-7xl gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</section></main></SiteLayout>
 }
 
 export function PhotographyPage() {

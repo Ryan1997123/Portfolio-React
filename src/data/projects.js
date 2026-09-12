@@ -1,12 +1,12 @@
 export const projects = [
   {
     slug: 'velocity',
-    title: 'Velocity',
-    category: 'Product design / Motion',
+    title: 'Johnson and Johnson - Icotyde Website for HCP',
+    category: 'PRODUCT DESIGN / WEBSITE',
     year: '2026',
-    summary: 'A product intelligence system that turns every user event into a clear next move.',
-    description: 'Velocity is an analytics concept built around legibility. The interface makes live events, funnels, and anomalies feel immediate without turning the product into a wall of charts.',
-    role: 'Strategy, art direction, interaction design, frontend',
+    summary: 'A focused healthcare website experience designed to make clinical information clearer for healthcare professionals.',
+    description: 'The Icotyde website for healthcare professionals brings complex treatment information into a clearer, more structured digital experience.',
+    role: 'Product design, website design, interaction design, frontend',
     color: 'cyan',
     outcomes: ['Clearer event narratives', 'Faster anomaly detection', 'A calmer analytics workflow'],
   },
