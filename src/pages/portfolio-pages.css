@@ -331,6 +331,11 @@
   line-height: normal;
 }
 
+.hero-proof blockquote,
+.hero-proof blockquote em {
+  font-style: italic !important;
+}
+
 .hero-proof-logos {
   display: flex;
   align-items: center;

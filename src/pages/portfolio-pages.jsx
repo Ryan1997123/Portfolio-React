@@ -481,7 +481,7 @@ export function HomePage() {
               </div>
               <MotionPathDesk />
             </div>
-            <blockquote><em>&quot;Ryan is dedicated to his craft. He takes careful effort to design for software applications, and helped keep our team organized rolling out new initiatives.&quot;</em></blockquote>
+            <blockquote><em>&ldquo;Ryan is dedicated to his craft. He takes careful effort to design for software applications, and helped keep our team organized rolling out new initiatives.&rdquo;</em></blockquote>
             <div className="hero-proof-logos" aria-label="Social profiles">
               <a href="https://www.behance.net" aria-label="Behance"><img src={behanceLogo} alt="" /></a>
               <a href="https://github.com" aria-label="GitHub"><img src={githubLogo} alt="" /></a>
