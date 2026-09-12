@@ -1,8 +1,21 @@
 import { AnimatePresence, motion } from 'motion/react'
+import { Ticker } from 'motion-plus/react'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { projects } from '../data/projects'
 import './portfolio-pages.css'
+
+const skills = [
+  'Figma',
+  'Framer',
+  'Adobe Illustrator',
+  'Adobe Photoshop',
+  'Javascript',
+  'React',
+  'ReactNative',
+  'Python',
+  'UX Research',
+]
 
 const navItems = [
   ['/', 'Home'],
@@ -107,11 +120,19 @@ export function HomePage() {
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-300">Portfolio / 2026</p>
             <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">Ideas with a pulse.</h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">I'm Ryan, a designer and developer building identities, digital experiences, and visual stories for people with something worth saying.</p>
-             {/* Work link button example*/}
-            <Link to="/work" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore the work <span className="ml-3">↗</span></Link>
-            {/* Photography link button example*/}
-            <Link to="/photography" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore my photography <span className="ml-3">↗</span></Link>
+            {/*Ticker code*/}
+            <div className="overflow-hidden border-y border-white/10 py-3">
+              <Ticker velocity={40} className="flex items-center gap-6 text-zinc-300">
+                {skills.map((skill, i) => (
+                  <span key={i} className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-300">{skill}</span>
+                ))}
+              </Ticker>
+            </div>
 
+            <div className="flex flex-wrap gap-4">
+              <Link to="/work" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore the work <span className="ml-3">↗</span></Link>
+              <Link to="/photography" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore my photography <span className="ml-3">↗</span></Link>
+            </div>
           </motion.div>
           <div className="flex flex-col gap-4 border-l border-white/10 pl-5 text-sm text-zinc-500 lg:mb-3">
             <span>Based between places.</span>
