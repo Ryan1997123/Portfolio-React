@@ -80,7 +80,7 @@ function SiteLayout({ children }) {
 
 function PageIntro({ eyebrow, title, body }) {
   return (
-    <header className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-6 pb-16 pt-20 sm:px-10 lg:px-14 lg:pb-24 lg:pt-28">
+    <header className="mx-auto flex h-[64vh] min-h-0 w-full max-w-7xl flex-col gap-5 px-6 pb-8 pt-16 sm:px-10 lg:px-14 lg:pb-10 lg:pt-16">
       <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-300">{eyebrow}</p>
       <h1 className="max-w-4xl text-balance text-5xl font-medium tracking-[-0.05em] sm:text-7xl">{title}</h1>
       {body && <p className="max-w-2xl text-pretty text-lg leading-relaxed text-zinc-400">{body}</p>}
@@ -115,21 +115,11 @@ export function HomePage() {
   return (
     <SiteLayout>
       <main>
-        <section className="mx-auto grid min-h-[72vh] w-full max-w-7xl items-end gap-12 px-6 pb-20 pt-16 sm:px-10 lg:grid-cols-[1.4fr_0.6fr] lg:px-14 lg:pb-28">
+        <section className="mx-auto grid min-h-[64vh] w-full max-w-7xl items-end gap-12 px-6 pb-8 pt-16 sm:px-10 lg:grid-cols-[1.4fr_0.6fr] lg:px-14 lg:pb-10">
           <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="flex flex-col gap-7">
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-300">Portfolio / 2026</p>
             <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">Ideas with a pulse.</h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">I'm Ryan, a designer and developer building identities, digital experiences, and visual stories for people with something worth saying.</p>
-           
-            {/*Ticker code*/}
-            <div className="overflow-hidden border-y border-white/10 py-3">
-              <Ticker velocity={40} className="flex items-center gap-6 text-zinc-300">
-                {skills.map((skill, i) => (
-                  <span key={i} className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-300">{skill}</span>
-                ))}
-              </Ticker>
-            </div>
-
             <div className="flex flex-wrap gap-4">
               <Link to="/work" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore the work <span className="ml-3">↗</span></Link>
               <Link to="/photography" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-cyan-300 hover:text-cyan-300">Explore my photography <span className="ml-3">↗</span></Link>
@@ -141,6 +131,15 @@ export function HomePage() {
             <span className="font-mono text-cyan-300">Currently: making things clearer.</span>
           </div>
         </section>
+        <div className="ticker-strip overflow-hidden border-y border-white/10">
+          <Ticker
+            velocity={40}
+            gap={0}
+            items={skills.map((skill) => (
+              <span key={skill} className="ticker-item-text whitespace-nowrap">{skill}</span>
+            ))}
+          />
+        </div>
         <section className="mx-auto w-full max-w-7xl px-6 pb-20 sm:px-10 lg:px-14">
           <div className="mb-7 flex items-end justify-between border-b border-white/10 pb-4"><h2 className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400">Selected work</h2><Link to="/work" className="text-sm text-zinc-500 hover:text-cyan-300">View all ↗</Link></div>
           <div className="grid gap-3 md:grid-cols-3">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div>

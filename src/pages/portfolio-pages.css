@@ -2,6 +2,30 @@
   --portfolio-cyan: #67e8f9;
 }
 
+.ticker-strip {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 64px;
+}
+
+.ticker-item-text {
+  display: block;
+  margin-inline: 40px;
+  padding: 10px;
+  color: rgb(244 244 245);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .ticker-item-text {
+    margin-inline: 16px;
+    font-size: 16px;
+  }
+}
+
 .project-card,
 .case-study-visual {
   background-color: #17191b;
