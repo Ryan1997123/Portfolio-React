@@ -13,6 +13,7 @@ import {
   wrap,
 } from "motion/react";
 import { ScrambleText, Ticker } from "motion-plus/react";
+import { DownloadSimple } from "@phosphor-icons/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
@@ -53,6 +54,20 @@ const identityWords = [
   "UX Expert",
   "Leader",
   "World Traveller",
+];
+
+const aboutDetails = [
+  ["Location", "New York, NY"],
+  ["Languages", "English, Korean, Japanese"],
+  ["Currently", "Product Designer"],
+  ["Years active", "5+ years of experience"],
+];
+
+const aboutPrinciples = [
+  "Research first /",
+  "Prototype early /",
+  "Design for access /",
+  "Build with intent /",
 ];
 
 const navItems = [
@@ -792,52 +807,249 @@ export function HomePage() {
 }
 
 export function AboutPage() {
+  const prefersReducedMotion = useReducedMotion();
+  const [factsVisible, setFactsVisible] = useState(false);
+  const [approachVisible, setApproachVisible] = useState(false);
+
   return (
     <SiteLayout>
-      <main>
-        <PageIntro
-          eyebrow="ABOUT"
-          title="Empathetic Product Designer"
-          body="I am an empathetic Product Designer with a foundation in Computer Science and over 5 years of experience transforming complex challenges into intuitive, user-centered digital products."
-        />
-        <section className="mx-auto flex w-full max-w-7xl flex-col items-start justify-end gap-8 px-5 py-[30px] sm:px-10 lg:px-14">
-          <div className="max-w-3xl text-zinc-400">
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Specialization</h3>
-              <p>
-                I specialize in the end-to-end design process, from initial research and wire-framing to high-fidelity prototyping and design system implementation.
+      <main className="about-page">
+        <section className="about-hero">
+          <motion.header
+            className="about-intro"
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <div className="about-intro-topline">
+              <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
+                <ScrambleText
+                  active={!prefersReducedMotion}
+                  delay={stagger(0.035)}
+                  duration={0.4}
+                  chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/"
+                >
+                  ABOUT / PROFILE
+                </ScrambleText>
               </p>
+              <p className="about-intro-note">New York / Product design</p>
             </div>
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Design Philosophy</h3>
-              <p>
-                With my background in business and tech, I integrate strong development and business leadership decision-making into my designs. My goal is to create inclusive and accessible experiences using clean and robust code, with a blend of creative thinking.
+            <h1 aria-label="Ideas Into Digital Experiences">
+              <span className="about-title-line">Ideas Into</span>
+              <ScrambleText
+                as="span"
+                className="about-title-line"
+                active={!prefersReducedMotion}
+                delay={stagger(0.025, { startDelay: 0.25 })}
+                duration={0.55}
+                chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%+"
+                aria-hidden="true"
+              >
+                Digital Experiences
+              </ScrambleText>
+            </h1>
+          </motion.header>
+
+          <div className="about-story-grid">
+            <motion.figure
+              className="about-portrait"
+              initial={{
+                opacity: 0,
+                y: prefersReducedMotion ? 0 : 28,
+              }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: prefersReducedMotion ? 0 : 0.2,
+                duration: prefersReducedMotion ? 0 : 0.75,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <motion.div
+                className="about-portrait-frame"
+                whileHover={prefersReducedMotion ? undefined : { y: -8 }}
+                transition={{ type: "spring", stiffness: 240, damping: 22 }}
+              >
+                <span className="about-portrait-mark" aria-hidden="true">
+                  RM
+                </span>
+                <motion.img
+                  className="about-portrait-image"
+                  src={meImage}
+                  alt="Ryan Monaghan, product designer"
+                  fetchPriority="high"
+                  initial={{ scale: prefersReducedMotion ? 1 : 1.08 }}
+                  animate={{ scale: 1 }}
+                  whileHover={prefersReducedMotion ? undefined : { scale: 1.04 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </motion.div>
+              <figcaption>
+                <ScrambleText
+                  active={!prefersReducedMotion}
+                  delay={stagger(0.025)}
+                  duration={0.35}
+                  chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/"
+                >
+                  Ryan Monaghan
+                </ScrambleText>
+                <span>New York / 2026</span>
+              </figcaption>
+            </motion.figure>
+
+            <motion.div
+              className="about-summary"
+              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 32 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                delay: prefersReducedMotion ? 0 : 0.35,
+                duration: prefersReducedMotion ? 0 : 0.75,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <span className="about-summary-label font-mono">
+                Profile / 001
+              </span>
+              <p className="about-summary-copy">
+                I am an empathetic product designer with a foundation in
+                computer science and over five years of experience transforming
+                complex challenges into intuitive, user-centered digital
+                products.
               </p>
-            </div>
+              <div className="about-actions">
+                <a
+                  className="about-action about-action-primary"
+                  href="/Ryan-Monaghan-Resume.pdf"
+                  download
+                >
+                  <span>Download resume</span>
+                  <DownloadSimple size={18} weight="bold" aria-hidden="true" />
+                </a>
+              </div>
+            </motion.div>
           </div>
-          <div className="max-w-3xl text-zinc-400">
-            <div>
-              <h3 className="mb-3 text-lg font-semibold text-zinc-200">Beyond Design</h3>
-              <p>
-                I love to travel and I'm fluent in Korean and Japanese, currently learning Spanish. I've traveled to South Korea, Mexico, Colombia, London, and Italy.
-              </p>
-              <p>
-                When I'm not at my computer, I stay active and centered through running half marathons, skiing, and yoga. Living in midtown NYC, I love exploring the city's dynamic food scene and discovering new restaurants and cafes.
-              </p>
-            </div>
-          </div>
+
+          <motion.dl
+            className="about-facts"
+            aria-label="Professional details"
+            onViewportEnter={() => setFactsVisible(true)}
+            viewport={{ once: true, amount: 0.4 }}
+          >
+            {aboutDetails.map(([label, value], index) => (
+              <motion.div
+                key={label}
+                initial={{
+                  opacity: 0,
+                  y: prefersReducedMotion ? 0 : 16,
+                }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  delay: prefersReducedMotion ? 0 : index * 0.08,
+                  duration: prefersReducedMotion ? 0 : 0.5,
+                }}
+              >
+                <dt>
+                  <ScrambleText
+                    active={factsVisible && !prefersReducedMotion}
+                    delay={stagger(0.025)}
+                    duration={0.3}
+                    chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/"
+                  >
+                    {label}
+                  </ScrambleText>
+                </dt>
+                <dd>{value}</dd>
+              </motion.div>
+            ))}
+          </motion.dl>
         </section>
-        <div className="ticker-strip overflow-hidden border-y border-white/10">
+
+        <div className="about-principles-ticker" aria-label="Design principles">
           <Ticker
-            velocity={40}
-            gap={0}
-            items={skills.map((skill) => (
-              <span key={skill} className="ticker-item-text whitespace-nowrap">
-                {skill}
+            velocity={prefersReducedMotion ? 0 : 34}
+            hoverFactor={0.3}
+            gap={48}
+            items={aboutPrinciples.map((principle) => (
+              <span key={principle} className="about-principle-item">
+                {principle}
               </span>
             ))}
           />
         </div>
+
+        <motion.section
+          className="about-approach"
+          onViewportEnter={() => setApproachVisible(true)}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <div className="about-approach-inner">
+            <motion.div
+              className="about-approach-rule"
+              initial={{ scaleX: prefersReducedMotion ? 1 : 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.9,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            />
+            <div className="about-approach-heading">
+              <span className="font-mono">
+                <ScrambleText
+                  active={approachVisible && !prefersReducedMotion}
+                  delay={stagger(0.035)}
+                  duration={0.35}
+                  chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/"
+                >
+                  01 / Process
+                </ScrambleText>
+              </span>
+              <motion.h2
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: prefersReducedMotion ? 0 : 0.65,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                Approach
+              </motion.h2>
+            </div>
+            <div className="about-approach-copy">
+              <motion.p
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.12,
+                  duration: prefersReducedMotion ? 0 : 0.7,
+                }}
+              >
+                I work end to end, moving from research and wireframes through
+                high-fidelity prototypes and design systems. Each decision starts
+                with the people using the product and the real constraints around
+                them.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.24,
+                  duration: prefersReducedMotion ? 0 : 0.7,
+                }}
+              >
+                My background in business and technology helps me connect user
+                needs with viable product decisions, then carry the experience
+                through with accessible design and clean, robust code.
+              </motion.p>
+            </div>
+          </div>
+        </motion.section>
       </main>
     </SiteLayout>
   );
