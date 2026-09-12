@@ -334,6 +334,7 @@
 .hero-proof blockquote,
 .hero-proof blockquote em {
   font-style: italic !important;
+  font-synthesis: style;
 }
 
 .hero-proof-logos {
