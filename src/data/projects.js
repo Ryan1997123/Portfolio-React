@@ -2,7 +2,7 @@ export const projects = [
   {
     slug: 'velocity',
     title: 'ICOTYDE withMe HCP',
-    category: 'PRODUCT DESIGN / WEBSITE',
+    category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',
     year: '2026',
     summary: 'A focused healthcare website experience that makes access, support, and enrollment information clearer for healthcare professionals.',
     description: 'ICOTYDE withMe HCP is a website designed for dermatologists prescribing ICOTYDE (icotrokinra), a treatment for plaque psoriasis. It turns dense clinical and insurance details into a clear, confident prescribing experience.',
