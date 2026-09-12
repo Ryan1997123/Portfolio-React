@@ -21,6 +21,15 @@ const skills = [
   'UX Research',
 ]
 
+const identityWords = [
+  'Designer',
+  'New Yorker',
+  'Developer',
+  'UX Expert',
+  'Leader',
+  'World Traveller',
+]
+
 const navItems = [
   ['/', 'Home'],
   ['/about', 'About'],
@@ -58,6 +67,11 @@ function SiteLayout({ children }) {
             <motion.nav
               id="mobile-navigation"
               aria-label="Mobile navigation"
+              className="absolute inset-x-0 top-0 -z-10 border-b border-white/10 bg-[#0A0A0A] px-6 pb-8 pt-24 shadow-2xl sm:px-10"
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -18 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="mx-auto flex max-w-7xl flex-col gap-5">
                 {navItems.map(([path, label]) => (
@@ -73,6 +87,30 @@ function SiteLayout({ children }) {
         <span>Independent designer / developer</span>
         <span>2026</span>
       </footer>
+    </div>
+  )
+}
+
+function RotatingIdentity() {
+  const [wordIndex, setWordIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((currentIndex) => (currentIndex + 1) % identityWords.length)
+    }, 2000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="hero-identity" aria-live="polite">
+      <span className="hero-identity-prefix">Also:</span>
+      <ScrambleText
+        className="hero-identity-word"
+        chars="!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡"
+      >
+        {identityWords[wordIndex]}
+      </ScrambleText>
     </div>
   )
 }
@@ -221,6 +259,9 @@ function PhotographyPlane({ index, scrollX, scrollVelocity, isHovered, onHoverSt
       style={{ transform, zIndex: isHovered ? 100 : 1, filter: isHovered ? 'brightness(1.15)' : 'brightness(1)' }}
       onHoverStart={onHoverStart}
       onHoverEnd={onHoverEnd}
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      onTap={() => (isHovered ? onHoverEnd() : onHoverStart())}
     >
       <div className="photography-plane-index">{String(index).padStart(2, '0')}</div>
       <AnimatePresence>
@@ -244,8 +285,37 @@ function ScrollVelocityPlanes() {
   const scrollX = useSpring(rawScrollX, { stiffness: 100, damping: 30, mass: 0.5 })
   const scrollVelocity = useVelocity(scrollX)
   const containerRef = useRef(null)
+  const pointerRef = useRef({ active: false, horizontal: false, x: 0, y: 0 })
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const prefersReducedMotion = useReducedMotion()
+
+  const handlePointerDown = (event) => {
+    pointerRef.current = { active: true, horizontal: false, x: event.clientX, y: event.clientY }
+    event.currentTarget.setPointerCapture?.(event.pointerId)
+  }
+
+  const handlePointerMove = (event) => {
+    const pointer = pointerRef.current
+    if (!pointer.active) return
+
+    const deltaX = event.clientX - pointer.x
+    const deltaY = event.clientY - pointer.y
+    if (!pointer.horizontal && Math.abs(deltaX) + Math.abs(deltaY) > 8) {
+      pointer.horizontal = Math.abs(deltaX) > Math.abs(deltaY)
+    }
+    if (!pointer.horizontal) return
+
+    event.preventDefault()
+    rawScrollX.set(rawScrollX.get() + deltaX * 2.5)
+    pointer.x = event.clientX
+    pointer.y = event.clientY
+  }
+
+  const handlePointerEnd = (event) => {
+    pointerRef.current.active = false
+    pointerRef.current.horizontal = false
+    event.currentTarget.releasePointerCapture?.(event.pointerId)
+  }
 
   useEffect(() => {
     const container = containerRef.current
@@ -259,7 +329,15 @@ function ScrollVelocityPlanes() {
   }, [prefersReducedMotion, rawScrollX])
 
   return (
-    <section ref={containerRef} className="photography-planes-container" onPan={(_, info) => rawScrollX.set(rawScrollX.get() + info.delta.x * 2.5)} aria-label="Interactive photography collection">
+    <section
+      ref={containerRef}
+      className="photography-planes-container"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerEnd}
+      onPointerCancel={handlePointerEnd}
+      aria-label="Interactive photography collection"
+    >
       <div className="photography-planes-heading">
         <span>HERITAGE / 2026</span>
         <strong>COLLECTION <sup>({photographyPlaneLabels.length})</sup></strong>
@@ -293,6 +371,7 @@ export function HomePage() {
             <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">AVAILABLE FOR HIRE</p>
             <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">PRODUCT DESIGNER</h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">I'm Ryan, a designer and developer building identities, digital experiences, and visual stories for people with something worth saying.</p>
+            <RotatingIdentity />
             <div className="flex flex-wrap gap-4">
               <Link to="/work" className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-[#B10E1E] hover:text-[#B10E1E]">Explore the work <span className="ml-3">↗</span></Link></div>
           </motion.div>

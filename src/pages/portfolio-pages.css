@@ -57,6 +57,33 @@
   justify-content: flex-start;
 }
 
+.hero-identity {
+  display: flex;
+  min-height: 30px;
+  align-items: center;
+  gap: 8px;
+  color: #8a8a85;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-identity-prefix {
+  color: #b10e1e;
+}
+
+.hero-identity-word {
+  color: #f5f3ef;
+  font-family: var(--font-mono) !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
 .hero-proof {
   display: flex;
   flex-direction: column;
@@ -419,7 +446,12 @@
   overflow: hidden;
   background: #0a0a0a;
   color: #f5f3ef;
-  touch-action: none;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.photography-planes-container:active {
+  cursor: grabbing;
 }
 
 .photography-planes-heading {
@@ -661,7 +693,8 @@
   }
 
   .photography-page-intro {
-    height: 42vh !important;
+    height: 30vh !important;
+    padding-bottom: 16px;
   }
 
   .photography-gallery {
@@ -704,6 +737,14 @@
 
   .photography-plane-label-line {
     width: 56px;
+  }
+
+  .photography-plane-label {
+    margin-left: 8px;
+  }
+
+  .photography-plane-label-text {
+    font-size: 9px;
   }
 }
 
