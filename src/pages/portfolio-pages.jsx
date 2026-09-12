@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from 'motion/react'
-import { Ticker } from 'motion-plus/react'
-import { useState } from 'react'
+import { AnimatePresence, motion, stagger, useMotionValue, useMotionValueEvent, useReducedMotion, useSpring, useTransform, useVelocity, wrap } from 'motion/react'
+import { ScrambleText, Ticker } from 'motion-plus/react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import behanceLogo from '../assets/Ionicons_logo-behance logo.svg'
 import githubLogo from '../assets/Ionicons_logo-github logo.svg'
@@ -77,9 +77,9 @@ function SiteLayout({ children }) {
   )
 }
 
-function PageIntro({ eyebrow, title, body }) {
+function PageIntro({ eyebrow, title, body, className = '' }) {
   return (
-    <header className="mx-auto flex h-[64vh] min-h-0 w-full max-w-7xl flex-col gap-5 px-6 pb-8 pt-8 sm:px-10 lg:px-14 lg:pb-10 lg:pt-8">
+    <header className={`mx-auto flex h-[64vh] min-h-0 w-full max-w-7xl flex-col gap-5 px-6 pb-8 pt-8 sm:px-10 lg:px-14 lg:pb-10 lg:pt-8 ${className}`}>
       <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">{eyebrow}</p>
       <h1 className="max-w-4xl text-balance text-5xl font-medium tracking-[-0.05em] sm:text-7xl">{title}</h1>
       {body && <p className="max-w-2xl text-pretty text-lg leading-relaxed text-zinc-400">{body}</p>}
@@ -117,7 +117,7 @@ function ProjectsIndex() {
   return (
     <section className="projects-index">
       <div className="projects-index-intro">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#B10E1E]">PROJECTS</p>
+        <h2 className="section-display-heading">PROJECTS</h2>
         <p className="projects-index-copy">A closer look at the work, from first idea to final interaction.</p>
         <Link to="/work" className="projects-index-button">VIEW MORE <span aria-hidden="true">↗</span></Link>
       </div>
@@ -173,7 +173,7 @@ function PhotographyIndex() {
   return (
     <section className="photography-index">
       <div className="photography-index-intro">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#B10E1E]">PHOTOGRAPHY</p>
+        <h2 className="section-display-heading">PHOTOGRAPHY</h2>
         <p className="photography-index-copy">A visual archive of quiet places, passing light, and the details that stay with you.</p>
         <Link to="/photography" className="projects-index-button">VIEW PHOTOGRAPHY <span aria-hidden="true">↗</span></Link>
       </div>
@@ -183,6 +183,102 @@ function PhotographyIndex() {
             <span>{label}</span>
           </Link>
         ))}
+      </div>
+    </section>
+  )
+}
+
+const photographyPlaneLabels = ['Afterglow', 'Drift Frame', 'Peripheral', 'Standstill', 'Threshold', 'Windowline']
+const photographyPlaneCount = 18
+const photographyPlaneWidth = 300
+const photographyPlaneGap = -56
+
+function PhotographyPlane({ index, scrollX, scrollVelocity, isHovered, onHoverStart, onHoverEnd }) {
+  const hoverOffset = useSpring(0, { stiffness: 400, damping: 25 })
+  const waveOffset = useSpring(0, { stiffness: 300, damping: 20, mass: 0.3 })
+  const planeWidth = photographyPlaneWidth + photographyPlaneGap
+  const totalWidth = planeWidth * photographyPlaneCount
+  const startPosition = index * planeWidth
+
+  useMotionValueEvent(scrollVelocity, 'change', (velocity) => {
+    const position = startPosition + scrollX.get()
+    const centered = wrap(-totalWidth / 2, totalWidth / 2, position)
+    waveOffset.set((velocity / 50) * Math.sin((centered / (totalWidth / 2)) * Math.PI * 2) * 5)
+  })
+
+  useEffect(() => {
+    hoverOffset.set(isHovered ? -24 : 0)
+  }, [hoverOffset, isHovered])
+
+  const transform = useTransform(() => {
+    const centered = wrap(-totalWidth / 2, totalWidth / 2, startPosition + scrollX.get())
+    return `translate3d(${centered}px, ${centered * -0.28 + waveOffset.get() + hoverOffset.get()}px, ${centered * -1.1}px) rotateY(-50deg)`
+  })
+
+  return (
+    <motion.article
+      className={`photography-plane photo-placeholder photo-placeholder-${(index % 6) + 1}`}
+      style={{ transform, zIndex: isHovered ? 100 : 1, filter: isHovered ? 'brightness(1.15)' : 'brightness(1)' }}
+      onHoverStart={onHoverStart}
+      onHoverEnd={onHoverEnd}
+    >
+      <div className="photography-plane-index">{String(index).padStart(2, '0')}</div>
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div className="photography-plane-label" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <motion.div className="photography-plane-label-line" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} exit={{ scaleX: 0 }} />
+            <div className="photography-plane-label-text">
+              <ScrambleText active={isHovered} duration={stagger(0.05)} chars="!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█">
+                {photographyPlaneLabels[index % photographyPlaneLabels.length]}
+              </ScrambleText>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.article>
+  )
+}
+
+function ScrollVelocityPlanes() {
+  const rawScrollX = useMotionValue(0)
+  const scrollX = useSpring(rawScrollX, { stiffness: 100, damping: 30, mass: 0.5 })
+  const scrollVelocity = useVelocity(scrollX)
+  const containerRef = useRef(null)
+  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const prefersReducedMotion = useReducedMotion()
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container || prefersReducedMotion) return undefined
+    const handleWheel = (event) => {
+      event.preventDefault()
+      rawScrollX.set(rawScrollX.get() - (event.deltaX || event.deltaY))
+    }
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    return () => container.removeEventListener('wheel', handleWheel)
+  }, [prefersReducedMotion, rawScrollX])
+
+  return (
+    <section ref={containerRef} className="photography-planes-container" onPan={(_, info) => rawScrollX.set(rawScrollX.get() + info.delta.x * 2.5)} aria-label="Interactive photography collection">
+      <div className="photography-planes-heading">
+        <span>HERITAGE / 2026</span>
+        <strong>COLLECTION <sup>({photographyPlaneLabels.length})</sup></strong>
+      </div>
+      <span className="photography-planes-hint">SCROLL TO SURF</span>
+      <div className="photography-planes-viewport">
+        <div className="photography-planes-stage">
+          {Array.from({ length: photographyPlaneCount }, (_, index) => (
+            <PhotographyPlane
+              key={index}
+              index={index}
+              scrollX={scrollX}
+              scrollVelocity={scrollVelocity}
+              isHovered={hoveredIndex === index}
+              onHoverStart={() => setHoveredIndex(index)}
+              onHoverEnd={() => setHoveredIndex(null)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -228,13 +324,13 @@ export function HomePage() {
             />
           </div>
         </section>
-        <section className="mx-auto w-full max-w-7xl px-6 pb-20 sm:px-10 lg:px-14">
+        <section className="mx-auto w-full max-w-7xl px-6 pb-0 sm:px-10 lg:px-14">
           <div className="mb-7 flex items-end justify-between border-b border-white/10 pb-4"><h2 className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400">Selected work</h2><Link to="/work" className="text-sm text-zinc-500 hover:text-[#B10E1E]">View all ↗</Link></div>
           {/* Original selected-work cards kept for future reuse.
           <div className="grid gap-3 md:grid-cols-3">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div>
           */}
-          <ProjectsIndex />
         </section>
+        <ProjectsIndex />
         <PhotographyIndex />
       </main>
     </SiteLayout>
@@ -250,7 +346,7 @@ export function WorkPage() {
 }
 
 export function PhotographyPage() {
-  return <SiteLayout><main><PageIntro eyebrow="PHOTOGRAPHY" title="Attention is a form of care." body="A growing archive of light, texture, distance, and the scenes that usually pass unnoticed." /><section className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-6 pb-24 sm:px-10 md:grid-cols-3 lg:px-14">{['01 / coastal light', '02 / after rain', '03 / late train', '04 / borrowed room', '05 / field study', '06 / last light'].map((label, index) => <div key={label} className={`photo-placeholder photo-placeholder-${index + 1} flex aspect-[4/5] items-end p-4`}><span className="font-mono text-xs uppercase tracking-[0.12em] text-zinc-300">{label}</span></div>)}</section></main></SiteLayout>
+  return <SiteLayout><main><PageIntro className="photography-page-intro" eyebrow="PHOTOGRAPHY" title="Attention is a form of care." body="A growing archive of light, texture, distance, and the scenes that usually pass unnoticed." />{/* Previous scroll gallery kept for later: <ScrollPhotographyGallery /> */}<ScrollVelocityPlanes /></main></SiteLayout>
 }
 
 export function ContactPage() {

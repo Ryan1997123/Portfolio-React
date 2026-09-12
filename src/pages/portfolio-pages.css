@@ -196,6 +196,16 @@
   gap: 10px;
 }
 
+.section-display-heading {
+  margin: 0;
+  color: #f5f3ef !important;
+  font-family: 'Basement Grotesque Norm', 'Arial Black', sans-serif !important;
+  font-size: 48px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
 .projects-index-copy {
   max-width: 20rem;
   color: #8a8a85;
@@ -396,6 +406,203 @@
   text-transform: uppercase;
 }
 
+.photography-scroll-container {
+  position: relative;
+  height: 300vh;
+  overflow: visible;
+}
+
+.photography-planes-container {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: #0a0a0a;
+  color: #f5f3ef;
+  touch-action: none;
+}
+
+.photography-planes-heading {
+  position: absolute;
+  z-index: 50;
+  top: 8%;
+  left: max(24px, calc((100% - 1280px) / 2 + 56px));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.photography-planes-heading strong {
+  color: #f5f3ef;
+  font-family: 'Basement Grotesque Norm', 'Arial Black', sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.photography-planes-heading sup {
+  color: #b10e1e;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.photography-planes-hint {
+  position: absolute;
+  z-index: 50;
+  right: 24px;
+  bottom: 24px;
+  color: #8a8a85;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.photography-planes-viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  perspective: 1800px;
+  perspective-origin: 10% 10%;
+}
+
+.photography-planes-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(70px);
+  transform-style: preserve-3d;
+}
+
+.photography-plane {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 390px;
+  overflow: visible;
+  border: 1px solid rgb(245 243 239 / 0.16);
+  color: #f5f3ef;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
+  transform-style: preserve-3d;
+  transition: filter 200ms ease;
+}
+
+.photography-plane::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 48%, rgb(10 10 10 / 0.88));
+  content: '';
+}
+
+.photography-plane-index {
+  position: absolute;
+  z-index: 2;
+  top: -22px;
+  left: 0;
+  color: #8a8a85;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.photography-plane-label {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  pointer-events: none;
+}
+
+.photography-plane-label-line {
+  width: 90px;
+  height: 1px;
+  background: #b10e1e;
+  transform-origin: left;
+}
+
+.photography-plane-label-text {
+  padding: 4px 8px;
+  color: #f5f3ef;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.photography-page-intro {
+  height: 48vh !important;
+}
+
+.photography-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: min(100%, 360px);
+  height: 100svh;
+  margin-left: max(24px, calc((100% - 1280px) / 2 + 56px));
+  margin-right: 0;
+  overflow: visible;
+}
+
+.photography-gallery-card::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 42%, rgb(10 10 10 / 0.9));
+  content: '';
+}
+
+.photography-gallery-content {
+  position: absolute;
+  z-index: 1;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+}
+
+.photography-gallery-number {
+  display: block;
+  margin-bottom: 8px;
+  color: #b10e1e;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.photography-gallery-content h2 {
+  margin: 0;
+  color: #f5f3ef !important;
+  font-family: 'Basement Grotesque Norm', 'Arial Black', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
 @media (min-width: 769px) and (max-width: 1023px) {
   .home-hero {
     min-height: auto !important;
@@ -446,6 +653,93 @@
   .photography-index-image {
     min-height: 180px;
     padding: 10px;
+  }
+
+  .photography-sticky-wrapper {
+    width: 280px;
+    margin: 0 auto;
+  }
+
+  .photography-page-intro {
+    height: 42vh !important;
+  }
+
+  .photography-gallery {
+    gap: 15px;
+  }
+
+  .photography-gallery-card {
+    width: 280px;
+    height: 350px;
+  }
+
+  .photography-gallery-content {
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+  }
+
+  .photography-gallery-content h2 {
+    font-size: 26px !important;
+  }
+
+  .photography-planes-heading {
+    top: 6%;
+    left: 24px;
+  }
+
+  .photography-planes-heading strong {
+    font-size: 24px;
+  }
+
+  .photography-planes-hint {
+    right: 24px;
+    bottom: 24px;
+  }
+
+  .photography-plane {
+    width: 260px;
+    height: 340px;
+  }
+
+  .photography-plane-label-line {
+    width: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photography-scroll-container {
+    height: auto;
+  }
+
+  .photography-sticky-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 50px 24px;
+    overflow-x: auto;
+  }
+
+  .photography-gallery {
+    transform: none !important;
+  }
+
+  .photography-planes-container {
+    touch-action: auto;
+  }
+
+  .photography-plane {
+    position: relative;
+    margin: 0 8px;
+    transform: none !important;
+  }
+
+  .photography-planes-stage {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 24px;
+    transform: none;
   }
 }
 
