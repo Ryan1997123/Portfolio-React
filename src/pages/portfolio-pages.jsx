@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, stagger, useMotionTemplate, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, useVelocity, wrap } from 'motion/react'
-import { Cursor, ScrambleText, Ticker } from 'motion-plus/react'
+import { ScrambleText, Ticker } from 'motion-plus/react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import behanceLogo from '../assets/Ionicons_logo-behance logo.svg'
@@ -42,15 +42,28 @@ const navItems = [
 
 function SiteLayout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 })
+
+  useEffect(() => {
+    const handlePointerMove = (event) => {
+      setCursorPosition({ x: event.clientX, y: event.clientY })
+    }
+
+    window.addEventListener('pointermove', handlePointerMove)
+    return () => window.removeEventListener('pointermove', handlePointerMove)
+  }, [])
 
   return (
     <div className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100">
-      <Cursor
+      <div
         className="portfolio-cursor"
         aria-hidden="true"
+        style={{ left: cursorPosition.x, top: cursorPosition.y }}
       >
-        <img className="portfolio-cursor-icon" src={mouseIcon} alt="" />
-      </Cursor>
+        <span className="portfolio-cursor-circle">
+          <img className="portfolio-cursor-icon" src={mouseIcon} alt="" />
+        </span>
+      </div>
       <header className="relative z-30 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-10 lg:px-14">
         <Link to="/" data-cursor="pointer" className="logo-wordmark text-zinc-100">Ryan Monaghan</Link>
         <nav className="hidden flex-wrap justify-end gap-x-2 gap-y-2 md:flex" aria-label="Main navigation">

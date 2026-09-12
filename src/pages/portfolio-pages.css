@@ -4,29 +4,48 @@
   --portfolio-muted: #8a8a85;
   background-color: #0a0a0a;
   color: #f5f3ef;
+  cursor: none;
 }
 
 .portfolio-cursor {
+  position: fixed;
+  z-index: 99999;
   width: 36px !important;
   height: 36px !important;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: block;
   border-radius: 50% !important;
   background: var(--portfolio-red) !important;
 }
 
-.portfolio-cursor[data-motion-cursor="pointer"] {
+.portfolio-cursor-circle {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   background-color: var(--portfolio-red) !important;
 }
 
 .portfolio-cursor-icon {
-  position: absolute;
-  top: 8px;
-  left: 8px;
   display: block;
   width: 20px;
   height: 20px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   pointer-events: none;
+}
+
+@media (pointer: coarse) {
+  .portfolio-shell {
+    cursor: auto;
+  }
+
+  .portfolio-cursor {
+    display: none;
+  }
 }
 
 .portfolio-shell h1 {
