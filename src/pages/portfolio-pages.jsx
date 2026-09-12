@@ -451,11 +451,7 @@ function ProjectsIndex() {
 }
 
 function PhotographyIndex() {
-  const featuredPhotos = [
-    ["01 / coastal light", 1],
-    ["02 / after rain", 2],
-    ["03 / late train", 3],
-  ];
+  const featuredPhotos = photography.slice(0, 3);
 
   return (
     <section className="photography-index">
@@ -470,13 +466,20 @@ function PhotographyIndex() {
         </Link>
       </div>
       <div className="photography-index-grid">
-        {featuredPhotos.map(([label, index]) => (
+        {featuredPhotos.map((photo, index) => (
           <Link
-            key={label}
+            key={photo.id}
             to="/photography"
-            className={`photography-index-image photo-placeholder photo-placeholder-${index}`}
+            className="photography-index-image photo-placeholder"
+            style={{
+              backgroundImage: `linear-gradient(to top, rgb(0 0 0 / 0.72), transparent 55%), url(${photo.image})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
           >
-            <span>{label}</span>
+            <span>
+              {String(index + 1).padStart(2, "0")} / {photo.label}
+            </span>
           </Link>
         ))}
       </div>
@@ -794,26 +797,47 @@ export function AboutPage() {
       <main>
         <PageIntro
           eyebrow="ABOUT"
-          title="A small studio for clear ideas."
-          body="I work across design and code, helping ambitious people turn rough thoughts into experiences with a point of view."
+          title="Empathetic Product Designer"
+          body="I am an empathetic Product Designer with a foundation in Computer Science and over 5 years of experience transforming complex challenges into intuitive, user-centered digital products."
         />
-        <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 sm:px-10 lg:grid-cols-2 lg:px-14">
-          <div className="text-2xl leading-relaxed tracking-tight text-zinc-200">
-            Good work should feel considered, useful, and a little unexpected.
+        <section className="mx-auto flex w-full max-w-7xl flex-col items-start justify-end gap-8 px-5 py-[30px] sm:px-10 lg:px-14">
+          <div className="max-w-3xl text-zinc-400">
+            <div>
+              <h3 className="mb-3 text-lg font-semibold">Specialization</h3>
+              <p>
+                I specialize in the end-to-end design process, from initial research and wire-framing to high-fidelity prototyping and design system implementation.
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-3 text-lg font-semibold">Design Philosophy</h3>
+              <p>
+                With my background in business and tech, I integrate strong development and business leadership decision-making into my designs. My goal is to create inclusive and accessible experiences using clean and robust code, with a blend of creative thinking.
+              </p>
+            </div>
           </div>
-          <div className="space-y-5 text-zinc-400">
-            <p>
-              My practice moves between brand systems, digital products,
-              editorial work, and photography. The medium changes, but the
-              question stays the same: what is the clearest, most human way to
-              make this matter?
-            </p>
-            <p>
-              I collaborate with founders, cultural teams, and people building
-              quietly excellent things.
-            </p>
+          <div className="max-w-3xl text-zinc-400">
+            <div>
+              <h3 className="mb-3 text-lg font-semibold text-zinc-200">Beyond Design</h3>
+              <p>
+                I love to travel and I'm fluent in Korean and Japanese, currently learning Spanish. I've traveled to South Korea, Mexico, Colombia, London, and Italy.
+              </p>
+              <p>
+                When I'm not at my computer, I stay active and centered through running half marathons, skiing, and yoga. Living in midtown NYC, I love exploring the city's dynamic food scene and discovering new restaurants and cafes.
+              </p>
+            </div>
           </div>
         </section>
+        <div className="ticker-strip overflow-hidden border-y border-white/10">
+          <Ticker
+            velocity={40}
+            gap={0}
+            items={skills.map((skill) => (
+              <span key={skill} className="ticker-item-text whitespace-nowrap">
+                {skill}
+              </span>
+            ))}
+          />
+        </div>
       </main>
     </SiteLayout>
   );
@@ -847,7 +871,7 @@ export function PhotographyPage() {
           className="photography-page-intro"
           eyebrow="PHOTOGRAPHY"
           title="Photographs by Ryan"
-          body="A visual archive of quiet moments, unfamiliar places, and the textures that stay with you after the trip ends."
+          body="Photos I have taken along the way, from places I have visited to details I did not want to forget."
         />
         {/* Previous scroll gallery kept for later: <ScrollPhotographyGallery /> */}
         <ScrollVelocityPlanes />
