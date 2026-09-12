@@ -72,22 +72,20 @@ export const projects = [
 ]
 
 
-export const photography = [
-  { id: 1, label: 'Afterglow' },
-  { id: 2, label: 'Drift Frame' },
-  { id: 3, label: 'Peripheral' },
-  { id: 4, label: 'Standstill' },
-  { id: 5, label: 'Threshold' },
-  { id: 6, label: 'Windowline' },
-  { id: 7, label: 'Afterglow' },
-  { id: 8, label: 'Drift Frame' },
-  { id: 9, label: 'Peripheral' },
-  { id: 10, label: 'Standstill' },
-  { id: 11, label: 'Threshold' },
-  { id: 12, label: 'Windowline' },
-  { id: 13, label: 'Afterglow' },
-  { id: 14, label: 'Drift Frame' },
-  { id: 15, label: 'Peripheral' },
-  { id: 16, label: 'Standstill' },
-  { id: 17, label: 'Threshold' },
-]
+const photographyImages = Object.entries(
+  import.meta.glob('../assets/photography/*.{jpg,jpeg,png}', { eager: true, import: 'default' }),
+).map(([path, image], index) => {
+  const fileName = path.split('/').pop() || `photo-${index + 1}`;
+  const label = fileName
+    .replace(/\.[^/.]+$/, '')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+  return {
+    id: index + 1,
+    label,
+    image,
+  };
+});
+
+export const photography = photographyImages;

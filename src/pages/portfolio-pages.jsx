@@ -491,6 +491,7 @@ const photographyPlaneGap = -56;
 
 function PhotographyPlane({
   index,
+  image,
   scrollX,
   scrollVelocity,
   isHovered,
@@ -530,6 +531,9 @@ function PhotographyPlane({
     <motion.article
       className={`photography-plane photo-placeholder photo-placeholder-${(index % 6) + 1}`}
       style={{
+        backgroundImage: image ? `url(${image})` : undefined,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         transform,
         zIndex: isHovered ? 100 : 1,
         filter: isHovered ? "brightness(1.15)" : "brightness(1)",
@@ -659,6 +663,7 @@ function ScrollVelocityPlanes() {
             <PhotographyPlane
               key={index}
               index={index}
+              image={photography[index]?.image}
               scrollX={scrollX}
               scrollVelocity={scrollVelocity}
               isHovered={hoveredIndex === index}
@@ -841,8 +846,8 @@ export function PhotographyPage() {
         <PageIntro
           className="photography-page-intro"
           eyebrow="PHOTOGRAPHY"
-          title="Attention is a form of care."
-          body="A growing archive of light, texture, distance, and the scenes that usually pass unnoticed."
+          title="Photographs by Ryan"
+          body="A visual archive of quiet moments, unfamiliar places, and the textures that stay with you after the trip ends."
         />
         {/* Previous scroll gallery kept for later: <ScrollPhotographyGallery /> */}
         <ScrollVelocityPlanes />
