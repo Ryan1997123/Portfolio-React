@@ -7,6 +7,7 @@ import githubLogo from '../assets/Ionicons_logo-github logo.svg'
 import linkedinLogo from '../assets/LinkedIn_logo_In-Black logo.svg'
 import icotydeOverview from '../assets/icotyde-overview.webp'
 import meImage from '../assets/me.png'
+import mouseIcon from '../assets/mouse_icon.svg'
 import { projects } from '../data/projects'
 import './portfolio-pages.css'
 
@@ -45,19 +46,11 @@ function SiteLayout({ children }) {
   return (
     <div className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100">
       <Cursor
-        magnetic
         className="portfolio-cursor"
         aria-hidden="true"
         style={{ background: 'transparent', border: '0' }}
-        variants={{
-          default: { rotate: -18, scale: 1 },
-          pointer: { rotate: -12, scale: 1.08 },
-          pressed: { rotate: -30, scale: 0.78 },
-        }}
       >
-        <span className="portfolio-cursor-handle" />
-        <span className="portfolio-cursor-bristles" />
-        <motion.span className="portfolio-cursor-spark" variants={{ default: { opacity: 0, scale: 0 }, pressed: { opacity: 1, scale: 1 } }} />
+        <img className="portfolio-cursor-icon" src={mouseIcon} alt="" />
       </Cursor>
       <header className="relative z-30 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-10 lg:px-14">
         <Link to="/" data-cursor="pointer" className="logo-wordmark text-zinc-100">Ryan Monaghan</Link>

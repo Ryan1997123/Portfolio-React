@@ -7,44 +7,18 @@
 }
 
 .portfolio-cursor {
-  width: 48px !important;
-  height: 48px !important;
-  mix-blend-mode: normal;
+  width: 32px !important;
+  height: 32px !important;
 }
 
-.portfolio-cursor-handle,
-.portfolio-cursor-bristles,
-.portfolio-cursor-spark {
+.portfolio-cursor-icon {
   position: absolute;
   display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
   pointer-events: none;
-}
-
-.portfolio-cursor-handle {
-  width: 29px;
-  height: 9px;
-  border-radius: 2px 7px 7px 2px;
-  background: #b10e1e;
-  box-shadow: 0 3px 0 rgb(10 10 10 / 0.35), 0 0 12px rgb(177 14 30 / 0.45);
-  transform: translate(-2px, -1px) rotate(-42deg);
-}
-
-.portfolio-cursor-bristles {
-  width: 13px;
-  height: 22px;
-  background: #f5f3ef;
-  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
-  filter: drop-shadow(0 3px 0 rgb(10 10 10 / 0.25));
-  transform: translate(13px, 13px) rotate(-42deg);
-}
-
-.portfolio-cursor-spark {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #b10e1e;
-  box-shadow: 0 0 0 4px rgb(177 14 30 / 0.18), 0 0 16px rgb(177 14 30 / 0.9);
-  transform: translate(21px, 22px);
 }
 
 .portfolio-shell h1 {

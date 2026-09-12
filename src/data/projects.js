@@ -11,7 +11,7 @@ export const projects = [
     tools: 'Figma',
     heroImage: 'icotyde-overview',
     color: 'cyan',
-    outcomes: ['Clearer event narratives', 'Faster anomaly detection', 'A calmer analytics workflow'],
+    outcomes: ['Clearer clinical and support information', 'Faster access to enrollment resources', 'More confident prescribing conversations'],
     overview: 'ICOTYDE withMe HCP simplifies access, support, and enrollment information for dermatologists prescribing ICOTYDE (icotrokinra), helping turn dense clinical and insurance details into a clear, confident experience.',
     problem: 'Healthcare professionals often face confusion and delays when trying to access patient support, insurance, and enrollment information for prescription treatments. ICOTYDE HCP needed a streamlined way to guide physicians through those resources without adding to their already limited time.',
     research: 'The project brought together clinical information, access and support resources, prior authorization steps, financial assistance programs, and enrollment forms. The challenge was to make those connected needs easy to find and understand in one experience.',
