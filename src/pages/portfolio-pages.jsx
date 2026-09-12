@@ -5,11 +5,11 @@ import { projects } from '../data/projects'
 import './portfolio-pages.css'
 
 const navItems = [
-  ['/', 'HOME'],
-  ['/about', 'ABOUT'],
-  ['/work', 'WORK'],
-  ['/photography', 'PHOTOGRAPHY'],
-  ['/contact', 'CONTACT'],
+  ['/', 'Home'],
+  ['/about', 'About'],
+  ['/work', 'Work'],
+  ['/photography', 'Photography'],
+  ['/contact', 'Contact'],
 ]
 
 function SiteLayout({ children }) {
