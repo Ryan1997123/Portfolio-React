@@ -1,5 +1,5 @@
 @import url('https://fonts.cdnfonts.com/css/pp-fraktion-mono');
-@import url('https://fonts.cdnfonts.com/css/abc-diatype');
+@import url('https://fonts.cdnfonts.com/css/abc-diatype?display=swap');
 @import './assets/fonts/Basementgrotesque/stylesheet.css';
 
 @import "tailwindcss";

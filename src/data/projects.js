@@ -17,7 +17,7 @@ export const projects = [
     problem: 'Healthcare professionals often face confusion and delays when trying to access patient support, insurance, and enrollment information for prescription treatments. ICOTYDE HCP needed a streamlined way to guide physicians through those resources without adding to their already limited time.',
     research: 'The project brought together clinical information, access and support resources, prior authorization steps, financial assistance programs, and enrollment forms. The challenge was to make those connected needs easy to find and understand in one experience.',
     process: 'My team and I worked closely in Figma to build a visual language based on trust and clarity. Across design, content, and development, we refined the page flow, navigation, and visual hierarchy so physicians and their staff could move from clinical data to patient access tools without unnecessary friction.',
-    processImages: ['Visual language and layout studies', 'Navigation and page-flow iterations'],
+    processImages: [{ label: 'Visual language and layout studies', image: 'example1.png' }, { label: 'Navigation and page-flow iterations', image: 'example2.png' }],
     solution: 'Working with UX, development, and product design, we created a friendly, accessible site that communicates ICOTYDE\'s clinical value and supports HCPs in taking real action: prescribing with confidence and helping their patients start treatment sooner. The completed work was handed to Johnson & Johnson\'s development team through Figma for launch.',
     solutionImage: 'ICOTYDE withMe HCP final design',
   },
