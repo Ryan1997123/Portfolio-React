@@ -1,5 +1,4 @@
 import { animate, motionValue, press } from 'motion'
-import { threeEffect } from 'motion/three'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three/webgpu'
 import { attribute, cos, mix, positionLocal, sin, time, uniform, vec3 } from 'three/tsl'
@@ -186,14 +185,21 @@ export default function IcotydeParticleHero({ image, alt }) {
       resizeObserver = new ResizeObserver(resize)
       resizeObserver.observe(stage)
       resize()
-      threeEffect(globe, { value: globeValue })
-      threeEffect(photoMesh.material, { opacity: globeValue.map((value) => imageOpacity(value)) })
+
+      const syncGlobeState = () => {
+        globe.value = globeValue.get()
+        photoMesh.material.opacity = imageOpacity(globeValue.get())
+      }
+
       animate(globeValue, 0, { type: 'spring', stiffness: 55, damping: 16, mass: 1, delay: 0.8 })
       stopPress = press(canvas, () => {
         animate(globeValue, 1, { type: 'spring', stiffness: 120, damping: 18, mass: 0.9 })
         return () => animate(globeValue, 0, { type: 'spring', stiffness: 70, damping: 16, mass: 1 })
       })
-      renderer.setAnimationLoop(() => renderer.render(scene, camera))
+      renderer.setAnimationLoop(() => {
+        syncGlobeState()
+        renderer.render(scene, camera)
+      })
     }
 
     start().catch((error) => {
