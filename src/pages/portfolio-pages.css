@@ -7,15 +7,19 @@
 }
 
 .portfolio-cursor {
-  width: 32px !important;
-  height: 32px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: var(--portfolio-red) !important;
 }
 
 .portfolio-cursor-icon {
   position: absolute;
+  top: 8px;
+  left: 8px;
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   pointer-events: none;
