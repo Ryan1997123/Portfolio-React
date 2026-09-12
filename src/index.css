@@ -1,6 +1,6 @@
-@import url('https://fonts.cdnfonts.com/css/basement-grotesque');
 @import url('https://fonts.cdnfonts.com/css/pp-fraktion-mono');
 @import url('https://fonts.cdnfonts.com/css/abc-diatype');
+@import './assets/fonts/Basementgrotesque/stylesheet.css';
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -22,7 +22,7 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --font-display: 'Basement Grotesque', 'Arial Black', sans-serif;
+  --font-display: 'Basement Grotesque Norm', 'Arial Black', sans-serif;
   --font-body: 'ABC Diatype', 'Segoe UI', sans-serif;
   --font-mono: 'PP Fraktion Mono', 'JetBrains Mono Variable', monospace;
   --sans: var(--font-body);
@@ -141,7 +141,7 @@ body {
 }
 
 .portfolio-shell {
-  --portfolio-cyan: #67e8f9;
+  --portfolio-red: #b10e1e;
   font-family: var(--font-body);
   color: rgb(244 244 245);
 }
@@ -213,9 +213,13 @@ body {
 }
 
 .portfolio-shell .logo-wordmark {
+  color: #fff !important;
+  font-family: var(--font-display) !important;
   font-size: 20px !important;
-  line-height: 1 !important;
-  letter-spacing: -0.05em !important;
+  font-style: normal !important;
+  font-weight: 800 !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
 }
 
 @media (max-width: 768px) {
@@ -267,7 +271,7 @@ code {
 
 @theme inline {
   --font-sans: 'ABC Diatype', 'Segoe UI', sans-serif;
-  --font-heading: 'Basement Grotesque', 'Arial Black', sans-serif;
+  --font-heading: 'Basement Grotesque Norm', 'Arial Black', sans-serif;
   --font-mono: 'PP Fraktion Mono', 'JetBrains Mono Variable', monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
