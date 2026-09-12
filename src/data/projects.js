@@ -10,6 +10,7 @@ export const projects = [
     timeline: '6 weeks',
     tools: 'Figma',
     heroImage: 'icotyde-overview',
+    figmaEmbed: 'https://embed.figma.com/design/0HbcrG7IhOSYnJDqIkoZDb/Ryan_local_SRX_ICO-HCP-FD?node-id=10190-11265&embed-host=share',
     color: 'cyan',
     outcomes: ['Clearer clinical and support information', 'Faster access to enrollment resources', 'More confident prescribing conversations'],
     overview: 'ICOTYDE withMe HCP simplifies access, support, and enrollment information for dermatologists prescribing ICOTYDE (icotrokinra), helping turn dense clinical and insurance details into a clear, confident experience.',

@@ -8,6 +8,7 @@ import linkedinLogo from '../assets/LinkedIn_logo_In-Black logo.svg'
 import icotydeOverview from '../assets/icotyde-overview.webp'
 import meImage from '../assets/me.png'
 import mouseIcon from '../assets/mouse_icon.svg'
+import IcotydeParticleHero from '../components/ui/icotyde-particle-hero'
 import { projects } from '../data/projects'
 import './portfolio-pages.css'
 
@@ -562,7 +563,15 @@ function CaseStudySection({ number, title, body, index, prefersReducedMotion }) 
 function CaseStudyImage({ color, label, index, prefersReducedMotion, onOpen }) {
   const [isVisible, setIsVisible] = useState(false)
 
+  if (color === 'cyan' && index === 2) {
+    return <FigmaEmbed src="https://embed.figma.com/design/0HbcrG7IhOSYnJDqIkoZDb/Ryan_local_SRX_ICO-HCP-FD?node-id=12818-31282&embed-host=share" title="ICOTYDE withMe HCP final design in Figma" />
+  }
+
   return <motion.figure className={`case-study-image case-study-image-${color} case-study-image-${index}`} role="button" tabIndex="0" aria-label={`Open ${label}`} initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.92, rotate: prefersReducedMotion ? 0 : index % 2 === 0 ? -2 : 2 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: prefersReducedMotion ? 0 : 0.9, ease: [0.22, 1, 0.36, 1], delay: prefersReducedMotion ? 0 : index * 0.1 }} onViewportEnter={() => setIsVisible(true)} onClick={onOpen} onKeyDown={(event) => event.key === 'Enter' && onOpen()}><ScrambleText active={isVisible && !prefersReducedMotion} duration={0.7} chars="!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█">{label}</ScrambleText></motion.figure>
+}
+
+function FigmaEmbed({ src, title }) {
+  return <div className="case-study-figma-embed"><iframe src={src} title={title} allowFullScreen /></div>
 }
 
 function CaseStudyLightbox({ image, onClose }) {
