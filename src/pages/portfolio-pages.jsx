@@ -48,7 +48,6 @@ function SiteLayout({ children }) {
       <Cursor
         className="portfolio-cursor"
         aria-hidden="true"
-        style={{ background: 'transparent', border: '0' }}
       >
         <img className="portfolio-cursor-icon" src={mouseIcon} alt="" />
       </Cursor>
