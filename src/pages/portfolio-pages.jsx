@@ -8,7 +8,7 @@ const navItems = [
   ['/', 'HOME'],
   ['/about', 'ABOUT'],
   ['/work', 'WORK'],
-  ['/photography', '{PHOTOGRAPHY}'],
+  ['/photography', 'PHOTOGRAPHY'],
   ['/contact', 'CONTACT'],
 ]
 
