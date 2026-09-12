@@ -17,7 +17,6 @@ function imageOpacity(value) {
 export default function IcotydeParticleHero({ image, alt }) {
   const stageRef = useRef(null)
   const canvasRef = useRef(null)
-  const imageRef = useRef(null)
 
   useEffect(() => {
     const stage = stageRef.current
