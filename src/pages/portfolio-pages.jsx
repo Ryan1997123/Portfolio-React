@@ -887,17 +887,16 @@ export function HomePage() {
 }
 
 export function AboutPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
   const [factsVisible, setFactsVisible] = useState(false);
   const [approachVisible, setApproachVisible] = useState(false);
 
   const aboutDetails = [
     [t("location"), t("locationVal")],
-    [t("roleLabel"), t("roleVal")],
-    [t("experienceLabel"), t("experienceVal")],
-    [t("educationLabel"), t("educationVal")],
-    [t("focusLabel"), t("focusVal")],
+    [t("languagesLabel"), t("languagesVal")],
+    [t("currentlyLabel"), t("currentlyVal")],
+    [t("yearsActiveLabel"), t("yearsActiveVal")],
   ];
 
   return (
@@ -1104,7 +1103,7 @@ export function AboutPage() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {t("howIWork")}
+                {t("approach")}
               </motion.h2>
             </div>
             <div className="about-approach-copy">
