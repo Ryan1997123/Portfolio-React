@@ -32,6 +32,7 @@ import ectrimsSitemapImage from "../assets/ectrims_booth/sitemap.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
+import resumePdf from "../assets/resume/ResumeMyResume.pdf";
 import { projects, photography } from "../data/projects";
 import "./portfolio-pages.css";
 
