@@ -1179,14 +1179,23 @@
   background-image: linear-gradient(160deg, rgb(245 243 239 / 0.14), transparent 35%), radial-gradient(circle at 72% 38%, rgb(177 14 30 / 0.64), transparent 30%);
 }
 
-.case-study-back {
-  display: inline-block;
+.case-study-nav {
   margin-top: 96px;
-  color: #b10e1e;
-  font-size: 14px;
+  gap: 24px;
 }
 
-.case-study-back:hover {
+.case-study-back,
+.case-study-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #b10e1e;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.case-study-back:hover,
+.case-study-next:hover {
   color: #f5f3ef;
 }
 

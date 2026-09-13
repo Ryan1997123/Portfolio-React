@@ -98,7 +98,8 @@ export const projects = [
       { label: 'Final tote bag design & QR code gateway', image: 'sibos-final' },
     ],
     solution: 'The tote bag design was a smashing success at Sibos 2023. More than 500 bags were given out to convention-goers among 9,000 attending financial professionals, effectively expanding brand presence outside typical app and website mediums.',
-    solutionImage: 'Final Sibos 2023 Tote Bag',
+    solutionImage: 'Final Sibos 2023 Tote Bag & Premium Technology Team',
+    solutionImageKey: 'sibos-premium',
   },
 ];
 

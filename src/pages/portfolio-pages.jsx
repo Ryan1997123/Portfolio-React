@@ -33,6 +33,7 @@ import sibosHero from "../assets/sibos_tote/hero.png";
 import sibosFinal from "../assets/sibos_tote/final_design.png";
 import sibosConcept1 from "../assets/sibos_tote/initial_concept1.png";
 import sibosConcept2 from "../assets/sibos_tote/initial_concept2.png";
+import sibosPremium from "../assets/sibos_tote/premium.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
@@ -1178,7 +1179,12 @@ export function ContactPage() {
 
 export function CaseStudyPage() {
   const { slug } = useParams();
-  const project = projects.find((item) => item.slug === slug);
+  const projectIndex = projects.findIndex((item) => item.slug === slug);
+  const project = projects[projectIndex];
+  const nextProject =
+    projectIndex !== -1 && projectIndex < projects.length - 1
+      ? projects[projectIndex + 1]
+      : null;
   const prefersReducedMotion = useReducedMotion();
   const [lightboxImage, setLightboxImage] = useState(null);
   if (!project)
@@ -1423,12 +1429,14 @@ export function CaseStudyPage() {
               <CaseStudyImage
                 color={project.color}
                 label={project.solutionImage}
+                image={project.solutionImageKey}
                 index={2}
                 prefersReducedMotion={prefersReducedMotion}
                 onOpen={() =>
                   openLightbox({
                     type: "panel",
                     label: project.solutionImage,
+                    image: project.solutionImageKey,
                     color: project.color,
                     index: 2,
                   })
@@ -1436,9 +1444,19 @@ export function CaseStudyPage() {
               />
             )}
           </motion.section>
-          <Link to="/work" className="case-study-back">
-            ← Back to work
-          </Link>
+          <div className="case-study-nav flex items-center justify-between">
+            <Link to="/work" className="case-study-back">
+              ← Back to work
+            </Link>
+            {nextProject && (
+              <Link
+                to={`/work/${nextProject.slug}`}
+                className="case-study-next"
+              >
+                <span>Next Project: {nextProject.title}</span> ←
+              </Link>
+            )}
+          </div>
         </section>
         {lightboxImage && (
           <CaseStudyLightbox
@@ -1582,7 +1600,9 @@ function resolveCaseStudyImage(imageKey) {
                       ? sibosConcept1
                       : imageKey === "sibos-concept2"
                         ? sibosConcept2
-                        : `/src/assets/jnj-ico/${imageKey}`;
+                        : imageKey === "sibos-premium"
+                          ? sibosPremium
+                          : `/src/assets/jnj-ico/${imageKey}`;
 }
 
 function CaseStudyImage({
