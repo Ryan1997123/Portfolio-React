@@ -139,14 +139,33 @@ function SiteLayout({ children }) {
   ];
   const [menuOpen, setMenuOpen] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
+  const cursorFrameRef = useRef(null);
 
   useEffect(() => {
     const handlePointerMove = (event) => {
-      setCursorPosition({ x: event.clientX, y: event.clientY });
+      if (cursorFrameRef.current) {
+        cancelAnimationFrame(cursorFrameRef.current);
+      }
+
+      cursorFrameRef.current = requestAnimationFrame(() => {
+        setCursorPosition({ x: event.clientX, y: event.clientY });
+      });
     };
 
-    window.addEventListener("pointermove", handlePointerMove);
-    return () => window.removeEventListener("pointermove", handlePointerMove);
+    const handlePointerLeave = () => {
+      setCursorPosition({ x: -100, y: -100 });
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerleave", handlePointerLeave);
+
+    return () => {
+      if (cursorFrameRef.current) {
+        cancelAnimationFrame(cursorFrameRef.current);
+      }
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+    };
   }, []);
 
   return (
