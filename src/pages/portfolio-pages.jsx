@@ -15,7 +15,7 @@ import {
 import { ScrambleText, Ticker } from "motion-plus/react";
 import { DownloadSimple } from "@phosphor-icons/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
 import githubLogo from "../assets/Ionicons_logo-github logo.svg";
 import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
@@ -86,8 +86,50 @@ const navItems = [
   ["/contact", "Contact"],
 ];
 
+function usePageSEO() {
+  const { lang, t, translateProject } = useLanguage();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+
+    let pageTitle = "Ryan Monaghan — Product Designer & Developer";
+    let pageDesc = "Portfolio of Ryan Monaghan, a Product Designer with 5+ years of experience crafting intuitive digital experiences, design systems, and responsive applications in New York.";
+
+    if (pathname === "/about") {
+      pageTitle = `${t("aboutEyebrow")} | Ryan Monaghan — Product Designer`;
+      pageDesc = t("aboutSummaryCopy");
+    } else if (pathname === "/work") {
+      pageTitle = `${t("workEyebrow")} | Selected Projects — Ryan Monaghan`;
+      pageDesc = t("workBody");
+    } else if (pathname.startsWith("/work/")) {
+      const slug = pathname.replace("/work/", "");
+      const rawProject = projects.find((p) => p.slug === slug);
+      if (rawProject) {
+        const project = translateProject(rawProject);
+        pageTitle = `${project.title} — Case Study | Ryan Monaghan`;
+        pageDesc = project.summary || project.description;
+      }
+    } else if (pathname === "/photography") {
+      pageTitle = `${t("photoEyebrow")} | Photographs by Ryan Monaghan`;
+      pageDesc = t("photoBody");
+    } else if (pathname === "/contact") {
+      pageTitle = `${t("contactEyebrow")} | Get in Touch — Ryan Monaghan`;
+      pageDesc = t("contactBody");
+    }
+
+    document.title = pageTitle;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", pageDesc);
+    }
+  }, [pathname, lang, t, translateProject]);
+}
+
 function SiteLayout({ children }) {
   const { t } = useLanguage();
+  usePageSEO();
   const navItems = [
     ["/", t("home")],
     ["/about", t("about")],
@@ -109,6 +151,12 @@ function SiteLayout({ children }) {
 
   return (
     <div className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:rounded focus:bg-[#B10E1E] focus:px-4 focus:py-2 focus:text-white focus:outline-none"
+      >
+        Skip to main content
+      </a>
       <div
         className="portfolio-cursor"
         aria-hidden="true"
@@ -268,7 +316,7 @@ function FooterReveal({ children }) {
 
   return (
     <div className="footer-reveal-shell">
-      <main ref={contentRef} className="footer-reveal-content">
+      <main id="main-content" tabIndex="-1" ref={contentRef} className="footer-reveal-content focus:outline-none">
         {children}
       </main>
       <footer ref={footerRef} className="reveal-footer">
@@ -806,7 +854,7 @@ export function HomePage() {
 
   return (
     <SiteLayout>
-      <main>
+      <div className="home-page">
         <section className="home-hero mx-auto grid min-h-[64vh] w-full max-w-7xl items-stretch gap-12 px-6 pb-8 pt-8 sm:px-10 lg:grid-cols-[1.4fr_0.6fr] lg:px-14 lg:pb-10">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -905,7 +953,7 @@ export function HomePage() {
         </section>
         <ProjectsIndex />
         <PhotographyIndex />
-      </main>
+      </div>
     </SiteLayout>
   );
 }
@@ -925,7 +973,7 @@ export function AboutPage() {
 
   return (
     <SiteLayout>
-      <main className="about-page">
+      <div className="about-page">
         <section className="about-hero">
           <motion.header
             className="about-intro"
@@ -1161,7 +1209,7 @@ export function AboutPage() {
             </div>
           </div>
         </motion.section>
-      </main>
+      </div>
     </SiteLayout>
   );
 }
@@ -1171,7 +1219,7 @@ export function WorkPage() {
 
   return (
     <SiteLayout>
-      <main>
+      <div className="work-page">
         <PageIntro
           className="work-page-intro"
           eyebrow={t("workEyebrow")}
@@ -1186,7 +1234,7 @@ export function WorkPage() {
             );
           })}
         </section>
-      </main>
+      </div>
     </SiteLayout>
   );
 }
@@ -1196,7 +1244,7 @@ export function PhotographyPage() {
 
   return (
     <SiteLayout>
-      <main>
+      <div className="photography-page">
         <PageIntro
           className="photography-page-intro"
           eyebrow={t("photoEyebrow")}
@@ -1205,7 +1253,7 @@ export function PhotographyPage() {
         />
         {/* Previous scroll gallery kept for later: <ScrollPhotographyGallery /> */}
         <ScrollVelocityPlanes />
-      </main>
+      </div>
     </SiteLayout>
   );
 }
@@ -1215,7 +1263,7 @@ export function ContactPage() {
 
   return (
     <SiteLayout>
-      <main>
+      <div className="contact-page">
         <PageIntro
           eyebrow={t("contactEyebrow")}
           title={t("contactTitle")}
@@ -1285,7 +1333,7 @@ export function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </SiteLayout>
   );
 }
@@ -1333,7 +1381,7 @@ export function CaseStudyPage() {
 
   return (
     <SiteLayout>
-      <main>
+      <div className="case-study-page">
         <PageIntro
           eyebrow={`${project.category} / ${project.year}`}
           title={project.title}
@@ -1580,7 +1628,7 @@ export function CaseStudyPage() {
             onClose={() => setLightboxImage(null)}
           />
         )}
-      </main>
+      </div>
     </SiteLayout>
   );
 }

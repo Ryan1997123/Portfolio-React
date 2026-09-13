@@ -36,7 +36,7 @@ export const translations = {
     aboutEyebrow: "ABOUT",
     aboutTitle: "Ryan Monaghan",
     aboutProfileLabel: "Profile / 001",
-    aboutSummaryCopy: "I am an empathetic product designer with a foundation in computer science and over five years of experience transforming complex challenges into intuitive, user-centered digital products.",
+    aboutSummaryCopy: "I am a user-focused product designer with a foundation in computer science and over five years of experience transforming complex challenges into intuitive, user-centered digital products.",
     downloadResume: "Download resume",
     approach: "Approach",
     designGrounded: "Design grounded in purpose and precision.",
