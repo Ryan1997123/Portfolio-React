@@ -69,7 +69,38 @@ export const projects = [
     solutionImage: 'Final GL HCP ECTRIMS Booth experience',
     figmaEmbed: 'https://embed.figma.com/design/KsQ7OzQkvb9HgF10CooYHD/Ryan_Local_Toleb-GL_HCP_ECTRIMS_Booth?node-id=92-2&embed-host=share',
   },
-]
+  {
+    slug: 'sibos-tote-bag',
+    title: 'Sibos 2023 Tote Bag Design',
+    category: 'BRANDING & MERCHANDISE / GRAPHIC DESIGN',
+    year: '2023',
+    summary: 'A sustainable, ESG-themed tote bag design created for Premium Technology at Sibos 2023.',
+    description: 'Premium Technology, a fintech company based in Jersey City, brought me on to design a sustainable, ESG-themed tote bag for Sibos 2023 in Toronto, the premier annual conference for global financial leaders. Over 500 bags were handed out to booth visitors.',
+    role: 'Lead product designer',
+    timeline: '2 weeks',
+    tools: 'Figma, Canva, Adobe Illustrator, Photoshop',
+    color: 'rose',
+    outcomes: [
+      'Handed out to 500+ financial leaders at Sibos Toronto',
+      'Integrated QR code driving direct traffic to Premium Technology',
+      'Sustainable, ESG-aligned brand merchandise design',
+    ],
+    overview: 'Premium Technology, a fintech company based in Jersey City, brought me on to design a sustainable, ESG-themed tote bag for Sibos 2023, the world\'s premier annual conference, exhibition, and networking event for financial leaders across the global financial industry.',
+    heroImage: 'sibos-tote-hero',
+    problem: 'The tote bag needed to stand out at a major global fintech convention while representing Premium Technology\'s ESG (Environmental, Social, and Governance) framework and vision for worldwide expansion without feeling overly aggressive or off-brand.',
+    research: 'I studied different bag designs and layouts, print formats, and ESG visual cues, exploring directions ranging from high-contrast orange graphics to more grounded, eco-friendly palettes.',
+    researchImages: [
+      { label: 'Initial concept exploration', image: 'sibos-concept1' },
+      { label: 'Alternative design direction', image: 'sibos-concept2' },
+    ],
+    process: 'While initial concepts were bold, they were ultimately sidelined as the graphics felt too aggressive and strayed from the core brand identity. I shifted to organic, earthy hues and an inviting typeface, incorporating global landmarks like the Statue of Liberty alongside an integrated QR code.',
+    processImages: [
+      { label: 'Final tote bag design & QR code gateway', image: 'sibos-final' },
+    ],
+    solution: 'The tote bag design was a smashing success at Sibos 2023. More than 500 bags were given out to convention-goers among 9,000 attending financial professionals, effectively expanding brand presence outside typical app and website mediums.',
+    solutionImage: 'Final Sibos 2023 Tote Bag',
+  },
+];
 
 
 const photographyImages = Object.entries(

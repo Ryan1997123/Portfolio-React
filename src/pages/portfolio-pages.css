@@ -1849,6 +1849,11 @@
   background-image: radial-gradient(circle at 74% 70%, rgb(177 14 30 / 0.2), transparent 35%), linear-gradient(135deg, #180c0e, #0a0a0a 60%);
 }
 
+.project-card-rose,
+.case-study-visual-rose {
+  background-image: radial-gradient(circle at 45% 20%, rgb(177 14 30 / 0.28), transparent 36%), linear-gradient(135deg, #231215, #0a0a0a 60%);
+}
+
 .photo-placeholder {
   background-color: #1a1c1d;
   background-image: linear-gradient(145deg, rgb(245 243 239 / 0.08), transparent 44%), radial-gradient(circle at 75% 25%, rgb(177 14 30 / 0.2), transparent 32%);

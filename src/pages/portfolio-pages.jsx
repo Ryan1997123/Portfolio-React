@@ -29,6 +29,10 @@ import aliceImage from "../assets/ectrims_booth/Alice.png";
 import wiresImage from "../assets/ectrims_booth/Wires.png";
 import funcAnnoImage from "../assets/ectrims_booth/funcanno.png";
 import ectrimsSitemapImage from "../assets/ectrims_booth/sitemap.png";
+import sibosHero from "../assets/sibos_tote/hero.png";
+import sibosFinal from "../assets/sibos_tote/final_design.png";
+import sibosConcept1 from "../assets/sibos_tote/initial_concept1.png";
+import sibosConcept2 from "../assets/sibos_tote/initial_concept2.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
@@ -1549,7 +1553,36 @@ function getHeroImageSource(heroImage) {
     ? gamingGearHighFidelity
     : heroImage === "ectrims-booth-hero"
       ? ectrimsBoothHero
-      : icotydeOverview;
+      : heroImage === "sibos-tote-hero"
+        ? sibosHero
+        : icotydeOverview;
+}
+
+function resolveCaseStudyImage(imageKey) {
+  if (!imageKey) return null;
+  return imageKey === "google-wires"
+    ? googleWires
+    : imageKey === "maze"
+      ? mazeImage
+      : imageKey === "research-study-plan"
+        ? researchStudyPlan
+        : imageKey === "sitemap"
+          ? sitemapImage
+          : imageKey === "alice"
+            ? aliceImage
+            : imageKey === "wires"
+              ? wiresImage
+              : imageKey === "func-anno"
+                ? funcAnnoImage
+                : imageKey === "ectrims-sitemap"
+                  ? ectrimsSitemapImage
+                  : imageKey === "sibos-final"
+                    ? sibosFinal
+                    : imageKey === "sibos-concept1"
+                      ? sibosConcept1
+                      : imageKey === "sibos-concept2"
+                        ? sibosConcept2
+                        : `/src/assets/jnj-ico/${imageKey}`;
 }
 
 function CaseStudyImage({
@@ -1562,26 +1595,7 @@ function CaseStudyImage({
 }) {
   const [isVisible, setIsVisible] = useState(false);
 
-  const imageSource =
-    image === "google-wires"
-      ? googleWires
-      : image === "maze"
-        ? mazeImage
-        : image === "research-study-plan"
-          ? researchStudyPlan
-          : image === "sitemap"
-            ? sitemapImage
-            : image === "alice"
-              ? aliceImage
-              : image === "wires"
-                ? wiresImage
-                : image === "func-anno"
-                  ? funcAnnoImage
-                  : image === "ectrims-sitemap"
-                    ? ectrimsSitemapImage
-        : image
-          ? `/src/assets/jnj-ico/${image}`
-          : null;
+  const imageSource = resolveCaseStudyImage(image);
   const figureStyle = imageSource
     ? {
         backgroundImage: `url(${imageSource})`,
@@ -1661,26 +1675,7 @@ function FigmaEmbed({ src, title }) {
 }
 
 function CaseStudyLightbox({ image, onClose }) {
-  const imageSource =
-    image.image === "google-wires"
-      ? googleWires
-      : image.image === "maze"
-        ? mazeImage
-        : image.image === "research-study-plan"
-          ? researchStudyPlan
-          : image.image === "sitemap"
-            ? sitemapImage
-            : image.image === "alice"
-              ? aliceImage
-              : image.image === "wires"
-                ? wiresImage
-                : image.image === "func-anno"
-                  ? funcAnnoImage
-                  : image.image === "ectrims-sitemap"
-                    ? ectrimsSitemapImage
-        : image.image
-          ? `/src/assets/jnj-ico/${image.image}`
-          : null;
+  const imageSource = resolveCaseStudyImage(image.image);
   return (
     <motion.div
       className="case-study-lightbox"
