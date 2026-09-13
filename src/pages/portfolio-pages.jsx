@@ -724,7 +724,7 @@ export function HomePage() {
                 to="/work"
                 className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-[#B10E1E] hover:text-[#B10E1E]"
               >
-                Explore the work <span className="ml-3">↗</span>
+                Explore my work <span className="ml-3">↗</span>
               </Link>
             </div>
           </motion.div>
