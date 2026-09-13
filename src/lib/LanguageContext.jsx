@@ -17,7 +17,13 @@ export const translations = {
     contact: "Contact",
 
     identityPrefix: "Also:",
-    identityWords: ["Design for access /", "Build with intent /"],
+    identityWords: [
+      "Developer",
+      "UX expert",
+      "World Traveller",
+      "Trilingual",
+      "Design expert"
+    ],
     heroTitle: "Product designer crafting intuitive digital experiences.",
     heroBody: "Blending design, technology, and user research to build products that feel effortless and meaningful.",
     exploreWork: "Explore the work",
@@ -86,7 +92,13 @@ export const translations = {
     contact: "お問い合わせ",
 
     identityPrefix: "また:",
-    identityWords: ["アクセシビリティへのデザイン /", "意図を持った構築 /"],
+    identityWords: [
+      "デベロッパー",
+      "UXエキスパート",
+      "ワールドトラベラー",
+      "トライリンガル",
+      "デザインエキスパート"
+    ],
     heroTitle: "直感的なデジタル体験を創造するプロダクトデザイナー。",
     heroBody: "デザイン、テクノロジー、ユーザーリサーチを融合させ、シンプルで価値あるプロダクトを構築します。",
     exploreWork: "実績を見る",
@@ -155,7 +167,13 @@ export const translations = {
     contact: "연락처",
 
     identityPrefix: "또한:",
-    identityWords: ["접근성을 위한 디자인 /", "의도를 담은 제작 /"],
+    identityWords: [
+      "개발자",
+      "UX 전문가",
+      "세계 여행가",
+      "3개 국어 능력자",
+      "디자인 전문가"
+    ],
     heroTitle: "직관적인 디지털 경험을 만드는 프로덕트 디자이너.",
     heroBody: "디자인, 기술, 사용자 리서치를 결합하여 효율적이고 의미 있는 제품을 만듭니다.",
     exploreWork: "작품 보기",
