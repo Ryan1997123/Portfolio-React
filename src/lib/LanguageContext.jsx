@@ -26,6 +26,7 @@ export const translations = {
     ],
     heroTitle: "Product designer crafting intuitive digital experiences.",
     heroBody: "Blending design, technology, and user research to build products that feel effortless and meaningful.",
+    heroQuote: "Ryan is dedicated to his craft. He takes careful effort to design for software applications, and helped keep our team organized rolling out new initiatives.",
     exploreWork: "Explore the work",
     selectedWork: "Selected work",
 
@@ -101,6 +102,7 @@ export const translations = {
     ],
     heroTitle: "直感的なデジタル体験を創造するプロダクトデザイナー。",
     heroBody: "デザイン、テクノロジー、ユーザーリサーチを融合させ、シンプルで価値あるプロダクトを構築します。",
+    heroQuote: "Ryanは自身のクラフトに情熱を注ぐデザイナーです。ソフトウェアアプリケーションの設計に細心の注意を払い、新しい取り組みの導入においてもチームを効率的に統括してくれました。",
     exploreWork: "実績を見る",
     selectedWork: "主要な実績",
 
@@ -176,6 +178,7 @@ export const translations = {
     ],
     heroTitle: "직관적인 디지털 경험을 만드는 프로덕트 디자이너.",
     heroBody: "디자인, 기술, 사용자 리서치를 결합하여 효율적이고 의미 있는 제품을 만듭니다.",
+    heroQuote: "Ryan은 디자인 제작에 매우 헌신적인 디자이너입니다. 소프트웨어 애플리케이션 디자인에 각별한 정성을 기울였으며, 새로운 이니셔티브를 추진할 때 팀의 조직력을 높이는 데 큰 도움을 주었습니다.",
     exploreWork: "작품 보기",
     selectedWork: "주요 작품",
 

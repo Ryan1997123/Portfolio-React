@@ -166,23 +166,49 @@ function SiteLayout({ children }) {
             <motion.nav
               id="mobile-navigation"
               aria-label="Mobile navigation"
-              className="absolute inset-x-0 top-0 -z-10 border-b border-white/10 bg-[#0A0A0A] px-6 pb-8 pt-24 shadow-2xl sm:px-10"
-              initial={{ opacity: 0, y: -18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -18 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-x-0 top-0 -z-10 overflow-hidden border-b border-white/10 bg-[#0A0A0A] px-6 pb-8 pt-24 shadow-2xl sm:px-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
+              {/* Wipe curtain animation from right to left */}
+              <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
+                <motion.div
+                  className="h-full w-full bg-[#B10E1E]"
+                  initial={{ x: "100%" }}
+                  animate={{ x: ["100%", "0%", "-100%"] }}
+                  exit={{ x: ["-100%", "0%", "100%"] }}
+                  transition={{
+                    duration: 0.7,
+                    times: [0, 0.45, 1],
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                />
+              </div>
+
               <div className="mx-auto flex max-w-7xl flex-col gap-5">
-                {navItems.map(([path, label]) => (
-                  <Link
+                {navItems.map(([path, label], index) => (
+                  <motion.div
                     key={path}
-                    to={path}
-                    data-cursor="pointer"
-                    className="border-b border-white/10 pb-3 text-2xl tracking-tight text-zinc-200 transition-colors hover:text-[#B10E1E]"
-                    onClick={() => setMenuOpen(false)}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{
+                      duration: 0.35,
+                      delay: 0.3 + index * 0.04,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                   >
-                    {label}
-                  </Link>
+                    <Link
+                      to={path}
+                      data-cursor="pointer"
+                      className="block border-b border-white/10 pb-3 text-2xl tracking-tight text-zinc-200 transition-colors hover:text-[#B10E1E]"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {label}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </motion.nav>
@@ -831,9 +857,7 @@ export function HomePage() {
             </div>
             <blockquote>
               <em>
-                &ldquo;&thinsp;Ryan is dedicated to his craft. He takes careful
-                effort to design for software applications, and helped keep our
-                team organized rolling out new initiatives.&rdquo;
+                &ldquo;&thinsp;{t("heroQuote")}&rdquo;
               </em>
             </blockquote>
             <div className="hero-proof-logos" aria-label="Social profiles">
