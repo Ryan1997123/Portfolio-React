@@ -1602,12 +1602,9 @@
   white-space: nowrap;
 }
 
-.photography-page-intro {
-  height: 48vh !important;
-}
-
+.photography-page-intro,
 .work-page-intro {
-  height: 48vh !important;
+  height: auto !important;
 }
 
 .photography-sticky-wrapper {
@@ -1736,14 +1733,10 @@
     margin: 0 auto;
   }
 
-  .photography-page-intro {
-    height: 30vh !important;
-    padding-bottom: 16px;
-  }
-
+  .photography-page-intro,
   .work-page-intro {
-    height: 34vh !important;
-    padding-bottom: 16px;
+    height: auto !important;
+    padding-bottom: 20px;
   }
 
   .photography-gallery {

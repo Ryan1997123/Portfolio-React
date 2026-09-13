@@ -346,7 +346,7 @@ function MotionPathDesk() {
 function PageIntro({ eyebrow, title, body, className = "" }) {
   return (
     <header
-      className={`mx-auto flex h-[64vh] min-h-0 w-full max-w-7xl flex-col gap-5 px-6 pb-8 pt-8 sm:px-10 lg:px-14 lg:pb-10 lg:pt-8 ${className}`}
+      className={`mx-auto flex w-full max-w-7xl flex-col gap-5 px-6 py-10 sm:px-10 lg:px-14 lg:pt-14 lg:pb-8 ${className}`}
     >
       <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
         {eyebrow}
