@@ -180,7 +180,7 @@ function SiteLayout({ children }) {
                   animate={{ x: ["100%", "0%", "-100%"] }}
                   exit={{ x: ["-100%", "0%", "100%"] }}
                   transition={{
-                    duration: 0.7,
+                    duration: 1.1,
                     times: [0, 0.45, 1],
                     ease: [0.22, 1, 0.36, 1],
                   }}
@@ -191,12 +191,12 @@ function SiteLayout({ children }) {
                 {navItems.map(([path, label], index) => (
                   <motion.div
                     key={path}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 25 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
+                    exit={{ opacity: 0, x: -25 }}
                     transition={{
-                      duration: 0.35,
-                      delay: 0.3 + index * 0.04,
+                      duration: 0.5,
+                      delay: 0.5 + index * 0.06,
                       ease: [0.22, 1, 0.36, 1],
                     }}
                   >
