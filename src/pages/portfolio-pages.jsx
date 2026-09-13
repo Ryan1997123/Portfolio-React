@@ -297,26 +297,36 @@ function FooterReveal({ children }) {
 }
 
 function RotatingIdentity() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [wordIndex, setWordIndex] = useState(0);
   const words = t("identityWords");
 
   useEffect(() => {
+    setWordIndex(0);
+  }, [lang]);
+
+  useEffect(() => {
+    if (!words || words.length === 0) return undefined;
     const interval = setInterval(() => {
       setWordIndex((currentIndex) => (currentIndex + 1) % words.length);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [words]);
+  }, [lang, words?.length]);
+
+  const currentWord = Array.isArray(words)
+    ? words[wordIndex % words.length] || ""
+    : "";
 
   return (
     <div className="hero-identity" aria-live="polite">
       <span className="hero-identity-prefix">{t("identityPrefix")}</span>
       <ScrambleText
+        key={`${lang}-${wordIndex}`}
         className="hero-identity-word"
         chars="!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡"
       >
-        {words[wordIndex]}
+        {currentWord}
       </ScrambleText>
     </div>
   );
@@ -906,6 +916,7 @@ export function AboutPage() {
             <div className="about-intro-topline">
               <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
                 <ScrambleText
+                  key={lang}
                   active={!prefersReducedMotion}
                   delay={stagger(0.035)}
                   duration={0.4}
@@ -1029,6 +1040,7 @@ export function AboutPage() {
               >
                 <dt>
                   <ScrambleText
+                    key={`${lang}-${label}`}
                     active={factsVisible && !prefersReducedMotion}
                     delay={stagger(0.025)}
                     duration={0.3}
