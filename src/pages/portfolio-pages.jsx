@@ -32,7 +32,7 @@ import ectrimsSitemapImage from "../assets/ectrims_booth/sitemap.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
-import resumePdf from "../assets/resume/ResumeMyResume.pdf";
+import resumePdf from "../assets/resume/RyanMonaghan_resume.pdf";
 import { projects, photography } from "../data/projects";
 import "./portfolio-pages.css";
 
@@ -922,8 +922,8 @@ export function AboutPage() {
               <div className="about-actions">
                 <a
                   className="about-action about-action-primary"
-                  href="/Ryan-Monaghan-Resume.pdf"
-                  download
+                  href={resumePdf}
+                  download="RyanMonaghan_resume.pdf"
                 >
                   <span>Download resume</span>
                   <DownloadSimple size={18} weight="bold" aria-hidden="true" />
