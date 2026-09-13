@@ -1473,6 +1473,8 @@
   color: #f5f3ef;
   cursor: grab;
   touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .photography-planes-container:active {
@@ -1559,6 +1561,8 @@
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
   transform-style: preserve-3d;
   transition: filter 200ms ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .photography-plane::before {

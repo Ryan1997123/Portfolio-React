@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { LanguageProvider } from './lib/LanguageContext'
 import {
   AboutPage,
   CaseStudyPage,
@@ -22,18 +23,20 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/work" element={<WorkPage />} />
-        <Route path="/work/:slug" element={<CaseStudyPage />} />
-        <Route path="/photography" element={<PhotographyPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/work" element={<WorkPage />} />
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+          <Route path="/photography" element={<PhotographyPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
   )
 }
 

@@ -39,6 +39,8 @@ import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
 import resumePdf from "../assets/resume/RyanMonaghan_resume.pdf";
 import { projects, photography } from "../data/projects";
+import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
+import { useLanguage } from "../lib/LanguageContext";
 import "./portfolio-pages.css";
 
 const skills = [
@@ -85,6 +87,14 @@ const navItems = [
 ];
 
 function SiteLayout({ children }) {
+  const { t } = useLanguage();
+  const navItems = [
+    ["/", t("home")],
+    ["/about", t("about")],
+    ["/work", t("work")],
+    ["/photography", t("photography")],
+    ["/contact", t("contact")],
+  ];
   const [menuOpen, setMenuOpen] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
 
@@ -117,7 +127,7 @@ function SiteLayout({ children }) {
           Ryan Monaghan
         </Link>
         <nav
-          className="hidden flex-wrap justify-end gap-x-2 gap-y-2 md:flex"
+          className="hidden flex-wrap items-center justify-end gap-x-5 gap-y-2 md:flex"
           aria-label="Main navigation"
         >
           {navItems.map(([path, label]) => (
@@ -125,28 +135,32 @@ function SiteLayout({ children }) {
               {label}
             </Link>
           ))}
+          <LanguageSwitcher />
         </nav>
-        <button
-          type="button"
-          data-cursor="pointer"
-          className="relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={
-            menuOpen ? "Close navigation menu" : "Open navigation menu"
-          }
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span
-            className={`block h-px w-4 bg-current transition-transform ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
-          />
-          <span
-            className={`block h-px w-4 bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-px w-4 bg-current transition-transform ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <LanguageSwitcher />
+          <button
+            type="button"
+            data-cursor="pointer"
+            className="relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={
+              menuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span
+              className={`block h-px w-4 bg-current transition-transform ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-px w-4 bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-px w-4 bg-current transition-transform ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
         <AnimatePresence>
           {menuOpen && (
             <motion.nav
@@ -181,6 +195,14 @@ function SiteLayout({ children }) {
 }
 
 function FooterReveal({ children }) {
+  const { t } = useLanguage();
+  const navItems = [
+    ["/", t("home")],
+    ["/about", t("about")],
+    ["/work", t("work")],
+    ["/photography", t("photography")],
+    ["/contact", t("contact")],
+  ];
   const contentRef = useRef(null);
   const footerRef = useRef(null);
   const [revealAt, setRevealAt] = useState(0.35);
@@ -238,7 +260,7 @@ function FooterReveal({ children }) {
             <div className="reveal-footer-inner">
               <div className="reveal-footer-columns">
                 <section>
-                  <h2>QUICK LINKS</h2>
+                  <h2>{t("quickLinks")}</h2>
                   <nav aria-label="Footer navigation">
                     {navItems.map(([path, label]) => (
                       <Link key={path} to={path}>
@@ -248,7 +270,7 @@ function FooterReveal({ children }) {
                   </nav>
                 </section>
                 <section>
-                  <h2>GET IN TOUCH</h2>
+                  <h2>{t("getInTouch")}</h2>
                   <div className="reveal-footer-socials">
                     <a href="https://github.com" aria-label="GitHub">
                       <img src={githubLogo} alt="" />
@@ -263,7 +285,7 @@ function FooterReveal({ children }) {
                 </section>
               </div>
               <div className="reveal-footer-bottom">
-                <span>Coded and designed by Ryan Monaghan</span>
+                <span>{t("codedBy")}</span>
                 <span>© 2026</span>
               </div>
             </div>
@@ -275,24 +297,26 @@ function FooterReveal({ children }) {
 }
 
 function RotatingIdentity() {
+  const { t } = useLanguage();
   const [wordIndex, setWordIndex] = useState(0);
+  const words = t("identityWords");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setWordIndex((currentIndex) => (currentIndex + 1) % identityWords.length);
+      setWordIndex((currentIndex) => (currentIndex + 1) % words.length);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [words]);
 
   return (
     <div className="hero-identity" aria-live="polite">
-      <span className="hero-identity-prefix">Also:</span>
+      <span className="hero-identity-prefix">{t("identityPrefix")}</span>
       <ScrambleText
         className="hero-identity-word"
         chars="!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡"
       >
-        {identityWords[wordIndex]}
+        {words[wordIndex]}
       </ScrambleText>
     </div>
   );
@@ -403,15 +427,16 @@ function ProjectCard({ project, index }) {
 }
 
 function ProjectsIndex() {
+  const { t, translateProject } = useLanguage();
   const [hoveredProject, setHoveredProject] = useState(null);
   const [previewPoint, setPreviewPoint] = useState({ x: 0, y: 0 });
 
   return (
     <section className="projects-index">
       <div className="projects-index-intro">
-        <h2 className="section-display-heading">PROJECTS</h2>
+        <h2 className="section-display-heading">{t("projectsTitle")}</h2>
         <p className="projects-index-copy">
-          A closer look at the work, from first idea to final interaction.
+          {t("projectsSub")}
         </p>
         <Link to="/work" className="projects-index-button">
           VIEW MORE <span aria-hidden="true">↗</span>
@@ -421,51 +446,54 @@ function ProjectsIndex() {
         className="projects-index-list"
         onMouseLeave={() => setHoveredProject(null)}
       >
-        {projects.map((project, index) => (
-          <div key={project.slug} className="project-index-row">
-            <Link
-              to={`/work/${project.slug}`}
-              className="project-index-link"
-              onMouseEnter={() => setHoveredProject(project.slug)}
-              onFocus={() => setHoveredProject(project.slug)}
-              onMouseMove={(event) =>
-                setPreviewPoint({ x: event.clientX, y: event.clientY })
-              }
-              onBlur={() => setHoveredProject(null)}
-            >
-              <span>{String(index + 1).padStart(2, "0")}.</span>
-              <span>{project.title}</span>
-              <span className="project-index-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </Link>
-            <AnimatePresence>
-              {hoveredProject === project.slug && (
-                <motion.div
-                  className={`project-preview project-card-${project.color}`}
-                  style={{
-                    left: previewPoint.x + 20,
-                    top: previewPoint.y + 20,
-                  }}
-                  initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 6, scale: 0.96 }}
-                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  aria-hidden="true"
-                >
-                  <div className="project-preview-canvas">
-                    <span>CASE STUDY / {project.year}</span>
-                    <strong>{project.title}</strong>
-                  </div>
-                  <span className="project-preview-category">
-                    {project.category}
-                  </span>
-                  <span>{project.summary}</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+        {projects.map((rawProject, index) => {
+          const project = translateProject(rawProject);
+          return (
+            <div key={project.slug} className="project-index-row">
+              <Link
+                to={`/work/${project.slug}`}
+                className="project-index-link"
+                onMouseEnter={() => setHoveredProject(project.slug)}
+                onFocus={() => setHoveredProject(project.slug)}
+                onMouseMove={(event) =>
+                  setPreviewPoint({ x: event.clientX, y: event.clientY })
+                }
+                onBlur={() => setHoveredProject(null)}
+              >
+                <span>{String(index + 1).padStart(2, "0")}.</span>
+                <span>{project.title}</span>
+                <span className="project-index-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </Link>
+              <AnimatePresence>
+                {hoveredProject === project.slug && (
+                  <motion.div
+                    className={`project-preview project-card-${project.color}`}
+                    style={{
+                      left: previewPoint.x + 20,
+                      top: previewPoint.y + 20,
+                    }}
+                    initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    aria-hidden="true"
+                  >
+                    <div className="project-preview-canvas">
+                      <span>CASE STUDY / {project.year}</span>
+                      <strong>{project.title}</strong>
+                    </div>
+                    <span className="project-preview-category">
+                      {project.category}
+                    </span>
+                    <span>{project.summary}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -602,6 +630,7 @@ function PhotographyPlane({
 }
 
 function ScrollVelocityPlanes() {
+  const { t } = useLanguage();
   const rawScrollX = useMotionValue(0);
   const scrollX = useSpring(rawScrollX, {
     stiffness: 100,
@@ -615,13 +644,23 @@ function ScrollVelocityPlanes() {
   const prefersReducedMotion = useReducedMotion();
 
   const handlePointerDown = (event) => {
+    if (event.button !== undefined && event.button !== 0) return;
     pointerRef.current = {
       active: true,
       horizontal: false,
       x: event.clientX,
       y: event.clientY,
     };
-    event.currentTarget.setPointerCapture?.(event.pointerId);
+    try {
+      if (
+        event.currentTarget &&
+        typeof event.currentTarget.setPointerCapture === "function"
+      ) {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
+    } catch (_) {
+      // Ignore pointer capture errors during rapid double-clicking
+    }
   };
 
   const handlePointerMove = (event) => {
@@ -635,7 +674,9 @@ function ScrollVelocityPlanes() {
     }
     if (!pointer.horizontal) return;
 
-    event.preventDefault();
+    if (event.cancelable) {
+      event.preventDefault();
+    }
     rawScrollX.set(rawScrollX.get() + deltaX * 2.5);
     pointer.x = event.clientX;
     pointer.y = event.clientY;
@@ -644,8 +685,29 @@ function ScrollVelocityPlanes() {
   const handlePointerEnd = (event) => {
     pointerRef.current.active = false;
     pointerRef.current.horizontal = false;
-    event.currentTarget.releasePointerCapture?.(event.pointerId);
+    if (event?.currentTarget && event?.pointerId !== undefined) {
+      try {
+        if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+          event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+      } catch (_) {
+        // Safe fallback
+      }
+    }
   };
+
+  useEffect(() => {
+    const handleGlobalPointerEnd = () => {
+      pointerRef.current.active = false;
+      pointerRef.current.horizontal = false;
+    };
+    window.addEventListener("pointerup", handleGlobalPointerEnd);
+    window.addEventListener("pointercancel", handleGlobalPointerEnd);
+    return () => {
+      window.removeEventListener("pointerup", handleGlobalPointerEnd);
+      window.removeEventListener("pointercancel", handleGlobalPointerEnd);
+    };
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -667,19 +729,21 @@ function ScrollVelocityPlanes() {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerEnd}
       onPointerCancel={handlePointerEnd}
+      onLostPointerCapture={handlePointerEnd}
+      onDoubleClick={(event) => event.preventDefault()}
       aria-label="Interactive photography collection"
     >
       <div className="photography-planes-heading">
-        <span>ALL PHOTOS / 2026</span>
+        <span>{t("allPhotos")}</span>
         <strong>
-          MY BEST SHOTS <sup>({photographyPlaneCount})</sup>
+          {t("bestShots")} <sup>({photographyPlaneCount})</sup>
         </strong>
       </div>
       <span className="photography-planes-hint photography-planes-hint-desktop">
-        HOLD + DRAG OR SCROLL TO VIEW ALL PHOTOS
+        {t("dragHintDesktop")}
       </span>
       <span className="photography-planes-hint photography-planes-hint-mobile">
-        SWIPE TO VIEW ALL PHOTOS
+        {t("dragHintMobile")}
       </span>
       <div className="photography-planes-viewport">
         <div className="photography-planes-stage">
@@ -702,6 +766,8 @@ function ScrollVelocityPlanes() {
 }
 
 export function HomePage() {
+  const { t } = useLanguage();
+
   return (
     <SiteLayout>
       <main>
@@ -719,9 +785,7 @@ export function HomePage() {
               PRODUCT DESIGNER
             </h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
-              I'm Ryan, a designer and developer building identities, digital
-              experiences, and visual stories for people with something worth
-              saying.
+              {t("heroBody")}
             </p>
             <RotatingIdentity />
             <div className="flex flex-wrap gap-4">
@@ -729,7 +793,7 @@ export function HomePage() {
                 to="/work"
                 className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-[#B10E1E] hover:text-[#B10E1E]"
               >
-                Explore my work <span className="ml-3">↗</span>
+                {t("exploreWork")} <span className="ml-3">↗</span>
               </Link>
             </div>
           </motion.div>
@@ -792,7 +856,7 @@ export function HomePage() {
         <section className="mx-auto w-full max-w-7xl px-6 pb-0 sm:px-10 lg:px-14">
           <div className="mb-7 flex items-end justify-between border-b border-white/10 pb-4">
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400">
-              Selected work
+              {t("selectedWork")}
             </h2>
             <Link
               to="/work"
@@ -813,9 +877,18 @@ export function HomePage() {
 }
 
 export function AboutPage() {
+  const { t } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
   const [factsVisible, setFactsVisible] = useState(false);
   const [approachVisible, setApproachVisible] = useState(false);
+
+  const aboutDetails = [
+    [t("location"), t("locationVal")],
+    [t("roleLabel"), t("roleVal")],
+    [t("experienceLabel"), t("experienceVal")],
+    [t("educationLabel"), t("educationVal")],
+    [t("focusLabel"), t("focusVal")],
+  ];
 
   return (
     <SiteLayout>
@@ -838,7 +911,7 @@ export function AboutPage() {
                   duration={0.4}
                   chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/"
                 >
-                  ABOUT / PROFILE
+                  {t("aboutEyebrow")} / PROFILE
                 </ScrambleText>
               </p>
               <p className="about-intro-note">New York / Product design</p>
@@ -916,13 +989,10 @@ export function AboutPage() {
               }}
             >
               <span className="about-summary-label font-mono">
-                Profile / 001
+                {t("aboutProfileLabel")}
               </span>
               <p className="about-summary-copy">
-                I am an empathetic product designer with a foundation in
-                computer science and over five years of experience transforming
-                complex challenges into intuitive, user-centered digital
-                products.
+                {t("aboutSummaryCopy")}
               </p>
               <div className="about-actions">
                 <a
@@ -930,7 +1000,7 @@ export function AboutPage() {
                   href={resumePdf}
                   download="RyanMonaghan_resume.pdf"
                 >
-                  <span>Download resume</span>
+                  <span>{t("downloadResume")}</span>
                   <DownloadSimple size={18} weight="bold" aria-hidden="true" />
                 </a>
               </div>
@@ -1022,7 +1092,7 @@ export function AboutPage() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                Approach
+                {t("howIWork")}
               </motion.h2>
             </div>
             <div className="about-approach-copy">
@@ -1062,19 +1132,24 @@ export function AboutPage() {
 }
 
 export function WorkPage() {
+  const { t, translateProject } = useLanguage();
+
   return (
     <SiteLayout>
       <main>
         <PageIntro
           className="work-page-intro"
-          eyebrow="WORK"
-          title="Selected projects."
-          body="A mix of identity, interaction, and image-making. Open a project to see the thinking behind it."
+          eyebrow={t("workEyebrow")}
+          title={t("workTitle")}
+          body={t("workBody")}
         />
         <section className="mx-auto grid max-w-7xl gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
-          ))}
+          {projects.map((rawProject, index) => {
+            const project = translateProject(rawProject);
+            return (
+              <ProjectCard key={project.slug} project={project} index={index} />
+            );
+          })}
         </section>
       </main>
     </SiteLayout>
@@ -1082,14 +1157,16 @@ export function WorkPage() {
 }
 
 export function PhotographyPage() {
+  const { t } = useLanguage();
+
   return (
     <SiteLayout>
       <main>
         <PageIntro
           className="photography-page-intro"
-          eyebrow="PHOTOGRAPHY"
-          title="Photographs by Ryan"
-          body="Photos I have taken along the way, from places I have visited to details I did not want to forget."
+          eyebrow={t("photoEyebrow")}
+          title={t("photoTitle")}
+          body={t("photoBody")}
         />
         {/* Previous scroll gallery kept for later: <ScrollPhotographyGallery /> */}
         <ScrollVelocityPlanes />
@@ -1099,20 +1176,22 @@ export function PhotographyPage() {
 }
 
 export function ContactPage() {
+  const { t } = useLanguage();
+
   return (
     <SiteLayout>
       <main>
         <PageIntro
-          eyebrow="CONTACT"
-          title="Hiring or building something great? Let’s talk."
-          body="For roles, collaborations, commissions, and thoughtful questions, email me directly."
+          eyebrow={t("contactEyebrow")}
+          title={t("contactTitle")}
+          body={t("contactBody")}
         />
         <section className="mx-auto max-w-7xl px-6 pb-32 sm:px-10 lg:px-14">
           <a
             href="mailto:ryandesigns970501@gmail.com"
             className="group inline-flex items-center gap-4 border-b border-[#B10E1E] pb-3 text-2xl text-zinc-100 transition-colors hover:text-[#B10E1E] sm:text-4xl"
           >
-            Email me here{" "}
+            {t("emailMe")}{" "}
             <span className="text-[#B10E1E] transition-transform group-hover:translate-x-2">
               ↗
             </span>
@@ -1178,12 +1257,14 @@ export function ContactPage() {
 
 
 export function CaseStudyPage() {
+  const { t, translateProject } = useLanguage();
   const { slug } = useParams();
   const projectIndex = projects.findIndex((item) => item.slug === slug);
-  const project = projects[projectIndex];
+  const rawProject = projects[projectIndex];
+  const project = translateProject(rawProject);
   const nextProject =
     projectIndex !== -1 && projectIndex < projects.length - 1
-      ? projects[projectIndex + 1]
+      ? translateProject(projects[projectIndex + 1])
       : null;
   const prefersReducedMotion = useReducedMotion();
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -1258,23 +1339,23 @@ export function CaseStudyPage() {
             </div>
             <div className="case-study-meta">
               <div>
-                <p className="case-study-label">Role</p>
+                <p className="case-study-label">{t("roleHeading")}</p>
                 <p>{project.role}</p>
               </div>
               {project.timeline && (
                 <div>
-                  <p className="case-study-label">Timeline</p>
+                  <p className="case-study-label">{t("timelineHeading")}</p>
                   <p>{project.timeline}</p>
                 </div>
               )}
               {project.tools && (
                 <div>
-                  <p className="case-study-label">Tools</p>
+                  <p className="case-study-label">{t("toolsHeading")}</p>
                   <p>{project.tools}</p>
                 </div>
               )}
               <div>
-                <p className="case-study-label">Outcomes</p>
+                <p className="case-study-label">{t("impactHeading")}</p>
                 <ul>
                   {project.outcomes.map((outcome) => (
                     <li key={outcome}>{outcome}</li>
@@ -1285,21 +1366,21 @@ export function CaseStudyPage() {
           </motion.div>
           <CaseStudySection
             number="01"
-            title="Overview"
+            title={t("overview").replace(/^01 \/ /, "")}
             body={project.overview}
             index={0}
             prefersReducedMotion={prefersReducedMotion}
           />
           <CaseStudySection
             number="02"
-            title="The Problem"
+            title={t("challenge").replace(/^02 \/ /, "")}
             body={project.problem}
             index={1}
             prefersReducedMotion={prefersReducedMotion}
           />
           <CaseStudySection
             number="03"
-            title="Context & Research"
+            title={t("researchLabel").replace(/^03 \/ /, "")}
             body={project.research}
             index={2}
             prefersReducedMotion={prefersReducedMotion}
@@ -1336,7 +1417,7 @@ export function CaseStudyPage() {
                   delay: prefersReducedMotion ? 0 : 0.16,
                 }}
               >
-                04 / Process & Iterations
+                {t("processLabel")}
               </motion.p>
               <motion.h2
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
@@ -1394,7 +1475,7 @@ export function CaseStudyPage() {
                   delay: prefersReducedMotion ? 0 : 0.16,
                 }}
               >
-                05 / The Solution
+                {t("solutionLabel")}
               </motion.p>
               <motion.h2
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
@@ -1446,14 +1527,14 @@ export function CaseStudyPage() {
           </motion.section>
           <div className="case-study-nav flex items-center justify-between">
             <Link to="/work" className="case-study-back">
-              ← Back to work
+              ← {t("backToWork")}
             </Link>
             {nextProject && (
               <Link
                 to={`/work/${nextProject.slug}`}
                 className="case-study-next"
               >
-                <span>Next Project: {nextProject.title}</span> ←
+                <span>{t("nextProject")}: {nextProject.title}</span> ←
               </Link>
             )}
           </div>
