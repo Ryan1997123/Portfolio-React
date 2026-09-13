@@ -1440,7 +1440,7 @@ export function CaseStudyPage() {
                   delay: prefersReducedMotion ? 0 : 0.22,
                 }}
               >
-                Finding the clearest path through the work.
+                {t("processSub")}
               </motion.h2>
             </div>
             <motion.p
@@ -1498,7 +1498,7 @@ export function CaseStudyPage() {
                   delay: prefersReducedMotion ? 0 : 0.22,
                 }}
               >
-                A system designed to make the important parts easier to see.
+                {t("solutionSub")}
               </motion.h2>
             </div>
             <motion.p
