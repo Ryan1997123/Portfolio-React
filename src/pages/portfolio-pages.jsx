@@ -1207,14 +1207,10 @@ export function AboutPage() {
                   duration: prefersReducedMotion ? 0 : 0.7,
                 }}
               >
-                I picked up the fundamentals of research, wireframing, and
-                high-fidelity prototyping at Fordham University, then pushed
-                that further while studying abroad at Korea University in
-                South Korea, where I learned to design for people with very
-                different habits and expectations than my own. That mix still
-                shapes how I work end to end today, starting every project
-                with the people using the product and the real constraints
-                around them.
+                I picked up research, wireframing, and high-fidelity
+                prototyping at Fordham University, then studying abroad at
+                Korea University in South Korea pushed it further, designing
+                for people with very different habits than my own.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 28 }}
@@ -1226,10 +1222,21 @@ export function AboutPage() {
                 }}
               >
                 The business side comes from working at a fintech company,
-                where I saw firsthand how design decisions tie into revenue,
-                risk, and compliance. That experience helps me connect user
-                needs with viable product decisions, then carry it through with
-                accessible design and clean, robust code.
+                where I saw how design decisions tie into revenue, risk, and
+                compliance.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.36,
+                  duration: prefersReducedMotion ? 0 : 0.7,
+                }}
+              >
+                Together, that mix helps me connect user needs with viable
+                product decisions, then carry it through with accessible
+                design and clean, robust code.
               </motion.p>
             </div>
           </div>
