@@ -906,7 +906,7 @@
   }
 }
 
-@media (max-height: 600px) and (orientation: landscape) {
+@media (max-height: 650px) and (max-width: 900px) {
   .about-approach-inner {
     grid-template-columns: 1fr;
     gap: 24px;
