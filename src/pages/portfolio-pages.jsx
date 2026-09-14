@@ -138,22 +138,34 @@ function SiteLayout({ children }) {
     ["/contact", t("contact")],
   ];
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
+  const cursorRef = useRef(null);
   const cursorFrameRef = useRef(null);
+  const pointerPositionRef = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
-    const handlePointerMove = (event) => {
-      if (cursorFrameRef.current) {
-        cancelAnimationFrame(cursorFrameRef.current);
-      }
+    const applyCursorPosition = () => {
+      cursorFrameRef.current = null;
+      const cursorNode = cursorRef.current;
+      if (!cursorNode) return;
+      const { x, y } = pointerPositionRef.current;
+      cursorNode.style.left = `${x}px`;
+      cursorNode.style.top = `${y}px`;
+    };
 
-      cursorFrameRef.current = requestAnimationFrame(() => {
-        setCursorPosition({ x: event.clientX, y: event.clientY });
-      });
+    // Update the DOM directly instead of via React state so rapid pointer
+    // events (e.g. dragging to select text) don't re-render the whole tree.
+    const handlePointerMove = (event) => {
+      pointerPositionRef.current = { x: event.clientX, y: event.clientY };
+      if (cursorFrameRef.current == null) {
+        cursorFrameRef.current = requestAnimationFrame(applyCursorPosition);
+      }
     };
 
     const handlePointerLeave = () => {
-      setCursorPosition({ x: -100, y: -100 });
+      pointerPositionRef.current = { x: -100, y: -100 };
+      if (cursorFrameRef.current == null) {
+        cursorFrameRef.current = requestAnimationFrame(applyCursorPosition);
+      }
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
@@ -178,8 +190,9 @@ function SiteLayout({ children }) {
       </a>
       <div
         className="portfolio-cursor"
+        ref={cursorRef}
         aria-hidden="true"
-        style={{ left: cursorPosition.x, top: cursorPosition.y }}
+        style={{ left: -100, top: -100 }}
       >
         <span className="portfolio-cursor-circle">
           <img className="portfolio-cursor-icon" src={mouseIcon} alt="" />
