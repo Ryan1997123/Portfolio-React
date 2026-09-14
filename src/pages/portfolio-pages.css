@@ -4,7 +4,6 @@
   --portfolio-muted: #8a8a85;
   background-color: #0a0a0a;
   color: #f5f3ef;
-  cursor: none;
 }
 
 .portfolio-cursor {
@@ -39,24 +38,9 @@
 }
 
 @media (pointer: coarse) {
-  .portfolio-shell {
-    cursor: auto;
-  }
-
   .portfolio-cursor {
     display: none;
   }
-}
-
-/* Restore the real cursor immediately while selecting text, since the JS-driven
-   dot can lag behind native selection handling and looks like a frozen pointer. */
-body.is-text-selecting .portfolio-shell,
-body.is-text-selecting .portfolio-shell * {
-  cursor: auto !important;
-}
-
-body.is-text-selecting .portfolio-cursor {
-  opacity: 0;
 }
 
 
