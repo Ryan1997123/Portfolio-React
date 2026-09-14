@@ -180,6 +180,24 @@ function SiteLayout({ children }) {
     };
   }, []);
 
+  useEffect(() => {
+    // Fall back to the native cursor the instant text selection starts, so a
+    // stalled custom-cursor frame never looks like a frozen mouse pointer.
+    const startSelecting = () => document.body.classList.add("is-text-selecting");
+    const stopSelecting = () => document.body.classList.remove("is-text-selecting");
+
+    document.addEventListener("selectstart", startSelecting);
+    document.addEventListener("mouseup", stopSelecting);
+    document.addEventListener("touchend", stopSelecting);
+
+    return () => {
+      document.removeEventListener("selectstart", startSelecting);
+      document.removeEventListener("mouseup", stopSelecting);
+      document.removeEventListener("touchend", stopSelecting);
+      document.body.classList.remove("is-text-selecting");
+    };
+  }, []);
+
   return (
     <div className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100">
       <a

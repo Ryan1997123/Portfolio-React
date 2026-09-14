@@ -48,6 +48,18 @@
   }
 }
 
+/* Restore the real cursor immediately while selecting text, since the JS-driven
+   dot can lag behind native selection handling and looks like a frozen pointer. */
+body.is-text-selecting .portfolio-shell,
+body.is-text-selecting .portfolio-shell * {
+  cursor: auto !important;
+}
+
+body.is-text-selecting .portfolio-cursor {
+  opacity: 0;
+}
+
+
 .portfolio-shell h1 {
   font-family: 'Basement Grotesque Norm', 'Arial Black', sans-serif !important;
   font-weight: 900 !important;
