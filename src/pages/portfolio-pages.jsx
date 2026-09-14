@@ -34,6 +34,8 @@ import sibosFinal from "../assets/sibos_tote/final_design.png";
 import sibosConcept1 from "../assets/sibos_tote/initial_concept1.png";
 import sibosConcept2 from "../assets/sibos_tote/initial_concept2.png";
 import sibosPremium from "../assets/sibos_tote/premium.png";
+import icotydeProcess1 from "../assets/jnj-ico/example1.png";
+import icotydeProcess2 from "../assets/jnj-ico/example2.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import meImage from "../assets/me.png";
 import mouseIcon from "../assets/mouse_icon.svg";
@@ -1811,7 +1813,11 @@ function resolveCaseStudyImage(imageKey) {
                         ? sibosConcept2
                         : imageKey === "sibos-premium"
                           ? sibosPremium
-                          : `/src/assets/jnj-ico/${imageKey}`;
+                          : imageKey === "example1.png"
+                            ? icotydeProcess1
+                            : imageKey === "example2.png"
+                              ? icotydeProcess2
+                              : null;
 }
 
 function CaseStudyImage({
