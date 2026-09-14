@@ -906,6 +906,29 @@
   }
 }
 
+@media (max-height: 500px) and (orientation: landscape) {
+  .about-approach-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 48px;
+    padding-bottom: 56px;
+  }
+
+  .portfolio-shell .about-approach-heading h2 {
+    font-size: 38px !important;
+  }
+
+  .about-approach-copy {
+    gap: 20px;
+  }
+
+  .about-approach-copy p,
+  .about-approach-copy p:first-child {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+}
+
 .project-card,
 .case-study-visual {
   background-color: #0a0a0a;

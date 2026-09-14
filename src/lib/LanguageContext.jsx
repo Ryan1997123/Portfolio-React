@@ -27,7 +27,7 @@ export const translations = {
     heroTitle: "Product designer crafting intuitive user experiences for healthcare, SaaS, and digital products.",
     heroBody: "I design clear, user-centered digital experiences and front-end systems that simplify complex decisions, build trust, and turn research into product clarity.",
     heroQuote: "Ryan is dedicated to his craft. He takes careful effort to design for software applications, and helped keep our team organized rolling out new initiatives.",
-    exploreWork: "Explore the work",
+    exploreWork: "Explore my work",
     selectedWork: "Selected work",
 
     projectsTitle: "PROJECTS",
