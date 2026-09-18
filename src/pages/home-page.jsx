@@ -242,7 +242,8 @@ export function HomePage() {
             </div>
           </div>
           <div className="hero-ticker ticker-strip col-span-full overflow-hidden border-y border-white/10">
-            <div className="skills-ticker-track" aria-label={skills.join(", ")}>
+            <p className="sr-only">Skills: {skills.join(", ")}</p>
+            <div className="skills-ticker-track">
               {[0, 1].map((groupIndex) => (
                 <div
                   key={groupIndex}
