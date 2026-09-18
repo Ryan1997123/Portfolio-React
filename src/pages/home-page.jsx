@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
 import githubLogo from "../assets/Ionicons_logo-github logo.svg";
 import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
-import meImage from "../assets/me.png";
+import meImage from "../assets/me-optimized.webp";
 import { photography, projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { SiteLayout } from "./site-layout";
@@ -169,12 +169,16 @@ function PhotographyIndex() {
             key={photo.id}
             to="/photography"
             className="photography-index-image photo-placeholder"
-            style={{
-              backgroundImage: `linear-gradient(to top, rgb(0 0 0 / 0.72), transparent 55%), url(${photo.image})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
           >
+            <img
+              src={photo.image}
+              alt=""
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+            />
             <span>
               {String(index + 1).padStart(2, "0")} / {photo.label}
             </span>

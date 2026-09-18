@@ -105,7 +105,7 @@ export const projects = [
 
 
 const photographyImages = Object.entries(
-  import.meta.glob('../assets/photography/*.{jpg,jpeg,png}', { eager: true, import: 'default' }),
+  import.meta.glob('../assets/photography/optimized/*.webp', { eager: true, import: 'default' }),
 ).map(([path, image], index) => {
   const fileName = path.split('/').pop() || `photo-${index + 1}`;
   const label = fileName

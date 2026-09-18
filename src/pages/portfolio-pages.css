@@ -1583,12 +1583,30 @@
 }
 
 .photography-index-image {
+  position: relative;
   display: flex;
   min-height: 260px;
   align-items: flex-end;
+  overflow: hidden;
   padding: 14px;
   color: #f5f3ef;
   transition: transform 220ms ease, border-color 220ms ease;
+}
+
+.photography-index-image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.72), transparent 55%);
+  content: '';
+  pointer-events: none;
+}
+
+.photography-index-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .photography-index-image:hover {
@@ -1597,6 +1615,8 @@
 }
 
 .photography-index-image span {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;

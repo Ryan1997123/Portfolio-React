@@ -2,7 +2,7 @@ import { DownloadSimple } from "@phosphor-icons/react";
 import { motion, stagger, useReducedMotion } from "motion/react";
 import { ScrambleText, Ticker } from "motion-plus/react";
 import { useState } from "react";
-import meImage from "../assets/me.png";
+import meImage from "../assets/me-about.webp";
 import resumePdf from "../assets/resume/RyanMonaghan_resume.pdf";
 import { useLanguage } from "../lib/LanguageContext";
 import { SiteLayout } from "./site-layout";
@@ -93,6 +93,9 @@ export function AboutPage() {
                   className="about-portrait-image"
                   src={meImage}
                   alt="Ryan Monaghan, product designer"
+                  width="720"
+                  height="720"
+                  decoding="async"
                   fetchPriority="high"
                   initial={{ scale: prefersReducedMotion ? 1 : 1.08 }}
                   animate={{ scale: 1 }}
