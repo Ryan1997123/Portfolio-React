@@ -43,6 +43,7 @@ import resumePdf from "../assets/resume/RyanMonaghan_resume.pdf";
 import { projects, photography } from "../data/projects";
 import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
 import { useLanguage } from "../lib/LanguageContext";
+import { getPageMetadata, getStructuredData } from "../seo";
 import "./portfolio-pages.css";
 
 const skills = [
@@ -95,8 +96,9 @@ function usePageSEO() {
   useEffect(() => {
     document.documentElement.lang = lang;
 
-    let pageTitle = "Ryan Monaghan — Product Designer & Developer";
-    let pageDesc = "Portfolio of Ryan Monaghan, a Product Designer with 5+ years of experience crafting intuitive digital experiences, design systems, and responsive applications in New York.";
+    const metadata = getPageMetadata(pathname);
+    let pageTitle = metadata.title;
+    let pageDesc = metadata.description;
 
     if (pathname === "/about") {
       pageTitle = `${t("aboutEyebrow")} | Ryan Monaghan — Product Designer`;
@@ -122,9 +124,40 @@ function usePageSEO() {
 
     document.title = pageTitle;
 
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute("content", pageDesc);
+    const metaUpdates = [
+      ['meta[name="title"]', pageTitle],
+      ['meta[name="description"]', pageDesc],
+      ['meta[name="robots"]', metadata.robots],
+      ['meta[property="og:type"]', metadata.ogType],
+      ['meta[property="og:url"]', metadata.canonical],
+      ['meta[property="og:title"]', pageTitle],
+      ['meta[property="og:description"]', pageDesc],
+      ['meta[property="og:image"]', metadata.image],
+      ['meta[property="og:image:alt"]', metadata.imageAlt],
+      ['meta[name="twitter:url"]', metadata.canonical],
+      ['meta[name="twitter:title"]', pageTitle],
+      ['meta[name="twitter:description"]', pageDesc],
+      ['meta[name="twitter:image"]', metadata.image],
+      ['meta[name="twitter:image:alt"]', metadata.imageAlt],
+    ];
+
+    metaUpdates.forEach(([selector, content]) => {
+      document.querySelector(selector)?.setAttribute("content", content);
+    });
+
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute("href", metadata.canonical);
+
+    const structuredData = document.querySelector("#seo-structured-data");
+    if (structuredData) {
+      structuredData.textContent = JSON.stringify(
+        getStructuredData({
+          ...metadata,
+          title: pageTitle,
+          description: pageDesc,
+        }),
+      );
     }
   }, [pathname, lang, t, translateProject]);
 }

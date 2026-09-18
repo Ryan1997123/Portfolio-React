@@ -10,6 +10,8 @@ import {
   PhotographyPage,
   WorkPage,
 } from './pages/portfolio-pages'
+import { Analytics } from '@vercel/analytics/react'
+
 
 function ScrollToTop() {
   const { pathname, search } = useLocation()
@@ -21,21 +23,30 @@ function ScrollToTop() {
   return null
 }
 
+export function AppRoutes() {
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/work" element={<WorkPage />} />
+        <Route path="/work/:slug" element={<CaseStudyPage />} />
+        <Route path="/photography" element={<PhotographyPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </>
+  )
+}
+
 function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/work" element={<WorkPage />} />
-          <Route path="/work/:slug" element={<CaseStudyPage />} />
-          <Route path="/photography" element={<PhotographyPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<HomePage />} />
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
+      <Analytics />
     </LanguageProvider>
   )
 }

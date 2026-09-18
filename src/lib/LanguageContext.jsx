@@ -337,13 +337,20 @@ export const projectTranslations = {
 };
 
 export function LanguageProvider({ children }) {
-  const [lang, setLangState] = useState(() => {
-    return localStorage.getItem("portfolio-language") || "en";
-  });
+  const [lang, setLangState] = useState("en");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("portfolio-language");
+    if (LANGUAGES.some(({ code }) => code === savedLanguage)) {
+      setLangState(savedLanguage);
+    }
+  }, []);
 
   const setLang = (newLang) => {
     setLangState(newLang);
-    localStorage.setItem("portfolio-language", newLang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("portfolio-language", newLang);
+    }
   };
 
   const t = (key) => {
