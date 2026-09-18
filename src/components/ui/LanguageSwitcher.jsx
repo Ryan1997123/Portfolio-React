@@ -48,7 +48,7 @@ export function LanguageSwitcher({ className = "" }) {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-36 rounded-lg border border-white/15 bg-[#121212] p-1.5 shadow-xl backdrop-blur-md z-50 animate-in fade-in zoom-in-95 duration-150">
+        <div className="language-menu absolute right-0 mt-2 w-36 rounded-lg border border-white/15 bg-[#121212] p-1.5 shadow-xl backdrop-blur-md z-50">
           {LANGUAGES.map((item) => {
             const isSelected = item.code === lang;
             return (
