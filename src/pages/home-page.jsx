@@ -173,8 +173,6 @@ function PhotographyIndex() {
             <img
               src={photo.image}
               alt=""
-              width="800"
-              height="600"
               loading="lazy"
               decoding="async"
               fetchPriority="low"
