@@ -24,7 +24,6 @@ import sftHero from "../assets/secure_file_transfer/hero.jpeg";
 import sftLowFi1 from "../assets/secure_file_transfer/artboard-1.png";
 import sftLowFi2 from "../assets/secure_file_transfer/artboard-2.png";
 import sftHighFi1 from "../assets/secure_file_transfer/artboard-11.png";
-import sftFinal from "../assets/secure_file_transfer/artboard-15.png";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, SiteLayout } from "./site-layout";
@@ -55,7 +54,6 @@ const caseStudyImages = {
   "sft-lowfi-1": sftLowFi1,
   "sft-lowfi-2": sftLowFi2,
   "sft-highfi-1": sftHighFi1,
-  "sft-final": sftFinal,
 };
 
 function getHeroImageSource(heroImage) {

@@ -127,7 +127,7 @@ export const projects = [
     processImages: [{ label: 'High fidelity dashboard screens', image: 'sft-highfi-1' }],
     solution: 'The Premium Technology SFT redesign was a success. The only real challenge was working within the code limitations of PT\'s tech team, who were using a very old version of Java for the secure file transfer system.',
     solutionImage: 'Final Secure File Transfer system design',
-    solutionImageKey: 'sft-final',
+    figmaEmbed: 'https://embed.figma.com/design/646mwFKDNkPaEU7dD6zUmi/SFT-PT-2024?node-id=0-1&embed-host=share',
   },
 ];
 
