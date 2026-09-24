@@ -1322,6 +1322,83 @@
   gap: 24px;
 }
 
+.case-study-carousel-section .case-study-carousel,
+.case-study-carousel-section .case-study-carousel-counter {
+  grid-column: 2;
+}
+
+.case-study-carousel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.case-study-carousel-track {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.case-study-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.case-study-carousel-slide {
+  flex: 0 0 auto;
+  width: min(78vw, 420px);
+  aspect-ratio: 16 / 10;
+  scroll-snap-align: start;
+  border: 1px solid rgb(245 243 239 / 0.12);
+  background-color: #171717;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 240ms ease, filter 240ms ease;
+}
+
+.case-study-carousel-slide:hover {
+  border-color: rgb(245 243 239 / 0.45);
+  filter: brightness(1.12);
+}
+
+.case-study-carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-study-carousel-arrow {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(245 243 239 / 0.18);
+  background: transparent;
+  color: #f5f3ef;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.case-study-carousel-arrow:hover:not(:disabled) {
+  border-color: #b10e1e;
+  color: #b10e1e;
+}
+
+.case-study-carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.case-study-carousel-counter {
+  margin-top: 12px;
+}
+
 .case-study-back,
 .case-study-next {
   display: inline-flex;
@@ -1355,6 +1432,11 @@
   .case-study-image-grid,
   .case-study-solution > .case-study-image,
   .case-study-figma-embed {
+    grid-column: auto;
+  }
+
+  .case-study-carousel-section .case-study-carousel,
+  .case-study-carousel-section .case-study-carousel-counter {
     grid-column: auto;
   }
 

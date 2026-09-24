@@ -128,6 +128,10 @@ export const projects = [
     solution: 'The Premium Technology SFT redesign was a success. The only real challenge was working within the code limitations of PT\'s tech team, who were using a very old version of Java for the secure file transfer system.',
     solutionImage: 'Final Secure File Transfer system design',
     figmaEmbed: 'https://embed.figma.com/design/646mwFKDNkPaEU7dD6zUmi/SFT-PT-2024?node-id=0-1&embed-host=share',
+    finalImages: Array.from({ length: 15 }, (_, i) => ({
+      label: `Final screen ${i + 1}`,
+      image: `sft-final-${i + 1}`,
+    })),
   },
 ];
 

@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ScrambleText } from "motion-plus/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
@@ -21,12 +21,24 @@ import icotydeProcess1 from "../assets/jnj-ico/example1.png";
 import icotydeProcess2 from "../assets/jnj-ico/example2.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import sftHero from "../assets/secure_file_transfer/hero.jpeg";
-import sftLowFi1 from "../assets/secure_file_transfer/artboard-1.png";
-import sftLowFi2 from "../assets/secure_file_transfer/artboard-2.png";
+import sftLowFi1 from "../assets/secure_file_transfer/lofi-1.png";
+import sftLowFi2 from "../assets/secure_file_transfer/lofi-2.png";
 import sftHighFi1 from "../assets/secure_file_transfer/artboard-11.png";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, SiteLayout } from "./site-layout";
+
+const sftFinalImages = Object.fromEntries(
+  Object.entries(
+    import.meta.glob("../assets/secure_file_transfer/final/*.png", {
+      eager: true,
+      import: "default",
+    }),
+  ).map(([path, image]) => {
+    const index = path.match(/screen-(\d+)\.png$/)[1];
+    return [`sft-final-${index}`, image];
+  }),
+);
 
 const heroImages = {
   "gaming-gear-highfidelity": gamingGearHighFidelity,
@@ -54,6 +66,7 @@ const caseStudyImages = {
   "sft-lowfi-1": sftLowFi1,
   "sft-lowfi-2": sftLowFi2,
   "sft-highfi-1": sftHighFi1,
+  ...sftFinalImages,
 };
 
 function getHeroImageSource(heroImage) {
@@ -344,6 +357,14 @@ export function CaseStudyPage() {
               />
             )}
           </motion.section>
+          {project.finalImages && project.finalImages.length > 0 && (
+            <CaseStudyCarousel
+              items={project.finalImages}
+              project={project}
+              prefersReducedMotion={prefersReducedMotion}
+              onOpen={openLightbox}
+            />
+          )}
           <div className="case-study-nav flex items-center justify-between">
             <Link to="/work" className="case-study-back">
               ← {t("backToWork")}
@@ -429,6 +450,92 @@ function CaseStudySection({
         {body}
       </motion.p>
       {children}
+    </motion.section>
+  );
+}
+
+function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
+  const { t } = useLanguage();
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!items || items.length === 0) return null;
+
+  const goTo = (index) => {
+    const clamped = Math.max(0, Math.min(index, items.length - 1));
+    setActiveIndex(clamped);
+    const track = trackRef.current;
+    const slide = track?.children[clamped];
+    slide?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      inline: "start",
+      block: "nearest",
+    });
+  };
+
+  return (
+    <motion.section
+      className="case-study-section case-study-carousel-section"
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <div className="case-study-section-heading">
+        <p className="case-study-label">{t("finalImagesLabel")}</p>
+        <h2>{t("finalImagesSub")}</h2>
+      </div>
+      <div className="case-study-carousel">
+        <button
+          type="button"
+          className="case-study-carousel-arrow case-study-carousel-arrow-prev"
+          aria-label="Previous image"
+          onClick={() => goTo(activeIndex - 1)}
+          disabled={activeIndex === 0}
+        >
+          ←
+        </button>
+        <div className="case-study-carousel-track" ref={trackRef}>
+          {items.map((item, index) => (
+            <button
+              key={item.image}
+              type="button"
+              className="case-study-carousel-slide"
+              aria-label={`Open ${item.label}`}
+              onClick={() =>
+                onOpen({
+                  type: "panel",
+                  label: item.label,
+                  image: item.image,
+                  color: project.color,
+                  index,
+                })
+              }
+            >
+              <img
+                src={resolveCaseStudyImage(item.image)}
+                alt={item.label}
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="case-study-carousel-arrow case-study-carousel-arrow-next"
+          aria-label="Next image"
+          onClick={() => goTo(activeIndex + 1)}
+          disabled={activeIndex === items.length - 1}
+        >
+          →
+        </button>
+      </div>
+      <p className="case-study-carousel-counter font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">
+        {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
+      </p>
     </motion.section>
   );
 }
