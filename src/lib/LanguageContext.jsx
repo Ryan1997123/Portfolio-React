@@ -53,6 +53,10 @@ export const translations = {
     workEyebrow: "WORK",
     workTitle: "Selected projects.",
     workBody: "A mix of identity, interaction, and image-making. Open a project to see the thinking behind it.",
+    workFilterAll: "All",
+    workFilterWebsite: "Websites",
+    workFilterMobile: "Mobile Apps",
+    workFilterGraphic: "Graphic Design",
 
     photoEyebrow: "PHOTOGRAPHY",
     photoTitle: "Photographs by Ryan",
@@ -129,6 +133,10 @@ export const translations = {
     workEyebrow: "WORK",
     workTitle: "主要プロジェクト。",
     workBody: "アイデンティティ、インタラクション、ビジュアル制作の融合。プロジェクトを開いて背景にある思考をご覧ください。",
+    workFilterAll: "すべて",
+    workFilterWebsite: "ウェブサイト",
+    workFilterMobile: "モバイルアプリ",
+    workFilterGraphic: "グラフィックデザイン",
 
     photoEyebrow: "PHOTOGRAPHY",
     photoTitle: "Ryanの写真コレクション",
@@ -205,6 +213,10 @@ export const translations = {
     workEyebrow: "WORK",
     workTitle: "주요 프로젝트.",
     workBody: "아이덴티티, 인터랙션, 비주얼 제작의 결합. 프로젝트를 열어 그 뒤에 있는 생각을 확인하세요.",
+    workFilterAll: "전체",
+    workFilterWebsite: "웹사이트",
+    workFilterMobile: "모바일 앱",
+    workFilterGraphic: "그래픽 디자인",
 
     photoEyebrow: "PHOTOGRAPHY",
     photoTitle: "Ryan의 사진 컬렉션",

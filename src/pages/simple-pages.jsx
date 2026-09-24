@@ -1,9 +1,22 @@
+import { useState } from "react";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, ProjectCard, SiteLayout } from "./site-layout";
 
+const WORK_FILTERS = [
+  { key: "all", labelKey: "workFilterAll" },
+  { key: "website", labelKey: "workFilterWebsite" },
+  { key: "mobile", labelKey: "workFilterMobile" },
+  { key: "graphic", labelKey: "workFilterGraphic" },
+];
+
 export function WorkPage() {
   const { t, translateProject } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredProjects = projects.filter(
+    (project) => activeFilter === "all" || project.type === activeFilter,
+  );
 
   return (
     <SiteLayout>
@@ -14,8 +27,21 @@ export function WorkPage() {
           title={t("workTitle")}
           body={t("workBody")}
         />
+        <div className="work-page-filters mx-auto flex max-w-7xl flex-wrap gap-2 px-6 pb-8 sm:px-10 lg:px-14">
+          {WORK_FILTERS.map(({ key, labelKey }) => (
+            <button
+              key={key}
+              type="button"
+              data-cursor="pointer"
+              className={`work-filter-button ${activeFilter === key ? "is-active" : ""}`}
+              onClick={() => setActiveFilter(key)}
+            >
+              {t(labelKey)}
+            </button>
+          ))}
+        </div>
         <section className="mx-auto grid max-w-7xl gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">
-          {projects.map((rawProject, index) => {
+          {filteredProjects.map((rawProject, index) => {
             const project = translateProject(rawProject);
             return <ProjectCard key={project.slug} project={project} index={index} />;
           })}
