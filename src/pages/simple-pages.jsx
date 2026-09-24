@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, ProjectCard, SiteLayout } from "./site-layout";
 
-const WORK_GROUPS = [
+const WORK_FILTERS = [
+  { key: "all", labelKey: "workFilterAll" },
   { key: "website", labelKey: "workFilterWebsite" },
   { key: "mobile", labelKey: "workFilterMobile" },
   { key: "graphic", labelKey: "workFilterGraphic" },
@@ -10,6 +12,11 @@ const WORK_GROUPS = [
 
 export function WorkPage() {
   const { t, translateProject } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredProjects = projects.filter(
+    (project) => activeFilter === "all" || project.type === activeFilter,
+  );
 
   return (
     <SiteLayout>
@@ -20,24 +27,25 @@ export function WorkPage() {
           title={t("workTitle")}
           body={t("workBody")}
         />
-        {WORK_GROUPS.map(({ key, labelKey }) => {
-          const groupProjects = projects.filter((project) => project.type === key);
-          if (groupProjects.length === 0) return null;
-
-          return (
-            <section key={key} className="work-page-group mx-auto max-w-7xl px-6 pb-16 sm:px-10 lg:px-14">
-              <h2 className="work-group-heading font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
-                {t(labelKey)}
-              </h2>
-              <div className="work-group-grid grid gap-3 md:grid-cols-2">
-                {groupProjects.map((rawProject, index) => {
-                  const project = translateProject(rawProject);
-                  return <ProjectCard key={project.slug} project={project} index={index} />;
-                })}
-              </div>
-            </section>
-          );
-        })}
+        <div className="work-page-filters mx-auto flex max-w-7xl flex-wrap gap-2 px-6 pb-8 sm:px-10 lg:px-14">
+          {WORK_FILTERS.map(({ key, labelKey }) => (
+            <button
+              key={key}
+              type="button"
+              data-cursor="pointer"
+              className={`work-filter-button ${activeFilter === key ? "is-active" : ""}`}
+              onClick={() => setActiveFilter(key)}
+            >
+              {t(labelKey)}
+            </button>
+          ))}
+        </div>
+        <section className="mx-auto grid max-w-7xl gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">
+          {filteredProjects.map((rawProject, index) => {
+            const project = translateProject(rawProject);
+            return <ProjectCard key={project.slug} project={project} index={index} />;
+          })}
+        </section>
       </div>
     </SiteLayout>
   );
