@@ -56,6 +56,7 @@ export const translations = {
     workFilterAll: "All",
     workFilterWebsite: "Websites",
     workFilterMobile: "Mobile Apps",
+    workFilterSaas: "SaaS",
     workFilterGraphic: "Graphic Design",
 
     photoEyebrow: "PHOTOGRAPHY",
@@ -136,6 +137,7 @@ export const translations = {
     workFilterAll: "すべて",
     workFilterWebsite: "ウェブサイト",
     workFilterMobile: "モバイルアプリ",
+    workFilterSaas: "SaaS",
     workFilterGraphic: "グラフィックデザイン",
 
     photoEyebrow: "PHOTOGRAPHY",
@@ -216,6 +218,7 @@ export const translations = {
     workFilterAll: "전체",
     workFilterWebsite: "웹사이트",
     workFilterMobile: "모바일 앱",
+    workFilterSaas: "SaaS",
     workFilterGraphic: "그래픽 디자인",
 
     photoEyebrow: "PHOTOGRAPHY",

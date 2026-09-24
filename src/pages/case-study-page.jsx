@@ -20,6 +20,11 @@ import sibosPremium from "../assets/sibos_tote/premium.png";
 import icotydeProcess1 from "../assets/jnj-ico/example1.png";
 import icotydeProcess2 from "../assets/jnj-ico/example2.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
+import sftHero from "../assets/secure_file_transfer/hero.jpeg";
+import sftLowFi1 from "../assets/secure_file_transfer/artboard-1.png";
+import sftLowFi2 from "../assets/secure_file_transfer/artboard-2.png";
+import sftHighFi1 from "../assets/secure_file_transfer/artboard-11.png";
+import sftFinal from "../assets/secure_file_transfer/artboard-15.png";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, SiteLayout } from "./site-layout";
@@ -29,6 +34,7 @@ const heroImages = {
   "ectrims-booth-hero": ectrimsBoothHero,
   "sibos-tote-hero": sibosHero,
   "icotyde-overview": icotydeOverview,
+  "sft-hero": sftHero,
 };
 
 const caseStudyImages = {
@@ -46,6 +52,10 @@ const caseStudyImages = {
   "sibos-premium": sibosPremium,
   "example1.png": icotydeProcess1,
   "example2.png": icotydeProcess2,
+  "sft-lowfi-1": sftLowFi1,
+  "sft-lowfi-2": sftLowFi2,
+  "sft-highfi-1": sftHighFi1,
+  "sft-final": sftFinal,
 };
 
 function getHeroImageSource(heroImage) {
