@@ -8,6 +8,7 @@ const WORK_FILTERS = [
   { key: "website", labelKey: "workFilterWebsite" },
   { key: "mobile", labelKey: "workFilterMobile" },
   { key: "saas", labelKey: "workFilterSaas" },
+  { key: "booth", labelKey: "workFilterBooth" },
   { key: "graphic", labelKey: "workFilterGraphic" },
 ];
 
