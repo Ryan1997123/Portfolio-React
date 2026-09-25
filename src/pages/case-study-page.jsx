@@ -29,6 +29,12 @@ import lillyBoothSchematic from "../assets/lilly_booth/schematic.webp";
 import lillyBoothScreen1 from "../assets/lilly_booth/1.png";
 import lillyBoothScreen3 from "../assets/lilly_booth/3.png";
 import lillyBoothScreen4 from "../assets/lilly_booth/4.png";
+import lillyBoothScreen5 from "../assets/lilly_booth/5.png";
+import lillyBoothScreen6 from "../assets/lilly_booth/6.png";
+import lillyBoothScreen7 from "../assets/lilly_booth/7.png";
+import lillyBoothScreen8 from "../assets/lilly_booth/8.png";
+import lillyBoothScreen9 from "../assets/lilly_booth/9.png";
+import lillyBoothScreen10 from "../assets/lilly_booth/10.png";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, SiteLayout } from "./site-layout";
@@ -76,6 +82,12 @@ const caseStudyImages = {
   "lilly-booth-screen-1": lillyBoothScreen1,
   "lilly-booth-screen-3": lillyBoothScreen3,
   "lilly-booth-screen-4": lillyBoothScreen4,
+  "lilly-booth-screen-5": lillyBoothScreen5,
+  "lilly-booth-screen-6": lillyBoothScreen6,
+  "lilly-booth-screen-7": lillyBoothScreen7,
+  "lilly-booth-screen-8": lillyBoothScreen8,
+  "lilly-booth-screen-9": lillyBoothScreen9,
+  "lilly-booth-screen-10": lillyBoothScreen10,
   "lilly-booth-hero": lillyBoothHero,
   ...sftFinalImages,
 };
@@ -286,12 +298,21 @@ export function CaseStudyPage() {
             >
               {project.process}
             </motion.p>
-            <CaseStudyImageGrid
-              items={project.processImages}
-              project={project}
-              prefersReducedMotion={prefersReducedMotion}
-              onOpen={openLightbox}
-            />
+            {project.processImageLayout === "carousel" ? (
+              <CaseStudyMediaCarousel
+                items={project.processImages}
+                project={project}
+                prefersReducedMotion={prefersReducedMotion}
+                onOpen={openLightbox}
+              />
+            ) : (
+              <CaseStudyImageGrid
+                items={project.processImages}
+                project={project}
+                prefersReducedMotion={prefersReducedMotion}
+                onOpen={openLightbox}
+              />
+            )}
           </motion.section>
           <motion.section
             className="case-study-section case-study-solution"
@@ -581,6 +602,96 @@ function CaseStudyImageGrid({ items, project, prefersReducedMotion, onOpen }) {
         );
       })}
     </div>
+  );
+}
+
+function CaseStudyMediaCarousel({ items, project, prefersReducedMotion, onOpen }) {
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!items || items.length === 0) return null;
+
+  const goTo = (index) => {
+    const clamped = Math.max(0, Math.min(index, items.length - 1));
+    setActiveIndex(clamped);
+    const track = trackRef.current;
+    const slide = track?.children[clamped];
+    slide?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  };
+
+  return (
+    <>
+      <motion.div
+        className="case-study-carousel case-study-process-carousel"
+        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{
+          duration: prefersReducedMotion ? 0 : 0.7,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        <button
+          type="button"
+          className="case-study-carousel-arrow case-study-carousel-arrow-prev"
+          aria-label="Previous image"
+          onClick={() => goTo(activeIndex - 1)}
+          disabled={activeIndex === 0}
+        >
+          ←
+        </button>
+        <div className="case-study-carousel-track" ref={trackRef}>
+          {items.map((item, index) => (
+            <motion.button
+              key={item.image}
+              type="button"
+              className="case-study-carousel-slide case-study-process-slide"
+              aria-label={`Open ${item.label}`}
+              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={prefersReducedMotion ? undefined : { y: -6 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.55,
+                ease: [0.22, 1, 0.36, 1],
+                delay: prefersReducedMotion ? 0 : index * 0.04,
+              }}
+              onClick={() =>
+                onOpen({
+                  type: "panel",
+                  label: item.label,
+                  image: item.image,
+                  color: project.color,
+                  index,
+                })
+              }
+            >
+              <img
+                src={resolveCaseStudyImage(item.image)}
+                alt={item.label}
+                loading="lazy"
+              />
+            </motion.button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="case-study-carousel-arrow case-study-carousel-arrow-next"
+          aria-label="Next image"
+          onClick={() => goTo(activeIndex + 1)}
+          disabled={activeIndex === items.length - 1}
+        >
+          →
+        </button>
+      </motion.div>
+      <p className="case-study-carousel-counter case-study-process-carousel-counter font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">
+        {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
+      </p>
+    </>
   );
 }
 
