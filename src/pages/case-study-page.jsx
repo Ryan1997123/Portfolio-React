@@ -26,7 +26,9 @@ import sftLowFi2 from "../assets/secure_file_transfer/lofi-2.png";
 import sftHighFi1 from "../assets/secure_file_transfer/artboard-11.png";
 import lillyBoothHero from "../assets/lilly_booth/lilly.webp";
 import lillyBoothSchematic from "../assets/lilly_booth/schematic.webp";
-import lillyBoothMockup from "../assets/lilly_booth/imac-mockup.webp";
+import lillyBoothScreen1 from "../assets/lilly_booth/1.png";
+import lillyBoothScreen3 from "../assets/lilly_booth/3.png";
+import lillyBoothScreen4 from "../assets/lilly_booth/4.png";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, SiteLayout } from "./site-layout";
@@ -71,7 +73,9 @@ const caseStudyImages = {
   "sft-lowfi-2": sftLowFi2,
   "sft-highfi-1": sftHighFi1,
   "lilly-booth-schematic": lillyBoothSchematic,
-  "lilly-booth-mockup": lillyBoothMockup,
+  "lilly-booth-screen-1": lillyBoothScreen1,
+  "lilly-booth-screen-3": lillyBoothScreen3,
+  "lilly-booth-screen-4": lillyBoothScreen4,
   "lilly-booth-hero": lillyBoothHero,
   ...sftFinalImages,
 };

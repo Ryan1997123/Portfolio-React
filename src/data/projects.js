@@ -84,6 +84,7 @@ export const projects = [
     timeline: 'Conference activation',
     tools: 'Figma, animated prototype',
     heroImage: 'lilly-booth-hero',
+    figmaEmbed: 'https://embed.figma.com/design/6vNj6lpcO4tMTiCvuIAJYO/Ryan-Portfolio-12270429-US-HCO-Alzheimer-s-Becker-s-Congress-Dig-Panels?node-id=0-1&embed-host=share',
     color: 'green',
     outcomes: [
       'Wheelchair-accessible booth interaction for all attendees',
@@ -95,14 +96,20 @@ export const projects = [
     research: 'The team mapped the booth around how attendees would physically approach, navigate, and complete the touchpad experience in a busy conference environment. The schematic helped align the accessible layout, interaction flow, and rep handoff before the experience moved into build.',
     researchImages: [{ label: 'Booth schematic and accessible layout', image: 'lilly-booth-schematic' }],
     process: 'My team and I built the experience around Lilly\'s branding, using their core colors and visual identity to keep the booth cohesive and recognizable. We created an animated prototype to communicate the gamified interaction flow and accessibility requirements to development.',
-    processImages: [{ label: 'Interactive booth prototype mockup', image: 'lilly-booth-mockup' }],
+    processImages: [
+      { label: 'Booth screens', image: 'lilly-booth-screen-1' },
+      { label: 'Booth screens 03', image: 'lilly-booth-screen-3' },
+      { label: 'Booth screens 04', image: 'lilly-booth-screen-4' },
+    ],
     solution: 'After several rounds of refinement, the design was approved for distribution and brought to life as a real interactive touchpad booth at Becker\'s Convention. The final experience rewarded curiosity, helped attendees move step by step through key categories, and turned education into a clear next action with Lilly representatives.',
     solutionImage: 'Final Lilly Alzheimer\'s Digital Panels booth',
     solutionImageKey: 'lilly-booth-hero',
     finalImages: [
       { label: 'Final booth experience', image: 'lilly-booth-hero' },
       { label: 'Booth schematic', image: 'lilly-booth-schematic' },
-      { label: 'Interactive prototype mockup', image: 'lilly-booth-mockup' },
+      { label: 'Booth screens', image: 'lilly-booth-screen-1' },
+      { label: 'Booth screens 03', image: 'lilly-booth-screen-3' },
+      { label: 'Booth screens 04', image: 'lilly-booth-screen-4' },
     ],
   },
   {
