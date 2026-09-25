@@ -1378,6 +1378,12 @@
 .case-study-process-slide {
   width: min(76vw, 560px);
   aspect-ratio: 16 / 9;
+  background: #f5f3ef;
+}
+
+.case-study-process-slide img {
+  object-fit: contain;
+  object-position: top center;
 }
 
 .case-study-carousel-arrow {
