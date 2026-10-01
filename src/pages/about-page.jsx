@@ -239,10 +239,9 @@ export function AboutPage() {
                   duration: prefersReducedMotion ? 0 : 0.7,
                 }}
               >
-                I picked up research, wireframing, and high-fidelity
-                prototyping at Fordham University, then studying abroad at
-                Korea University in South Korea pushed it further, designing
-                for people with very different habits than my own.
+                Research, wireframing, and high-fidelity prototyping taught me
+                to question assumptions and design for people with habits and
+                needs very different from my own.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 28 }}
@@ -273,6 +272,33 @@ export function AboutPage() {
             </div>
           </div>
         </motion.section>
+
+        <section className="about-life" aria-labelledby="about-life-title">
+          <div className="about-life-inner">
+            <div className="about-life-heading">
+              <span className="about-life-label">02 / Beyond the work</span>
+              <h2 id="about-life-title">Life outside of the screen.</h2>
+            </div>
+            <div className="about-life-copy">
+              <p>
+                I went to Fordham University and studied at Korea University in
+                2017. That time abroad sparked a love of exploring new places
+                and seeing the world from different perspectives.
+              </p>
+              <p>
+                I speak Korean and Japanese, and I&apos;m learning Spanish (day
+                356 on Duolingo). I&apos;ve traveled through South Korea, Mexico,
+                Colombia, London, and Italy, and there&apos;s still plenty left
+                on my list.
+              </p>
+              <p>
+                These days I&apos;m based in Midtown New York, always looking
+                for a new restaurant or cafe. Away from my desk, I run half
+                marathons, ski, and practice yoga.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </SiteLayout>
   );
