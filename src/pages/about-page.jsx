@@ -65,8 +65,12 @@ const lifeBeats = [
     text: "I went to Fordham University and studied at Korea University in 2017. That time abroad sparked a love of exploring new places and seeing the world from different perspectives.",
     photos: travelPhotos,
   },
-  "I speak Korean and Japanese, and I'm learning Spanish (day 356 on Duolingo). I've traveled through South Korea, Mexico, Colombia, London, and Italy, and there's still plenty left on my list.",
-  "These days I'm based in Midtown New York, always looking for a new restaurant or cafe. Away from my desk, I run half marathons, ski, and practice yoga.",
+  {
+    text: [
+      "I speak Korean and Japanese, and I'm learning Spanish (day 356 on Duolingo). I've traveled through South Korea, Mexico, Colombia, London, and Italy, and there's still plenty left on my list.",
+      "These days I'm based in Midtown New York, always looking for a new restaurant or cafe. Away from my desk, I run half marathons, ski, and practice yoga.",
+    ],
+  },
 ];
 
 // Native scroll-timeline animations snap back outside their keyframes, so hold values across 0..1.
