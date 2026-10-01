@@ -19,9 +19,13 @@ const aboutPrinciples = [
 ];
 
 const approachBeats = [
-  "Research, wireframing, and high-fidelity prototyping taught me to question assumptions and design for people with habits and needs very different from my own.",
-  "The business side comes from working at a fintech company, where I saw how design decisions tie into revenue, risk, and compliance.",
-  "Together, that mix helps me connect user needs with viable product decisions, then carry it through with accessible design and clean, robust code.",
+  {
+    text: [
+      "Research, wireframing, and high-fidelity prototyping taught me to question assumptions and design for people with habits and needs very different from my own.",
+      "The business side comes from working at a fintech company, where I saw how design decisions tie into revenue, risk, and compliance.",
+      "Together, that mix helps me connect user needs with viable product decisions, then carry it through with accessible design and clean, robust code.",
+    ],
+  },
 ];
 
 const storyThemes = {
@@ -80,12 +84,33 @@ function fullRange(input, output) {
   return [paddedInput, paddedOutput];
 }
 
+function BeatContent({ beat, renderPhoto }) {
+  const paragraphs = [].concat(beat.text ?? beat);
+  const photos = beat.photos ?? [];
+
+  return (
+    <>
+      {paragraphs.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+      {photos.length > 0 && (
+        <div className="about-life-gallery" role="group" aria-label="Travel photos">
+          {photos.map(renderPhoto)}
+        </div>
+      )}
+    </>
+  );
+}
+
+function beatClassName(beat) {
+  return `scroll-story-beat${Array.isArray(beat.text) ? " is-multi" : ""}`;
+}
+
 function ScrollStoryBeat({ progress, index, segment, color, isLast, beat }) {
   const fade = segment * 0.3;
   const enter = index * segment;
   const exit = enter + segment;
   const isFirst = index === 0;
-  const photos = beat.photos ?? [];
 
   // Outgoing text clears before incoming text appears so they never overlap.
   const opacity = useTransform(
@@ -109,24 +134,19 @@ function ScrollStoryBeat({ progress, index, segment, color, isLast, beat }) {
   );
 
   return (
-    <motion.div
-      className={`scroll-story-beat${photos.length ? " has-photos" : ""}`}
-      style={{ color, opacity, x, y }}
-    >
-      <p>{beat.text ?? beat}</p>
-      {photos.length > 0 && (
-        <div className="about-life-gallery" role="group" aria-label="Travel photos">
-          {photos.map((photo, photoIndex) => (
-            <ScrollStoryPhoto
-              key={photo.id}
-              progress={progress}
-              start={enter + fade * 0.2 + photoIndex * segment * 0.04}
-              segment={segment}
-              photo={photo}
-            />
-          ))}
-        </div>
-      )}
+    <motion.div className={beatClassName(beat)} style={{ color, opacity, x, y }}>
+      <BeatContent
+        beat={beat}
+        renderPhoto={(photo, photoIndex) => (
+          <ScrollStoryPhoto
+            key={photo.id}
+            progress={progress}
+            start={enter + fade * 0.2 + photoIndex * segment * 0.04}
+            segment={segment}
+            photo={photo}
+          />
+        )}
+      />
     </motion.div>
   );
 }
@@ -235,23 +255,21 @@ function ScrollStory({ chapters }) {
                 {chapter.title}
               </div>
               <div className="scroll-story-stage">
-                {chapter.beats.map((beat) => (
-                  <div key={beat.text ?? beat} className="scroll-story-beat">
-                    <p>{beat.text ?? beat}</p>
-                    {beat.photos && (
-                      <div className="about-life-gallery" role="group" aria-label="Travel photos">
-                        {beat.photos.map((photo) => (
-                          <ScrollStoryPhoto
-                            key={photo.id}
-                            progress={scrollYProgress}
-                            start={0}
-                            segment={segment}
-                            photo={photo}
-                            isStatic
-                          />
-                        ))}
-                      </div>
-                    )}
+                {chapter.beats.map((beat, beatIndex) => (
+                  <div key={`${chapter.id}-${beatIndex}`} className={beatClassName(beat)}>
+                    <BeatContent
+                      beat={beat}
+                      renderPhoto={(photo) => (
+                        <ScrollStoryPhoto
+                          key={photo.id}
+                          progress={scrollYProgress}
+                          start={0}
+                          segment={segment}
+                          photo={photo}
+                          isStatic
+                        />
+                      )}
+                    />
                   </div>
                 ))}
               </div>
@@ -304,7 +322,7 @@ function ScrollStory({ chapters }) {
           {chapters.flatMap((chapter, chapterIndex) =>
             chapter.beats.map((beat, beatIndex) => (
               <ScrollStoryBeat
-                key={beat.text ?? beat}
+                key={`${chapter.id}-${beatIndex}`}
                 progress={scrollYProgress}
                 index={starts[chapterIndex] + beatIndex}
                 segment={segment}
