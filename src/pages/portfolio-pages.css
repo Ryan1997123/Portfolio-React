@@ -1551,16 +1551,24 @@
   }
 }
 
+.projects-index,
+.projects-index-header {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 89rem;
+}
+
+.projects-index-header {
+  padding: 0 60px;
+}
+
 .projects-index {
   display: grid;
   grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
   gap: 10px;
   align-items: start;
   align-self: stretch;
-  margin: 0 auto;
   padding: 30px 60px 80px;
-  width: 100%;
-  max-width: 89rem;
 }
 
 .projects-index-intro {
@@ -2074,6 +2082,10 @@
     flex-direction: column;
     gap: 10px;
     line-height: 1.5;
+  }
+
+  .projects-index-header {
+    padding: 0 24px;
   }
 
   .projects-index {

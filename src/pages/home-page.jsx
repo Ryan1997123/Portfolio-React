@@ -263,7 +263,7 @@ export function HomePage() {
             </div>
           </div>
         </section>
-        <section className="mx-auto w-full max-w-7xl px-6 pb-0 sm:px-10 lg:px-14">
+        <section className="projects-index-header">
           <div className="mb-7 flex items-end justify-between border-b border-white/10 pb-4">
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400">
               {t("selectedWork")}
