@@ -104,7 +104,7 @@ function ProjectsIndex() {
         className="projects-index-list"
         onMouseLeave={() => setHoveredProject(null)}
       >
-        {projects.map((rawProject, index) => {
+        {projects.slice(0, 3).map((rawProject, index) => {
           const project = translateProject(rawProject);
           return (
             <div key={project.slug} className="project-index-row">
