@@ -1145,6 +1145,90 @@
   text-transform: uppercase;
 }
 
+.password-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(10 10 10 / 0.92);
+}
+
+.password-gate-panel {
+  display: flex;
+  width: min(440px, 100%);
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid rgb(245 243 239 / 0.25);
+  background: #0a0a0a;
+  padding: 32px;
+  color: var(--portfolio-paper);
+}
+
+.password-gate-panel h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.password-gate-copy {
+  margin: 0;
+  color: var(--portfolio-muted);
+}
+
+.password-gate-panel input {
+  border: 1px solid rgb(245 243 239 / 0.4);
+  background: transparent;
+  color: var(--portfolio-paper);
+  font-size: 16px;
+  padding: 12px 14px;
+}
+
+.password-gate-panel input:focus {
+  outline: none;
+  border-color: var(--portfolio-red);
+}
+
+.password-gate-panel input[aria-invalid="true"] {
+  border-color: var(--portfolio-red);
+}
+
+.password-gate-error {
+  margin: 0;
+  color: var(--portfolio-red);
+  font-size: 14px;
+}
+
+.password-gate-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.password-gate-cancel,
+.password-gate-submit {
+  border: 1px solid rgb(245 243 239 / 0.4);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 10px 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.password-gate-cancel {
+  background: transparent;
+  color: var(--portfolio-paper);
+}
+
+.password-gate-submit {
+  border-color: var(--portfolio-red);
+  background: var(--portfolio-red);
+  color: var(--portfolio-paper);
+}
+
 @media (max-width: 768px) {
   .case-study-lightbox {
     padding: 16px;

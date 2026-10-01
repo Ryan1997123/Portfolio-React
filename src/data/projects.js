@@ -1,6 +1,7 @@
 export const projects = [
   {
     slug: 'velocity',
+    protected: true,
     title: 'ICOTYDE withMe HCP',
     category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',
     type: 'website',
@@ -52,6 +53,7 @@ export const projects = [
   },
   {
     slug: 'gl-hcp-ectrims-booth',
+    protected: true,
     title: 'GL HCP ECTRIMS Booth',
     category: 'PRODUCT DESIGN / INTERACTIVE VISUAL AID',
     type: 'website',
@@ -74,6 +76,7 @@ export const projects = [
   },
   {
     slug: 'lilly-alzheimers-digital-panels',
+    protected: true,
     title: 'Lilly Alzheimer\'s Digital Panels',
     category: 'BOOTHS / INTERACTIVE EXPERIENCE',
     type: 'booth',

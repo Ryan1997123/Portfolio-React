@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ScrambleText } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
@@ -92,6 +92,9 @@ const caseStudyImages = {
   ...sftFinalImages,
 };
 
+const PROJECT_PASSWORD = "Ryanswork123@";
+const UNLOCK_STORAGE_KEY = "portfolio-projects-unlocked";
+
 function getHeroImageSource(heroImage) {
   return heroImages[heroImage] || icotydeOverview;
 }
@@ -112,6 +115,11 @@ export function CaseStudyPage() {
       : null;
   const prefersReducedMotion = useReducedMotion();
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [unlocked, setUnlocked] = useState(false);
+
+  useEffect(() => {
+    setUnlocked(sessionStorage.getItem(UNLOCK_STORAGE_KEY) === "true");
+  }, []);
 
   useEffect(() => {
     if (!lightboxImage) return undefined;
@@ -133,6 +141,20 @@ export function CaseStudyPage() {
           eyebrow="404"
           title="Project not found."
           body="That case study does not exist yet."
+        />
+      </SiteLayout>
+    );
+  }
+
+  if (project.protected && !unlocked) {
+    return (
+      <SiteLayout>
+        <PasswordGate
+          title={project.title}
+          onUnlock={() => {
+            sessionStorage.setItem(UNLOCK_STORAGE_KEY, "true");
+            setUnlocked(true);
+          }}
         />
       </SiteLayout>
     );
@@ -419,6 +441,83 @@ export function CaseStudyPage() {
         )}
       </div>
     </SiteLayout>
+  );
+}
+
+function PasswordGate({ title, onUnlock }) {
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") navigate("/work");
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [navigate]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (password === PROJECT_PASSWORD) {
+      onUnlock();
+    } else {
+      setError(true);
+      setPassword("");
+      inputRef.current?.focus();
+    }
+  };
+
+  return (
+    <div
+      className="password-gate"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="password-gate-title"
+    >
+      <form className="password-gate-panel" onSubmit={handleSubmit}>
+        <p className="case-study-label">Protected project</p>
+        <h2 id="password-gate-title">{title}</h2>
+        <p className="password-gate-copy">
+          This case study is password protected. Enter the password to view it.
+        </p>
+        <label htmlFor="password-gate-input" className="sr-only">
+          Password
+        </label>
+        <input
+          id="password-gate-input"
+          ref={inputRef}
+          type="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+            setError(false);
+          }}
+          aria-invalid={error}
+          aria-describedby={error ? "password-gate-error" : undefined}
+        />
+        {error && (
+          <p id="password-gate-error" className="password-gate-error" role="alert">
+            Incorrect password. Please try again.
+          </p>
+        )}
+        <div className="password-gate-actions">
+          <Link to="/work" className="password-gate-cancel">
+            Cancel
+          </Link>
+          <button type="submit" className="password-gate-submit">
+            Unlock
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
