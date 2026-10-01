@@ -976,6 +976,93 @@
   line-height: 1.3;
 }
 
+.approach-sketch {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 12px;
+}
+
+.approach-sketch svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.approach-sketch-frame {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.2;
+  stroke-width: 1.5;
+}
+
+.approach-sketch-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.approach-sketch-note {
+  fill: rgb(177 14 30 / 0.12);
+  stroke: #b10e1e;
+  stroke-width: 1.5;
+}
+
+.approach-sketch-fill {
+  fill: currentColor;
+}
+
+.approach-sketch-accent {
+  fill: #b10e1e;
+}
+
+.approach-sketch-cursor {
+  fill: currentColor;
+  stroke: #f5f3ef;
+  stroke-width: 1;
+}
+
+.approach-sketch-code {
+  fill: #f5f3ef;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.approach-sketch-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.approach-sketch .approach-sketch-steps > span {
+  position: relative;
+  padding-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  text-transform: uppercase;
+  transition: color 200ms ease, opacity 200ms ease;
+}
+
+.approach-sketch .approach-sketch-steps > span.is-active {
+  color: #b10e1e;
+  opacity: 1;
+}
+
+.approach-sketch-marker {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #b10e1e;
+}
+
 .about-life-photo {
   min-width: 0;
   margin: 0;
@@ -1170,6 +1257,10 @@
     gap: 14px;
     font-size: 18px;
   }
+
+  .approach-sketch {
+    display: none;
+  }
 }
 
 @media (max-height: 650px) and (max-width: 900px),
@@ -1203,6 +1294,10 @@
   .scroll-story-beat.is-multi {
     gap: 12px;
     font-size: 16px;
+  }
+
+  .approach-sketch {
+    display: none;
   }
 }
 

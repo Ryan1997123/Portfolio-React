@@ -1,7 +1,7 @@
 import { DownloadSimple } from "@phosphor-icons/react";
 import { motion, stagger, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ScrambleText, Ticker } from "motion-plus/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import colorfulStreet from "../assets/aboutme/1000015242.JPG";
 import umbrellaStreet from "../assets/aboutme/oT0NlVII6dk9PKKP.jpg";
 import milanGallery from "../assets/aboutme/qvd0dER4TEM79Jds.jpg";
@@ -72,6 +72,171 @@ const lifeBeats = [
     ],
   },
 ];
+
+const sketchStages = ["Research", "Wireframe", "Prototype", "Build"];
+const sketchNotes = [
+  { x: 36, y: 34, rotate: -6 },
+  { x: 118, y: 58, rotate: 4 },
+  { x: 200, y: 30, rotate: -3 },
+];
+const sketchOutlines = [
+  "M30 26 H270 V46 H30 Z",
+  "M30 60 H140 V150 H30 Z",
+  "M156 66 H262",
+  "M156 82 H244",
+  "M156 98 H254",
+  "M156 120 H228 V142 H156 Z",
+  "M30 168 H200",
+];
+
+function ApproachSketch() {
+  const prefersReducedMotion = useReducedMotion();
+  const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setStage(sketchStages.length - 1);
+      return undefined;
+    }
+    const interval = setInterval(
+      () => setStage((current) => (current + 1) % sketchStages.length),
+      1800,
+    );
+    return () => clearInterval(interval);
+  }, [prefersReducedMotion]);
+
+  const isResearch = stage === 0;
+  const isDrawn = stage >= 1;
+  const isFilled = stage >= 2;
+  const isBuilt = stage === 3;
+  const ease = [0.22, 1, 0.36, 1];
+  const timing = (delay = 0) => ({
+    duration: prefersReducedMotion ? 0 : 0.6,
+    delay: prefersReducedMotion ? 0 : delay,
+    ease,
+  });
+  const centered = { transformBox: "fill-box", transformOrigin: "center" };
+
+  return (
+    <div className="approach-sketch" aria-hidden="true">
+      <svg viewBox="0 0 300 200">
+        <rect className="approach-sketch-frame" x="12" y="10" width="276" height="180" rx="12" />
+
+        {sketchNotes.map((note, index) => (
+          <motion.g
+            key={note.x}
+            style={centered}
+            initial={false}
+            animate={
+              isResearch
+                ? { opacity: 1, scale: 1, rotate: note.rotate }
+                : { opacity: 0, scale: 0.6, rotate: 0 }
+            }
+            transition={timing(isResearch ? index * 0.12 : 0)}
+          >
+            <rect x={note.x} y={note.y} width="64" height="48" rx="4" className="approach-sketch-note" />
+            <path d={`M${note.x + 10} ${note.y + 16} H${note.x + 52} M${note.x + 10} ${note.y + 28} H${note.x + 40}`} className="approach-sketch-line" />
+          </motion.g>
+        ))}
+        <motion.g
+          initial={false}
+          animate={
+            isResearch && !prefersReducedMotion
+              ? { opacity: 1, x: [0, 84, 166, 0], y: [0, 22, -6, 0] }
+              : { opacity: 0, x: 0, y: 0 }
+          }
+          transition={{ duration: 1.6, ease: "easeInOut" }}
+        >
+          <circle cx="70" cy="132" r="14" className="approach-sketch-line" />
+          <path d="M80 142 L92 154" className="approach-sketch-line" />
+        </motion.g>
+
+        {sketchOutlines.map((d, index) => (
+          <motion.path
+            key={d}
+            d={d}
+            className="approach-sketch-line"
+            initial={false}
+            animate={{ pathLength: isDrawn ? 1 : 0, opacity: isDrawn ? 1 : 0 }}
+            transition={timing(isDrawn && stage === 1 ? index * 0.08 : 0)}
+          />
+        ))}
+        <motion.path
+          d="M30 60 L140 150 M140 60 L30 150"
+          className="approach-sketch-line"
+          initial={false}
+          animate={{ pathLength: isDrawn && !isFilled ? 1 : 0, opacity: isDrawn && !isFilled ? 0.5 : 0 }}
+          transition={timing(stage === 1 ? 0.3 : 0)}
+        />
+
+        <motion.rect
+          x="30"
+          y="60"
+          width="110"
+          height="90"
+          className="approach-sketch-fill"
+          initial={false}
+          animate={{ opacity: isFilled ? 0.14 : 0 }}
+          transition={timing()}
+        />
+        <motion.rect
+          x="156"
+          y="120"
+          width="72"
+          height="22"
+          className="approach-sketch-accent"
+          style={centered}
+          initial={false}
+          animate={
+            isFilled
+              ? { opacity: 1, scale: stage === 2 && !prefersReducedMotion ? [1, 1, 0.9, 1] : 1 }
+              : { opacity: 0, scale: 1 }
+          }
+          transition={{ ...timing(), duration: prefersReducedMotion ? 0 : 1.2, times: [0, 0.6, 0.75, 1] }}
+        />
+        <motion.g
+          initial={false}
+          animate={
+            stage === 2 && !prefersReducedMotion
+              ? { opacity: 1, x: 196, y: 132 }
+              : { opacity: 0, x: 262, y: 186 }
+          }
+          transition={timing()}
+        >
+          <path d="M0 0 L0 16 L4.5 12 L8 19 L10.5 18 L7 11 L13 11 Z" className="approach-sketch-cursor" />
+        </motion.g>
+
+        <motion.g
+          style={centered}
+          initial={false}
+          animate={isBuilt ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.4 }}
+          transition={
+            prefersReducedMotion ? { duration: 0 } : { type: "spring", stiffness: 320, damping: 18 }
+          }
+        >
+          <circle cx="252" cy="160" r="22" className="approach-sketch-accent" />
+          <text x="252" y="165" textAnchor="middle" className="approach-sketch-code">
+            {"</>"}
+          </text>
+        </motion.g>
+      </svg>
+      <div className="approach-sketch-steps">
+        {sketchStages.map((label, index) => (
+          <span key={label} className={index === stage ? "is-active" : undefined}>
+            {label}
+            {index === stage && (
+              <motion.span
+                layoutId="approach-sketch-marker"
+                className="approach-sketch-marker"
+                transition={timing()}
+              />
+            )}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 // Native scroll-timeline animations snap back outside their keyframes, so hold values across 0..1.
 function fullRange(input, output) {
@@ -257,6 +422,7 @@ function ScrollStory({ chapters }) {
               <div className="about-approach-heading scroll-story-heading">
                 {chapter.label}
                 {chapter.title}
+                {chapter.visual}
               </div>
               <div className="scroll-story-stage">
                 {chapter.beats.map((beat, beatIndex) => (
@@ -319,6 +485,7 @@ function ScrollStory({ chapters }) {
             >
               {chapter.label}
               {chapter.title}
+              {chapter.visual}
             </ScrollStoryHeading>
           ))}
         </div>
@@ -541,6 +708,7 @@ export function AboutPage() {
                   </span>
                 ),
                 title: <h2>{t("approach")}</h2>,
+                visual: <ApproachSketch />,
                 beats: approachBeats,
               },
               {
