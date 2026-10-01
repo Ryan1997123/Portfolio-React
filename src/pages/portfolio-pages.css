@@ -961,11 +961,20 @@
 }
 
 .scroll-story:not(.is-static) .scroll-story-stage {
+  position: relative;
   grid-row: 2;
   grid-column: 2;
   align-self: start;
   align-items: start;
   padding-top: 32px;
+}
+
+/* Out of flow so the photo grid doesn't reserve empty height under every other paragraph. */
+.scroll-story:not(.is-static) .scroll-story-beat.has-photos {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  left: 0;
 }
 
 .about-life-photo {
@@ -1157,6 +1166,10 @@
     grid-column: 1;
     padding-top: 0;
   }
+
+  .scroll-story:not(.is-static) .scroll-story-beat.has-photos {
+    top: 0;
+  }
 }
 
 @media (max-height: 650px) and (max-width: 900px),
@@ -1185,6 +1198,10 @@
     grid-row: 3;
     grid-column: 1;
     padding-top: 0;
+  }
+
+  .scroll-story:not(.is-static) .scroll-story-beat.has-photos {
+    top: 0;
   }
 }
 

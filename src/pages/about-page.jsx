@@ -109,7 +109,10 @@ function ScrollStoryBeat({ progress, index, segment, color, isLast, beat }) {
   );
 
   return (
-    <motion.div className="scroll-story-beat" style={{ color, opacity, x, y }}>
+    <motion.div
+      className={`scroll-story-beat${photos.length ? " has-photos" : ""}`}
+      style={{ color, opacity, x, y }}
+    >
       <p>{beat.text ?? beat}</p>
       {photos.length > 0 && (
         <div className="about-life-gallery" role="group" aria-label="Travel photos">
