@@ -35,6 +35,33 @@ const storyThemes = {
   dark: { background: "#0a0a0a", color: "#f5f3ef" },
 };
 
+const travelPhotos = [
+  {
+    id: "cartagena",
+    src: umbrellaStreet,
+    alt: "Colorful umbrellas hanging over a narrow street",
+    caption: "01 / Cartagena, Colombia",
+  },
+  {
+    id: "san-juan",
+    src: colorfulStreet,
+    alt: "Pink, yellow, and green buildings lining a cobbled street",
+    caption: "02 / San Juan, Puerto Rico",
+  },
+  {
+    id: "london",
+    src: londonStreet,
+    alt: "Union Jack flags above a London street",
+    caption: "03 / London, England",
+  },
+  {
+    id: "milan",
+    src: milanGallery,
+    alt: "Glass-domed shopping gallery with ornate architecture",
+    caption: "04 / Milan, Italy",
+  },
+];
+
 // Native scroll-timeline animations snap back outside their keyframes, so hold values across 0..1.
 function fullRange(input, output) {
   const paddedInput = [...input];
@@ -108,7 +135,22 @@ function ScrollStoryHeading({ progress, start, end, fade, isFirst, children }) {
   );
 }
 
-function ScrollStory({ chapters }) {
+function ScrollStoryPhoto({ progress, start, segment, photo, isStatic }) {
+  const opacity = useTransform(progress, ...fullRange([start, start + segment * 0.3], [0, 1]));
+  const y = useTransform(progress, ...fullRange([start, start + segment * 0.4], [80, 0]));
+
+  return (
+    <motion.figure
+      className={`about-life-photo about-life-photo-${photo.id}`}
+      style={isStatic ? undefined : { opacity, y }}
+    >
+      <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+      <figcaption>{photo.caption}</figcaption>
+    </motion.figure>
+  );
+}
+
+function ScrollStory({ chapters, photos = [] }) {
   const prefersReducedMotion = useReducedMotion();
   const storyRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -122,9 +164,11 @@ function ScrollStory({ chapters }) {
     starts.push(beatCount);
     beatCount += chapter.beats.length;
   }
-  // The extra half step lets the final paragraph exit before the section unpins.
-  const segment = 1 / (beatCount + 0.5);
+  // Extra steps let the final paragraph exit and the photos settle before the section unpins.
+  const steps = beatCount + (photos.length ? 1.5 : 0.5);
+  const segment = 1 / steps;
   const fade = segment * 0.3;
+  const photosStart = beatCount * segment + fade * 0.2;
   const themes = chapters.map((chapter) => storyThemes[chapter.theme]);
   const boundaries = starts.slice(1).map((start) => start * segment);
   const colorInput = boundaries.length
@@ -153,6 +197,22 @@ function ScrollStory({ chapters }) {
     />
   );
 
+  const renderPhotos = (isStatic) =>
+    photos.length > 0 && (
+      <div className="about-life-gallery scroll-story-photos" role="group" aria-label="Travel photos">
+        {photos.map((photo, index) => (
+          <ScrollStoryPhoto
+            key={photo.id}
+            progress={scrollYProgress}
+            start={photosStart + index * segment * 0.15}
+            segment={segment}
+            photo={photo}
+            isStatic={isStatic}
+          />
+        ))}
+      </div>
+    );
+
   if (prefersReducedMotion) {
     return (
       <div ref={storyRef} className="scroll-story is-static">
@@ -171,6 +231,7 @@ function ScrollStory({ chapters }) {
                   </p>
                 ))}
               </div>
+              {index === chapters.length - 1 && renderPhotos(true)}
             </div>
           </div>
         ))}
@@ -182,7 +243,7 @@ function ScrollStory({ chapters }) {
     <motion.div
       ref={storyRef}
       className="scroll-story"
-      style={{ "--story-beats": beatCount, backgroundColor, color }}
+      style={{ "--story-steps": steps, backgroundColor, color }}
     >
       <div className="scroll-story-pin about-approach-inner">
         {rule}
@@ -215,6 +276,7 @@ function ScrollStory({ chapters }) {
             )),
           )}
         </div>
+        {renderPhotos(false)}
       </div>
     </motion.div>
   );
@@ -225,12 +287,6 @@ export function AboutPage() {
   const prefersReducedMotion = useReducedMotion();
   const [factsVisible, setFactsVisible] = useState(false);
   const [approachVisible, setApproachVisible] = useState(false);
-  const galleryRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: galleryRef,
-    offset: ["start end", "end start"],
-  });
-  const photoParallax = useTransform(scrollYProgress, [0, 1], [32, -32]);
 
   const aboutDetails = [
     [t("location"), t("locationVal")],
@@ -435,78 +491,9 @@ export function AboutPage() {
                 beats: lifeBeats,
               },
             ]}
+            photos={travelPhotos}
           />
         </motion.section>
-
-        <section className="about-life" aria-label="Travel photos">
-          <div className="about-life-inner about-life-gallery-wrap">
-            <div className="about-life-gallery" ref={galleryRef}>
-              <motion.figure
-                className="about-life-photo about-life-photo-umbrellas"
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 48 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
-              >
-                <img
-                  src={umbrellaStreet}
-                  alt="Colorful umbrellas hanging over a narrow street"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>01 / Cartagena, Colombia</figcaption>
-              </motion.figure>
-              <motion.figure
-                className="about-life-photo about-life-photo-main"
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 64 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: prefersReducedMotion ? 0 : 0.12, duration: prefersReducedMotion ? 0 : 0.8 }}
-              >
-                <div className="about-life-photo-window">
-                  <motion.img
-                    src={colorfulStreet}
-                    alt="Pink, yellow, and green buildings lining a cobbled street"
-                    loading="lazy"
-                    decoding="async"
-                    style={{ y: prefersReducedMotion ? 0 : photoParallax }}
-                  />
-                </div>
-                <figcaption>02 / San Juan, Puerto Rico</figcaption>
-              </motion.figure>
-              <motion.figure
-                className="about-life-photo about-life-photo-london"
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 48 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: prefersReducedMotion ? 0 : 0.24, duration: prefersReducedMotion ? 0 : 0.7 }}
-              >
-                <img
-                  src={londonStreet}
-                  alt="Union Jack flags above a London street"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>03 / London, England</figcaption>
-              </motion.figure>
-              <motion.figure
-                className="about-life-photo about-life-photo-milan"
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 48 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: prefersReducedMotion ? 0 : 0.36, duration: prefersReducedMotion ? 0 : 0.7 }}
-              >
-                <img
-                  src={milanGallery}
-                  alt="Glass-domed shopping gallery with ornate architecture"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>04 / Milan, Italy</figcaption>
-              </motion.figure>
-            </div>
-          </div>
-        </section>
       </div>
     </SiteLayout>
   );

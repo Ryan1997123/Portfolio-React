@@ -873,7 +873,7 @@
 }
 
 .scroll-story {
-  height: calc((var(--story-beats) + 0.5) * 70vh + 100vh);
+  height: calc(var(--story-steps) * 70vh + 100vh);
 }
 
 .scroll-story-pin {
@@ -881,7 +881,9 @@
   top: 0;
   min-height: 100vh;
   min-height: 100svh;
-  align-content: center;
+  align-content: start;
+  row-gap: 40px;
+  padding-top: 48px;
 }
 
 .scroll-story-headings {
@@ -931,24 +933,6 @@
   will-change: auto;
 }
 
-.about-life {
-  border-top: 1px solid rgb(245 243 239 / 0.18);
-  background: #0a0a0a;
-}
-
-.about-life-inner {
-  display: grid;
-  max-width: 80rem;
-  margin: 0 auto;
-  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
-  gap: 64px;
-  padding: 96px 20px 120px;
-}
-
-.about-life-gallery-wrap {
-  padding-top: 0;
-}
-
 .about-life-gallery {
   display: grid;
   min-width: 0;
@@ -956,7 +940,24 @@
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr) minmax(0, 0.85fr) minmax(0, 0.9fr);
   gap: clamp(14px, 3vw, 40px);
   align-items: start;
-  margin-top: 24px;
+}
+
+.scroll-story-photos {
+  grid-row: 2;
+}
+
+.scroll-story:not(.is-static) .scroll-story-headings {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.scroll-story:not(.is-static) .scroll-story-stage {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.scroll-story.is-static .scroll-story-photos {
+  grid-row: auto;
 }
 
 .about-life-photo {
@@ -965,11 +966,11 @@
   aspect-ratio: 3 / 4;
 }
 
-.about-life-photo-umbrellas {
+.about-life-photo-cartagena {
   margin-top: 60px;
 }
 
-.about-life-photo-main {
+.about-life-photo-san-juan {
   aspect-ratio: 4 / 5;
 }
 
@@ -981,26 +982,11 @@
   margin-top: 30px;
 }
 
-.about-life-photo > img,
-.about-life-photo-window {
+.about-life-photo img {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-}
-
-.about-life-photo > img,
-.about-life-photo-window img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-}
-
-.about-life-photo-window img {
-  position: relative;
-  top: -40px;
-  height: calc(100% + 80px);
-  object-position: center 70%;
 }
 
 .about-life-photo figcaption {
@@ -1014,16 +1000,14 @@
 
 @media (min-width: 640px) {
   .about-hero,
-  .about-approach-inner,
-  .about-life-inner {
+  .about-approach-inner {
     padding-inline: 40px;
   }
 }
 
 @media (min-width: 1024px) {
   .about-hero,
-  .about-approach-inner,
-  .about-life-inner {
+  .about-approach-inner {
     padding-inline: 56px;
   }
 }
@@ -1066,36 +1050,10 @@
     gap: 40px;
   }
 
-  .about-life-inner {
-    gap: 40px;
-  }
-
-  .about-life-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 16px;
-    margin-top: 0;
-  }
-
-  .about-life-photo-umbrellas,
+  .about-life-photo-cartagena,
   .about-life-photo-london,
   .about-life-photo-milan {
     margin-top: 0;
-  }
-
-  .about-life-photo-main {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    aspect-ratio: 4 / 3;
-  }
-
-  .about-life-photo-london {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    aspect-ratio: 16 / 9;
-  }
-
-  .about-life-photo-london img {
-    object-position: center 30%;
   }
 
   .scroll-story-beat {
@@ -1160,15 +1118,13 @@
     padding-bottom: 88px;
   }
 
-  .portfolio-shell .about-approach-heading h2 {
-    font-size: 42px !important;
+  .scroll-story-pin {
+    row-gap: 28px;
+    padding-top: 32px;
   }
 
-  .about-life-inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding-top: 64px;
-    padding-bottom: 80px;
+  .portfolio-shell .about-approach-heading h2 {
+    font-size: 42px !important;
   }
 
   .scroll-story-beat {
@@ -1176,8 +1132,23 @@
     line-height: 1.25;
   }
 
-  .about-life-gallery-wrap {
-    padding-top: 0;
+  .about-life-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+
+  .about-life-photo,
+  .about-life-photo-san-juan {
+    aspect-ratio: 4 / 5;
+  }
+
+  .scroll-story-photos {
+    grid-row: 2 / 4;
+  }
+
+  .scroll-story:not(.is-static) .scroll-story-stage {
+    grid-row: 3;
+    grid-column: 1;
   }
 }
 
@@ -1197,6 +1168,15 @@
   .scroll-story-beat {
     font-size: 18px;
     line-height: 1.2;
+  }
+
+  .scroll-story-photos {
+    grid-row: 2 / 4;
+  }
+
+  .scroll-story:not(.is-static) .scroll-story-stage {
+    grid-row: 3;
+    grid-column: 1;
   }
 }
 
