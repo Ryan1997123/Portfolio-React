@@ -24,12 +24,6 @@ const approachBeats = [
   "Together, that mix helps me connect user needs with viable product decisions, then carry it through with accessible design and clean, robust code.",
 ];
 
-const lifeBeats = [
-  "I went to Fordham University and studied at Korea University in 2017. That time abroad sparked a love of exploring new places and seeing the world from different perspectives.",
-  "I speak Korean and Japanese, and I'm learning Spanish (day 356 on Duolingo). I've traveled through South Korea, Mexico, Colombia, London, and Italy, and there's still plenty left on my list.",
-  "These days I'm based in Midtown New York, always looking for a new restaurant or cafe. Away from my desk, I run half marathons, ski, and practice yoga.",
-];
-
 const storyThemes = {
   light: { background: "#f5f3ef", color: "#0a0a0a" },
   dark: { background: "#0a0a0a", color: "#f5f3ef" },
@@ -62,6 +56,15 @@ const travelPhotos = [
   },
 ];
 
+const lifeBeats = [
+  {
+    text: "I went to Fordham University and studied at Korea University in 2017. That time abroad sparked a love of exploring new places and seeing the world from different perspectives.",
+    photos: travelPhotos,
+  },
+  "I speak Korean and Japanese, and I'm learning Spanish (day 356 on Duolingo). I've traveled through South Korea, Mexico, Colombia, London, and Italy, and there's still plenty left on my list.",
+  "These days I'm based in Midtown New York, always looking for a new restaurant or cafe. Away from my desk, I run half marathons, ski, and practice yoga.",
+];
+
 // Native scroll-timeline animations snap back outside their keyframes, so hold values across 0..1.
 function fullRange(input, output) {
   const paddedInput = [...input];
@@ -77,20 +80,22 @@ function fullRange(input, output) {
   return [paddedInput, paddedOutput];
 }
 
-function ScrollStoryBeat({ progress, index, segment, color, children }) {
+function ScrollStoryBeat({ progress, index, segment, color, isLast, beat }) {
   const fade = segment * 0.3;
   const enter = index * segment;
   const exit = enter + segment;
   const isFirst = index === 0;
+  const photos = beat.photos ?? [];
 
   // Outgoing text clears before incoming text appears so they never overlap.
   const opacity = useTransform(
     progress,
     ...fullRange(
-      isFirst
-        ? [exit - fade, exit - fade * 0.6]
-        : [enter + fade * 0.2, enter + fade, exit - fade, exit - fade * 0.6],
-      isFirst ? [1, 0] : [0, 1, 1, 0],
+      [
+        ...(isFirst ? [] : [enter + fade * 0.2, enter + fade]),
+        ...(isLast ? [] : [exit - fade, exit - fade * 0.6]),
+      ],
+      [...(isFirst ? [] : [0, 1]), ...(isLast ? [] : [1, 0])],
     ),
   );
   // Incoming beats rise vertically and outgoing beats slide left, tracing an L.
@@ -98,30 +103,47 @@ function ScrollStoryBeat({ progress, index, segment, color, children }) {
     progress,
     ...fullRange([enter, enter + fade], isFirst ? [0, 0] : [120, 0]),
   );
-  const x = useTransform(progress, ...fullRange([exit - fade, exit], [0, -160]));
+  const x = useTransform(
+    progress,
+    ...fullRange([exit - fade, exit], isLast ? [0, 0] : [0, -160]),
+  );
 
   return (
-    <motion.p className="scroll-story-beat" style={{ color, opacity, x, y }}>
-      {children}
-    </motion.p>
+    <motion.div className="scroll-story-beat" style={{ color, opacity, x, y }}>
+      <p>{beat.text ?? beat}</p>
+      {photos.length > 0 && (
+        <div className="about-life-gallery" role="group" aria-label="Travel photos">
+          {photos.map((photo, photoIndex) => (
+            <ScrollStoryPhoto
+              key={photo.id}
+              progress={progress}
+              start={enter + fade * 0.2 + photoIndex * segment * 0.04}
+              segment={segment}
+              photo={photo}
+            />
+          ))}
+        </div>
+      )}
+    </motion.div>
   );
 }
 
-function ScrollStoryHeading({ progress, start, end, fade, isFirst, color, children }) {
+function ScrollStoryHeading({ progress, start, end, fade, isFirst, isLast, color, children }) {
   const opacity = useTransform(
     progress,
     ...fullRange(
-      isFirst
-        ? [end - fade, end - fade * 0.6]
-        : [start + fade * 0.2, start + fade, end - fade, end - fade * 0.6],
-      isFirst ? [1, 0] : [0, 1, 1, 0],
+      [
+        ...(isFirst ? [] : [start + fade * 0.2, start + fade]),
+        ...(isLast ? [] : [end - fade, end - fade * 0.6]),
+      ],
+      [...(isFirst ? [] : [0, 1]), ...(isLast ? [] : [1, 0])],
     ),
   );
   const y = useTransform(
     progress,
     ...fullRange(
-      isFirst ? [end - fade, end] : [start, start + fade, end - fade, end],
-      isFirst ? [0, -40] : [40, 0, 0, -40],
+      [...(isFirst ? [] : [start, start + fade]), ...(isLast ? [] : [end - fade, end])],
+      [...(isFirst ? [] : [40, 0]), ...(isLast ? [] : [0, -40])],
     ),
   );
 
@@ -151,8 +173,8 @@ function ScrollStoryBackdrop({ progress, boundary, fade, background }) {
 }
 
 function ScrollStoryPhoto({ progress, start, segment, photo, isStatic }) {
-  const opacity = useTransform(progress, ...fullRange([start, start + segment * 0.3], [0, 1]));
-  const y = useTransform(progress, ...fullRange([start, start + segment * 0.4], [80, 0]));
+  const opacity = useTransform(progress, ...fullRange([start, start + segment * 0.15], [0, 1]));
+  const y = useTransform(progress, ...fullRange([start, start + segment * 0.2], [40, 0]));
 
   return (
     <motion.figure
@@ -165,7 +187,7 @@ function ScrollStoryPhoto({ progress, start, segment, photo, isStatic }) {
   );
 }
 
-function ScrollStory({ chapters, photos = [] }) {
+function ScrollStory({ chapters }) {
   const prefersReducedMotion = useReducedMotion();
   const storyRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -179,11 +201,9 @@ function ScrollStory({ chapters, photos = [] }) {
     starts.push(beatCount);
     beatCount += chapter.beats.length;
   }
-  // Extra steps let the final paragraph exit and the photos settle before the section unpins.
-  const steps = beatCount + (photos.length ? 1.5 : 0.5);
+  const steps = beatCount;
   const segment = 1 / steps;
   const fade = segment * 0.3;
-  const photosStart = beatCount * segment + fade * 0.2;
   const themes = chapters.map((chapter) => storyThemes[chapter.theme]);
   const boundaries = starts.slice(1).map((start) => start * segment);
 
@@ -200,22 +220,6 @@ function ScrollStory({ chapters, photos = [] }) {
     />
   );
 
-  const renderPhotos = (isStatic) =>
-    photos.length > 0 && (
-      <div className="about-life-gallery scroll-story-photos" role="group" aria-label="Travel photos">
-        {photos.map((photo, index) => (
-          <ScrollStoryPhoto
-            key={photo.id}
-            progress={scrollYProgress}
-            start={photosStart + index * segment * 0.15}
-            segment={segment}
-            photo={photo}
-            isStatic={isStatic}
-          />
-        ))}
-      </div>
-    );
-
   if (prefersReducedMotion) {
     return (
       <div ref={storyRef} className="scroll-story is-static">
@@ -229,12 +233,25 @@ function ScrollStory({ chapters, photos = [] }) {
               </div>
               <div className="scroll-story-stage">
                 {chapter.beats.map((beat) => (
-                  <p key={beat} className="scroll-story-beat">
-                    {beat}
-                  </p>
+                  <div key={beat.text ?? beat} className="scroll-story-beat">
+                    <p>{beat.text ?? beat}</p>
+                    {beat.photos && (
+                      <div className="about-life-gallery" role="group" aria-label="Travel photos">
+                        {beat.photos.map((photo) => (
+                          <ScrollStoryPhoto
+                            key={photo.id}
+                            progress={scrollYProgress}
+                            start={0}
+                            segment={segment}
+                            photo={photo}
+                            isStatic
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
-              {index === chapters.length - 1 && renderPhotos(true)}
             </div>
           </div>
         ))}
@@ -272,6 +289,7 @@ function ScrollStory({ chapters, photos = [] }) {
               end={(starts[index] + chapter.beats.length) * segment}
               fade={fade}
               isFirst={index === 0}
+              isLast={index === chapters.length - 1}
               color={themes[index].color}
             >
               {chapter.label}
@@ -283,18 +301,17 @@ function ScrollStory({ chapters, photos = [] }) {
           {chapters.flatMap((chapter, chapterIndex) =>
             chapter.beats.map((beat, beatIndex) => (
               <ScrollStoryBeat
-                key={beat}
+                key={beat.text ?? beat}
                 progress={scrollYProgress}
                 index={starts[chapterIndex] + beatIndex}
                 segment={segment}
                 color={themes[chapterIndex].color}
-              >
-                {beat}
-              </ScrollStoryBeat>
+                isLast={starts[chapterIndex] + beatIndex === beatCount - 1}
+                beat={beat}
+              />
             )),
           )}
         </div>
-        {renderPhotos(false)}
       </div>
     </div>
   );
@@ -509,7 +526,6 @@ export function AboutPage() {
                 beats: lifeBeats,
               },
             ]}
-            photos={travelPhotos}
           />
         </motion.section>
       </div>
