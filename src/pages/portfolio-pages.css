@@ -873,7 +873,16 @@
 }
 
 .scroll-story {
+  position: relative;
+  isolation: isolate;
   height: calc(var(--story-steps) * 70vh + 100vh);
+}
+
+.scroll-story-backdrop {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
 }
 
 .scroll-story-pin {
@@ -946,6 +955,11 @@
   grid-row: 2;
 }
 
+.scroll-story:not(.is-static) .scroll-story-pin {
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  column-gap: 48px;
+}
+
 .scroll-story:not(.is-static) .scroll-story-headings {
   grid-row: 2;
   grid-column: 1;
@@ -954,6 +968,9 @@
 .scroll-story:not(.is-static) .scroll-story-stage {
   grid-row: 2;
   grid-column: 2;
+  align-self: start;
+  align-items: start;
+  padding-top: 32px;
 }
 
 .scroll-story.is-static .scroll-story-photos {
@@ -1143,12 +1160,17 @@
   }
 
   .scroll-story-photos {
-    grid-row: 2 / 4;
+    grid-row: 3;
+  }
+
+  .scroll-story:not(.is-static) .scroll-story-pin {
+    grid-template-columns: 1fr;
   }
 
   .scroll-story:not(.is-static) .scroll-story-stage {
     grid-row: 3;
     grid-column: 1;
+    padding-top: 0;
   }
 }
 
@@ -1171,12 +1193,17 @@
   }
 
   .scroll-story-photos {
-    grid-row: 2 / 4;
+    grid-row: 3;
+  }
+
+  .scroll-story:not(.is-static) .scroll-story-pin {
+    grid-template-columns: 1fr;
   }
 
   .scroll-story:not(.is-static) .scroll-story-stage {
     grid-row: 3;
     grid-column: 1;
+    padding-top: 0;
   }
 }
 

@@ -77,7 +77,7 @@ function fullRange(input, output) {
   return [paddedInput, paddedOutput];
 }
 
-function ScrollStoryBeat({ progress, index, segment, children }) {
+function ScrollStoryBeat({ progress, index, segment, color, children }) {
   const fade = segment * 0.3;
   const enter = index * segment;
   const exit = enter + segment;
@@ -101,13 +101,13 @@ function ScrollStoryBeat({ progress, index, segment, children }) {
   const x = useTransform(progress, ...fullRange([exit - fade, exit], [0, -160]));
 
   return (
-    <motion.p className="scroll-story-beat" style={{ opacity, x, y }}>
+    <motion.p className="scroll-story-beat" style={{ color, opacity, x, y }}>
       {children}
     </motion.p>
   );
 }
 
-function ScrollStoryHeading({ progress, start, end, fade, isFirst, children }) {
+function ScrollStoryHeading({ progress, start, end, fade, isFirst, color, children }) {
   const opacity = useTransform(
     progress,
     ...fullRange(
@@ -128,10 +128,25 @@ function ScrollStoryHeading({ progress, start, end, fade, isFirst, children }) {
   return (
     <motion.div
       className="about-approach-heading scroll-story-heading"
-      style={{ opacity, y }}
+      style={{ color, opacity, y }}
     >
       {children}
     </motion.div>
+  );
+}
+
+function ScrollStoryBackdrop({ progress, boundary, fade, background }) {
+  const opacity = useTransform(
+    progress,
+    ...fullRange([boundary - fade * 0.5, boundary + fade * 0.5], [0, 1]),
+  );
+
+  return (
+    <motion.div
+      className="scroll-story-backdrop"
+      aria-hidden="true"
+      style={{ background, opacity }}
+    />
   );
 }
 
@@ -171,18 +186,6 @@ function ScrollStory({ chapters, photos = [] }) {
   const photosStart = beatCount * segment + fade * 0.2;
   const themes = chapters.map((chapter) => storyThemes[chapter.theme]);
   const boundaries = starts.slice(1).map((start) => start * segment);
-  const colorInput = boundaries.length
-    ? boundaries.flatMap((boundary) => [boundary - fade * 0.5, boundary + fade * 0.5])
-    : [0, 1];
-  const colorOutput = (key) =>
-    boundaries.length
-      ? boundaries.flatMap((_, i) => [themes[i][key], themes[i + 1][key]])
-      : [themes[0][key], themes[0][key]];
-  const backgroundColor = useTransform(
-    scrollYProgress,
-    ...fullRange(colorInput, colorOutput("background")),
-  );
-  const color = useTransform(scrollYProgress, ...fullRange(colorInput, colorOutput("color")));
 
   const rule = (
     <motion.div
@@ -240,11 +243,24 @@ function ScrollStory({ chapters, photos = [] }) {
   }
 
   return (
-    <motion.div
+    <div
       ref={storyRef}
       className="scroll-story"
-      style={{ "--story-steps": steps, backgroundColor, color }}
+      style={{
+        "--story-steps": steps,
+        background: themes[0].background,
+        color: themes[0].color,
+      }}
     >
+      {boundaries.map((boundary, index) => (
+        <ScrollStoryBackdrop
+          key={chapters[index + 1].id}
+          progress={scrollYProgress}
+          boundary={boundary}
+          fade={fade}
+          background={themes[index + 1].background}
+        />
+      ))}
       <div className="scroll-story-pin about-approach-inner">
         {rule}
         <div className="scroll-story-headings">
@@ -256,6 +272,7 @@ function ScrollStory({ chapters, photos = [] }) {
               end={(starts[index] + chapter.beats.length) * segment}
               fade={fade}
               isFirst={index === 0}
+              color={themes[index].color}
             >
               {chapter.label}
               {chapter.title}
@@ -270,6 +287,7 @@ function ScrollStory({ chapters, photos = [] }) {
                 progress={scrollYProgress}
                 index={starts[chapterIndex] + beatIndex}
                 segment={segment}
+                color={themes[chapterIndex].color}
               >
                 {beat}
               </ScrollStoryBeat>
@@ -278,7 +296,7 @@ function ScrollStory({ chapters, photos = [] }) {
         </div>
         {renderPhotos(false)}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
