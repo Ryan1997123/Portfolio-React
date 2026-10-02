@@ -51,36 +51,49 @@ function RotatingIdentity() {
   );
 }
 
-function MotionPathDesk() {
+function PortraitDesignBackdrop() {
   return (
-    <div className="motion-path-desk" aria-hidden="true">
-      <svg viewBox="0 0 160 140" role="presentation">
+    <div className="hero-design-backdrop" aria-hidden="true">
+      <svg viewBox="0 0 440 360" fill="none" role="presentation">
+        <g className="hero-design-guides">
+          <path d="M40 90H400 M40 270H400 M110 28V332 M330 28V332" />
+          <circle cx="220" cy="180" r="142" strokeDasharray="3 8" />
+          <path d="M30 180H48 M39 171V189 M392 180H410 M401 171V189" />
+        </g>
+        <g className="hero-design-wireframe" transform="rotate(-12 84 100)">
+          <rect x="30" y="42" width="108" height="116" rx="4" />
+          <path d="M30 62H138 M42 52H46 M51 52H55 M60 52H64" />
+          <rect x="42" y="75" width="84" height="34" rx="2" />
+          <path d="M42 122H104 M42 132H87 M42 142H112 M48 102L67 84L81 96L96 83L120 102" />
+        </g>
+        <g className="hero-design-wireframe" transform="rotate(12 366 220)">
+          <rect x="334" y="154" width="64" height="128" rx="8" />
+          <path d="M355 163H377 M344 238H388 M344 247H372" />
+          <rect x="344" y="178" width="44" height="48" rx="2" />
+          <rect x="344" y="257" width="44" height="12" rx="2" />
+          <path d="M356 196L366 187L376 196 M366 187V215" />
+        </g>
         <path
-          className="motion-path-drawing"
-          d="M 18 16 H 132 Q 138 16 138 22 V 78 Q 138 84 132 84 H 18 Q 12 84 12 78 V 22 Q 12 16 18 16 Z"
+          className="hero-design-skyline"
+          d="M46 318H65V292H85V305H104V279H127V299H149V272H165V254H174V234H178V254H187V272H201V307H227V284H250V300H272V269H292V292H310V306H333V281H354V300H376V318H394"
+        />
+        <g className="hero-design-handles">
+          <path d="M60 248L93 51 M347 309L383 112" />
+          <circle cx="93" cy="51" r="4" />
+          <circle cx="347" cy="309" r="4" />
+        </g>
+        <path
+          className="hero-design-curve"
+          d="M60 248C93 51 347 309 383 112"
           pathLength="1"
         />
-        <path
-          className="motion-path-drawing"
-          d="M 75 84 V 105 M 51 112 H 99"
-          pathLength="1"
-          style={{ "--motion-path-delay": "0.25s" }}
-        />
-        <path
-          className="motion-path-drawing"
-          d="M 26 113 H 126 L 143 128 H 9 Z"
-          pathLength="1"
-          style={{ "--motion-path-delay": "0.5s" }}
-        />
-        <path
-          className="motion-path-drawing motion-path-keys"
-          d="M 25 119 H 126 M 34 124 H 116"
-          pathLength="1"
-          style={{ "--motion-path-delay": "0.7s" }}
-        />
-        <text className="motion-path-screen-text" x="75" y="55">
-          RYAN
-        </text>
+        <g className="hero-design-anchors">
+          <rect x="55" y="243" width="10" height="10" />
+          <rect x="378" y="107" width="10" height="10" />
+        </g>
+        <g className="hero-design-cursor" transform="rotate(-14 312 76)">
+          <path d="M312 56V88L321 80L328 94L335 90L328 77H340Z" />
+        </g>
       </svg>
     </div>
   );
@@ -216,6 +229,7 @@ export function HomePage() {
           </div>
           <div className="hero-proof lg:mb-3 lg:h-full">
             <div className="hero-portrait-scene">
+              <PortraitDesignBackdrop />
               <div className="hero-portrait-wrap">
                 <span
                   className="hero-portrait-tag"
@@ -224,7 +238,6 @@ export function HomePage() {
                 </span>
                 <img className="hero-proof-image" src={meImage} alt="Ryan Monaghan" />
               </div>
-              <MotionPathDesk />
             </div>
             <blockquote>
               <em>&ldquo;&thinsp;{t("heroQuote")}&rdquo;</em>

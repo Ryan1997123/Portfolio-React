@@ -323,67 +323,90 @@
 
 .hero-portrait-scene {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: min(100%, 500px);
-  min-height: 320px;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  width: min(100%, 440px);
+  aspect-ratio: 440 / 360;
 }
 
 .hero-portrait-wrap {
   position: relative;
+  z-index: 1;
   display: inline-flex;
   isolation: isolate;
-  width: min(100%, 220px);
+  width: min(64%, 220px);
   flex-shrink: 0;
   aspect-ratio: 1;
   border-radius: 50%;
   background: linear-gradient(145deg, #0a0a0a 0%, #b10e1e 58%, #f5f3ef 100%);
 }
 
-.motion-path-desk {
-  position: relative;
-  width: 160px;
-  height: 120px;
+.hero-design-backdrop {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
+  animation: hero-copy-enter 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.motion-path-desk svg {
+.hero-design-backdrop svg {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.motion-path-drawing {
-  fill: none;
+.hero-design-guides {
+  stroke: rgb(245 243 239 / 0.13);
+  stroke-width: 1;
+}
+
+.hero-design-wireframe {
+  stroke: rgb(245 243 239 / 0.48);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero-design-skyline {
+  stroke: rgb(245 243 239 / 0.3);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.hero-design-handles {
+  stroke: #76b7af;
+  stroke-width: 1.5;
+}
+
+.hero-design-handles circle {
+  fill: #0a0a0a;
+}
+
+.hero-design-curve {
   stroke: #b10e1e;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   stroke-linecap: round;
-  stroke-linejoin: round;
   stroke-width: 3;
-  animation: motion-path-draw 3.2s var(--motion-path-delay, 0s) ease-in-out infinite alternate;
+  animation: hero-design-draw 1600ms 200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes motion-path-draw {
+@keyframes hero-design-draw {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-.motion-path-keys {
-  stroke: #f5f3ef;
-  stroke-width: 1.5;
+.hero-design-anchors {
+  fill: #0a0a0a;
+  stroke: #b10e1e;
+  stroke-width: 2;
 }
 
-.motion-path-screen-text {
-  fill: #f5f3ef;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-style: italic;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-anchor: middle;
+.hero-design-cursor {
+  fill: #76b7af;
+  stroke: #0a0a0a;
+  stroke-width: 1.5;
 }
 
 .hero-portrait-tag {
@@ -463,19 +486,6 @@
 }
 
 @media (max-width: 768px) {
-  .hero-portrait-scene {
-    min-height: 250px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .motion-path-desk {
-    width: 140px;
-    height: 100px;
-    margin-left: 92px;
-    margin-top: -36px;
-  }
-
   .hero-portrait-tag {
     right: -24px;
   }
@@ -526,13 +536,14 @@
   .mobile-navigation-curtain,
   .mobile-navigation-item,
   .hero-copy-enter,
-  .motion-path-drawing,
+  .hero-design-backdrop,
+  .hero-design-curve,
   .hero-portrait-tag,
   .project-preview {
     animation: none;
   }
 
-  .motion-path-drawing {
+  .hero-design-curve {
     stroke-dashoffset: 0;
   }
 }
