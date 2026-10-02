@@ -54,8 +54,8 @@ function RotatingIdentity() {
 
 function PortraitDesignBackdrop({ x, y, prefersReducedMotion }) {
   const drift = (distance, duration, delay = 0) => ({
-    initial: false,
-    animate: { y: prefersReducedMotion ? 0 : [0, distance, 0] },
+    initial: { translateY: 0 },
+    animate: { translateY: prefersReducedMotion ? 0 : [0, distance, 0] },
     transition: prefersReducedMotion
       ? { duration: 0 }
       : { duration, delay, repeat: Infinity, ease: "easeInOut" },
@@ -116,8 +116,8 @@ function PortraitDesignBackdrop({ x, y, prefersReducedMotion }) {
           </g>
         </motion.g>
         <motion.g
-          initial={false}
-          animate={prefersReducedMotion ? { x: 0, y: 0 } : { x: [0, 10, -4, 0], y: [0, 8, 3, 0] }}
+          initial={{ translateX: 0, translateY: 0 }}
+          animate={prefersReducedMotion ? { translateX: 0, translateY: 0 } : { translateX: [0, 10, -4, 0], translateY: [0, 8, 3, 0] }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: 9, repeat: Infinity, ease: "easeInOut" }}
         >
           <g className="hero-design-cursor" transform="rotate(-14 312 76)">
