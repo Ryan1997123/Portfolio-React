@@ -346,7 +346,6 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  animation: hero-copy-enter 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-design-backdrop svg {
@@ -384,17 +383,8 @@
 
 .hero-design-curve {
   stroke: #b10e1e;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
   stroke-linecap: round;
   stroke-width: 3;
-  animation: hero-design-draw 1600ms 200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes hero-design-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
 }
 
 .hero-design-anchors {
@@ -536,16 +526,11 @@
   .mobile-navigation-curtain,
   .mobile-navigation-item,
   .hero-copy-enter,
-  .hero-design-backdrop,
-  .hero-design-curve,
   .hero-portrait-tag,
   .project-preview {
     animation: none;
   }
 
-  .hero-design-curve {
-    stroke-dashoffset: 0;
-  }
 }
 
 @media (max-width: 768px) {
