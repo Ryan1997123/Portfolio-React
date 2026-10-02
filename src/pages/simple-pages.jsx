@@ -1,6 +1,6 @@
 import { DownloadSimple } from "@phosphor-icons/react";
 import { useState } from "react";
-import resumePdf from "../assets/resume/RyanMonaghan_100226_Resume.pdf";
+import resumePdf from "../assets/resume/RyanMonaghan_100226_ResumeMyResume.pdf";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, ProjectCard, SiteLayout } from "./site-layout";
@@ -133,7 +133,7 @@ export function ContactPage() {
             <a
               className="about-action about-action-primary"
               href={resumePdf}
-              download="RyanMonaghan_100226_Resume.pdf"
+              download="RyanMonaghan_100226_ResumeMyResume.pdf"
             >
               <span>{t("downloadResume")}</span>
               <DownloadSimple size={18} weight="bold" aria-hidden="true" />
