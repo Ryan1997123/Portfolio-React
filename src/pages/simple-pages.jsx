@@ -1,4 +1,6 @@
+import { DownloadSimple } from "@phosphor-icons/react";
 import { useState } from "react";
+import resumePdf from "../assets/resume/RyanMonaghan_100226_Resume.pdf";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, ProjectCard, SiteLayout } from "./site-layout";
@@ -126,6 +128,16 @@ export function ContactPage() {
               </svg>
               <span>ryandesigns970501@gmail.com</span>
             </div>
+          </div>
+          <div className="about-actions mt-10">
+            <a
+              className="about-action about-action-primary"
+              href={resumePdf}
+              download="RyanMonaghan_100226_Resume.pdf"
+            >
+              <span>{t("downloadResume")}</span>
+              <DownloadSimple size={18} weight="bold" aria-hidden="true" />
+            </a>
           </div>
         </section>
       </div>

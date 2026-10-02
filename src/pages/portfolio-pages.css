@@ -1031,6 +1031,40 @@
   font-weight: 700;
 }
 
+.approach-sketch-route {
+  stroke-opacity: 0.45;
+}
+
+.approach-sketch-text {
+  fill: currentColor;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.approach-sketch-text.is-accent {
+  fill: #b10e1e;
+}
+
+.approach-sketch-bubble {
+  fill: currentColor;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.approach-sketch-bubble.is-accent {
+  fill: #f5f3ef;
+}
+
+.approach-sketch-count {
+  fill: currentColor;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 900;
+}
+
 .approach-sketch-steps {
   display: flex;
   justify-content: space-between;
@@ -1675,6 +1709,7 @@
 
 .case-study-carousel {
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: 12px;
 }
@@ -1682,6 +1717,7 @@
 .case-study-carousel-track {
   display: flex;
   flex: 1;
+  min-width: 0;
   gap: 12px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
