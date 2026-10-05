@@ -6,6 +6,7 @@ import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
 import mouseIcon from "../assets/mouse_icon.svg";
 import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
 import { projects } from "../data/projects";
+import { getHeroImageSource } from "../data/project-images";
 import { useLanguage } from "../lib/LanguageContext";
 import { getPageMetadata, getStructuredData } from "../seo";
 import "./portfolio-pages.css";
@@ -309,6 +310,13 @@ export function ProjectCard({ project, index }) {
         to={`/work/${project.slug}`}
         className={`project-card project-card-${project.color} group flex min-h-80 flex-col justify-between border border-white/10 p-6 transition-colors hover:border-[#B10E1E]/70 sm:p-8`}
       >
+        <div className="-mx-6 -mt-6 mb-6 aspect-[16/9] overflow-hidden border-b border-white/10 sm:-mx-8 sm:-mt-8">
+          <img
+            src={getHeroImageSource(project.heroImage)}
+            alt=""
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
         <div className="flex items-start justify-between gap-5">
           <span className="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400">
             0{index + 1}

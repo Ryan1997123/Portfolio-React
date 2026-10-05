@@ -6,25 +6,19 @@ import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
 import sitemapImage from "../assets/gaming_gear/map.png";
-import gamingGearHighFidelity from "../assets/gaming_gear/Highfidelity.png";
-import ectrimsBoothHero from "../assets/ectrims_booth/Cenrifki2.png";
 import aliceImage from "../assets/ectrims_booth/Alice.png";
 import wiresImage from "../assets/ectrims_booth/Wires.png";
 import funcAnnoImage from "../assets/ectrims_booth/funcanno.png";
 import ectrimsSitemapImage from "../assets/ectrims_booth/sitemap.png";
-import sibosHero from "../assets/sibos_tote/hero.png";
 import sibosFinal from "../assets/sibos_tote/final_design.png";
 import sibosConcept1 from "../assets/sibos_tote/initial_concept1.png";
 import sibosConcept2 from "../assets/sibos_tote/initial_concept2.png";
 import sibosPremium from "../assets/sibos_tote/premium.png";
 import icotydeProcess1 from "../assets/jnj-ico/example1.png";
 import icotydeProcess2 from "../assets/jnj-ico/example2.png";
-import icotydeOverview from "../assets/icotyde-overview.webp";
-import sftHero from "../assets/secure_file_transfer/hero.jpeg";
 import sftLowFi1 from "../assets/secure_file_transfer/lofi-1.png";
 import sftLowFi2 from "../assets/secure_file_transfer/lofi-2.png";
 import sftHighFi1 from "../assets/secure_file_transfer/artboard-11.png";
-import lillyBoothHero from "../assets/lilly_booth/lilly.webp";
 import lillyBoothSchematic from "../assets/lilly_booth/schematic.webp";
 import lillyBoothScreen1 from "../assets/lilly_booth/1.png";
 import lillyBoothScreen3 from "../assets/lilly_booth/3.png";
@@ -35,6 +29,7 @@ import lillyBoothScreen7 from "../assets/lilly_booth/7.png";
 import lillyBoothScreen8 from "../assets/lilly_booth/8.png";
 import lillyBoothScreen9 from "../assets/lilly_booth/9.png";
 import lillyBoothScreen10 from "../assets/lilly_booth/10.png";
+import { getHeroImageSource } from "../data/project-images";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
 import { PageIntro, SiteLayout } from "./site-layout";
@@ -50,15 +45,6 @@ const sftFinalImages = Object.fromEntries(
     return [`sft-final-${index}`, image];
   }),
 );
-
-const heroImages = {
-  "gaming-gear-highfidelity": gamingGearHighFidelity,
-  "ectrims-booth-hero": ectrimsBoothHero,
-  "sibos-tote-hero": sibosHero,
-  "icotyde-overview": icotydeOverview,
-  "sft-hero": sftHero,
-  "lilly-booth-hero": lillyBoothHero,
-};
 
 const caseStudyImages = {
   "google-wires": googleWires,
@@ -88,16 +74,12 @@ const caseStudyImages = {
   "lilly-booth-screen-8": lillyBoothScreen8,
   "lilly-booth-screen-9": lillyBoothScreen9,
   "lilly-booth-screen-10": lillyBoothScreen10,
-  "lilly-booth-hero": lillyBoothHero,
+  "lilly-booth-hero": getHeroImageSource("lilly-booth-hero"),
   ...sftFinalImages,
 };
 
 const PROJECT_PASSWORD = "Ryanswork123@";
 const UNLOCK_STORAGE_KEY = "portfolio-projects-unlocked";
-
-function getHeroImageSource(heroImage) {
-  return heroImages[heroImage] || icotydeOverview;
-}
 
 function resolveCaseStudyImage(imageKey) {
   return caseStudyImages[imageKey] || null;
