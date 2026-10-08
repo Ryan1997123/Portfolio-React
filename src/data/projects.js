@@ -56,7 +56,7 @@ export const projects = [
     protected: true,
     title: 'GL HCP ECTRIMS Booth',
     category: 'PRODUCT DESIGN / INTERACTIVE VISUAL AID',
-    type: 'website',
+    type: 'booth',
     year: '2026',
     summary: 'An interactive visual aid built for a conference booth, helping HCPs explore key clinical information in a hands-on, engaging format.',
     description: 'GL HCP ECTRIMS Booth is an interactive touchscreen experience designed for the ECTRIMS conference, giving healthcare professionals a self-guided way to explore clinical data and treatment information at the booth.',
