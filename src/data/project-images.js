@@ -8,6 +8,7 @@ import imaavyCaregiverHero from "../assets/imaavy caregiver/2_02_1.1 Landing.png
 import icotydeDesktopThumb from "../assets/thumbnails/icotyde-desktop.webp";
 import imaavyDesktopThumb from "../assets/thumbnails/imaavy-desktop.webp";
 import imaavyMobileThumb from "../assets/thumbnails/imaavy-mobile.webp";
+import icotydeMobileThumb from "../assets/thumbnails/icotyde-mobile.webp";
 import ectrimsIvaThumb from "../assets/thumbnails/ectrims-iva.webp";
 import gamingSplashThumb from "../assets/thumbnails/gaming-splash.webp";
 import gamingLandingThumb from "../assets/thumbnails/gaming-landing.webp";
@@ -27,6 +28,7 @@ export const thumbnailImages = {
   "icotyde-desktop": icotydeDesktopThumb,
   "imaavy-desktop": imaavyDesktopThumb,
   "imaavy-mobile": imaavyMobileThumb,
+  "icotyde-mobile": icotydeMobileThumb,
   "ectrims-iva": ectrimsIvaThumb,
   "gaming-splash": gamingSplashThumb,
   "gaming-landing": gamingLandingThumb,
