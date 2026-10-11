@@ -2552,3 +2552,258 @@
 .photo-placeholder-4 { background-image: linear-gradient(145deg, rgb(245 243 239 / 0.08), transparent 42%), radial-gradient(circle at 35% 22%, rgb(177 14 30 / 0.18), transparent 34%); }
 .photo-placeholder-5 { background-image: linear-gradient(145deg, rgb(245 243 239 / 0.06), transparent 42%), radial-gradient(circle at 75% 75%, rgb(177 14 30 / 0.15), transparent 34%); }
 .photo-placeholder-6 { background-image: linear-gradient(145deg, rgb(245 243 239 / 0.08), transparent 42%), radial-gradient(circle at 22% 60%, rgb(177 14 30 / 0.17), transparent 34%); }
+
+.theme-toggle {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(245 243 239 / 0.15);
+  background: rgb(0 0 0 / 0.4);
+  color: #f5f3ef;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: #b10e1e;
+  color: #b10e1e;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid #b10e1e;
+  outline-offset: 3px;
+}
+
+.portfolio-shell[data-theme="light"] {
+  --portfolio-paper: #191817;
+  --portfolio-muted: #625e58;
+  background-color: #f5f3ef;
+  color: #191817;
+  color-scheme: light;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+.portfolio-shell[data-theme="light"] .footer-reveal-content,
+.portfolio-shell[data-theme="light"] .project-card,
+.portfolio-shell[data-theme="light"] .case-study-visual,
+.portfolio-shell[data-theme="light"] .photography-planes-container {
+  background-color: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .mobile-navigation {
+  border-color: rgb(25 24 23 / 0.14);
+  background-color: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .site-menu-toggle {
+  border-color: rgb(25 24 23 / 0.18);
+  color: #191817 !important;
+}
+
+.portfolio-shell[data-theme="light"] .mobile-navigation-item a {
+  border-color: rgb(25 24 23 / 0.14);
+}
+
+.portfolio-shell[data-theme="light"] .text-zinc-100,
+.portfolio-shell[data-theme="light"] .text-zinc-200,
+.portfolio-shell[data-theme="light"] .text-zinc-300,
+.portfolio-shell[data-theme="light"] .site-nav-link,
+.portfolio-shell[data-theme="light"] .logo-wordmark,
+.portfolio-shell[data-theme="light"] h1,
+.portfolio-shell[data-theme="light"] h2,
+.portfolio-shell[data-theme="light"] h3,
+.portfolio-shell[data-theme="light"] .ticker-item-text,
+.portfolio-shell[data-theme="light"] .hero-identity-word,
+.portfolio-shell[data-theme="light"] .hero-proof blockquote,
+.portfolio-shell[data-theme="light"] .about-title-line,
+.portfolio-shell[data-theme="light"] .about-summary-copy,
+.portfolio-shell[data-theme="light"] .about-facts dd,
+.portfolio-shell[data-theme="light"] .scroll-story-beat,
+.portfolio-shell[data-theme="light"] .case-study-meta,
+.portfolio-shell[data-theme="light"] .case-study-meta li,
+.portfolio-shell[data-theme="light"] .case-study-section-copy,
+.portfolio-shell[data-theme="light"] .case-study-section > p:not(.case-study-label),
+.portfolio-shell[data-theme="light"] .case-study-carousel-arrow,
+.portfolio-shell[data-theme="light"] .section-display-heading,
+.portfolio-shell[data-theme="light"] .projects-index-button,
+.portfolio-shell[data-theme="light"] .project-index-link,
+.portfolio-shell[data-theme="light"] .photography-planes-container,
+.portfolio-shell[data-theme="light"] .photography-planes-heading strong,
+.portfolio-shell[data-theme="light"] .photography-plane,
+.portfolio-shell[data-theme="light"] .photography-plane-label-text {
+  color: #191817 !important;
+}
+
+.portfolio-shell[data-theme="light"] .text-zinc-400,
+.portfolio-shell[data-theme="light"] .text-zinc-500,
+.portfolio-shell[data-theme="light"] .hero-identity,
+.portfolio-shell[data-theme="light"] .about-intro-note,
+.portfolio-shell[data-theme="light"] .about-portrait figcaption,
+.portfolio-shell[data-theme="light"] .case-study-label,
+.portfolio-shell[data-theme="light"] .case-study-lightbox-content p,
+.portfolio-shell[data-theme="light"] .projects-index-copy,
+.portfolio-shell[data-theme="light"] .project-index-link > span:first-child,
+.portfolio-shell[data-theme="light"] .photography-index-copy,
+.portfolio-shell[data-theme="light"] .photography-planes-hint,
+.portfolio-shell[data-theme="light"] .photography-plane-index {
+  color: #625e58 !important;
+}
+
+.portfolio-shell[data-theme="light"] .site-nav-link:hover {
+  background-color: #191817;
+  color: #f5f3ef !important;
+}
+
+.portfolio-shell[data-theme="light"] .about-action {
+  border-color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .about-action-primary {
+  background: #191817;
+  color: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .about-action-primary:hover,
+.portfolio-shell[data-theme="light"] .about-action-primary:focus-visible {
+  border-color: #b10e1e;
+  background: #b10e1e;
+  color: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .about-approach-heading h2 {
+  color: #191817 !important;
+}
+
+.portfolio-shell[data-theme="light"] .work-filter-button {
+  border-color: rgb(25 24 23 / 0.16);
+  color: #625e58;
+}
+
+.portfolio-shell[data-theme="light"] .work-filter-button:hover {
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .work-filter-button.is-active {
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .project-preview {
+  border-color: rgb(25 24 23 / 0.2);
+  background-color: #fffdfa;
+  box-shadow: 12px 12px 0 rgb(25 24 23 / 0.12);
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .project-preview-canvas {
+  border-color: rgb(25 24 23 / 0.16);
+  background: rgb(25 24 23 / 0.04);
+}
+
+.portfolio-shell[data-theme="light"] .project-preview-canvas span,
+.portfolio-shell[data-theme="light"] .project-preview > span:last-child {
+  color: #625e58;
+}
+
+.portfolio-shell[data-theme="light"] .about-principle-item,
+.portfolio-shell[data-theme="light"] .reveal-footer-fade,
+.portfolio-shell[data-theme="light"] .reveal-footer-columns h2,
+.portfolio-shell[data-theme="light"] .reveal-footer-columns nav a,
+.portfolio-shell[data-theme="light"] .reveal-footer-bottom {
+  color: #f5f3ef !important;
+}
+
+.portfolio-shell[data-theme="light"] .reveal-footer-columns nav a:hover {
+  color: #191817 !important;
+}
+
+.portfolio-shell[data-theme="light"] .reveal-footer-bottom {
+  border-color: rgb(245 243 239 / 0.35);
+}
+
+.portfolio-shell[data-theme="light"] .theme-toggle,
+.portfolio-shell[data-theme="light"] .language-switcher-button {
+  border-color: rgb(25 24 23 / 0.18);
+  background: rgb(255 255 255 / 0.75);
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .language-menu {
+  border-color: rgb(25 24 23 / 0.16);
+  background: #fffdfa;
+}
+
+.portfolio-shell[data-theme="light"] .language-menu button {
+  color: #625e58;
+}
+
+.portfolio-shell[data-theme="light"] .language-menu button:hover {
+  background: rgb(25 24 23 / 0.06);
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .language-menu button.is-selected {
+  background: rgb(177 14 30 / 0.12);
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .about-story-grid,
+.portfolio-shell[data-theme="light"] .about-facts,
+.portfolio-shell[data-theme="light"] .about-facts div,
+.portfolio-shell[data-theme="light"] .project-index-row,
+.portfolio-shell[data-theme="light"] .photography-index,
+.portfolio-shell[data-theme="light"] .case-study-section,
+.portfolio-shell[data-theme="light"] .case-study-meta li {
+  border-color: rgb(25 24 23 / 0.16);
+}
+
+.portfolio-shell[data-theme="light"] .about-facts div:hover {
+  background: rgb(25 24 23 / 0.04);
+}
+
+.portfolio-shell[data-theme="light"] .case-study-visual,
+.portfolio-shell[data-theme="light"] .case-study-visual-image,
+.portfolio-shell[data-theme="light"] .project-card {
+  border-color: rgb(25 24 23 / 0.14);
+}
+
+.portfolio-shell[data-theme="light"] .photography-planes-container {
+  background-color: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .photography-plane {
+  border-color: rgb(25 24 23 / 0.2);
+  box-shadow: 0 25px 50px -12px rgb(25 24 23 / 0.18);
+}
+
+.portfolio-shell[data-theme="light"] .photography-plane::before {
+  background: linear-gradient(to bottom, transparent 48%, rgb(25 24 23 / 0.68));
+}
+
+.portfolio-shell[data-theme="light"] .case-study-visual-cyan,
+.portfolio-shell[data-theme="light"] .project-card-cyan {
+  background-image: radial-gradient(circle at 78% 18%, rgb(177 14 30 / 0.16), transparent 34%), linear-gradient(135deg, #fffdfa, #e9e4de 60%);
+}
+
+.portfolio-shell[data-theme="light"] .case-study-visual-amber,
+.portfolio-shell[data-theme="light"] .project-card-amber {
+  background-image: radial-gradient(circle at 22% 24%, rgb(25 24 23 / 0.07), transparent 34%), linear-gradient(135deg, #fffdfa, #e9e4de 60%);
+}
+
+.portfolio-shell[data-theme="light"] .case-study-visual-green,
+.portfolio-shell[data-theme="light"] .project-card-green {
+  background-image: radial-gradient(circle at 74% 70%, rgb(177 14 30 / 0.12), transparent 35%), linear-gradient(135deg, #fffdfa, #e9e4de 60%);
+}
+
+.portfolio-shell[data-theme="light"] .case-study-visual-rose,
+.portfolio-shell[data-theme="light"] .project-card-rose {
+  background-image: radial-gradient(circle at 45% 20%, rgb(177 14 30 / 0.16), transparent 36%), linear-gradient(135deg, #fffdfa, #e9e4de 60%);
+}
+
+.portfolio-shell[data-theme="light"] .photo-placeholder {
+  background-color: #e9e4de;
+  background-image: linear-gradient(145deg, rgb(25 24 23 / 0.04), transparent 44%), radial-gradient(circle at 75% 25%, rgb(177 14 30 / 0.12), transparent 32%);
+}

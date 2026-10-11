@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LanguageProvider } from './lib/LanguageContext'
+import { ThemeProvider } from './lib/ThemeContext'
 import { HomePage } from './pages/home-page'
 import { ContactPage, WorkPage } from './pages/simple-pages'
 import { Analytics } from '@vercel/analytics/react'
@@ -76,10 +77,12 @@ export function AppRoutes({
 function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-      <Analytics />
+      <ThemeProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+        <Analytics />
+      </ThemeProvider>
     </LanguageProvider>
   )
 }

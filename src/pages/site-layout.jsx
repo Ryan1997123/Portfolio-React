@@ -5,9 +5,11 @@ import githubLogo from "../assets/Ionicons_logo-github logo.svg";
 import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
 import mouseIcon from "../assets/mouse_icon.svg";
 import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
+import { ThemeSwitcher } from "../components/ui/ThemeSwitcher";
 import { projects } from "../data/projects";
 import { getHeroImageSource } from "../data/project-images";
 import { useLanguage } from "../lib/LanguageContext";
+import { useTheme } from "../lib/ThemeContext";
 import { getPageMetadata, getStructuredData } from "../seo";
 import "./portfolio-pages.css";
 
@@ -86,6 +88,7 @@ function usePageSEO() {
 
 export function SiteLayout({ children }) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   usePageSEO();
   const navItems = [
     ["/", t("home")],
@@ -134,7 +137,10 @@ export function SiteLayout({ children }) {
   }, []);
 
   return (
-    <div className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100">
+    <div
+      className="portfolio-shell min-h-screen bg-[#0A0A0A] text-zinc-100"
+      data-theme={theme}
+    >
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:rounded focus:bg-[#B10E1E] focus:px-4 focus:py-2 focus:text-white focus:outline-none"
@@ -164,14 +170,16 @@ export function SiteLayout({ children }) {
               {label}
             </Link>
           ))}
+          <ThemeSwitcher />
           <LanguageSwitcher />
         </nav>
         <div className="flex items-center gap-3 md:hidden">
+          <ThemeSwitcher />
           <LanguageSwitcher />
           <button
             type="button"
             data-cursor="pointer"
-            className="relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
+            className="site-menu-toggle relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}

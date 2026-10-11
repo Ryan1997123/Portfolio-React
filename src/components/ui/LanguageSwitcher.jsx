@@ -38,7 +38,7 @@ export function LanguageSwitcher({ className = "" }) {
           e.preventDefault();
           e.stopPropagation();
         }}
-        className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-zinc-300 transition-all hover:border-[#B10E1E] hover:text-white focus:outline-none"
+        className="language-switcher-button flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-zinc-300 transition-all hover:border-[#B10E1E] hover:text-white focus:outline-none"
         aria-label="Select website language"
         aria-expanded={isOpen}
         data-cursor="pointer"
@@ -68,7 +68,7 @@ export function LanguageSwitcher({ className = "" }) {
                 }}
                 className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-xs font-medium transition-colors ${
                   isSelected
-                    ? "bg-[#B10E1E]/20 text-white font-semibold"
+                    ? "is-selected bg-[#B10E1E]/20 text-white font-semibold"
                     : "text-zinc-400 hover:bg-white/5 hover:text-zinc-100"
                 }`}
                 data-cursor="pointer"
