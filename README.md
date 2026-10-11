@@ -48,7 +48,8 @@ Work cards stretch to equal heights within each grid row without fixed heights
 or truncating content. On mobile, the single-column cards remain content-sized.
 
 The homepage's five project links show their matching Work thumbnails only on
-pointer hover, with Motion enter/exit animation and viewport-bounded positioning.
+pointer hover, with the project title, category, year, and summary beneath the
+image, Motion enter/exit animation, and positioning based on the preview's size.
 Previews are decorative, do not intercept clicks, dismiss on Escape or scrolling,
 and respect reduced motion. Touch and keyboard navigation keep the plain links.
 

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
 import githubLogo from "../assets/Ionicons_logo-github logo.svg";
@@ -135,12 +135,16 @@ function ProjectsIndex() {
   const [hoveredProject, setHoveredProject] = useState(null);
   const previewX = useMotionValue(0);
   const previewY = useMotionValue(0);
+  const previewRef = useRef(null);
+  const pointerRef = useRef({ clientX: 0, clientY: 0 });
   const prefersReducedMotion = useReducedMotion();
 
   const movePreview = (event) => {
-    const width = Math.min(360, window.innerWidth - 32, (window.innerHeight - 32) * 16 / 9);
+    pointerRef.current = { clientX: event.clientX, clientY: event.clientY };
+    const width = previewRef.current?.offsetWidth || Math.min(360, window.innerWidth - 32);
+    const height = previewRef.current?.offsetHeight || 400;
     previewX.set(Math.max(16, Math.min(event.clientX + 20, window.innerWidth - width - 16)));
-    previewY.set(Math.max(16, Math.min(event.clientY + 20, window.innerHeight - width * 9 / 16 - 16)));
+    previewY.set(Math.max(16, Math.min(event.clientY + 20, window.innerHeight - height - 16)));
   };
 
   useEffect(() => {
@@ -197,6 +201,11 @@ function ProjectsIndex() {
                 {hoveredProject === project.slug && (
                   <motion.div
                     key={project.slug}
+                    ref={(node) => {
+                      if (!node) return;
+                      previewRef.current = node;
+                      movePreview(pointerRef.current);
+                    }}
                     className={`project-preview project-card-${project.color}`}
                     style={{ left: previewX, top: previewY }}
                     initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.96 }}
@@ -205,11 +214,20 @@ function ProjectsIndex() {
                     transition={{ duration: prefersReducedMotion ? 0 : 0.18 }}
                     aria-hidden="true"
                   >
-                    {project.thumbnail ? (
-                      <ProjectMockup thumbnail={project.thumbnail} />
-                    ) : (
-                      <img src={getHeroImageSource(project.heroImage)} alt="" decoding="async" />
-                    )}
+                    <div className="project-preview-image">
+                      {project.thumbnail ? (
+                        <ProjectMockup thumbnail={project.thumbnail} />
+                      ) : (
+                        <img src={getHeroImageSource(project.heroImage)} alt="" decoding="async" />
+                      )}
+                    </div>
+                    <div className="project-preview-info">
+                      <span className="project-preview-category">
+                        {[project.category, project.year].filter(Boolean).join(" / ")}
+                      </span>
+                      <strong>{project.title}</strong>
+                      <p>{project.summary}</p>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
