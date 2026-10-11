@@ -333,10 +333,37 @@ function MockupBrowser({ screen, url }) {
   );
 }
 
-function MockupPhone({ screen, className = "" }) {
+function MockupStatusBar() {
+  return (
+    <div className="project-mockup-status">
+      <span className="project-mockup-status-time">9:41</span>
+      <span className="project-mockup-status-icons">
+        <svg viewBox="0 0 18 12" className="project-mockup-status-signal">
+          <rect x="0" y="8" width="3" height="4" rx="1" />
+          <rect x="5" y="5.5" width="3" height="6.5" rx="1" />
+          <rect x="10" y="3" width="3" height="9" rx="1" />
+          <rect x="15" y="0" width="3" height="12" rx="1" />
+        </svg>
+        <svg viewBox="0 0 16 12" className="project-mockup-status-wifi">
+          <path d="M1.6 4.4a9.2 9.2 0 0 1 12.8 0" />
+          <path d="M4.2 7.1a5.5 5.5 0 0 1 7.6 0" />
+          <circle cx="8" cy="10" r="1.4" />
+        </svg>
+        <svg viewBox="0 0 27 12" className="project-mockup-status-battery">
+          <rect x="0.5" y="0.5" width="23" height="11" rx="3" fill="none" stroke="currentColor" strokeOpacity="0.4" />
+          <rect x="2" y="2" width="20" height="8" rx="1.8" />
+          <path d="M25 4v4a2 2 0 0 0 0-4Z" fillOpacity="0.45" />
+        </svg>
+      </span>
+    </div>
+  );
+}
+
+function MockupPhone({ screen, className = "", statusBar = false }) {
   return (
     <div className={`project-mockup-phone ${className}`}>
       <div className="project-mockup-phone-screen">
+        {statusBar && <MockupStatusBar />}
         <MockupScreen name={screen} />
       </div>
     </div>
@@ -353,7 +380,7 @@ function ProjectMockup({ thumbnail }) {
       {mockup === "responsive" && (
         <>
           <MockupBrowser screen={screens[0]} url={url} />
-          <MockupPhone screen={screens[1]} />
+          <MockupPhone screen={screens[1]} statusBar />
         </>
       )}
       {mockup === "phones" &&

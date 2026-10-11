@@ -3485,14 +3485,52 @@
   width: 72cqw;
 }
 
+.project-mockup-stage-responsive .project-mockup-phone::before {
+  width: 3.6cqw;
+}
+
 .project-mockup-stage-responsive .project-mockup-phone {
   top: 30cqh;
   right: 6cqw;
   width: 15cqw;
 }
 
-.project-mockup-stage-responsive .project-mockup-phone-screen {
-  padding-top: 2.4cqw;
+.project-mockup-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2.6cqw;
+  padding: 0.3cqw 1cqw 0 1.6cqw;
+  background: #fff;
+  color: #0d0d0d;
+}
+
+.project-mockup-status-time {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85cqw;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.project-mockup-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.22cqw;
+}
+
+.project-mockup-status-icons svg {
+  display: block;
+  height: 0.52cqw;
+  width: auto;
+  fill: currentColor;
+}
+
+.project-mockup-status-wifi path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
 }
 
 .project-mockup-stage-phones .project-mockup-phone {
