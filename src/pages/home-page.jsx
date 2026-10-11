@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
@@ -6,8 +6,9 @@ import githubLogo from "../assets/Ionicons_logo-github logo.svg";
 import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
 import meImage from "../assets/me-optimized.webp";
 import { photography, projects } from "../data/projects";
+import { getHeroImageSource } from "../data/project-images";
 import { useLanguage } from "../lib/LanguageContext";
-import { SiteLayout } from "./site-layout";
+import { ProjectMockup, SiteLayout } from "./site-layout";
 
 const skills = [
   "Figma",
@@ -132,7 +133,31 @@ function PortraitDesignBackdrop({ x, y, prefersReducedMotion }) {
 function ProjectsIndex() {
   const { t, translateProject } = useLanguage();
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [previewPoint, setPreviewPoint] = useState({ x: 0, y: 0 });
+  const previewX = useMotionValue(0);
+  const previewY = useMotionValue(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  const movePreview = (event) => {
+    const width = Math.min(360, window.innerWidth - 32, (window.innerHeight - 32) * 16 / 9);
+    previewX.set(Math.max(16, Math.min(event.clientX + 20, window.innerWidth - width - 16)));
+    previewY.set(Math.max(16, Math.min(event.clientY + 20, window.innerHeight - width * 9 / 16 - 16)));
+  };
+
+  useEffect(() => {
+    if (!hoveredProject) return undefined;
+    const dismiss = () => setHoveredProject(null);
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") dismiss();
+    };
+    window.addEventListener("scroll", dismiss, true);
+    window.addEventListener("resize", dismiss);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("scroll", dismiss, true);
+      window.removeEventListener("resize", dismiss);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [hoveredProject]);
 
   return (
     <section className="projects-index">
@@ -154,12 +179,13 @@ function ProjectsIndex() {
               <Link
                 to={`/work/${project.slug}`}
                 className="project-index-link"
-                onMouseEnter={() => setHoveredProject(project.slug)}
-                onFocus={() => setHoveredProject(project.slug)}
-                onMouseMove={(event) =>
-                  setPreviewPoint({ x: event.clientX, y: event.clientY })
-                }
-                onBlur={() => setHoveredProject(null)}
+                onPointerEnter={(event) => {
+                  if (event.pointerType === "touch" || !window.matchMedia("(any-hover: hover)").matches) return;
+                  movePreview(event);
+                  setHoveredProject(project.slug);
+                }}
+                onPointerMove={movePreview}
+                onPointerLeave={() => setHoveredProject(null)}
               >
                 <span>{String(index + 1).padStart(2, "0")}.</span>
                 <span>{project.title}</span>
@@ -167,22 +193,26 @@ function ProjectsIndex() {
                   ↗
                 </span>
               </Link>
-              {hoveredProject === project.slug && (
-                  <div
+              <AnimatePresence>
+                {hoveredProject === project.slug && (
+                  <motion.div
+                    key={project.slug}
                     className={`project-preview project-card-${project.color}`}
-                    style={{ left: previewPoint.x + 20, top: previewPoint.y + 20 }}
+                    style={{ left: previewX, top: previewY }}
+                    initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.96 }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.18 }}
                     aria-hidden="true"
                   >
-                    <div className="project-preview-canvas">
-                      <span>{["CASE STUDY", project.year].filter(Boolean).join(" / ")}</span>
-                      <strong>{project.title}</strong>
-                    </div>
-                    <span className="project-preview-category">
-                      {project.category}
-                    </span>
-                    <span>{project.summary}</span>
-                  </div>
-              )}
+                    {project.thumbnail ? (
+                      <ProjectMockup thumbnail={project.thumbnail} />
+                    ) : (
+                      <img src={getHeroImageSource(project.heroImage)} alt="" decoding="async" />
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
