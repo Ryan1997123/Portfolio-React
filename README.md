@@ -36,6 +36,9 @@ content width in a 16:9 frame, with project details beneath. An explicit
 phone header with full-size image links. Projects without either keep their
 regular cover image.
 
+ICOTYDE HCP also uses `liveUrl` to show the same live-website button beneath its
+header, linking to `https://www.icotydehcp.com/`.
+
 Case studies end with a prominent next-project link and a secondary back-to-work
 link. Navigation stacks on mobile, supports wrapping titles and keyboard focus,
 and uses high-contrast colors in both themes with reduced-motion support.
