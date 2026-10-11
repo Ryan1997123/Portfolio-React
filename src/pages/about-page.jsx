@@ -9,6 +9,7 @@ import londonStreet from "../assets/aboutme/rmicbVaW7DRN3Scb.jpg";
 import meImage from "../assets/me-about.webp";
 import resumeDocx from "../assets/resume/Ryan_Monaghan_Resume_2026.docx?url";
 import { useLanguage } from "../lib/LanguageContext";
+import { useTheme } from "../lib/ThemeContext";
 import { SiteLayout } from "./site-layout";
 
 const aboutPrinciples = [
@@ -548,6 +549,7 @@ function ScrollStoryPhoto({ progress, start, segment, photo, isStatic }) {
 
 function ScrollStory({ chapters }) {
   const prefersReducedMotion = useReducedMotion();
+  const { theme } = useTheme();
   const storyRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: storyRef,
@@ -563,7 +565,11 @@ function ScrollStory({ chapters }) {
   const steps = beatCount;
   const segment = 1 / steps;
   const fade = segment * 0.3;
-  const themes = chapters.map((chapter) => storyThemes[chapter.theme]);
+  const themes = chapters.map((chapter) =>
+    theme === "light"
+      ? { background: "#f5f3ef", color: "#191817" }
+      : storyThemes[chapter.theme],
+  );
   const boundaries = starts.slice(1).map((start) => start * segment);
 
   const rule = (

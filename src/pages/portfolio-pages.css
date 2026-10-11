@@ -2807,3 +2807,37 @@
   background-color: #e9e4de;
   background-image: linear-gradient(145deg, rgb(25 24 23 / 0.04), transparent 44%), radial-gradient(circle at 75% 25%, rgb(177 14 30 / 0.12), transparent 32%);
 }
+
+.portfolio-shell[data-theme="light"] .password-gate {
+  background: rgb(25 24 23 / 0.48);
+}
+
+.portfolio-shell[data-theme="light"] .password-gate-panel {
+  border-color: rgb(25 24 23 / 0.18);
+  background: #fffdfa;
+  color: #191817;
+  box-shadow: 0 24px 80px rgb(25 24 23 / 0.22);
+}
+
+.portfolio-shell[data-theme="light"] .password-gate-panel h2 {
+  color: #191817 !important;
+}
+
+.portfolio-shell[data-theme="light"] .password-gate-copy {
+  color: #625e58;
+}
+
+.portfolio-shell[data-theme="light"] .password-gate-panel input {
+  border-color: rgb(25 24 23 / 0.28);
+  background: #fff;
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .password-gate-cancel {
+  border-color: rgb(25 24 23 / 0.28);
+  color: #191817;
+}
+
+.portfolio-shell[data-theme="light"] .password-gate-submit {
+  color: #fffdfa;
+}
