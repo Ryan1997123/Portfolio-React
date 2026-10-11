@@ -85,6 +85,7 @@ export const projects = [
   },
   {
     slug: 'gaming-gear',
+    horizontalSections: true,
     title: 'Gaming Gear / Google UX Course',
     category: 'PRODUCT DESIGN / MOBILE APP',
     type: 'mobile',
@@ -109,11 +110,13 @@ export const projects = [
       { label: 'Sitemap', image: 'sitemap' },
     ],
     figmaEmbed: 'https://embed.figma.com/design/6Iwe4QDjlpNldz9Ouz0oyi/Ryan-Local_Google-Gaming-Gear?node-id=599-1447&embed-host=share',
+    figmaEmbedAtEnd: true,
     solution: 'The final concept gives players a clearer path from browsing to confidence. Personalized suggestions surface relevant gear, while reviews, comparisons, and community feedback support more informed decisions.',
     solutionImage: 'Final Gaming Gear app',
   },
   {
     slug: 'gl-hcp-ectrims-booth',
+    horizontalSections: true,
     protected: true,
     title: 'GL HCP ECTRIMS Booth',
     category: 'PRODUCT DESIGN / INTERACTIVE VISUAL AID',
@@ -135,9 +138,11 @@ export const projects = [
     solution: 'The final experience gives HCPs an interactive, self-paced way to explore clinical information at the booth, making the conversation with reps more focused and the takeaway more memorable.',
     solutionImage: 'Final GL HCP ECTRIMS Booth experience',
     figmaEmbed: 'https://embed.figma.com/design/KsQ7OzQkvb9HgF10CooYHD/Ryan_Local_Toleb-GL_HCP_ECTRIMS_Booth?node-id=92-2&embed-host=share',
+    figmaEmbedAtEnd: true,
   },
   {
     slug: 'lilly-alzheimers-digital-panels',
+    horizontalSections: true,
     protected: true,
     title: 'Lilly Alzheimer\'s Digital Panels',
     category: 'BOOTHS / INTERACTIVE EXPERIENCE',
@@ -150,6 +155,7 @@ export const projects = [
     tools: 'Figma, animated prototype',
     heroImage: 'lilly-booth-hero',
     figmaEmbed: 'https://embed.figma.com/design/6vNj6lpcO4tMTiCvuIAJYO/Ryan-Portfolio-12270429-US-HCO-Alzheimer-s-Becker-s-Congress-Dig-Panels?node-id=0-1&embed-host=share',
+    figmaEmbedAtEnd: true,
     color: 'green',
     outcomes: [
       'Wheelchair-accessible booth interaction for all attendees',
@@ -192,6 +198,7 @@ export const projects = [
   },
   {
     slug: 'sibos-tote-bag',
+    horizontalSections: true,
     title: 'Sibos 2023 Tote Bag Design',
     category: 'BRANDING & MERCHANDISE / GRAPHIC DESIGN',
     type: 'graphic',
@@ -225,6 +232,7 @@ export const projects = [
   },
   {
     slug: 'secure-file-transfer',
+    horizontalSections: true,
     title: 'Secure File Transfer System',
     category: 'PRODUCT DESIGN / SAAS PLATFORM',
     type: 'saas',
@@ -246,6 +254,7 @@ export const projects = [
     solution: 'The Premium Technology SFT redesign was a success. The only real challenge was working within the code limitations of PT\'s tech team, who were using a very old version of Java for the secure file transfer system.',
     solutionImage: 'Final Secure File Transfer system design',
     figmaEmbed: 'https://embed.figma.com/design/646mwFKDNkPaEU7dD6zUmi/SFT-PT-2024?node-id=0-1&embed-host=share',
+    figmaEmbedAtEnd: true,
     finalImages: Array.from({ length: 15 }, (_, i) => ({
       label: `Final screen ${i + 1}`,
       image: `sft-final-${i + 1}`,
