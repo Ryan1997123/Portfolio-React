@@ -13,7 +13,7 @@ export const projects = [
     timeline: '6 weeks',
     tools: 'Figma',
     heroImage: 'icotyde-overview',
-    thumbnail: { mockup: 'browser', screens: ['icotyde-desktop'] },
+    thumbnail: { mockup: 'browser', screens: ['icotyde-desktop'], url: 'imaavyhcp.com' },
     figmaEmbed: 'https://embed.figma.com/design/0HbcrG7IhOSYnJDqIkoZDb/Ryan_local_SRX_ICO-HCP-FD?node-id=12818-31282&embed-host=share',
     figmaEmbedAtEnd: true,
     color: 'cyan',
