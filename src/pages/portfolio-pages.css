@@ -1740,6 +1740,109 @@
   transform-origin: left;
 }
 
+/* Phone/tablet panels: one column that always fits inside the sticky 100svh viewport. */
+.case-study-horizontal-scroll-compact {
+  margin-top: 64px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel {
+  align-items: stretch;
+  padding: 24px 20px 88px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-number {
+  right: 12px;
+  bottom: 72px;
+  font-size: clamp(120px, 38vw, 260px);
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section {
+  display: flex;
+  min-height: 0;
+  max-height: 100%;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-section-heading {
+  flex: none;
+  gap: 12px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-section-heading .case-study-label {
+  margin-bottom: 0;
+}
+
+.case-study-horizontal-scroll-compact .case-study-section h2 {
+  font-size: clamp(28px, 7vw, 40px) !important;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section-copy,
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section > p:not(.case-study-label) {
+  flex: none;
+  font-size: clamp(19px, 4.6vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section:has(> .case-study-image-grid, > .case-study-image, > .case-study-carousel) .case-study-section-copy {
+  font-size: clamp(16px, 3.8vw, 20px);
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section > .case-study-image,
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section > .case-study-image-grid {
+  flex: 0 1 min(32svh, 320px);
+  min-height: 96px;
+  height: auto;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-section > .case-study-image-grid {
+  grid-template-rows: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-image-grid .case-study-image {
+  height: auto;
+  min-height: 0;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel {
+  flex: none;
+  gap: 8px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel-arrow {
+  width: 44px;
+  height: 44px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel-slide,
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-screenshot-carousel .case-study-carousel-slide {
+  width: auto;
+  height: min(26svh, 220px);
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel-counter {
+  flex: none;
+  margin-top: 0;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-progress {
+  right: 20px;
+  bottom: 24px;
+  left: 20px;
+  font-size: 11px;
+}
+
 .case-study-section h2 {
   margin: 0;
   max-width: 28rem;

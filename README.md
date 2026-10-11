@@ -24,12 +24,15 @@ screens, not the complete website.
 IMAAVY uses the same password and session unlock as the other protected projects.
 This is a client-side privacy gate, not secure access control: bundled content and
 images remain publicly accessible. Do not rely on it for confidential material.
-Every case study enables `horizontalSections`: on screens at least
-1024px wide and 640px tall, sections 01–06 are pinned and vertical scrolling
+Every case study enables `horizontalSections`: on desktop screens (at least
+1024px wide and 640px tall) and on portrait phones/tablets at least 500px tall,
+sections 01–06 are pinned and vertical scrolling
 moves them horizontally with Motion (`useScroll`/`useTransform`) parallax, before
 the page continues vertically to the resource links (if any) and the Figma
-embed (`figmaEmbedAtEnd`). Smaller
-screens and reduced-motion preferences keep the normal vertical layout.
+embed (`figmaEmbedAtEnd`). On screens under 1024px, panels use a compact
+single-column layout with shrinkable media, smaller parallax offsets, and
+1.75× vertical scroll per panel so a swipe does not skip sections. Short
+landscape screens and reduced-motion preferences keep the normal vertical layout.
 
 A project's optional `thumbnail` field renders its Work card and case-study
 header as the same device mockup (`browser`, `responsive`, `phones`, or `tablet`)
