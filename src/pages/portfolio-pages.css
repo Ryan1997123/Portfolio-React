@@ -2812,6 +2812,32 @@
   filter: brightness(0);
 }
 
+.portfolio-shell[data-theme="light"] .hero-design-guides {
+  stroke: rgb(25 24 23 / 0.2);
+}
+
+.portfolio-shell[data-theme="light"] .hero-design-wireframe {
+  stroke: rgb(25 24 23 / 0.6);
+}
+
+.portfolio-shell[data-theme="light"] .hero-design-skyline {
+  stroke: rgb(25 24 23 / 0.42);
+}
+
+.portfolio-shell[data-theme="light"] .hero-design-handles {
+  stroke: #3f8a81;
+}
+
+.portfolio-shell[data-theme="light"] .hero-design-handles circle,
+.portfolio-shell[data-theme="light"] .hero-design-anchors {
+  fill: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .hero-design-cursor {
+  fill: #3f8a81;
+  stroke: #191817;
+}
+
 .portfolio-shell[data-theme="light"] .password-gate {
   background: rgb(25 24 23 / 0.48);
 }
