@@ -18,10 +18,11 @@ matching mobile screens, including both mobile infusion locator views.
 at the bottom of the case study. The supplied `Typography.png` is a sitemap and
 is labeled as such in the research section. The carousel presents selected
 screens, not the complete website.
-The caregiver case study enables `horizontalSections`: on screens at least
+The caregiver and ICOTYDE withMe HCP case studies enable `horizontalSections`: on screens at least
 1024px wide and 640px tall, sections 01–06 are pinned and vertical scrolling
 moves them horizontally with Motion (`useScroll`/`useTransform`) parallax, before
-the page continues vertically to the resource links and Figma embed. Smaller
+the page continues vertically to the resource links (if any) and the Figma
+embed (`figmaEmbedAtEnd`). Smaller
 screens and reduced-motion preferences keep the normal vertical layout.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.

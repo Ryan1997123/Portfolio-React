@@ -1658,7 +1658,9 @@
 .case-study-horizontal-panel .case-study-section > .case-study-image-grid {
   grid-column: 2;
   grid-row: 1 / span 2;
-  grid-template-columns: 1fr;
+  grid-template-columns: none;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
 }
 
 .case-study-horizontal-panel .case-study-image-grid .case-study-image {
@@ -1849,11 +1851,16 @@
   margin-top: 48px;
 }
 
+.case-study-bottom-figma .case-study-section-heading {
+  margin-bottom: 48px;
+  padding-bottom: 16px;
+}
+
 .case-study-bottom-figma h2 {
-  margin: 0 0 48px;
-  font-size: clamp(28px, 4vw, 40px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  margin: 0;
+  max-width: 28rem;
+  font-size: 40px !important;
+  line-height: 0.95;
 }
 
 .case-study-live-action {

@@ -2,6 +2,7 @@ export const projects = [
   {
     slug: 'velocity',
     protected: true,
+    horizontalSections: true,
     title: 'ICOTYDE withMe HCP',
     category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',
     type: 'website',
@@ -13,6 +14,7 @@ export const projects = [
     tools: 'Figma',
     heroImage: 'icotyde-overview',
     figmaEmbed: 'https://embed.figma.com/design/0HbcrG7IhOSYnJDqIkoZDb/Ryan_local_SRX_ICO-HCP-FD?node-id=12818-31282&embed-host=share',
+    figmaEmbedAtEnd: true,
     color: 'cyan',
     outcomes: ['Clearer clinical and support information', 'Faster access to enrollment resources', 'More confident prescribing conversations'],
     overview: 'ICOTYDE withMe HCP simplifies access, support, and enrollment information for dermatologists prescribing ICOTYDE (icotrokinra), helping turn dense clinical and insurance details into a clear, confident experience.',
