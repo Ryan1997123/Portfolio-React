@@ -7,7 +7,7 @@ import mouseIcon from "../assets/mouse_icon.svg";
 import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
 import { ThemeSwitcher } from "../components/ui/ThemeSwitcher";
 import { projects } from "../data/projects";
-import { getHeroImageSource } from "../data/project-images";
+import { getHeroImageSource, thumbnailImages } from "../data/project-images";
 import { useLanguage } from "../lib/LanguageContext";
 import { useTheme } from "../lib/ThemeContext";
 import { getPageMetadata, getStructuredData } from "../seo";
@@ -311,6 +311,67 @@ export function PageIntro({ eyebrow, title, body, className = "" }) {
   );
 }
 
+function MockupScreen({ name }) {
+  return <img src={thumbnailImages[name]} alt="" loading="lazy" decoding="async" />;
+}
+
+function MockupBrowser({ screen, url }) {
+  return (
+    <div className="project-mockup-browser">
+      <div className="project-mockup-browser-bar">
+        <span className="project-mockup-dots">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="project-mockup-address">{url}</span>
+      </div>
+      <div className="project-mockup-browser-screen">
+        <MockupScreen name={screen} />
+      </div>
+    </div>
+  );
+}
+
+function MockupPhone({ screen, className = "" }) {
+  return (
+    <div className={`project-mockup-phone ${className}`}>
+      <div className="project-mockup-phone-screen">
+        <MockupScreen name={screen} />
+      </div>
+    </div>
+  );
+}
+
+// Decorative device frames for Work page thumbnails; card text carries the accessible name.
+function ProjectMockup({ thumbnail }) {
+  const { mockup, screens, url } = thumbnail;
+
+  return (
+    <div className={`project-mockup project-mockup-stage-${mockup}`} aria-hidden="true">
+      {mockup === "browser" && <MockupBrowser screen={screens[0]} url={url} />}
+      {mockup === "responsive" && (
+        <>
+          <MockupBrowser screen={screens[0]} url={url} />
+          <MockupPhone screen={screens[1]} />
+        </>
+      )}
+      {mockup === "phones" &&
+        screens.map((screen, index) => (
+          <MockupPhone key={screen} screen={screen} className={`project-mockup-phone-${index + 1}`} />
+        ))}
+      {mockup === "tablet" && (
+        <div className="project-mockup-tablet">
+          <div className="project-mockup-tablet-screen">
+            <MockupScreen name={screens[0]} />
+            <span className="project-mockup-touch" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ProjectCard({ project, index }) {
   return (
     <article className="project-card-entry">
@@ -319,11 +380,15 @@ export function ProjectCard({ project, index }) {
         className={`project-card project-card-${project.color} group flex min-h-80 flex-col justify-between border border-white/10 p-6 transition-colors hover:border-[#B10E1E]/70 sm:p-8`}
       >
         <div className="-mx-6 -mt-6 mb-6 aspect-[16/9] overflow-hidden border-b border-white/10 sm:-mx-8 sm:-mt-8">
-          <img
-            src={getHeroImageSource(project.heroImage)}
-            alt=""
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          />
+          {project.thumbnail ? (
+            <ProjectMockup thumbnail={project.thumbnail} />
+          ) : (
+            <img
+              src={getHeroImageSource(project.heroImage)}
+              alt=""
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          )}
         </div>
         <div className="flex items-start justify-between gap-5">
           <span className="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400">

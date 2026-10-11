@@ -25,6 +25,11 @@ the page continues vertically to the resource links (if any) and the Figma
 embed (`figmaEmbedAtEnd`). Smaller
 screens and reduced-motion preferences keep the normal vertical layout.
 
+On the Work page, a project's optional `thumbnail` field renders its card image as
+a device mockup (`browser`, `responsive`, `phones`, or `tablet`) using cropped
+screens from `src/assets/thumbnails/`. Projects without it keep their regular
+cover image.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:
