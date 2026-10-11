@@ -465,7 +465,8 @@ export function CaseStudyPage() {
             </div>
           )}
           {project.figmaEmbedAtEnd && (
-            <section className="case-study-bottom-figma" aria-label={t("viewFigmaDesign")}>
+            <section className="case-study-bottom-figma" aria-labelledby="case-study-figma-heading">
+              <h2 id="case-study-figma-heading">{t("fullDesignHeading")}</h2>
               <FigmaEmbed
                 src={project.figmaEmbed}
                 title={`${project.title} final design in Figma`}

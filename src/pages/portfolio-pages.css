@@ -1712,6 +1712,13 @@
   margin-top: 48px;
 }
 
+.case-study-bottom-figma h2 {
+  margin: 0 0 24px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
 .case-study-live-action {
   grid-column: 1 / -1;
 }
