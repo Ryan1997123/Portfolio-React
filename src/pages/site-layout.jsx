@@ -404,16 +404,16 @@ export function ProjectCard({ project, index }) {
     <article className="project-card-entry flex min-w-0">
       <Link
         to={`/work/${project.slug}`}
-        className={`project-card project-card-${project.color} group flex min-h-80 min-w-0 flex-1 flex-col justify-between border border-white/10 p-6 transition-colors hover:border-[#B10E1E]/70 sm:p-8`}
+        className={`project-card project-card-${project.color} group flex min-h-80 min-w-0 flex-1 flex-col gap-6 border border-white/10 p-6 transition-colors hover:border-[#B10E1E]/70 sm:p-8`}
       >
-        <div className="-mx-6 -mt-6 mb-6 aspect-[16/9] shrink-0 overflow-hidden border-b border-white/10 sm:-mx-8 sm:-mt-8">
+        <div className="project-card-thumbnail relative -mx-6 -mt-6 aspect-[16/9] shrink-0 overflow-hidden border-b border-white/10 sm:-mx-8 sm:-mt-8">
           {project.thumbnail ? (
             <ProjectMockup thumbnail={project.thumbnail} />
           ) : (
             <img
               src={getHeroImageSource(project.heroImage)}
               alt=""
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           )}
         </div>

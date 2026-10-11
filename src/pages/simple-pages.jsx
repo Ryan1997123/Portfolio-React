@@ -44,7 +44,7 @@ export function WorkPage() {
             </button>
           ))}
         </div>
-        <section className="mx-auto grid max-w-7xl gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">
+        <section className="work-project-grid mx-auto grid max-w-7xl auto-rows-fr gap-3 px-6 pb-24 sm:px-10 md:grid-cols-2 lg:px-14">
           {filteredProjects.map((rawProject, index) => {
             const project = translateProject(rawProject);
             return <ProjectCard key={project.slug} project={project} index={index} />;

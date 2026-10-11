@@ -44,8 +44,10 @@ link. Navigation stacks on mobile, supports wrapping titles and keyboard focus,
 and uses high-contrast colors in both themes with reduced-motion support.
 The final project retains only the back-to-work link.
 
-Work cards stretch to equal heights within each grid row without fixed heights
-or truncating content. On mobile, the single-column cards remain content-sized.
+Work cards use equal-height grid rows without fixed pixel heights or truncating
+content, including in the mobile single-column layout. Identical 16:9 thumbnail
+frames and consistent spacing anchor each card's index and year at the same
+position, independent of title or summary length.
 
 The homepage's five project links show their matching Work thumbnails only on
 pointer hover, with the project title, category, year, and summary beneath the
