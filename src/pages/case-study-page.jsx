@@ -658,7 +658,7 @@ function CaseStudySectionNavigation({ prefersReducedMotion }) {
     let frame = 0;
     const update = () => {
       frame = 0;
-      const threshold = (navRef.current?.getBoundingClientRect().height || 0) + 40;
+      const threshold = Math.max(112, navRef.current?.getBoundingClientRect().height || 0) + 40;
       let current = 0;
       sectionLabelKeys.forEach((_, index) => {
         const section = document.getElementById(`case-study-section-0${index + 1}`);
