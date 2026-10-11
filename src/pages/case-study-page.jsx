@@ -2,7 +2,7 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform 
 import { ScrambleText } from "motion-plus/react";
 import { Children, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ArrowClockwise, LockSimple, WifiHigh, BatteryFull, CellSignalFull, Export, Copy, Plus } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
 import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
@@ -185,7 +185,7 @@ export function CaseStudyPage() {
 
   return (
     <SiteLayout>
-      <div className="case-study-page">
+      <div className={`case-study-page${project.slug === "imaavy-caregiver-resource" ? " imaavy-case-study" : ""}`}>
         <PageIntro
           className={project.slug === "imaavy-caregiver-resource" ? "imaavy-case-study-intro" : ""}
           eyebrow={[project.category, project.year].filter(Boolean).join(" / ")}
@@ -199,9 +199,7 @@ export function CaseStudyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={revealTransition}
           >
-            {project.heroScreens ? (
-              <ResponsiveHeroScreens items={project.heroScreens} />
-            ) : project.thumbnail ? (
+            {project.thumbnail ? (
               <div
                 className="case-study-thumbnail-hero"
                 role="img"
@@ -243,6 +241,17 @@ export function CaseStudyPage() {
                 </span>
               )}
             </div>)}
+            {project.heroScreens && (
+              <div className="case-study-hero-image-links">
+                {project.heroScreens.map(({ label, image }) => (
+                  <a key={image} href={resolveCaseStudyImage(image)} target="_blank" rel="noopener noreferrer">
+                    {label}: {t("viewFullSizeImage")}
+                    <span aria-hidden="true"> ↗</span>
+                    <span className="sr-only"> ({t("opensInNewTab")})</span>
+                  </a>
+                ))}
+              </div>
+            )}
             {project.liveUrl && (
               <div className="case-study-live-action">
                 <a
@@ -517,68 +526,6 @@ export function CaseStudyPage() {
         )}
       </div>
     </SiteLayout>
-  );
-}
-
-function ResponsiveHeroScreens({ items }) {
-  const { t } = useLanguage();
-
-  return (
-    <div className="case-study-device-gallery case-study-hero-devices">
-      {items.map(({ label, image, device }) => {
-        const source = resolveCaseStudyImage(image);
-
-        return (
-          <figure className={`case-study-device-card case-study-device-card-${device}`} key={image}>
-            <div className={`case-study-device case-study-device-${device}`}>
-              {device === "desktop" ? (
-                <div className="case-study-browser-chrome" aria-hidden="true">
-                  <div className="case-study-browser-tabs">
-                    <div className="case-study-window-controls"><i /><i /><i /></div>
-                    <span className="case-study-browser-tab">IMAAVY <span>×</span></span>
-                    <Plus />
-                  </div>
-                  <div className="case-study-browser-toolbar">
-                    <ArrowLeft /><ArrowRight /><ArrowClockwise />
-                    <div className="case-study-browser-address"><LockSimple /><span>imaavy.com</span></div>
-                    <span className="case-study-browser-menu">···</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="case-study-phone-chrome" aria-hidden="true">
-                  <div className="case-study-phone-status">
-                    <span>9:41</span><span className="case-study-phone-camera" />
-                    <span className="case-study-phone-signals"><CellSignalFull /><WifiHigh /><BatteryFull /></span>
-                  </div>
-                  <div className="case-study-phone-address">
-                    <span>aA</span><span><LockSimple />imaavy.com</span><ArrowClockwise />
-                  </div>
-                </div>
-              )}
-              <div
-                className="case-study-device-screen"
-              >
-                <img src={source} alt={label} decoding="async" />
-              </div>
-              {device === "phone" && (
-                <div className="case-study-phone-bottom" aria-hidden="true">
-                  <div className="case-study-phone-toolbar"><ArrowLeft /><ArrowRight /><Export /><Copy /></div>
-                  <span className="case-study-phone-home" />
-                </div>
-              )}
-            </div>
-            <figcaption>
-              <p>{label}</p>
-              <a href={source} target="_blank" rel="noopener noreferrer">
-                {t("viewFullSizeImage")}
-                <span aria-hidden="true"> ↗</span>
-                <span className="sr-only"> ({t("opensInNewTab")})</span>
-              </a>
-            </figcaption>
-          </figure>
-        );
-      })}
-    </div>
   );
 }
 

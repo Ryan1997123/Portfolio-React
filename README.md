@@ -7,12 +7,12 @@ in `src/data/project-images.js`. Adding a project automatically includes it on t
 work page, in case-study navigation, and in the prerendered routes and sitemap.
 
 The IMAAVY Caregiver Resource case study uses the supplied images in
-`src/assets/imaavy caregiver/`. Its `heroScreens` show scaled desktop and phone
-landing images side by side in browser and phone-browser mockups, with full-size
-image links. The decorative browser controls are not interactive and are hidden
+`src/assets/imaavy caregiver/`. Its header uses the same responsive thumbnail
+mockup and frame sizing as ICOTYDE, with `heroScreens` providing full-size desktop
+and mobile image links underneath. The decorative browser controls are not interactive and are hidden
 from assistive technology. A `liveUrl` button beneath the header mockups opens
-the live website in a new tab. On desktop, the header gallery is centered and
-capped at 880px; the introductory paragraph has extra vertical padding.
+the live website in a new tab. The introductory paragraph has extra vertical
+padding, with a compact transition from project metadata into Overview.
 The remaining screens
 appear in the bottom `finalImages` carousel, with each desktop followed by its
 matching mobile screens, including both mobile infusion locator views.
@@ -33,9 +33,9 @@ screens and reduced-motion preferences keep the normal vertical layout.
 A project's optional `thumbnail` field renders its Work card and case-study
 header as the same device mockup (`browser`, `responsive`, `phones`, or `tablet`)
 using cropped screens from `src/assets/thumbnails/`. Case-study headers span the
-content width in a 16:9 frame, with project details beneath. An explicit
-`heroScreens` gallery takes precedence, preserving IMAAVY's existing desktop and
-phone header with full-size image links. Projects without either keep their
+content width in a 16:9 frame, with project details beneath. Optional
+`heroScreens` provide full-size image links below the preview. Projects without a
+thumbnail keep their
 regular cover image.
 
 ICOTYDE HCP also uses `liveUrl` to show the same live-website button beneath its
