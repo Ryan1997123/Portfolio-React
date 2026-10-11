@@ -1889,31 +1889,31 @@
   padding-top: 24px;
 }
 
-.imaavy-case-study .case-study-thumbnail-hero {
+.responsive-hero-case-study .case-study-thumbnail-hero {
   aspect-ratio: 21 / 9;
 }
 
-.imaavy-case-study .case-study-thumbnail-hero .project-mockup {
+.responsive-hero-case-study .case-study-thumbnail-hero .project-mockup {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3%;
 }
 
-.imaavy-case-study .case-study-thumbnail-hero .project-mockup-browser,
-.imaavy-case-study .case-study-thumbnail-hero .project-mockup-phone {
+.responsive-hero-case-study .case-study-thumbnail-hero .project-mockup-browser,
+.responsive-hero-case-study .case-study-thumbnail-hero .project-mockup-phone {
   position: relative;
   inset: auto;
   flex: 0 0 auto;
   transform: none;
 }
 
-.imaavy-case-study .case-study-thumbnail-hero .project-mockup-browser {
+.responsive-hero-case-study .case-study-thumbnail-hero .project-mockup-browser {
   width: 58cqw;
   border-radius: 1.2cqw;
 }
 
-.imaavy-case-study .case-study-thumbnail-hero .project-mockup-phone {
+.responsive-hero-case-study .case-study-thumbnail-hero .project-mockup-phone {
   width: 15cqw;
 }
 

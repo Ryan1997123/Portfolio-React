@@ -185,7 +185,11 @@ export function CaseStudyPage() {
 
   return (
     <SiteLayout>
-      <div className={`case-study-page${project.slug === "imaavy-caregiver-resource" ? " imaavy-case-study" : ""}`}>
+      <div
+        className={`case-study-page${project.slug === "imaavy-caregiver-resource" ? " imaavy-case-study" : ""}${
+          project.thumbnail?.mockup === "responsive" ? " responsive-hero-case-study" : ""
+        }`}
+      >
         <PageIntro
           className={project.slug === "imaavy-caregiver-resource" ? "imaavy-case-study-intro" : ""}
           eyebrow={[project.category, project.year].filter(Boolean).join(" / ")}
