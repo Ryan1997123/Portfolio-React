@@ -1712,41 +1712,34 @@
   margin-top: 48px;
 }
 
-.case-study-scope {
-  margin-top: 48px;
-  padding-block: 24px;
-  border-block: 1px solid rgb(128 128 128 / 0.35);
+.case-study-live-action {
+  grid-column: 1 / -1;
 }
 
-.case-study-scope-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  margin-block: 24px;
-}
-
-.case-study-scope-metrics > div {
-  display: flex;
-  flex-direction: column-reverse;
+.case-study-live-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
-}
-
-.case-study-scope-metrics dt,
-.case-study-scope > p {
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1px solid #b10e1e;
+  border-radius: 4px;
+  background: #b10e1e;
+  color: #fff;
   font-size: 16px;
-  line-height: 1.5;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms ease;
 }
 
-.case-study-scope-metrics dd {
-  margin: 0;
-  font-size: clamp(40px, 5vw, 64px);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
+.case-study-live-button:hover {
+  background: #8e0b18;
 }
 
-.case-study-scope > p {
-  max-width: 48rem;
-  margin: 0;
+.case-study-live-button:focus-visible {
+  outline: 3px solid #007eb5;
+  outline-offset: 4px;
 }
 
 .case-study-screenshot-carousel .case-study-carousel-slide {
@@ -1994,10 +1987,6 @@
 
 @media (max-width: 768px) {
   .case-study-hero-responsive .case-study-meta {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .case-study-scope-metrics {
     grid-template-columns: minmax(0, 1fr);
   }
 

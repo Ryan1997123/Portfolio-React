@@ -234,6 +234,20 @@ export function CaseStudyPage() {
                 </span>
               )}
             </div>)}
+            {project.liveUrl && (
+              <div className="case-study-live-action">
+                <a
+                  className="case-study-live-button"
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("viewLiveWebsite")}
+                  <span aria-hidden="true"> ↗</span>
+                  <span className="sr-only"> ({t("opensInNewTab")})</span>
+                </a>
+              </div>
+            )}
             <div className="case-study-meta">
               <div>
                 <p className="case-study-label">{t("roleHeading")}</p>
@@ -261,20 +275,6 @@ export function CaseStudyPage() {
               </div>
             </div>
           </motion.div>
-          {project.scopeMetrics && (
-            <section className="case-study-scope" aria-labelledby="case-study-scope-heading">
-              <h2 id="case-study-scope-heading" className="case-study-label">{t("projectScopeHeading")}</h2>
-              <dl className="case-study-scope-metrics">
-                {project.scopeMetrics.map(({ value, labelKey }) => (
-                  <div key={labelKey}>
-                    <dt>{t(labelKey)}</dt>
-                    <dd>{value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p>{t("scopeMetricsNote")}</p>
-            </section>
-          )}
           <CaseStudySection
             number="01"
             title={t("overview").replace(/^01 \/ /, "")}

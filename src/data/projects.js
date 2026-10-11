@@ -33,12 +33,8 @@ export const projects = [
     role: 'Website layout and UX/UI design alongside one other designer',
     tools: 'Figma',
     heroImage: 'imaavy-caregiver-hero',
+    liveUrl: 'https://www.imaavy.com/',
     color: 'cyan',
-    scopeMetrics: [
-      { value: 2, labelKey: 'designersMetric' },
-      { value: 2, labelKey: 'deviceFormatsMetric' },
-      { value: 17, labelKey: 'showcasedScreensMetric' },
-    ],
     outcomes: [
       'Patient-friendly condition education and support pathways',
       'Consistent desktop and mobile layouts',

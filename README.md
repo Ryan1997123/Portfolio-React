@@ -10,15 +10,14 @@ The IMAAVY Caregiver Resource case study uses the supplied images in
 `src/assets/imaavy caregiver/`. Its `heroScreens` show scaled desktop and phone
 landing images side by side in browser and phone-browser mockups, with full-size
 image links. The decorative browser controls are not interactive and are hidden
-from assistive technology. The remaining screens
+from assistive technology. A `liveUrl` button beneath the header mockups opens
+the live website in a new tab. The remaining screens
 appear in the bottom `finalImages` carousel, with each desktop followed by its
 matching mobile screens, including both mobile infusion locator views.
 `resourceLinks` follow the carousel, and `figmaEmbedAtEnd` places the Figma embed
 at the bottom of the case study. The supplied `Typography.png` is a sitemap and
 is labeled as such in the research section. The carousel presents selected
-screens, not the complete website. `scopeMetrics` record the confirmed scope:
-2 designers, 2 device formats, and 17 showcased screens (2 header previews plus
-15 carousel images), rather than unverified usability or business outcomes.
+screens, not the complete website.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
