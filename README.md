@@ -8,7 +8,8 @@ work page, in case-study navigation, and in the prerendered routes and sitemap.
 
 The IMAAVY Caregiver Resource case study uses the supplied images in
 `src/assets/imaavy caregiver/`. Its header uses the same responsive thumbnail
-mockup and frame sizing as ICOTYDE, with `heroScreens` providing full-size desktop
+mockup as ICOTYDE in a shorter 21:9 frame, with the uncropped desktop and mobile
+frames centered side by side, and `heroScreens` providing full-size desktop
 and mobile image links underneath. The decorative browser controls are not interactive and are hidden
 from assistive technology. A `liveUrl` button beneath the header mockups opens
 the live website in a new tab. The introductory paragraph has extra vertical
