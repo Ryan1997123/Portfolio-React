@@ -18,7 +18,7 @@ matching mobile screens, including both mobile infusion locator views.
 at the bottom of the case study. The supplied `Typography.png` is a sitemap and
 is labeled as such in the research section. The carousel presents selected
 screens, not the complete website.
-The caregiver and ICOTYDE withMe HCP case studies enable `horizontalSections`: on screens at least
+Every case study enables `horizontalSections`: on screens at least
 1024px wide and 640px tall, sections 01–06 are pinned and vertical scrolling
 moves them horizontally with Motion (`useScroll`/`useTransform`) parallax, before
 the page continues vertically to the resource links (if any) and the Figma
