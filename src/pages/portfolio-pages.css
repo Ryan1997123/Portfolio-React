@@ -1889,13 +1889,18 @@
   padding-top: 24px;
 }
 
+.imaavy-case-study .imaavy-case-study-intro {
+  padding-bottom: 16px;
+}
+
 .imaavy-case-study-intro > p:last-child {
-  padding-block: 20px;
+  padding-top: 20px;
+  padding-bottom: 0;
 }
 
 @media (min-width: 1024px) {
   .imaavy-case-study-intro > p:last-child {
-    padding-block: 32px;
+    padding-top: 32px;
   }
 }
 
