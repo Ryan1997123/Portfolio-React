@@ -187,6 +187,7 @@ export function CaseStudyPage() {
     <SiteLayout>
       <div className="case-study-page">
         <PageIntro
+          className={project.slug === "imaavy-caregiver-resource" ? "imaavy-case-study-intro" : ""}
           eyebrow={[project.category, project.year].filter(Boolean).join(" / ")}
           title={project.title}
           body={project.description}

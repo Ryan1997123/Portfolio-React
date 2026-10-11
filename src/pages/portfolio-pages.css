@@ -1873,6 +1873,22 @@
   width: 100%;
 }
 
+.imaavy-case-study-intro > p:last-child {
+  padding-block: 20px;
+}
+
+@media (min-width: 1024px) {
+  .case-study-hero-devices {
+    width: 100%;
+    max-width: 880px;
+    margin-inline: auto;
+  }
+
+  .imaavy-case-study-intro > p:last-child {
+    padding-block: 32px;
+  }
+}
+
 .case-study-bottom-figma {
   margin-top: 48px;
 }

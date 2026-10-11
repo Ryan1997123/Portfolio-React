@@ -11,7 +11,9 @@ The IMAAVY Caregiver Resource case study uses the supplied images in
 landing images side by side in browser and phone-browser mockups, with full-size
 image links. The decorative browser controls are not interactive and are hidden
 from assistive technology. A `liveUrl` button beneath the header mockups opens
-the live website in a new tab. The remaining screens
+the live website in a new tab. On desktop, the header gallery is centered and
+capped at 880px; the introductory paragraph has extra vertical padding.
+The remaining screens
 appear in the bottom `finalImages` carousel, with each desktop followed by its
 matching mobile screens, including both mobile infusion locator views.
 `resourceLinks` follow the carousel, and `figmaEmbedAtEnd` places the Figma embed
