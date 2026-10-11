@@ -174,7 +174,7 @@ function ProjectsIndex() {
                     aria-hidden="true"
                   >
                     <div className="project-preview-canvas">
-                      <span>CASE STUDY / {project.year}</span>
+                      <span>{["CASE STUDY", project.year].filter(Boolean).join(" / ")}</span>
                       <strong>{project.title}</strong>
                     </div>
                     <span className="project-preview-category">

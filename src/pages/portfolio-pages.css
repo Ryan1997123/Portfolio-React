@@ -1679,6 +1679,330 @@
   border: 0;
 }
 
+.case-study-device-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 0.4fr);
+  align-items: start;
+  gap: 48px 32px;
+}
+
+.case-study-hero-responsive .case-study-meta {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.case-study-hero-devices {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.28fr);
+  gap: clamp(12px, 3vw, 40px);
+}
+
+.case-study-hero-devices .case-study-device .case-study-device-screen {
+  height: auto;
+  overflow: hidden;
+}
+
+.case-study-hero-devices .case-study-device-phone {
+  width: 100%;
+}
+
+.case-study-bottom-figma {
+  margin-top: 48px;
+}
+
+.case-study-scope {
+  margin-top: 48px;
+  padding-block: 24px;
+  border-block: 1px solid rgb(128 128 128 / 0.35);
+}
+
+.case-study-scope-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-block: 24px;
+}
+
+.case-study-scope-metrics > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 12px;
+}
+
+.case-study-scope-metrics dt,
+.case-study-scope > p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.case-study-scope-metrics dd {
+  margin: 0;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.case-study-scope > p {
+  max-width: 48rem;
+  margin: 0;
+}
+
+.case-study-screenshot-carousel .case-study-carousel-slide {
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  aspect-ratio: auto;
+}
+
+.case-study-screenshot-carousel .case-study-carousel-slide img {
+  min-height: 0;
+  flex: 1;
+  object-fit: contain;
+  background: #fff;
+}
+
+.case-study-carousel-caption {
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.case-study-screenshot-carousel .case-study-carousel,
+.case-study-screenshot-carousel .case-study-carousel-counter {
+  grid-column: 1 / -1;
+}
+
+.case-study-device-card {
+  min-width: 0;
+  margin: 0;
+}
+
+.case-study-device-card-desktop {
+  grid-column: 1;
+}
+
+.case-study-device-card-phone {
+  grid-column: 2;
+}
+
+.case-study-device {
+  overflow: hidden;
+  border: 8px solid #292929;
+  background: #292929;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+}
+
+.case-study-device-desktop {
+  border: 1px solid #737373;
+  border-radius: 12px;
+  background: #e8e8ed;
+}
+
+.case-study-browser-chrome {
+  color: #484851;
+  font-size: clamp(6px, 1vw, 13px);
+  background: #e8e8ed;
+}
+
+.case-study-browser-chrome svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+}
+
+.case-study-browser-tabs,
+.case-study-browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.6em 1em;
+}
+
+.case-study-window-controls {
+  display: flex;
+  gap: 0.5em;
+}
+
+.case-study-window-controls i {
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background: #ff6058;
+}
+
+.case-study-window-controls i:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.case-study-window-controls i:nth-child(3) {
+  background: #28c840;
+}
+
+.case-study-browser-tab {
+  display: flex;
+  justify-content: space-between;
+  width: 32%;
+  padding: 0.5em 0.8em;
+  border-radius: 6px 6px 0 0;
+  background: #f8f8fa;
+}
+
+.case-study-browser-toolbar {
+  background: #f8f8fa;
+  border-bottom: 1px solid #d7d7dc;
+}
+
+.case-study-browser-address {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0.6em;
+  padding: 0.45em 0.8em;
+  border-radius: 20px;
+  background: #eaeaee;
+}
+
+.case-study-browser-menu {
+  font-weight: 700;
+}
+
+.case-study-device-screen {
+  height: clamp(240px, 32vw, 440px);
+  overflow-y: auto;
+  background: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: #767676 #f1f1f1;
+}
+
+.case-study-device-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-study-device-phone {
+  width: min(100%, 260px);
+  margin-inline: auto;
+  border: clamp(3px, 0.5vw, 7px) solid #18181a;
+  border-radius: clamp(12px, 2.5vw, 36px);
+  background: #f7f7fa;
+  box-shadow: 0 0 0 1px #77777b, 0 0 0 3px #343437, 0 16px 40px rgb(0 0 0 / 0.3);
+}
+
+.case-study-phone-chrome,
+.case-study-phone-bottom {
+  color: #242429;
+  background: #f7f7fa;
+  font-size: clamp(4px, 0.9vw, 12px);
+}
+
+.case-study-phone-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4em;
+  padding: 0.8em 0.8em 0.6em;
+  font-weight: 600;
+}
+
+.case-study-phone-camera {
+  width: 28%;
+  height: 1.2em;
+  border-radius: 20px;
+  background: #18181a;
+}
+
+.case-study-phone-signals,
+.case-study-phone-address,
+.case-study-phone-address > span,
+.case-study-phone-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.case-study-phone-chrome svg,
+.case-study-phone-bottom svg {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+
+.case-study-phone-address {
+  justify-content: space-between;
+  margin: 0.2em 0.6em 0.6em;
+  padding: 0.6em 0.5em;
+  border-radius: 0.6em;
+  background: #e8e8ed;
+}
+
+.case-study-phone-toolbar {
+  justify-content: space-between;
+  padding: 0.8em 1em;
+  border-top: 1px solid #d7d7dc;
+}
+
+.case-study-phone-home {
+  display: block;
+  width: 36%;
+  height: 0.3em;
+  margin: 0.2em auto 0.5em;
+  border-radius: 8px;
+  background: #18181a;
+}
+
+.case-study-device-phone .case-study-device-screen {
+  height: 480px;
+  border-radius: 0;
+}
+
+.case-study-device-card figcaption {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.case-study-device-card figcaption p {
+  margin: 0 0 8px;
+}
+
+.case-study-device-card a,
+.case-study-resource-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.case-study-device-screen:focus-visible,
+.case-study-device-card a:focus-visible,
+.case-study-resource-links a:focus-visible {
+  outline: 3px solid #007eb5;
+  outline-offset: -3px;
+}
+
+.case-study-resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+  .case-study-hero-responsive .case-study-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case-study-scope-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+}
+
 .case-study-image-1 {
   background-image: linear-gradient(45deg, rgb(245 243 239 / 0.08), transparent 42%), linear-gradient(135deg, transparent 34%, rgb(177 14 30 / 0.54));
 }

@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ScrambleText } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight, ArrowClockwise, LockSimple, WifiHigh, BatteryFull, CellSignalFull, Export, Copy, Plus } from "@phosphor-icons/react";
 import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
@@ -29,6 +30,23 @@ import lillyBoothScreen7 from "../assets/lilly_booth/7.png";
 import lillyBoothScreen8 from "../assets/lilly_booth/8.png";
 import lillyBoothScreen9 from "../assets/lilly_booth/9.png";
 import lillyBoothScreen10 from "../assets/lilly_booth/10.png";
+import imaavySitemap from "../assets/imaavy caregiver/Typography.png";
+import imaavyDesktopAccessibility from "../assets/imaavy caregiver/2_03_1.2 Home - AccessiBe Expanded.png";
+import imaavyDesktopHome from "../assets/imaavy caregiver/2_05_1.4 Home_Opt4.png";
+import imaavyDesktopGmg from "../assets/imaavy caregiver/2_07_1.6 About gMG.png";
+import imaavyDesktopAbout from "../assets/imaavy caregiver/2_09_1.9 About IMAAVY - MG-ADL.png";
+import imaavyDesktopGetStarted from "../assets/imaavy caregiver/2_12_1.12 Get Started.png";
+import imaavyDesktopResources from "../assets/imaavy caregiver/2_15_1.15 Resources.png";
+import imaavyDesktopLookup from "../assets/imaavy caregiver/2_17_1.18 Lookup.png";
+import imaavyMobileLanding from "../assets/imaavy caregiver/3_02_2.1 Landing.png";
+import imaavyMobileHome from "../assets/imaavy caregiver/3_04_2.6 Home.png";
+import imaavyMobileHomeExtended from "../assets/imaavy caregiver/3_08_2.5 Home.png";
+import imaavyMobileGmg from "../assets/imaavy caregiver/3_09_2.7 About gMG.png";
+import imaavyMobileAbout from "../assets/imaavy caregiver/3_10_2.9 About IMAAVY.png";
+import imaavyMobileGetStarted from "../assets/imaavy caregiver/3_12_2.11 Get Started.png";
+import imaavyMobileResources from "../assets/imaavy caregiver/3_14_2.13 Resources.png";
+import imaavyMobileLookup from "../assets/imaavy caregiver/3_18_2.19 Lookup.png";
+import imaavyMobileLookupMap from "../assets/imaavy caregiver/3_18_2.19 Lookup-1.png";
 import { getHeroImageSource } from "../data/project-images";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
@@ -75,6 +93,24 @@ const caseStudyImages = {
   "lilly-booth-screen-9": lillyBoothScreen9,
   "lilly-booth-screen-10": lillyBoothScreen10,
   "lilly-booth-hero": getHeroImageSource("lilly-booth-hero"),
+  "imaavy-caregiver-sitemap": imaavySitemap,
+  "imaavy-caregiver-desktop-landing": getHeroImageSource("imaavy-caregiver-hero"),
+  "imaavy-caregiver-desktop-accessibility": imaavyDesktopAccessibility,
+  "imaavy-caregiver-desktop-home": imaavyDesktopHome,
+  "imaavy-caregiver-desktop-gmg": imaavyDesktopGmg,
+  "imaavy-caregiver-desktop-about": imaavyDesktopAbout,
+  "imaavy-caregiver-desktop-get-started": imaavyDesktopGetStarted,
+  "imaavy-caregiver-desktop-resources": imaavyDesktopResources,
+  "imaavy-caregiver-desktop-lookup": imaavyDesktopLookup,
+  "imaavy-caregiver-mobile-landing": imaavyMobileLanding,
+  "imaavy-caregiver-mobile-home": imaavyMobileHome,
+  "imaavy-caregiver-mobile-home-extended": imaavyMobileHomeExtended,
+  "imaavy-caregiver-mobile-gmg": imaavyMobileGmg,
+  "imaavy-caregiver-mobile-about": imaavyMobileAbout,
+  "imaavy-caregiver-mobile-get-started": imaavyMobileGetStarted,
+  "imaavy-caregiver-mobile-resources": imaavyMobileResources,
+  "imaavy-caregiver-mobile-lookup": imaavyMobileLookup,
+  "imaavy-caregiver-mobile-lookup-map": imaavyMobileLookupMap,
   ...sftFinalImages,
 };
 
@@ -151,18 +187,20 @@ export function CaseStudyPage() {
     <SiteLayout>
       <div className="case-study-page">
         <PageIntro
-          eyebrow={`${project.category} / ${project.year}`}
+          eyebrow={[project.category, project.year].filter(Boolean).join(" / ")}
           title={project.title}
           body={project.description}
         />
         <section className="case-study-content mx-auto max-w-7xl px-6 pb-24 sm:px-10 lg:px-14">
           <motion.div
-            className="case-study-hero"
+            className={`case-study-hero${project.heroScreens ? " case-study-hero-responsive" : ""}`}
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={revealTransition}
           >
-            <div
+            {project.heroScreens ? (
+              <ResponsiveHeroScreens items={project.heroScreens} />
+            ) : (<div
               className={`case-study-visual case-study-visual-clickable case-study-visual-${project.color}${project.heroImage ? " case-study-visual-image" : ""}`}
               role="button"
               tabIndex="0"
@@ -195,7 +233,7 @@ export function CaseStudyPage() {
                   Case study / {project.title}
                 </span>
               )}
-            </div>
+            </div>)}
             <div className="case-study-meta">
               <div>
                 <p className="case-study-label">{t("roleHeading")}</p>
@@ -223,6 +261,20 @@ export function CaseStudyPage() {
               </div>
             </div>
           </motion.div>
+          {project.scopeMetrics && (
+            <section className="case-study-scope" aria-labelledby="case-study-scope-heading">
+              <h2 id="case-study-scope-heading" className="case-study-label">{t("projectScopeHeading")}</h2>
+              <dl className="case-study-scope-metrics">
+                {project.scopeMetrics.map(({ value, labelKey }) => (
+                  <div key={labelKey}>
+                    <dt>{t(labelKey)}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p>{t("scopeMetricsNote")}</p>
+            </section>
+          )}
           <CaseStudySection
             number="01"
             title={t("overview").replace(/^01 \/ /, "")}
@@ -369,7 +421,7 @@ export function CaseStudyPage() {
             >
               {project.solution}
             </motion.p>
-            {project.figmaEmbed ? (
+            {!project.figmaEmbedAtEnd && (project.figmaEmbed ? (
               <FigmaEmbed
                 src={project.figmaEmbed}
                 title={`${project.title} final design in Figma`}
@@ -391,7 +443,7 @@ export function CaseStudyPage() {
                   })
                 }
               />
-            )}
+            ))}
           </motion.section>
           {project.finalImages && project.finalImages.length > 0 && (
             <CaseStudyCarousel
@@ -400,6 +452,25 @@ export function CaseStudyPage() {
               prefersReducedMotion={prefersReducedMotion}
               onOpen={openLightbox}
             />
+          )}
+          {project.resourceLinks && (
+            <div className="case-study-resource-links">
+              {project.resourceLinks.map(({ labelKey, href }) => (
+                <a key={href} href={href} target="_blank" rel="noopener noreferrer">
+                  {t(labelKey)}
+                  <span aria-hidden="true"> ↗</span>
+                  <span className="sr-only"> ({t("opensInNewTab")})</span>
+                </a>
+              ))}
+            </div>
+          )}
+          {project.figmaEmbedAtEnd && (
+            <section className="case-study-bottom-figma" aria-label={t("viewFigmaDesign")}>
+              <FigmaEmbed
+                src={project.figmaEmbed}
+                title={`${project.title} final design in Figma`}
+              />
+            </section>
           )}
           <div className="case-study-nav flex items-center justify-between">
             <Link to="/work" className="case-study-back">
@@ -423,6 +494,68 @@ export function CaseStudyPage() {
         )}
       </div>
     </SiteLayout>
+  );
+}
+
+function ResponsiveHeroScreens({ items }) {
+  const { t } = useLanguage();
+
+  return (
+    <div className="case-study-device-gallery case-study-hero-devices">
+      {items.map(({ label, image, device }) => {
+        const source = resolveCaseStudyImage(image);
+
+        return (
+          <figure className={`case-study-device-card case-study-device-card-${device}`} key={image}>
+            <div className={`case-study-device case-study-device-${device}`}>
+              {device === "desktop" ? (
+                <div className="case-study-browser-chrome" aria-hidden="true">
+                  <div className="case-study-browser-tabs">
+                    <div className="case-study-window-controls"><i /><i /><i /></div>
+                    <span className="case-study-browser-tab">IMAAVY <span>×</span></span>
+                    <Plus />
+                  </div>
+                  <div className="case-study-browser-toolbar">
+                    <ArrowLeft /><ArrowRight /><ArrowClockwise />
+                    <div className="case-study-browser-address"><LockSimple /><span>imaavy.com</span></div>
+                    <span className="case-study-browser-menu">···</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="case-study-phone-chrome" aria-hidden="true">
+                  <div className="case-study-phone-status">
+                    <span>9:41</span><span className="case-study-phone-camera" />
+                    <span className="case-study-phone-signals"><CellSignalFull /><WifiHigh /><BatteryFull /></span>
+                  </div>
+                  <div className="case-study-phone-address">
+                    <span>aA</span><span><LockSimple />imaavy.com</span><ArrowClockwise />
+                  </div>
+                </div>
+              )}
+              <div
+                className="case-study-device-screen"
+              >
+                <img src={source} alt={label} decoding="async" />
+              </div>
+              {device === "phone" && (
+                <div className="case-study-phone-bottom" aria-hidden="true">
+                  <div className="case-study-phone-toolbar"><ArrowLeft /><ArrowRight /><Export /><Copy /></div>
+                  <span className="case-study-phone-home" />
+                </div>
+              )}
+            </div>
+            <figcaption>
+              <p>{label}</p>
+              <a href={source} target="_blank" rel="noopener noreferrer">
+                {t("viewFullSizeImage")}
+                <span aria-hidden="true"> ↗</span>
+                <span className="sr-only"> ({t("opensInNewTab")})</span>
+              </a>
+            </figcaption>
+          </figure>
+        );
+      })}
+    </div>
   );
 }
 
@@ -588,7 +721,7 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
 
   return (
     <motion.section
-      className="case-study-section case-study-carousel-section"
+      className={`case-study-section case-study-carousel-section${project.finalImageLayout === "screenshots" ? " case-study-screenshot-carousel" : ""}`}
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -599,7 +732,7 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
     >
       <div className="case-study-section-heading">
         <p className="case-study-label">{t("finalImagesLabel")}</p>
-        <h2>{t("finalImagesSub")}</h2>
+        <h2>{t(project.finalImageLayout === "screenshots" ? "selectedFinalImagesSub" : "finalImagesSub")}</h2>
       </div>
       <div className="case-study-carousel">
         <button
@@ -611,7 +744,22 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
         >
           ←
         </button>
-        <div className="case-study-carousel-track" ref={trackRef}>
+        <div
+          className="case-study-carousel-track"
+          ref={trackRef}
+          onScroll={(event) => {
+            const track = event.currentTarget;
+            const closestIndex = Array.from(track.children).reduce(
+              (closest, slide, index, slides) =>
+                Math.abs(slide.offsetLeft - track.offsetLeft - track.scrollLeft) <
+                Math.abs(slides[closest].offsetLeft - track.offsetLeft - track.scrollLeft)
+                  ? index
+                  : closest,
+              0,
+            );
+            setActiveIndex(closestIndex);
+          }}
+        >
           {items.map((item, index) => (
             <button
               key={item.image}
@@ -633,6 +781,9 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
                 alt={item.label}
                 loading="lazy"
               />
+              {project.finalImageLayout === "screenshots" && (
+                <span className="case-study-carousel-caption">{item.label}</span>
+              )}
             </button>
           ))}
         </div>

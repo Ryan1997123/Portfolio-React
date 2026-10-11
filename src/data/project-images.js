@@ -4,6 +4,7 @@ import sibosHero from "../assets/sibos_tote/hero.png";
 import icotydeOverview from "../assets/icotyde-overview.webp";
 import sftHero from "../assets/secure_file_transfer/hero.jpeg";
 import lillyBoothHero from "../assets/lilly_booth/lilly.webp";
+import imaavyCaregiverHero from "../assets/imaavy caregiver/2_02_1.1 Landing.png";
 
 export const heroImages = {
   "gaming-gear-highfidelity": gamingGearHighFidelity,
@@ -12,6 +13,7 @@ export const heroImages = {
   "icotyde-overview": icotydeOverview,
   "sft-hero": sftHero,
   "lilly-booth-hero": lillyBoothHero,
+  "imaavy-caregiver-hero": imaavyCaregiverHero,
 };
 
 export function getHeroImageSource(heroImage) {
