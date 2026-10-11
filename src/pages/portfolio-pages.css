@@ -1894,14 +1894,7 @@
 }
 
 .imaavy-case-study-intro > p:last-child {
-  padding-top: 20px;
-  padding-bottom: 0;
-}
-
-@media (min-width: 1024px) {
-  .imaavy-case-study-intro > p:last-child {
-    padding-top: 32px;
-  }
+  padding-block: 8px;
 }
 
 .case-study-bottom-figma {
