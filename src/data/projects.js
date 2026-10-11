@@ -28,6 +28,7 @@ export const projects = [
   },
   {
     slug: 'imaavy-caregiver-resource',
+    protected: true,
     horizontalSections: true,
     title: 'IMAAVY Caregiver Resource',
     category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',

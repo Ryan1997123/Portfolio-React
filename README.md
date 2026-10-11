@@ -18,6 +18,9 @@ matching mobile screens, including both mobile infusion locator views.
 at the bottom of the case study. The supplied `Typography.png` is a sitemap and
 is labeled as such in the research section. The carousel presents selected
 screens, not the complete website.
+IMAAVY uses the same password and session unlock as the other protected projects.
+This is a client-side privacy gate, not secure access control: bundled content and
+images remain publicly accessible. Do not rely on it for confidential material.
 Every case study enables `horizontalSections`: on screens at least
 1024px wide and 640px tall, sections 01–06 are pinned and vertical scrolling
 moves them horizontally with Motion (`useScroll`/`useTransform`) parallax, before
@@ -25,10 +28,13 @@ the page continues vertically to the resource links (if any) and the Figma
 embed (`figmaEmbedAtEnd`). Smaller
 screens and reduced-motion preferences keep the normal vertical layout.
 
-On the Work page, a project's optional `thumbnail` field renders its card image as
-a device mockup (`browser`, `responsive`, `phones`, or `tablet`) using cropped
-screens from `src/assets/thumbnails/`. Projects without it keep their regular
-cover image.
+A project's optional `thumbnail` field renders its Work card and case-study
+header as the same device mockup (`browser`, `responsive`, `phones`, or `tablet`)
+using cropped screens from `src/assets/thumbnails/`. Case-study headers span the
+content width in a 16:9 frame, with project details beneath. An explicit
+`heroScreens` gallery takes precedence, preserving IMAAVY's existing desktop and
+phone header with full-size image links. Projects without either keep their
+regular cover image.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

@@ -50,7 +50,7 @@ import imaavyMobileLookupMap from "../assets/imaavy caregiver/3_18_2.19 Lookup-1
 import { getHeroImageSource } from "../data/project-images";
 import { projects } from "../data/projects";
 import { useLanguage } from "../lib/LanguageContext";
-import { PageIntro, SiteLayout } from "./site-layout";
+import { PageIntro, ProjectMockup, SiteLayout } from "./site-layout";
 
 const sftFinalImages = Object.fromEntries(
   Object.entries(
@@ -193,13 +193,21 @@ export function CaseStudyPage() {
         />
         <section className="case-study-content mx-auto max-w-7xl px-6 pb-24 sm:px-10 lg:px-14">
           <motion.div
-            className={`case-study-hero${project.heroScreens ? " case-study-hero-responsive" : ""}`}
+            className={`case-study-hero${project.heroScreens || project.thumbnail ? " case-study-hero-responsive" : ""}`}
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={revealTransition}
           >
             {project.heroScreens ? (
               <ResponsiveHeroScreens items={project.heroScreens} />
+            ) : project.thumbnail ? (
+              <div
+                className="case-study-thumbnail-hero"
+                role="img"
+                aria-label={`${project.title} design preview`}
+              >
+                <ProjectMockup thumbnail={project.thumbnail} />
+              </div>
             ) : (<div
               className={`case-study-visual case-study-visual-clickable case-study-visual-${project.color}${project.heroImage ? " case-study-visual-image" : ""}`}
               role="button"

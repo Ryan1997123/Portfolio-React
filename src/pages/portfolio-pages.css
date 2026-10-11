@@ -1343,6 +1343,13 @@
   align-items: start;
 }
 
+.case-study-thumbnail-hero {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgb(245 243 239 / 0.1);
+}
+
 .case-study-visual {
   display: flex;
   min-height: 420px;
@@ -3362,7 +3369,7 @@
   background: rgb(25 24 23 / 0.16);
 }
 
-/* Work page device mockup thumbnails */
+/* Shared Work card and case-study header device mockups */
 .project-mockup {
   position: relative;
   width: 100%;

@@ -370,8 +370,8 @@ function MockupPhone({ screen, className = "", statusBar = false }) {
   );
 }
 
-// Decorative device frames for Work page thumbnails; card text carries the accessible name.
-function ProjectMockup({ thumbnail }) {
+// Decorative device frames; the surrounding card or header carries the accessible name.
+export function ProjectMockup({ thumbnail }) {
   const { mockup, screens, url } = thumbnail;
 
   return (
