@@ -76,7 +76,6 @@ export const translations = {
     emailMe: "Email me here",
 
     overview: "01 / Overview",
-    caseStudyNavigation: "Case study sections",
     challenge: "02 / The Challenge",
     researchLabel: "03 / Research & Discovery",
     processLabel: "04 / Process & Iterations",
@@ -173,7 +172,6 @@ export const translations = {
     emailMe: "メールで連絡する",
 
     overview: "01 / 概要",
-    caseStudyNavigation: "ケーススタディのセクション",
     challenge: "02 / 課題",
     researchLabel: "03 / リサーチと発見",
     processLabel: "04 / プロセスとイテレーション",
@@ -270,7 +268,6 @@ export const translations = {
     emailMe: "이메일 보내기",
 
     overview: "01 / 개요",
-    caseStudyNavigation: "사례 연구 섹션",
     challenge: "02 / 과제",
     researchLabel: "03 / 리서치 및 발견",
     processLabel: "04 / 프로세스 및 반복",

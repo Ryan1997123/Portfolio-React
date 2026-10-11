@@ -1,6 +1,6 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ScrambleText } from "motion-plus/react";
-import { useEffect, useRef, useState } from "react";
+import { Children, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ArrowClockwise, LockSimple, WifiHigh, BatteryFull, CellSignalFull, Export, Copy, Plus } from "@phosphor-icons/react";
 import googleWires from "../assets/gaming_gear/Google_wires.png";
@@ -275,20 +275,19 @@ export function CaseStudyPage() {
               </div>
             </div>
           </motion.div>
+          <HorizontalScrollSections
+            enabled={project.horizontalSections}
+            prefersReducedMotion={prefersReducedMotion}
+          >
           <CaseStudySection
             number="01"
-            parallax={project.sectionNavigation}
             title={t("overview").replace(/^01 \/ /, "")}
             body={project.overview}
             index={0}
             prefersReducedMotion={prefersReducedMotion}
           />
-          {project.sectionNavigation && (
-            <CaseStudySectionNavigation prefersReducedMotion={prefersReducedMotion} />
-          )}
           <CaseStudySection
             number="02"
-            parallax={project.sectionNavigation}
             title={t("challenge").replace(/^02 \/ /, "")}
             body={project.problem}
             index={1}
@@ -296,7 +295,6 @@ export function CaseStudyPage() {
           />
           <CaseStudySection
             number="03"
-            parallax={project.sectionNavigation}
             title={t("researchLabel").replace(/^03 \/ /, "")}
             body={project.research}
             index={2}
@@ -325,7 +323,7 @@ export function CaseStudyPage() {
               delay: prefersReducedMotion ? 0 : 0.08,
             }}
           >
-            <ParallaxSectionHeading enabled={project.sectionNavigation && !prefersReducedMotion}>
+            <div className="case-study-section-heading">
               <motion.p
                 className="case-study-label"
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -18 }}
@@ -349,7 +347,7 @@ export function CaseStudyPage() {
               >
                 {t("processSub")}
               </motion.h2>
-            </ParallaxSectionHeading>
+            </div>
             <motion.p
               className="case-study-section-copy"
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
@@ -394,7 +392,7 @@ export function CaseStudyPage() {
               delay: prefersReducedMotion ? 0 : 0.08,
             }}
           >
-            <ParallaxSectionHeading enabled={project.sectionNavigation && !prefersReducedMotion}>
+            <div className="case-study-section-heading">
               <motion.p
                 className="case-study-label"
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 18 }}
@@ -418,7 +416,7 @@ export function CaseStudyPage() {
               >
                 {t("solutionSub")}
               </motion.h2>
-            </ParallaxSectionHeading>
+            </div>
             <motion.p
               className="case-study-section-copy"
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
@@ -463,6 +461,7 @@ export function CaseStudyPage() {
               onOpen={openLightbox}
             />
           )}
+          </HorizontalScrollSections>
           {project.resourceLinks && (
             <div className="case-study-resource-links">
               {project.resourceLinks.map(({ labelKey, href }) => (
@@ -649,79 +648,121 @@ function PasswordGate({ title, onUnlock }) {
 
 const sectionLabelKeys = ["overview", "challenge", "researchLabel", "processLabel", "solutionLabel", "finalImagesLabel"];
 
-function CaseStudySectionNavigation({ prefersReducedMotion }) {
-  const { t } = useLanguage();
-  const navRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+function HorizontalScrollSections({ enabled, prefersReducedMotion, children }) {
+  const [isWideViewport, setIsWideViewport] = useState(false);
 
   useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const threshold = Math.max(112, navRef.current?.getBoundingClientRect().height || 0) + 40;
-      let current = 0;
-      sectionLabelKeys.forEach((_, index) => {
-        const section = document.getElementById(`case-study-section-0${index + 1}`);
-        if (section && section.getBoundingClientRect().top <= threshold) current = index;
-      });
-      setActiveIndex(current);
-    };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
+    if (!enabled) return undefined;
+    const query = window.matchMedia("(min-width: 1024px) and (min-height: 640px)");
+    const update = () => setIsWideViewport(query.matches);
     update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [enabled]);
+
+  if (!enabled || prefersReducedMotion || !isWideViewport) return children;
+  return <HorizontalScrollTrack>{children}</HorizontalScrollTrack>;
+}
+
+function HorizontalScrollTrack({ children }) {
+  const { t } = useLanguage();
+  const panels = Children.toArray(children).filter(Boolean);
+  const outerRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const [distance, setDistance] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { scrollYProgress } = useScroll({ target: outerRef, offset: ["start start", "end end"] });
+  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+  const lastIndex = Math.max(panels.length - 1, 1);
+
+  useEffect(() => {
+    const measure = () => {
+      const lastPanel = trackRef.current?.lastElementChild;
+      if (!lastPanel || !viewportRef.current) return;
+      // Use panel geometry; scrollWidth also includes the translated parallax numbers.
+      setDistance(Math.max(0, lastPanel.offsetLeft + lastPanel.offsetWidth - viewportRef.current.clientWidth));
     };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(trackRef.current);
+    observer.observe(viewportRef.current);
+    return () => observer.disconnect();
   }, []);
 
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    setActiveIndex(Math.round(value * lastIndex));
+  });
+
+  // Keyboard focus inside an off-screen panel scrolls the page to the matching horizontal position.
+  const handleFocus = (event) => {
+    const panel = event.target.closest("[data-panel-index]");
+    if (!panel || !outerRef.current) return;
+    const index = Number(panel.dataset.panelIndex);
+    const top = outerRef.current.getBoundingClientRect().top + window.scrollY;
+    const target = top + (index / lastIndex) * distance;
+    if (Math.abs(window.scrollY - target) > 2) window.scrollTo({ top: target, behavior: "instant" });
+  };
+
   return (
-    <nav ref={navRef} className="case-study-section-navigation" aria-label={t("caseStudyNavigation")}>
-      <div className="case-study-section-links">
-        {sectionLabelKeys.map((key, index) => (
-          <a
-            key={key}
-            href={`#case-study-section-0${index + 1}`}
-            aria-current={activeIndex === index ? "step" : undefined}
-            onClick={(event) => {
-              if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-              const section = document.getElementById(`case-study-section-0${index + 1}`);
-              if (!section) return;
-              event.preventDefault();
-              section.focus({ preventScroll: true });
-              section.scrollIntoView({ behavior: prefersReducedMotion ? "instant" : "smooth", block: "start" });
-              window.history.replaceState(null, "", `#${section.id}`);
-            }}
-          >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <span className="case-study-section-link-label">{t(key).replace(/^\d+ \/ /, "")}</span>
-            <span className="sr-only">{t(key).replace(/^\d+ \/ /, "")}</span>
-          </a>
-        ))}
+    <div
+      ref={outerRef}
+      className="case-study-horizontal-scroll"
+      style={{ height: `calc(100svh + ${distance}px)` }}
+    >
+      <div ref={viewportRef} className="case-study-horizontal-viewport" onFocus={handleFocus}>
+        <motion.div ref={trackRef} className="case-study-horizontal-track" style={{ x }}>
+          {panels.map((panel, index) => (
+            <HorizontalScrollPanel
+              key={panel.key ?? index}
+              index={index}
+              lastIndex={lastIndex}
+              progress={scrollYProgress}
+            >
+              {panel}
+            </HorizontalScrollPanel>
+          ))}
+        </motion.div>
+        <div className="case-study-horizontal-progress" aria-hidden="true">
+          <span>
+            {String(activeIndex + 1).padStart(2, "0")} / {String(panels.length).padStart(2, "0")}
+          </span>
+          <span className="case-study-horizontal-progress-label">
+            {t(sectionLabelKeys[activeIndex] ?? sectionLabelKeys[0]).replace(/^\d+ \/ /, "")}
+          </span>
+          <span className="case-study-horizontal-progress-bar">
+            <motion.span style={{ scaleX: scrollYProgress }} />
+          </span>
+        </div>
       </div>
-      <motion.div
-        className="case-study-section-progress"
-        aria-hidden="true"
-        animate={{ scaleX: (activeIndex + 1) / sectionLabelKeys.length }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.25 }}
-      />
-    </nav>
+    </div>
   );
 }
 
-function ParallaxSectionHeading({ enabled, children }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [16, -16]);
+function HorizontalScrollPanel({ index, lastIndex, progress, children }) {
+  const center = index / lastIndex;
+  const step = 1 / lastIndex;
+  // Keep offsets inside 0–1 so Motion can hardware-accelerate the scroll timeline.
+  const points = [
+    index > 0 && [center - step, 0],
+    [center, 1],
+    index < lastIndex && [center + step, 2],
+  ].filter(Boolean);
+  const range = points.map(([offset]) => offset);
+  const pick = (values) => points.map(([, slot]) => values[slot]);
+  const numberX = useTransform(progress, range, pick(["45vw", "0vw", "-45vw"]));
+  const contentX = useTransform(progress, range, pick([120, 0, -120]));
+  const contentOpacity = useTransform(progress, range, pick([0.35, 1, 0.35]));
 
   return (
-    <motion.div ref={ref} className="case-study-section-heading" style={{ y: enabled ? y : 0 }}>
-      {children}
-    </motion.div>
+    <div className="case-study-horizontal-panel" data-panel-index={index}>
+      <motion.span className="case-study-horizontal-number" style={{ x: numberX }} aria-hidden="true">
+        {String(index + 1).padStart(2, "0")}
+      </motion.span>
+      <motion.div className="case-study-horizontal-content" style={{ x: contentX, opacity: contentOpacity }}>
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
@@ -732,7 +773,6 @@ function CaseStudySection({
   index,
   prefersReducedMotion,
   children,
-  parallax,
 }) {
   const direction = index % 2 === 0 ? -1 : 1;
   const transition = prefersReducedMotion
@@ -753,7 +793,7 @@ function CaseStudySection({
       viewport={{ once: true, amount: 0.25 }}
       transition={transition}
     >
-      <ParallaxSectionHeading enabled={parallax && !prefersReducedMotion}>
+      <div className="case-study-section-heading">
         <motion.p
           className="case-study-label"
           initial={{
@@ -777,7 +817,7 @@ function CaseStudySection({
         >
           {title}
         </motion.h2>
-      </ParallaxSectionHeading>
+      </div>
       <motion.p
         className="case-study-section-copy"
         initial={{ opacity: 0, x: prefersReducedMotion ? 0 : direction * 24 }}
@@ -824,10 +864,10 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <ParallaxSectionHeading enabled={project.sectionNavigation && !prefersReducedMotion}>
+      <div className="case-study-section-heading">
         <p className="case-study-label">{t("finalImagesLabel")}</p>
         <h2>{t(project.finalImageLayout === "screenshots" ? "selectedFinalImagesSub" : "finalImagesSub")}</h2>
-      </ParallaxSectionHeading>
+      </div>
       <div className="case-study-carousel">
         <button
           type="button"
