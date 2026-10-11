@@ -18,6 +18,10 @@ matching mobile screens, including both mobile infusion locator views.
 at the bottom of the case study. The supplied `Typography.png` is a sitemap and
 is labeled as such in the research section. The carousel presents selected
 screens, not the complete website.
+The caregiver case study enables `sectionNavigation`: a sticky 01–06 navigator
+after Overview tracks the current section and offers jump links. Motion adds
+subtle scroll-linked heading parallax; reduced-motion preferences disable it
+and make section jumps immediate, without taking over normal scrolling.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

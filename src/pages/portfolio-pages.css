@@ -1573,6 +1573,79 @@
   border-top: 1px solid rgb(245 243 239 / 0.14);
   padding-top: 24px;
   overflow: clip;
+  scroll-margin-top: 112px;
+}
+
+.case-study-section-navigation {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  margin-top: 48px;
+  overflow: hidden;
+  border: 1px solid #777;
+  border-radius: 8px;
+  background: #171717;
+  color: #f5f3ef;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.16);
+}
+
+.case-study-section-links {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.case-study-section-links a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.case-study-section-links a > span:first-child {
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.case-study-section-links a[aria-current],
+.case-study-section-links a:hover {
+  background: #b10e1e;
+  color: #fff;
+}
+
+.case-study-section-links a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -4px;
+}
+
+.case-study-section-progress {
+  height: 3px;
+  background: #e63f50;
+  transform-origin: left;
+}
+
+.case-study-section-link-label + .sr-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .case-study-section-link-label {
+    display: none;
+  }
+
+  .case-study-section-link-label + .sr-only {
+    display: inline;
+  }
+
+  .case-study-section-links a {
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    min-height: 48px;
+  }
 }
 
 .case-study-section h2 {

@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ScrambleText } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -277,13 +277,18 @@ export function CaseStudyPage() {
           </motion.div>
           <CaseStudySection
             number="01"
+            parallax={project.sectionNavigation}
             title={t("overview").replace(/^01 \/ /, "")}
             body={project.overview}
             index={0}
             prefersReducedMotion={prefersReducedMotion}
           />
+          {project.sectionNavigation && (
+            <CaseStudySectionNavigation prefersReducedMotion={prefersReducedMotion} />
+          )}
           <CaseStudySection
             number="02"
+            parallax={project.sectionNavigation}
             title={t("challenge").replace(/^02 \/ /, "")}
             body={project.problem}
             index={1}
@@ -291,6 +296,7 @@ export function CaseStudyPage() {
           />
           <CaseStudySection
             number="03"
+            parallax={project.sectionNavigation}
             title={t("researchLabel").replace(/^03 \/ /, "")}
             body={project.research}
             index={2}
@@ -304,6 +310,8 @@ export function CaseStudyPage() {
             />
           </CaseStudySection>
           <motion.section
+            id="case-study-section-04"
+            tabIndex={-1}
             className="case-study-section case-study-process"
             initial={{
               opacity: 0,
@@ -317,7 +325,7 @@ export function CaseStudyPage() {
               delay: prefersReducedMotion ? 0 : 0.08,
             }}
           >
-            <div className="case-study-section-heading">
+            <ParallaxSectionHeading enabled={project.sectionNavigation && !prefersReducedMotion}>
               <motion.p
                 className="case-study-label"
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -18 }}
@@ -341,7 +349,7 @@ export function CaseStudyPage() {
               >
                 {t("processSub")}
               </motion.h2>
-            </div>
+            </ParallaxSectionHeading>
             <motion.p
               className="case-study-section-copy"
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
@@ -371,6 +379,8 @@ export function CaseStudyPage() {
             )}
           </motion.section>
           <motion.section
+            id="case-study-section-05"
+            tabIndex={-1}
             className="case-study-section case-study-solution"
             initial={{
               opacity: 0,
@@ -384,7 +394,7 @@ export function CaseStudyPage() {
               delay: prefersReducedMotion ? 0 : 0.08,
             }}
           >
-            <div className="case-study-section-heading">
+            <ParallaxSectionHeading enabled={project.sectionNavigation && !prefersReducedMotion}>
               <motion.p
                 className="case-study-label"
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 18 }}
@@ -408,7 +418,7 @@ export function CaseStudyPage() {
               >
                 {t("solutionSub")}
               </motion.h2>
-            </div>
+            </ParallaxSectionHeading>
             <motion.p
               className="case-study-section-copy"
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
@@ -637,6 +647,84 @@ function PasswordGate({ title, onUnlock }) {
   );
 }
 
+const sectionLabelKeys = ["overview", "challenge", "researchLabel", "processLabel", "solutionLabel", "finalImagesLabel"];
+
+function CaseStudySectionNavigation({ prefersReducedMotion }) {
+  const { t } = useLanguage();
+  const navRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const threshold = (navRef.current?.getBoundingClientRect().height || 0) + 40;
+      let current = 0;
+      sectionLabelKeys.forEach((_, index) => {
+        const section = document.getElementById(`case-study-section-0${index + 1}`);
+        if (section && section.getBoundingClientRect().top <= threshold) current = index;
+      });
+      setActiveIndex(current);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+
+  return (
+    <nav ref={navRef} className="case-study-section-navigation" aria-label={t("caseStudyNavigation")}>
+      <div className="case-study-section-links">
+        {sectionLabelKeys.map((key, index) => (
+          <a
+            key={key}
+            href={`#case-study-section-0${index + 1}`}
+            aria-current={activeIndex === index ? "step" : undefined}
+            onClick={(event) => {
+              if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              const section = document.getElementById(`case-study-section-0${index + 1}`);
+              if (!section) return;
+              event.preventDefault();
+              section.focus({ preventScroll: true });
+              section.scrollIntoView({ behavior: prefersReducedMotion ? "instant" : "smooth", block: "start" });
+              window.history.replaceState(null, "", `#${section.id}`);
+            }}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span className="case-study-section-link-label">{t(key).replace(/^\d+ \/ /, "")}</span>
+            <span className="sr-only">{t(key).replace(/^\d+ \/ /, "")}</span>
+          </a>
+        ))}
+      </div>
+      <motion.div
+        className="case-study-section-progress"
+        aria-hidden="true"
+        animate={{ scaleX: (activeIndex + 1) / sectionLabelKeys.length }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.25 }}
+      />
+    </nav>
+  );
+}
+
+function ParallaxSectionHeading({ enabled, children }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [16, -16]);
+
+  return (
+    <motion.div ref={ref} className="case-study-section-heading" style={{ y: enabled ? y : 0 }}>
+      {children}
+    </motion.div>
+  );
+}
+
 function CaseStudySection({
   number,
   title,
@@ -644,6 +732,7 @@ function CaseStudySection({
   index,
   prefersReducedMotion,
   children,
+  parallax,
 }) {
   const direction = index % 2 === 0 ? -1 : 1;
   const transition = prefersReducedMotion
@@ -652,6 +741,8 @@ function CaseStudySection({
 
   return (
     <motion.section
+      id={`case-study-section-${number}`}
+      tabIndex={-1}
       className="case-study-section"
       initial={{
         opacity: 0,
@@ -662,7 +753,7 @@ function CaseStudySection({
       viewport={{ once: true, amount: 0.25 }}
       transition={transition}
     >
-      <div className="case-study-section-heading">
+      <ParallaxSectionHeading enabled={parallax && !prefersReducedMotion}>
         <motion.p
           className="case-study-label"
           initial={{
@@ -686,7 +777,7 @@ function CaseStudySection({
         >
           {title}
         </motion.h2>
-      </div>
+      </ParallaxSectionHeading>
       <motion.p
         className="case-study-section-copy"
         initial={{ opacity: 0, x: prefersReducedMotion ? 0 : direction * 24 }}
@@ -722,6 +813,8 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
 
   return (
     <motion.section
+      id="case-study-section-06"
+      tabIndex={-1}
       className={`case-study-section case-study-carousel-section${project.finalImageLayout === "screenshots" ? " case-study-screenshot-carousel" : ""}`}
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -731,10 +824,10 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <div className="case-study-section-heading">
+      <ParallaxSectionHeading enabled={project.sectionNavigation && !prefersReducedMotion}>
         <p className="case-study-label">{t("finalImagesLabel")}</p>
         <h2>{t(project.finalImageLayout === "screenshots" ? "selectedFinalImagesSub" : "finalImagesSub")}</h2>
-      </div>
+      </ParallaxSectionHeading>
       <div className="case-study-carousel">
         <button
           type="button"
