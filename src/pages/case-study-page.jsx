@@ -492,19 +492,21 @@ export function CaseStudyPage() {
               />
             </section>
           )}
-          <div className="case-study-nav flex items-center justify-between">
+          <nav className="case-study-nav" aria-label={t("work")}>
             <Link to="/work" className="case-study-back">
-              ← {t("backToWork")}
+              <ArrowLeft aria-hidden="true" />
+              <span>{t("backToWork")}</span>
             </Link>
             {nextProject && (
               <Link to={`/work/${nextProject.slug}`} className="case-study-next">
-                <span>
-                  {t("nextProject")}: {nextProject.title}
-                </span>{" "}
-                ←
+                <span className="case-study-next-copy">
+                  <span className="case-study-next-label">{t("nextProject")}</span>
+                  <span className="case-study-next-title">{nextProject.title}</span>
+                </span>
+                <ArrowRight aria-hidden="true" />
               </Link>
             )}
-          </div>
+          </nav>
         </section>
         {lightboxImage && (
           <CaseStudyLightbox

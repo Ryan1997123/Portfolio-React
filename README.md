@@ -36,6 +36,11 @@ content width in a 16:9 frame, with project details beneath. An explicit
 phone header with full-size image links. Projects without either keep their
 regular cover image.
 
+Case studies end with a prominent next-project link and a secondary back-to-work
+link. Navigation stacks on mobile, supports wrapping titles and keyboard focus,
+and uses high-contrast colors in both themes with reduced-motion support.
+The final project retains only the back-to-work link.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:
