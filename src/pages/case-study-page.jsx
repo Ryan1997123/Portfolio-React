@@ -612,23 +612,33 @@ function PasswordGate({ title, onUnlock }) {
 
 const sectionLabelKeys = ["overview", "challenge", "researchLabel", "processLabel", "solutionLabel", "finalImagesLabel"];
 
+// Short landscape phones keep the stacked layout because a full-height panel would not fit.
+const HORIZONTAL_SCROLL_QUERY =
+  "(min-width: 1024px) and (min-height: 640px), (max-width: 1023px) and (min-height: 500px) and (orientation: portrait)";
+const COMPACT_QUERY = "(max-width: 1023px)";
+
 function HorizontalScrollSections({ enabled, prefersReducedMotion, children }) {
-  const [isWideViewport, setIsWideViewport] = useState(false);
+  const [layout, setLayout] = useState({ active: false, compact: false });
 
   useEffect(() => {
     if (!enabled) return undefined;
-    const query = window.matchMedia("(min-width: 1024px) and (min-height: 640px)");
-    const update = () => setIsWideViewport(query.matches);
+    const query = window.matchMedia(HORIZONTAL_SCROLL_QUERY);
+    const compactQuery = window.matchMedia(COMPACT_QUERY);
+    const update = () => setLayout({ active: query.matches, compact: compactQuery.matches });
     update();
     query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
+    compactQuery.addEventListener("change", update);
+    return () => {
+      query.removeEventListener("change", update);
+      compactQuery.removeEventListener("change", update);
+    };
   }, [enabled]);
 
-  if (!enabled || prefersReducedMotion || !isWideViewport) return children;
-  return <HorizontalScrollTrack>{children}</HorizontalScrollTrack>;
+  if (!enabled || prefersReducedMotion || !layout.active) return children;
+  return <HorizontalScrollTrack compact={layout.compact}>{children}</HorizontalScrollTrack>;
 }
 
-function HorizontalScrollTrack({ children }) {
+function HorizontalScrollTrack({ compact, children }) {
   const { t } = useLanguage();
   const panels = Children.toArray(children).filter(Boolean);
   const outerRef = useRef(null);
@@ -639,6 +649,8 @@ function HorizontalScrollTrack({ children }) {
   const { scrollYProgress } = useScroll({ target: outerRef, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
   const lastIndex = Math.max(panels.length - 1, 1);
+  // Narrow panels give a short swipe per section, so mobile gets extra vertical scroll per panel.
+  const scrollLength = distance * (compact ? 1.75 : 1);
 
   useEffect(() => {
     const measure = () => {
@@ -664,15 +676,15 @@ function HorizontalScrollTrack({ children }) {
     if (!panel || !outerRef.current) return;
     const index = Number(panel.dataset.panelIndex);
     const top = outerRef.current.getBoundingClientRect().top + window.scrollY;
-    const target = top + (index / lastIndex) * distance;
+    const target = top + (index / lastIndex) * scrollLength;
     if (Math.abs(window.scrollY - target) > 2) window.scrollTo({ top: target, behavior: "instant" });
   };
 
   return (
     <div
       ref={outerRef}
-      className="case-study-horizontal-scroll"
-      style={{ height: `calc(100svh + ${distance}px)` }}
+      className={`case-study-horizontal-scroll${compact ? " case-study-horizontal-scroll-compact" : ""}`}
+      style={{ height: `calc(100svh + ${scrollLength}px)` }}
     >
       <div ref={viewportRef} className="case-study-horizontal-viewport" onFocus={handleFocus}>
         <motion.div ref={trackRef} className="case-study-horizontal-track" style={{ x }}>
@@ -682,6 +694,7 @@ function HorizontalScrollTrack({ children }) {
               index={index}
               lastIndex={lastIndex}
               progress={scrollYProgress}
+              compact={compact}
             >
               {panel}
             </HorizontalScrollPanel>
@@ -703,7 +716,7 @@ function HorizontalScrollTrack({ children }) {
   );
 }
 
-function HorizontalScrollPanel({ index, lastIndex, progress, children }) {
+function HorizontalScrollPanel({ index, lastIndex, progress, compact, children }) {
   const center = index / lastIndex;
   const step = 1 / lastIndex;
   // Keep offsets inside 0–1 so Motion can hardware-accelerate the scroll timeline.
@@ -714,8 +727,9 @@ function HorizontalScrollPanel({ index, lastIndex, progress, children }) {
   ].filter(Boolean);
   const range = points.map(([offset]) => offset);
   const pick = (values) => points.map(([, slot]) => values[slot]);
+  const contentOffset = compact ? 48 : 120;
   const numberX = useTransform(progress, range, pick(["45vw", "0vw", "-45vw"]));
-  const contentX = useTransform(progress, range, pick([120, 0, -120]));
+  const contentX = useTransform(progress, range, pick([contentOffset, 0, -contentOffset]));
   const contentOpacity = useTransform(progress, range, pick([0.35, 1, 0.35]));
 
   return (
