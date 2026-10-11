@@ -44,6 +44,9 @@ link. Navigation stacks on mobile, supports wrapping titles and keyboard focus,
 and uses high-contrast colors in both themes with reduced-motion support.
 The final project retains only the back-to-work link.
 
+Work cards stretch to equal heights within each grid row without fixed heights
+or truncating content. On mobile, the single-column cards remain content-sized.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

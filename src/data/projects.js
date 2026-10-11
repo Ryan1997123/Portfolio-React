@@ -34,6 +34,7 @@ export const projects = [
     title: 'IMAAVY Caregiver Resource',
     category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',
     type: 'website',
+    year: '2025',
     summary: 'A responsive patient and caregiver website designed to make condition education, support resources, and infusion-location help easier to navigate.',
     description: 'Working alongside one other designer, I was responsible for laying out the IMAAVY patient and caregiver website, including the infusion locator. The goal was to make complex healthcare information easier to understand while designing for accessibility and pharmaceutical review requirements.',
     role: 'Website layout and UX/UI design alongside one other designer',

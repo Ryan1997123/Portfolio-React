@@ -401,12 +401,12 @@ export function ProjectMockup({ thumbnail }) {
 
 export function ProjectCard({ project, index }) {
   return (
-    <article className="project-card-entry">
+    <article className="project-card-entry flex min-w-0">
       <Link
         to={`/work/${project.slug}`}
-        className={`project-card project-card-${project.color} group flex min-h-80 flex-col justify-between border border-white/10 p-6 transition-colors hover:border-[#B10E1E]/70 sm:p-8`}
+        className={`project-card project-card-${project.color} group flex min-h-80 min-w-0 flex-1 flex-col justify-between border border-white/10 p-6 transition-colors hover:border-[#B10E1E]/70 sm:p-8`}
       >
-        <div className="-mx-6 -mt-6 mb-6 aspect-[16/9] overflow-hidden border-b border-white/10 sm:-mx-8 sm:-mt-8">
+        <div className="-mx-6 -mt-6 mb-6 aspect-[16/9] shrink-0 overflow-hidden border-b border-white/10 sm:-mx-8 sm:-mt-8">
           {project.thumbnail ? (
             <ProjectMockup thumbnail={project.thumbnail} />
           ) : (
