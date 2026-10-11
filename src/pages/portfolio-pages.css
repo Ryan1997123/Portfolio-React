@@ -3178,6 +3178,11 @@
   border-color: rgb(25 24 23 / 0.14);
 }
 
+.portfolio-shell[data-theme="light"] .hero-ticker {
+  background-color: #e8e4de;
+  border-color: #625e58;
+}
+
 .portfolio-shell[data-theme="light"] .text-zinc-100,
 .portfolio-shell[data-theme="light"] .text-zinc-200,
 .portfolio-shell[data-theme="light"] .text-zinc-300,
