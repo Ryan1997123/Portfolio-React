@@ -308,7 +308,7 @@ export function HomePage() {
               <a href="https://github.com" aria-label="GitHub">
                 <img src={githubLogo} alt="" />
               </a>
-              <a href="https://www.linkedin.com" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/ryan-monaghan-186865141/" aria-label="LinkedIn">
                 <img src={linkedinLogo} alt="" />
               </a>
             </div>

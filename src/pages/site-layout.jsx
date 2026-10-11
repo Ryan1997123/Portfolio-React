@@ -273,7 +273,7 @@ function FooterReveal({ children }) {
                     <a href="https://www.behance.net" aria-label="Behance">
                       <img src={behanceLogo} alt="" />
                     </a>
-                    <a href="https://www.linkedin.com" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/ryan-monaghan-186865141/" aria-label="LinkedIn">
                       <img src={linkedinLogo} alt="" />
                     </a>
                   </div>
