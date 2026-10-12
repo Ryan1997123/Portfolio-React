@@ -33,6 +33,9 @@ embed (`figmaEmbedAtEnd`). On screens under 1024px, panels use a compact
 single-column layout with shrinkable media, smaller parallax offsets, and
 1.75× vertical scroll per panel so a swipe does not skip sections. Short
 landscape screens and reduced-motion preferences keep the normal vertical layout.
+All case studies use a 24px gap after the hero metadata and a top-aligned
+first parallax panel, avoiding a large empty area before Overview on desktop
+and mobile. The stacked fallback keeps the same compact gap.
 
 A project's optional `thumbnail` field renders its Work card and case-study
 header as the same device mockup (`browser`, `responsive`, `phones`, or `tablet`)
@@ -41,6 +44,9 @@ content width in a 16:9 frame, with project details beneath. Optional
 `heroScreens` provide full-size image links below the preview. Projects without a
 thumbnail keep their
 regular cover image.
+Gaming Gear's three-phone case-study header is centered and capped at 880px
+wide to reduce thumbnail enlargement, while its Work card and homepage preview
+retain their existing sizing.
 
 ICOTYDE HCP also uses `liveUrl` to show the same live-website button beneath its
 header, linking to `https://www.icotydehcp.com/`.

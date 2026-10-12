@@ -1355,6 +1355,12 @@
   border: 1px solid rgb(245 243 239 / 0.1);
 }
 
+.case-study-thumbnail-hero:has(> .project-mockup-stage-phones) {
+  width: 100%;
+  max-width: 880px;
+  justify-self: center;
+}
+
 .case-study-visual {
   display: flex;
   min-height: 420px;
@@ -1610,7 +1616,7 @@
 .case-study-horizontal-scroll {
   position: relative;
   width: 100vw;
-  margin-top: 96px;
+  margin-top: 24px;
   margin-left: calc(50% - 50vw);
 }
 
@@ -1762,7 +1768,7 @@
 
 /* Phone/tablet panels: one column that always fits inside the sticky 100svh viewport. */
 .case-study-horizontal-scroll-compact {
-  margin-top: 64px;
+  margin-top: 24px;
 }
 
 .case-study-horizontal-scroll-compact .case-study-horizontal-panel {
@@ -2005,14 +2011,17 @@
   outline-offset: 4px;
 }
 
-.imaavy-case-study .case-study-hero + .case-study-section,
-.imaavy-case-study .case-study-horizontal-scroll {
+.case-study-hero + .case-study-section {
   margin-top: 24px;
 }
 
-.imaavy-case-study .case-study-horizontal-panel:first-child {
+.case-study-horizontal-panel:first-child {
   align-items: flex-start;
   padding-top: 24px;
+}
+
+.case-study-horizontal-scroll-compact .case-study-horizontal-panel:first-child .case-study-horizontal-content {
+  justify-content: flex-start;
 }
 
 .responsive-hero-case-study .case-study-thumbnail-hero {
