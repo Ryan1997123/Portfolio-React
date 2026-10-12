@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { ScrambleText } from "motion-plus/react";
+import { Typewriter } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
@@ -23,48 +23,55 @@ const skills = [
   "UX Research",
 ];
 
-const HERO_SCRAMBLE_PHRASES = [
+const HERO_TYPEWRITER_PHRASES = [
   "PRODUCT DESIGNER",
   "FRONT-END DEVELOPER",
   "DESIGNING DIGITAL EXPERIENCES",
   "PRODUCT DESIGNER",
 ];
 
-const SCRAMBLE_GLYPHS = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡🎨🖌✒📐💻⌨🖱⚡✨🚀💡⚙</>{}=";
-
-function HeroRoleScramble({ prefersReducedMotion }) {
+function HeroRoleTypewriter({ prefersReducedMotion }) {
   const [phraseIndex, setPhraseIndex] = useState(0);
 
-  useEffect(() => {
-    if (prefersReducedMotion) return undefined;
-    if (phraseIndex >= HERO_SCRAMBLE_PHRASES.length - 1) return undefined;
-
-    // Hold current phrase for 2.2s then transition to the next
-    const timer = setTimeout(() => {
-      setPhraseIndex((prev) => prev + 1);
-    }, 2200);
-
-    return () => clearTimeout(timer);
-  }, [phraseIndex, prefersReducedMotion]);
+  const handleComplete = () => {
+    if (phraseIndex < HERO_TYPEWRITER_PHRASES.length - 1) {
+      setTimeout(() => {
+        setPhraseIndex((prev) => prev + 1);
+      }, 1600);
+    }
+  };
 
   const currentPhrase = prefersReducedMotion
-    ? HERO_SCRAMBLE_PHRASES[0]
-    : HERO_SCRAMBLE_PHRASES[phraseIndex];
+    ? HERO_TYPEWRITER_PHRASES[0]
+    : HERO_TYPEWRITER_PHRASES[phraseIndex];
 
   return (
     <h1
-      className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl"
+      className="home-hero-title max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl"
       aria-label="Product Designer"
     >
-      <ScrambleText
-        key={phraseIndex}
-        active={!prefersReducedMotion}
-        duration={0.7}
-        interval={0.04}
-        chars={SCRAMBLE_GLYPHS}
-      >
-        {currentPhrase}
-      </ScrambleText>
+      {prefersReducedMotion ? (
+        currentPhrase
+      ) : (
+        <Typewriter
+          as="span"
+          speed={110}
+          backspaceFactor={0.4}
+          cursorBlinkDuration={0.6}
+          cursorBlinkRepeat={phraseIndex === HERO_TYPEWRITER_PHRASES.length - 1 ? Infinity : 2}
+          cursorStyle={{
+            backgroundColor: "#B10E1E",
+            width: "3px",
+            height: "0.85em",
+            top: "0.05em",
+            marginLeft: "0.15em",
+          }}
+          textClassName="home-hero-typewriter-text"
+          onComplete={handleComplete}
+        >
+          {currentPhrase}
+        </Typewriter>
+      )}
     </h1>
   );
 }
@@ -360,7 +367,7 @@ export function HomePage() {
             <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
               AVAILABLE FOR HIRE
             </p>
-            <HeroRoleScramble prefersReducedMotion={prefersReducedMotion} />
+            <HeroRoleTypewriter prefersReducedMotion={prefersReducedMotion} />
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
               {t("heroBody")}
             </p>
