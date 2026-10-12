@@ -758,15 +758,17 @@ export function AboutPage() {
                   <span className="about-portrait-mark-r">R</span>
                   <span className="about-portrait-mark-m">M</span>
                 </span>
-                <motion.img
-                  className="about-portrait-image"
-                  src={meImage}
-                  alt="Ryan Monaghan, product designer"
-                  width="720"
-                  height="720"
-                  decoding="async"
-                  fetchPriority="high"
-                />
+                <div className="about-portrait-media">
+                  <motion.img
+                    className="about-portrait-image"
+                    src={meImage}
+                    alt="Ryan Monaghan, product designer"
+                    width="720"
+                    height="720"
+                    decoding="async"
+                    fetchPriority="high"
+                  />
+                </div>
               </motion.div>
               <figcaption>
                 <ScrambleText
