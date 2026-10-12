@@ -287,7 +287,7 @@ export function CaseStudyPage() {
                   <p>{project.tools}</p>
                 </div>
               )}
-              <div>
+              <div className="case-study-meta-impact">
                 <p className="case-study-label">{t("impactHeading")}</p>
                 <ul>
                   {project.outcomes.map((outcome) => (

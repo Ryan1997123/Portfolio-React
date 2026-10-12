@@ -1577,6 +1577,26 @@
   color: #f5f3ef;
 }
 
+/* Pull Impact closer to the meta item above it (stacked 40px / grid 32px gaps → 16px). */
+.case-study-page:not(.imaavy-case-study) .case-study-meta-impact {
+  margin-top: -24px;
+}
+
+.case-study-page:not(.imaavy-case-study) .case-study-hero-responsive .case-study-meta-impact {
+  margin-top: 0;
+}
+
+/* In the 3-column header grid, Impact only starts a new row when it is the 4th item. */
+.case-study-page:not(.imaavy-case-study) .case-study-hero-responsive .case-study-meta-impact:nth-child(4) {
+  margin-top: -16px;
+}
+
+@media (max-width: 768px) {
+  .case-study-page:not(.imaavy-case-study) .case-study-hero-responsive .case-study-meta-impact {
+    margin-top: -16px;
+  }
+}
+
 .case-study-section {
   display: grid;
   grid-template-columns: minmax(180px, 0.6fr) minmax(0, 1.4fr);
