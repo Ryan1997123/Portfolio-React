@@ -49,7 +49,7 @@ export const translations = {
     yearsActiveLabel: "Years active",
     locationVal: "New York, NY",
     languagesVal: "English, Korean, Japanese",
-    currentlyVal: "Product Designer",
+    currentlyVal: "Product Designer at Studio RX",
     yearsActiveVal: "5+ years of experience",
 
     workEyebrow: "WORK",
