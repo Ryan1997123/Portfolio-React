@@ -1,4 +1,5 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { ScrambleText } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
@@ -21,6 +22,52 @@ const skills = [
   "Python",
   "UX Research",
 ];
+
+const HERO_SCRAMBLE_PHRASES = [
+  "PRODUCT DESIGNER",
+  "FRONT-END DEVELOPER",
+  "DESIGNING DIGITAL EXPERIENCES",
+  "PRODUCT DESIGNER",
+];
+
+const SCRAMBLE_GLYPHS = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡🎨🖌✒📐💻⌨🖱⚡✨🚀💡⚙</>{}=";
+
+function HeroRoleScramble({ prefersReducedMotion }) {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return undefined;
+    if (phraseIndex >= HERO_SCRAMBLE_PHRASES.length - 1) return undefined;
+
+    // Hold current phrase for 2.2s then transition to the next
+    const timer = setTimeout(() => {
+      setPhraseIndex((prev) => prev + 1);
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, [phraseIndex, prefersReducedMotion]);
+
+  const currentPhrase = prefersReducedMotion
+    ? HERO_SCRAMBLE_PHRASES[0]
+    : HERO_SCRAMBLE_PHRASES[phraseIndex];
+
+  return (
+    <h1
+      className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl"
+      aria-label="Product Designer"
+    >
+      <ScrambleText
+        key={phraseIndex}
+        active={!prefersReducedMotion}
+        duration={0.7}
+        interval={0.04}
+        chars={SCRAMBLE_GLYPHS}
+      >
+        {currentPhrase}
+      </ScrambleText>
+    </h1>
+  );
+}
 
 function RotatingIdentity() {
   const { lang, t } = useLanguage();
@@ -313,9 +360,7 @@ export function HomePage() {
             <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
               AVAILABLE FOR HIRE
             </p>
-            <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">
-              PRODUCT DESIGNER
-            </h1>
+            <HeroRoleScramble prefersReducedMotion={prefersReducedMotion} />
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
               {t("heroBody")}
             </p>
