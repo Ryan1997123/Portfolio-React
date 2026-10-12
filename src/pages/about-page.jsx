@@ -6,7 +6,7 @@ import colorfulStreet from "../assets/aboutme/1000015242.JPG";
 import umbrellaStreet from "../assets/aboutme/oT0NlVII6dk9PKKP.jpg";
 import milanGallery from "../assets/aboutme/qvd0dER4TEM79Jds.jpg";
 import londonStreet from "../assets/aboutme/rmicbVaW7DRN3Scb.jpg";
-import meImage from "../assets/me-about.webp";
+import meImage from "../assets/aboutme/me2-cutout.png";
 import resumeDocx from "../assets/resume/Ryan_Monaghan_Resume_2026.docx?url";
 import { useLanguage } from "../lib/LanguageContext";
 import { useTheme } from "../lib/ThemeContext";
