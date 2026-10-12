@@ -3970,6 +3970,40 @@
   background: #fff;
 }
 
+@media (max-width: 768px) {
+  .case-study-thumbnail-hero,
+  .responsive-hero-case-study .case-study-thumbnail-hero {
+    aspect-ratio: 4 / 3;
+  }
+
+  .responsive-hero-case-study .case-study-thumbnail-hero .project-mockup-browser {
+    width: 70cqw;
+  }
+
+  .responsive-hero-case-study .case-study-thumbnail-hero .project-mockup-phone {
+    width: 22cqw;
+  }
+
+  .case-study-thumbnail-hero .project-mockup-stage-phones .project-mockup-phone {
+    top: 8cqh;
+    width: 26cqw;
+  }
+
+  .case-study-thumbnail-hero .project-mockup-stage-phones .project-mockup-phone-1 {
+    top: 16cqh;
+    transform: translateX(calc(-50% - 29cqw)) scale(0.92);
+  }
+
+  .case-study-thumbnail-hero .project-mockup-stage-phones .project-mockup-phone-3 {
+    top: 16cqh;
+    transform: translateX(calc(-50% + 29cqw)) scale(0.92);
+  }
+
+  .case-study-thumbnail-hero .project-mockup-tablet {
+    width: 85cqw;
+  }
+}
+
 /* Tap indicator on Alice's "See Profile" button signals that the IVA is interactive. */
 .project-mockup-touch {
   position: absolute;

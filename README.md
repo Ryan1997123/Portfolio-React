@@ -56,6 +56,9 @@ content width in a 16:9 frame, with project details beneath. Optional
 `heroScreens` provide full-size image links below the preview. Projects without a
 thumbnail keep their
 regular cover image.
+On mobile (up to 768px), thumbnail headers use a taller 4:3 stage with larger
+desktop/phone, three-phone, and tablet previews. These overrides affect only
+case-study headers; desktop layouts, Work cards, and homepage previews stay unchanged.
 Gaming Gear's three-phone case-study header is centered and capped at 880px
 wide to reduce thumbnail enlargement, while its Work card and homepage preview
 retain their existing sizing.

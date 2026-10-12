@@ -336,7 +336,7 @@ function MockupAddress({ url, className }) {
       <span className="project-mockup-address-display">
         {animate ? inView && (
           <Typewriter
-            speed={55}
+            speed={90}
             variance={0.2}
             cursorBlinkRepeat={0}
             cursorStyle={{ width: "1px", left: 0 }}
