@@ -13,10 +13,10 @@ import { useTheme } from "../lib/ThemeContext";
 import { SiteLayout } from "./site-layout";
 
 const aboutPrinciples = [
-  "Research first /",
-  "Prototype early /",
-  "Design for access /",
-  "Build with intent /",
+  "Hells Kitchen, NYC based /",
+  "Experience with Fintech, Tech startups, and Advertising industries /",
+  "5+ years experience /",
+  "Computer science degree /",
 ];
 
 const approachBeats = [
