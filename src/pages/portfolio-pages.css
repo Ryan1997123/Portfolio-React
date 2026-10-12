@@ -1548,6 +1548,7 @@
 .case-study-meta {
   display: flex;
   flex-direction: column;
+  align-self: end;
   gap: 40px;
   color: #f5f3ef;
 }

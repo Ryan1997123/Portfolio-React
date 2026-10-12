@@ -35,7 +35,9 @@ single-column layout with shrinkable media, smaller parallax offsets, and
 landscape screens and reduced-motion preferences keep the normal vertical layout.
 All case studies use a 24px gap after the hero metadata and a top-aligned
 first parallax panel, avoiding a large empty area before Overview on desktop
-and mobile. The stacked fallback keeps the same compact gap.
+and mobile. Metadata beside a cover image aligns to the bottom of its row
+so Impact is not separated from Overview by the taller image's empty space.
+The stacked fallback keeps the same compact gap.
 
 A project's optional `thumbnail` field renders its Work card and case-study
 header as the same device mockup (`browser`, `responsive`, `phones`, or `tablet`)
