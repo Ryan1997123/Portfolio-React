@@ -3680,11 +3680,36 @@
 .project-mockup-browser-bar {
   display: flex;
   align-items: center;
-  gap: 2cqw;
+  gap: 1cqw;
   height: 4.4cqw;
   padding: 0 1.6cqw;
   border-bottom: 1px solid #d9d9d9;
   background: #e8e8e8;
+  color: #3c4043;
+}
+
+.project-mockup-browser-navigation,
+.project-mockup-browser-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.8cqw;
+}
+
+.project-mockup-browser-bar svg {
+  display: block;
+  flex: none;
+  width: 1.6cqw;
+  height: 1.6cqw;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-mockup-browser-bar .project-mockup-browser-menu {
+  fill: currentColor;
+  stroke: none;
 }
 
 .project-mockup-dots {
@@ -3709,15 +3734,14 @@
 
 .project-mockup-address {
   display: flex;
-  flex: 0 0 44%;
+  flex: 1;
   min-width: 0;
-  max-width: 44%;
   overflow: hidden;
   white-space: nowrap;
   align-items: center;
-  justify-content: center;
+  gap: 0.8cqw;
   height: 2.5cqw;
-  margin: 0 auto;
+  padding-inline: 0.8cqw;
   border-radius: 1.25cqw;
   background: #fff;
   color: #555;
@@ -3726,6 +3750,13 @@
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
   line-height: 1;
+}
+
+.portfolio-shell .project-mockup-address-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
 }
 
 .project-mockup-phone {

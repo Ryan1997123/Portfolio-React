@@ -324,7 +324,40 @@ function MockupBrowser({ screen, url }) {
           <i />
           <i />
         </span>
-        <span className="project-mockup-address">{url}</span>
+        <span className="project-mockup-browser-navigation">
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="m12 5-7 7 7 7M5 12h14" />
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="m12 5 7 7-7 7M19 12H5" />
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7" />
+          </svg>
+        </span>
+        <div className="project-mockup-address">
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="M3 7h4m6 0h8M3 17h10m6 0h2" />
+            <circle cx="10" cy="7" r="3" />
+            <circle cx="16" cy="17" r="3" />
+          </svg>
+          <span className="project-mockup-address-text">{url}</span>
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z" />
+          </svg>
+        </div>
+        <span className="project-mockup-browser-actions">
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="9" r="3" />
+            <path d="M5.5 18a7 7 0 0 1 13 0" />
+          </svg>
+          <svg viewBox="0 0 24 24" className="project-mockup-browser-menu" focusable="false">
+            <circle cx="12" cy="5" r="1.6" />
+            <circle cx="12" cy="12" r="1.6" />
+            <circle cx="12" cy="19" r="1.6" />
+          </svg>
+        </span>
       </div>
       <div className="project-mockup-browser-screen">
         <MockupScreen name={screen} />

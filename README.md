@@ -15,7 +15,9 @@ from assistive technology. Both responsive phone mockups include a compact mobil
 Android Chrome-style toolbar beneath the status bar, with a home icon, site
 controls, the project's domain, a tab counter, and a three-dot menu across Work
 cards, homepage hover previews, and case-study headers. App-only phone mockups
-keep their existing appearance. A `liveUrl` button beneath the header mockups opens
+keep their existing appearance. Desktop browser frames also show Chrome-style
+back/forward, reload, site controls, bookmark, profile, and menu icons without
+changing the frame height. A `liveUrl` button beneath the header mockups opens
 the live website in a new tab. The introductory paragraph has extra vertical
 padding, with a compact transition from project metadata into Overview.
 The remaining screens
