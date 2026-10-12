@@ -78,12 +78,12 @@ export const projects = [
       { label: 'Mobile infusion locator', image: 'imaavy-caregiver-mobile-lookup', device: 'phone' },
       { label: 'Mobile infusion locator: map view', image: 'imaavy-caregiver-mobile-lookup-map', device: 'phone' },
     ],
-    figmaEmbed: 'https://embed.figma.com/design/L8pjiYWqRXkeDEHOExeZj9/IMAAVY-Caregiver-Resource-Page-Update?node-id=0-1&embed-host=share',
+    figmaEmbed: 'https://embed.figma.com/design/L8pjiYWqRXkeDEHOExeZj9/IMAAVY-Caregiver-Resource-Page-Update?node-id=3847-9487&embed-host=share',
     figmaEmbedAtEnd: true,
     resourceLinks: [
       { labelKey: 'viewGmgWebsite', href: 'https://www.imaavy.com/generalized-myasthenia-gravis/' },
       { labelKey: 'viewWaihaWebsite', href: 'https://www.imaavy.com/warm-autoimmune-hemolytic-anemia/' },
-      { labelKey: 'viewFigmaDesign', href: 'https://www.figma.com/design/L8pjiYWqRXkeDEHOExeZj9/IMAAVY-Caregiver-Resource-Page-Update?node-id=0-1&t=TRxO5qSaqwETz7R4-1' },
+      { labelKey: 'viewFigmaDesign', href: 'https://www.figma.com/design/L8pjiYWqRXkeDEHOExeZj9/IMAAVY-Caregiver-Resource-Page-Update?node-id=3847-9487&t=smIEeOOMM85uS1zq-1' },
     ],
   },
   {
