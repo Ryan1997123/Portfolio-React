@@ -663,10 +663,10 @@
   z-index: 1;
   right: auto;
   bottom: 0;
-  left: 6%;
+  left: 3%;
   display: block;
-  width: 88%;
-  height: 88%;
+  width: 94%;
+  height: 94%;
   object-fit: contain;
   object-position: center bottom;
 }
