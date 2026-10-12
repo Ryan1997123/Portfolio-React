@@ -22,9 +22,9 @@ const aboutPrinciples = [
 const approachBeats = [
   {
     text: [
-      "Research, wireframing, and high-fidelity prototyping taught me to question assumptions and design for people with habits and needs very different from my own.",
-      "The business side comes from working at a fintech company, where I saw how design decisions tie into revenue, risk, and compliance.",
-      "Together, that mix helps me connect user needs with viable product decisions, then carry it through with accessible design and clean, robust code.",
+      "At Fordham, I learned research, wireframing, and prototyping. A semester at Korea University taught me something harder: to question my assumptions and design for people whose habits look nothing like mine.",
+      "Working in fintech gave me the business side. I saw firsthand how a single design decision can affect revenue, risk, and compliance. ",
+      "Today I bring both together: I connect what users need with what the business can ship, then carry it through with accessible design and clean, production-ready code.",
     ],
   },
 ];
