@@ -3759,6 +3759,23 @@
   font-family: system-ui, sans-serif;
 }
 
+.project-mockup-typed-address {
+  position: relative;
+}
+
+.project-mockup-address-reserve {
+  visibility: hidden;
+}
+
+.project-mockup-address-display {
+  position: absolute;
+  inset: 0;
+}
+
+.portfolio-shell .project-mockup-typed-address span {
+  font-family: inherit;
+}
+
 .project-mockup-phone {
   width: 16cqw;
   padding: 0.8cqw;

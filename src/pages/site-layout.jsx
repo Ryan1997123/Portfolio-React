@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "motion/react";
+import { Typewriter } from "motion-plus/react";
 import { Link, useLocation } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
 import githubLogo from "../assets/Ionicons_logo-github logo.svg";
@@ -315,6 +317,33 @@ function MockupScreen({ name }) {
   return <img src={thumbnailImages[name]} alt="" loading="lazy" decoding="async" />;
 }
 
+function MockupAddress({ url, className }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.8 });
+  const prefersReducedMotion = useReducedMotion();
+  const [complete, setComplete] = useState(false);
+  const animate = prefersReducedMotion === false && !complete;
+
+  return (
+    <span ref={ref} className={`${className} project-mockup-typed-address`}>
+      <span className="project-mockup-address-reserve">{url}</span>
+      <span className="project-mockup-address-display">
+        {animate ? inView && (
+          <Typewriter
+            speed={55}
+            variance={0.2}
+            cursorBlinkRepeat={0}
+            cursorStyle={{ width: "1px", left: 0 }}
+            onComplete={() => setComplete(true)}
+          >
+            {url}
+          </Typewriter>
+        ) : url}
+      </span>
+    </span>
+  );
+}
+
 function MockupBrowser({ screen, url }) {
   return (
     <div className="project-mockup-browser">
@@ -341,7 +370,7 @@ function MockupBrowser({ screen, url }) {
             <circle cx="10" cy="7" r="3" />
             <circle cx="16" cy="17" r="3" />
           </svg>
-          <span className="project-mockup-address-text">{url}</span>
+          <MockupAddress url={url} className="project-mockup-address-text" />
           <svg viewBox="0 0 24 24" fill="none" focusable="false">
             <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z" />
           </svg>
@@ -408,7 +437,7 @@ function MockupPhone({ screen, className = "", statusBar = false, url }) {
                 <circle cx="10" cy="7" r="3" />
                 <circle cx="16" cy="17" r="3" />
               </svg>
-              <span className="project-mockup-mobile-address">{url}</span>
+              <MockupAddress url={url} className="project-mockup-mobile-address" />
             </div>
             <svg className="project-mockup-mobile-control" viewBox="0 0 24 24" fill="none" focusable="false">
               <rect x="4" y="4" width="16" height="16" rx="3" />

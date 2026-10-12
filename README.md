@@ -20,6 +20,10 @@ back/forward, reload, site controls, bookmark, profile, and menu icons without
 changing the frame height. A `liveUrl` button beneath the header mockups opens
 the live website in a new tab. The introductory paragraph has extra vertical
 padding, with a compact transition from project metadata into Overview.
+Desktop and mobile domains use the installed Motion+ `Typewriter` once when
+the address enters view (also when a homepage hover preview opens). The full
+domain reserves its space to prevent shifting; the cursor disappears when typing
+finishes, and reduced-motion users see the complete domain immediately.
 The remaining screens
 appear in the bottom `finalImages` carousel, with each desktop followed by its
 matching mobile screens, including both mobile infusion locator views.
