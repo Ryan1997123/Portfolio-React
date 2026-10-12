@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { AnimatePresence, motion, useInView, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
@@ -21,6 +21,76 @@ const skills = [
   "Python",
   "UX Research",
 ];
+
+const titleStoryTransition = {
+  duration: 4.6,
+  delay: 0.2,
+  times: [0, 0.12, 0.25, 0.38, 0.5, 0.64, 0.76, 0.88, 1],
+  ease: "easeInOut",
+};
+
+function TitleGargoyle({ thief = false, play }) {
+  return (
+    <motion.span
+      className={`hero-title-gargoyle${thief ? " hero-title-gargoyle-thief" : ""}`}
+      initial={false}
+      animate={play ? {
+        opacity: [0, 1, 1, 1, thief ? 0 : 1, thief ? 0 : 1, 1, 1, 0],
+        x: thief
+          ? ["-0.12em", "-0.12em", "-0.12em", "-0.47em", "-0.92em", "-0.92em", "-0.47em", "-0.12em", "-0.12em"]
+          : ["0em", "-0.14em", "-0.17em", "-0.12em", "-0.17em", "-0.12em", "-0.17em", "-0.14em", "0em"],
+        y: ["0.2em", "0em", "-0.03em", "0.08em", "0.12em", "0.12em", "0.08em", "0em", "0.2em"],
+        rotate: [0, -8, 3, -5, 5, -5, 5, -8, 0],
+      } : { opacity: 0, x: 0, y: 0, rotate: 0 }}
+      transition={play ? titleStoryTransition : { duration: 0 }}
+    >
+      <svg viewBox="0 0 64 80" fill="none" focusable="false">
+        <path className="hero-gargoyle-wing" d="M24 40 4 26 8 49 18 44 14 62 29 54M40 40 60 26 56 49 46 44 50 62 35 54" />
+        <path className="hero-gargoyle-body" d="M18 31 13 8 27 20 37 20 51 8 46 31C54 39 48 50 42 53L46 71 37 74 32 62 27 74 18 71 22 53C16 50 10 39 18 31Z" />
+        <path className="hero-gargoyle-detail" d="m19 34 10 4m16-4-10 4M28 48l4 3 4-3M23 57l-6 6m24-6 6 6" />
+        <path className="hero-gargoyle-eyes" d="m21 39 6 2-5 2Zm22 0-6 2 5 2Z" />
+        <path className="hero-gargoyle-claws" d="m17 61-8 3 1 5m37-8 8 3-1 5" />
+      </svg>
+    </motion.span>
+  );
+}
+
+function HauntedTitle() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.8 });
+  const prefersReducedMotion = useReducedMotion();
+  const play = inView && prefersReducedMotion === false;
+
+  return (
+    <h1 ref={ref} className="hero-haunted-title max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">
+      <span className="sr-only">PRODUCT DESIGNER</span>
+      <span aria-hidden="true">
+        <span className="hero-title-word">
+          <span className="hero-title-letter hero-title-letter-stolen">
+            <TitleGargoyle thief play={play} />
+            <motion.span
+              className="hero-title-glyph"
+              initial={false}
+              animate={play ? {
+                x: ["0em", "0em", "0em", "-0.35em", "-0.8em", "-0.8em", "-0.35em", "0em", "0em"],
+                y: ["0em", "0em", "0em", "0.18em", "0.25em", "0.25em", "0.18em", "0em", "0em"],
+                rotate: [0, 0, -3, -12, -18, -18, -12, 0, 0],
+                opacity: [1, 1, 1, 1, 0, 0, 1, 1, 1],
+              } : { x: 0, y: 0, rotate: 0, opacity: 1 }}
+              transition={play ? titleStoryTransition : { duration: 0 }}
+            >
+              P
+            </motion.span>
+          </span>
+          R<span className="hero-title-letter"><TitleGargoyle play={play} /><span className="hero-title-glyph">O</span></span>DUCT
+        </span>{" "}
+        <span className="hero-title-word">
+          DESIGN<span className="hero-title-letter"><TitleGargoyle play={play} /><span className="hero-title-glyph">E</span></span>R
+        </span>
+      </span>
+    </h1>
+  );
+}
 
 function RotatingIdentity() {
   const { lang, t } = useLanguage();
@@ -313,9 +383,7 @@ export function HomePage() {
             <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
               AVAILABLE FOR HIRE
             </p>
-            <h1 className="max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">
-              PRODUCT DESIGNER
-            </h1>
+            <HauntedTitle />
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
               {t("heroBody")}
             </p>

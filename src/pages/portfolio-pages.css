@@ -49,6 +49,84 @@
   font-weight: 900 !important;
 }
 
+.hero-haunted-title {
+  isolation: isolate;
+}
+
+.portfolio-shell .hero-haunted-title span {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+.hero-title-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-title-letter,
+.hero-title-glyph {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-title-glyph {
+  z-index: 2;
+}
+
+.hero-title-gargoyle {
+  position: absolute;
+  z-index: 1;
+  bottom: 0.03em;
+  left: -0.1em;
+  width: 0.38em;
+  height: 0.48em;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-title-gargoyle-thief {
+  z-index: 3;
+  bottom: -0.13em;
+  left: 0.02em;
+}
+
+.hero-title-gargoyle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-gargoyle-wing,
+.hero-gargoyle-body {
+  fill: #17171c;
+  stroke: #6d686e;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+.hero-gargoyle-wing {
+  fill: #101014;
+  stroke: #49434c;
+}
+
+.hero-gargoyle-detail,
+.hero-gargoyle-claws {
+  stroke: #8a8189;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.hero-gargoyle-eyes {
+  fill: #b10e1e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-gargoyle {
+    display: none;
+  }
+}
+
 .portfolio-shell .text-zinc-100,
 .portfolio-shell .text-zinc-200,
 .portfolio-shell .text-zinc-300 {

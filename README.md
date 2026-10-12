@@ -1,5 +1,14 @@
 # React + Vite
 
+## Homepage title
+
+The PRODUCT DESIGNER title uses a one-time Motion sequence as it enters view:
+charcoal gargoyles peek around the letters, one carries the P into shadow and
+returns it, then all retreat. The scene finishes within five seconds and does
+not loop. Letter spacing remains reserved throughout, the decorative visuals
+are hidden from assistive technology, and reduced-motion users get a static
+title without creatures.
+
 ## Portfolio case studies
 
 Project content lives in `src/data/projects.js`, with card and hero images registered
