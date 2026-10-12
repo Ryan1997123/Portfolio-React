@@ -640,14 +640,21 @@
   aspect-ratio: 1;
   overflow: visible;
   border: 0;
+}
+
+.about-portrait-frame::before {
+  position: absolute;
+  z-index: -1;
+  inset: -8px;
   border-radius: 50%;
   background: #b10e1e;
-  box-shadow: 0 0 0 8px #b10e1e;
+  clip-path: inset(0 0 12% round 50%);
+  content: "";
 }
 
 .about-portrait-mark {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   top: 24px;
   left: 24px;
   color: rgb(245 243 239 / 0.14);
@@ -656,6 +663,11 @@
   font-weight: 900;
   letter-spacing: 0 !important;
   line-height: 0.8;
+}
+
+.about-portrait-mark-m {
+  display: inline-block;
+  transform: translateX(0.95em);
 }
 
 .about-portrait-image {

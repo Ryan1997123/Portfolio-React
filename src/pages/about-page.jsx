@@ -755,7 +755,8 @@ export function AboutPage() {
                 transition={{ type: "spring", stiffness: 240, damping: 22 }}
               >
                 <span className="about-portrait-mark" aria-hidden="true">
-                  RM
+                  <span>R</span>
+                  <span className="about-portrait-mark-m">M</span>
                 </span>
                 <motion.img
                   className="about-portrait-image"
