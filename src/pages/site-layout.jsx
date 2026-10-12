@@ -359,11 +359,16 @@ function MockupStatusBar() {
   );
 }
 
-function MockupPhone({ screen, className = "", statusBar = false }) {
+function MockupPhone({ screen, className = "", statusBar = false, url }) {
   return (
     <div className={`project-mockup-phone ${className}`}>
       <div className="project-mockup-phone-screen">
         {statusBar && <MockupStatusBar />}
+        {url && (
+          <div className="project-mockup-mobile-browser-bar">
+            <span className="project-mockup-mobile-address">{url}</span>
+          </div>
+        )}
         <MockupScreen name={screen} />
       </div>
     </div>
@@ -380,7 +385,7 @@ export function ProjectMockup({ thumbnail }) {
       {mockup === "responsive" && (
         <>
           <MockupBrowser screen={screens[0]} url={url} />
-          <MockupPhone screen={screens[1]} statusBar />
+          <MockupPhone screen={screens[1]} statusBar url={url} />
         </>
       )}
       {mockup === "phones" &&

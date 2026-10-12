@@ -1,14 +1,5 @@
 # React + Vite
 
-## Homepage title
-
-The PRODUCT DESIGNER title uses a one-time Motion sequence as it enters view:
-charcoal gargoyles peek around the letters, one carries the P into shadow and
-returns it, then all retreat. The scene finishes within five seconds and does
-not loop. Letter spacing remains reserved throughout, the decorative visuals
-are hidden from assistive technology, and reduced-motion users get a static
-title without creatures.
-
 ## Portfolio case studies
 
 Project content lives in `src/data/projects.js`, with card and hero images registered
@@ -20,7 +11,10 @@ The IMAAVY Caregiver Resource case study uses the supplied images in
 mockup as ICOTYDE; both use a shorter 21:9 frame, with the uncropped desktop and mobile
 frames centered side by side, and `heroScreens` providing full-size desktop
 and mobile image links underneath. The decorative browser controls are not interactive and are hidden
-from assistive technology. A `liveUrl` button beneath the header mockups opens
+from assistive technology. Both responsive phone mockups include a compact mobile
+address bar beneath the status bar, showing the project's domain across Work
+cards, homepage hover previews, and case-study headers. App-only phone mockups
+keep their existing appearance. A `liveUrl` button beneath the header mockups opens
 the live website in a new tab. The introductory paragraph has extra vertical
 padding, with a compact transition from project metadata into Overview.
 The remaining screens
