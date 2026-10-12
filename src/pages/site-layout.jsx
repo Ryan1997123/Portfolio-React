@@ -4,9 +4,7 @@ import { Typewriter } from "motion-plus/react";
 import { Link, useLocation } from "react-router-dom";
 import { DownloadSimple } from "@phosphor-icons/react";
 import resumeDocx from "../assets/resume/Ryan_Monaghan_Resume_2026.docx?url";
-import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
-import githubLogo from "../assets/Ionicons_logo-github logo.svg";
-import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
+import { BehanceIcon, GithubIcon, LinkedinIcon } from "../components/ui/SocialIcons";
 import mouseIcon from "../assets/mouse_icon.svg";
 import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
 import { ThemeSwitcher } from "../components/ui/ThemeSwitcher";
@@ -296,14 +294,14 @@ function FooterReveal({ children }) {
                 <section>
                   <h2>{t("getInTouch")}</h2>
                   <div className="reveal-footer-socials">
-                    <a href="https://github.com" aria-label="GitHub">
-                      <img src={githubLogo} alt="" />
+                    <a href="https://github.com" aria-label="GitHub" target="_blank" rel="noreferrer">
+                      <GithubIcon size={44} />
                     </a>
-                    <a href="https://www.behance.net" aria-label="Behance">
-                      <img src={behanceLogo} alt="" />
+                    <a href="https://www.behance.net" aria-label="Behance" target="_blank" rel="noreferrer">
+                      <BehanceIcon size={44} />
                     </a>
-                    <a href="https://www.linkedin.com/in/ryan-monaghan-186865141/" aria-label="LinkedIn">
-                      <img src={linkedinLogo} alt="" />
+                    <a href="https://www.linkedin.com/in/ryan-monaghan-186865141/" aria-label="LinkedIn" target="_blank" rel="noreferrer">
+                      <LinkedinIcon size={36} />
                     </a>
                   </div>
                 </section>
