@@ -375,7 +375,7 @@ export function HomePage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/work"
-                className="w-fit border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-zinc-100 transition-colors hover:border-[#B10E1E] hover:text-[#B10E1E]"
+                className="home-hero-cta w-fit px-5 py-3 font-mono text-xs uppercase tracking-[0.14em]"
               >
                 {t("exploreWork")} <span className="ml-3">↗</span>
               </Link>

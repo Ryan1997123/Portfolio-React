@@ -91,6 +91,52 @@
   color: rgb(10 10 10);
 }
 
+.portfolio-shell .site-nav-resume-btn {
+  display: inline-flex;
+  min-height: 32px;
+  padding: 5.5px 12px;
+  align-items: center;
+  gap: 6px;
+  background-color: #b10e1e;
+  border: 1px solid #b10e1e;
+  color: #ffffff !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: normal;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.portfolio-shell .site-nav-resume-btn:hover {
+  background-color: #cb1525;
+  border-color: #cb1525;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgb(177 14 30 / 0.35);
+}
+
+.portfolio-shell .home-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b10e1e;
+  border: 1px solid #b10e1e;
+  color: #ffffff !important;
+  font-weight: 700;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.portfolio-shell .home-hero-cta:hover {
+  background-color: #cb1525;
+  border-color: #cb1525;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgb(177 14 30 / 0.4);
+}
+
 .mobile-navigation {
   animation: mobile-navigation-enter 300ms ease-out both;
 }
@@ -468,6 +514,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease;
+}
+
+.hero-proof-logos a:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.hero-proof-logos a img {
+  display: block;
+  /* Red tint in dark mode: turns white SVG icon into bold #B10E1E red */
+  filter: invert(16%) sepia(88%) saturate(4621%) hue-rotate(345deg) brightness(84%) contrast(98%);
+  transition: filter 180ms ease;
+}
+
+.hero-proof-logos a:hover img {
+  /* Slightly brighter/vibrant red on hover */
+  filter: invert(21%) sepia(95%) saturate(5420%) hue-rotate(348deg) brightness(92%) contrast(105%);
 }
 
 .hero-proof-logos a:nth-child(1) img,
@@ -3597,7 +3661,12 @@
 }
 
 .portfolio-shell[data-theme="light"] .hero-proof-logos img {
-  filter: brightness(0);
+  /* Rich branded red in light mode for clear contrast and affordance against warm cream background */
+  filter: invert(16%) sepia(88%) saturate(4621%) hue-rotate(345deg) brightness(84%) contrast(98%);
+}
+
+.portfolio-shell[data-theme="light"] .hero-proof-logos a:hover img {
+  filter: invert(21%) sepia(95%) saturate(5420%) hue-rotate(348deg) brightness(92%) contrast(105%);
 }
 
 .portfolio-shell[data-theme="light"] .hero-design-guides {

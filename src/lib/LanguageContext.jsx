@@ -15,6 +15,7 @@ export const translations = {
     work: "Work",
     photography: "Photography",
     contact: "Contact",
+    resume: "Resume",
     switchToLightMode: "Switch to light mode",
     switchToDarkMode: "Switch to dark mode",
 
@@ -111,6 +112,7 @@ export const translations = {
     work: "実績・作品",
     photography: "写真",
     contact: "お問い合わせ",
+    resume: "履歴書",
     switchToLightMode: "ライトモードに切り替え",
     switchToDarkMode: "ダークモードに切り替え",
 
@@ -207,6 +209,7 @@ export const translations = {
     work: "작품",
     photography: "사진",
     contact: "연락처",
+    resume: "이력서",
     switchToLightMode: "라이트 모드로 전환",
     switchToDarkMode: "다크 모드로 전환",
 

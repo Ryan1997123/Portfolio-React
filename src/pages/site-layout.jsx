@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
 import { Typewriter } from "motion-plus/react";
 import { Link, useLocation } from "react-router-dom";
+import { DownloadSimple } from "@phosphor-icons/react";
+import resumeDocx from "../assets/resume/Ryan_Monaghan_Resume_2026.docx?url";
 import behanceLogo from "../assets/Ionicons_logo-behance logo.svg";
 import githubLogo from "../assets/Ionicons_logo-github logo.svg";
 import linkedinLogo from "../assets/LinkedIn_logo_In-Black logo.svg";
@@ -172,6 +174,16 @@ export function SiteLayout({ children }) {
               {label}
             </Link>
           ))}
+          <a
+            href={resumeDocx}
+            download="Ryan_Monaghan_Resume_2026.docx"
+            className="site-nav-resume-btn"
+            data-cursor="pointer"
+            aria-label={`${t("downloadResume")}`}
+          >
+            <span>{t("resume")}</span>
+            <DownloadSimple size={13} weight="bold" aria-hidden="true" />
+          </a>
           <ThemeSwitcher />
           <LanguageSwitcher />
         </nav>
@@ -224,6 +236,21 @@ export function SiteLayout({ children }) {
                     </Link>
                   </div>
                 ))}
+                <div
+                  className="mobile-navigation-item pt-2"
+                  style={{ animationDelay: `${0.5 + navItems.length * 0.06}s` }}
+                >
+                  <a
+                    href={resumeDocx}
+                    download="Ryan_Monaghan_Resume_2026.docx"
+                    className="site-nav-resume-btn inline-flex"
+                    data-cursor="pointer"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span>{t("downloadResume")}</span>
+                    <DownloadSimple size={14} weight="bold" aria-hidden="true" />
+                  </a>
+                </div>
               </div>
             </nav>
         )}
