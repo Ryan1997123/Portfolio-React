@@ -322,13 +322,12 @@ function MockupAddress({ url, className }) {
   const inView = useInView(ref, { once: true, amount: 0.8 });
   const prefersReducedMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
-  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const animate = mounted && prefersReducedMotion === false && !complete;
+  const animate = mounted && prefersReducedMotion === false;
 
   return (
     <span ref={ref} className={`${className} project-mockup-typed-address`}>
@@ -336,11 +335,10 @@ function MockupAddress({ url, className }) {
       <span className="project-mockup-address-display">
         {animate ? inView && (
           <Typewriter
-            speed={90}
+            speed={150}
             variance={0.2}
-            cursorBlinkRepeat={0}
+            cursorBlinkDuration={1}
             cursorStyle={{ width: "1px", left: 0 }}
-            onComplete={() => setComplete(true)}
           >
             {url}
           </Typewriter>
