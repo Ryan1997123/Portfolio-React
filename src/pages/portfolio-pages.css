@@ -1816,19 +1816,22 @@
 }
 
 .case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel {
-  flex: none;
+  flex: 0 1 min(26svh, 220px);
+  min-height: 96px;
+  align-items: stretch;
   gap: 8px;
 }
 
 .case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel-arrow {
   width: 44px;
   height: 44px;
+  align-self: center;
 }
 
 .case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel-slide,
 .case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-screenshot-carousel .case-study-carousel-slide {
   width: auto;
-  height: min(26svh, 220px);
+  height: 100%;
 }
 
 .case-study-horizontal-scroll-compact .case-study-horizontal-panel .case-study-carousel-counter {
