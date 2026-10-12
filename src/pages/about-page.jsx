@@ -722,8 +722,8 @@ export function AboutPage() {
               </p>
               <p className="about-intro-note">New York / Product design</p>
             </div>
-            <h1 aria-label="Ideas Into Digital Experiences">
-              <span className="about-title-line">Ideas Into</span>
+            <h1 aria-label="Who is Ryan Monaghan">
+              <span className="about-title-line">Who is</span>
               <ScrambleText
                 as="span"
                 className="about-title-line"
@@ -733,7 +733,7 @@ export function AboutPage() {
                 chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%+"
                 aria-hidden="true"
               >
-                Digital Experiences
+                Ryan Monaghan
               </ScrambleText>
             </h1>
           </motion.header>
@@ -755,7 +755,7 @@ export function AboutPage() {
                 transition={{ type: "spring", stiffness: 240, damping: 22 }}
               >
                 <span className="about-portrait-mark" aria-hidden="true">
-                  <span>R</span>
+                  <span className="about-portrait-mark-r">R</span>
                   <span className="about-portrait-mark-m">M</span>
                 </span>
                 <motion.img
@@ -766,10 +766,6 @@ export function AboutPage() {
                   height="720"
                   decoding="async"
                   fetchPriority="high"
-                  initial={{ scale: prefersReducedMotion ? 1 : 1.08 }}
-                  animate={{ scale: 1 }}
-                  whileHover={prefersReducedMotion ? undefined : { scale: 1.04 }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 />
               </motion.div>
               <figcaption>

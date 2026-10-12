@@ -640,23 +640,19 @@
   aspect-ratio: 1;
   overflow: visible;
   border: 0;
-}
-
-.about-portrait-frame::before {
-  position: absolute;
-  z-index: -1;
-  inset: -8px;
   border-radius: 50%;
   background: #b10e1e;
-  clip-path: inset(0 0 12% round 50%);
-  content: "";
 }
 
 .about-portrait-mark {
   position: absolute;
   z-index: 0;
-  top: 24px;
-  left: 24px;
+  top: 6%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
   color: rgb(245 243 239 / 0.14);
   font-family: var(--font-display) !important;
   font-size: 132px;
@@ -665,22 +661,26 @@
   line-height: 0.8;
 }
 
+.about-portrait-mark-r {
+  position: absolute;
+  left: 12%;
+}
+
 .about-portrait-mark-m {
-  display: inline-block;
-  transform: translateX(0.95em);
+  position: absolute;
+  left: 61%;
 }
 
 .about-portrait-image {
   position: absolute;
   z-index: 1;
-  right: auto;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
+  border-radius: 50%;
   clip-path: circle(50% at 50% 50%);
 }
 
