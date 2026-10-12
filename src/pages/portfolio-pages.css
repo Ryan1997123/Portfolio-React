@@ -663,12 +663,12 @@
 
 .about-portrait-mark-r {
   position: absolute;
-  left: 9%;
+  left: 10%;
 }
 
 .about-portrait-mark-m {
   position: absolute;
-  left: 59%;
+  left: 60%;
 }
 
 .about-portrait-image {
@@ -678,11 +678,12 @@
   display: block;
   width: 100%;
   height: 100%;
-  transform: translateX(-4%);
+  transform: translate(-3%, 3%) scale(1.1);
+  transform-origin: center bottom;
   object-fit: contain;
   object-position: center bottom;
   border-radius: 50%;
-  clip-path: circle(50% at 54% 50%);
+  clip-path: circle(45.45% at 52.7% 47.3%);
 }
 
 .about-portrait figcaption {
@@ -3431,6 +3432,10 @@
 .portfolio-shell[data-theme="light"] .photography-planes-hint,
 .portfolio-shell[data-theme="light"] .photography-plane-index {
   color: #625e58 !important;
+}
+
+.portfolio-shell[data-theme="light"] .about-portrait-mark {
+  color: rgb(25 24 23 / 0.28);
 }
 
 .portfolio-shell[data-theme="light"] .site-nav-link:hover {
