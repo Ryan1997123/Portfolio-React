@@ -163,7 +163,7 @@ export const projects = [
     processImages: [{ label: 'Patient Alice clicked on', image: 'alice' }, { label: 'Touchscreen wireframes', image: 'wires' }],
     solution: 'The final experience gives HCPs an interactive, self-paced way to explore clinical information at the booth, making the conversation with reps more focused and the takeaway more memorable.',
     solutionImage: 'Final GL HCP ECTRIMS Booth experience',
-    figmaEmbed: 'https://embed.figma.com/design/KsQ7OzQkvb9HgF10CooYHD/Ryan_Local_Toleb-GL_HCP_ECTRIMS_Booth?node-id=0-1&embed-host=share',
+    figmaEmbed: 'https://embed.figma.com/design/KsQ7OzQkvb9HgF10CooYHD/Ryan_Local_Toleb-GL_HCP_ECTRIMS_Booth?node-id=93-376&embed-host=share',
     figmaEmbedAtEnd: true,
   },
   {
