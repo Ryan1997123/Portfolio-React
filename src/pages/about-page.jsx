@@ -14,7 +14,7 @@ import { SiteLayout } from "./site-layout";
 
 const aboutPrinciples = [
   "Hells Kitchen, NYC based /",
-  "Experience with Fintech, Tech startups, and Advertising industries /",
+  "Fintech, tech startup, and advertising industry experience /",
   "From Long Island, NY /",
   "Bachelors degree in CS from Fordham /",
 ];
