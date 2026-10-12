@@ -12,7 +12,8 @@ mockup as ICOTYDE; both use a shorter 21:9 frame, with the uncropped desktop and
 frames centered side by side, and `heroScreens` providing full-size desktop
 and mobile image links underneath. The decorative browser controls are not interactive and are hidden
 from assistive technology. Both responsive phone mockups include a compact mobile
-address bar beneath the status bar, showing the project's domain across Work
+Android Chrome-style toolbar beneath the status bar, with a home icon, site
+controls, the project's domain, a tab counter, and a three-dot menu across Work
 cards, homepage hover previews, and case-study headers. App-only phone mockups
 keep their existing appearance. A `liveUrl` button beneath the header mockups opens
 the live website in a new tab. The introductory paragraph has extra vertical

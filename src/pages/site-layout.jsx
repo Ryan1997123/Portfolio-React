@@ -366,7 +366,26 @@ function MockupPhone({ screen, className = "", statusBar = false, url }) {
         {statusBar && <MockupStatusBar />}
         {url && (
           <div className="project-mockup-mobile-browser-bar">
-            <span className="project-mockup-mobile-address">{url}</span>
+            <svg className="project-mockup-mobile-control" viewBox="0 0 24 24" fill="none" focusable="false">
+              <path d="m3 10 9-7 9 7v10h-6v-7H9v7H3Z" />
+            </svg>
+            <div className="project-mockup-mobile-address-field">
+              <svg className="project-mockup-mobile-site-controls" viewBox="0 0 24 24" fill="none" focusable="false">
+                <path d="M3 7h4m6 0h8M3 17h10m6 0h2" />
+                <circle cx="10" cy="7" r="3" />
+                <circle cx="16" cy="17" r="3" />
+              </svg>
+              <span className="project-mockup-mobile-address">{url}</span>
+            </div>
+            <svg className="project-mockup-mobile-control" viewBox="0 0 24 24" fill="none" focusable="false">
+              <rect x="4" y="4" width="16" height="16" rx="3" />
+              <path d="m10 10 2-1v6m-2 0h4" />
+            </svg>
+            <svg className="project-mockup-mobile-control project-mockup-mobile-menu" viewBox="0 0 8 24" focusable="false">
+              <circle cx="4" cy="5" r="1.6" />
+              <circle cx="4" cy="12" r="1.6" />
+              <circle cx="4" cy="19" r="1.6" />
+            </svg>
           </div>
         )}
         <MockupScreen name={screen} />

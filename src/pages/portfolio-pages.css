@@ -3785,25 +3785,58 @@
 .project-mockup-mobile-browser-bar {
   display: flex;
   align-items: center;
+  gap: 0.35cqw;
   height: 2.8cqw;
-  padding: 0.35cqw 0.6cqw;
+  padding: 0.35cqw 0.4cqw;
   border-bottom: 1px solid #d9d9d9;
-  background: #e8e8e8;
+  background: #f4f5f7;
+  color: #3c4043;
+}
+
+.project-mockup-mobile-control,
+.project-mockup-mobile-site-controls {
+  display: block;
+  flex: none;
+  width: 1.05cqw;
+  height: 1.05cqw;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-mockup-mobile-menu {
+  width: 0.35cqw;
+  fill: currentColor;
+  stroke: none;
+}
+
+.project-mockup-mobile-address-field {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.25cqw;
+  min-width: 0;
+  padding: 0.35cqw 0.4cqw;
+  border-radius: 1cqw;
+  background: #e8eaed;
+}
+
+.project-mockup-mobile-site-controls {
+  width: 0.8cqw;
+  height: 0.8cqw;
 }
 
 .portfolio-shell .project-mockup-mobile-address {
   display: block;
-  width: 100%;
+  flex: 1;
   min-width: 0;
   overflow: hidden;
-  padding: 0.35cqw 0.4cqw;
-  border-radius: 0.6cqw;
-  background: #fff;
-  color: #555;
+  color: #3c4043;
   font-family: system-ui, sans-serif;
-  font-size: 0.95cqw;
+  font-size: 0.82cqw;
   line-height: 1;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
