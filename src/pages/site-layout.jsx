@@ -321,8 +321,14 @@ function MockupAddress({ url, className }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.8 });
   const prefersReducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const [complete, setComplete] = useState(false);
-  const animate = prefersReducedMotion === false && !complete;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const animate = mounted && prefersReducedMotion === false && !complete;
 
   return (
     <span ref={ref} className={`${className} project-mockup-typed-address`}>
