@@ -274,24 +274,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 180ms ease;
+  color: #f5f3ef;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .reveal-footer-socials a:hover {
+  color: #0a0a0a;
   transform: translateY(-5px) rotate(-4deg);
 }
 
-.reveal-footer-socials img {
+.reveal-footer-socials svg {
   display: block;
 }
 
-.reveal-footer-socials a:nth-child(1) img,
-.reveal-footer-socials a:nth-child(2) img {
+.reveal-footer-socials a:nth-child(1) svg,
+.reveal-footer-socials a:nth-child(2) svg {
   width: 44px;
   height: 44px;
 }
 
-.reveal-footer-socials a:nth-child(3) img {
+.reveal-footer-socials a:nth-child(3) svg {
   width: 36px;
   height: 36px;
 }
@@ -514,33 +516,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease;
+  color: #b10e1e !important;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .hero-proof-logos a:hover {
+  color: #e01e33 !important;
   transform: translateY(-3px) scale(1.05);
 }
 
-.hero-proof-logos a img {
+.hero-proof-logos svg {
   display: block;
-  /* Red tint in dark mode: turns white SVG icon into bold #B10E1E red */
-  filter: invert(16%) sepia(88%) saturate(4621%) hue-rotate(345deg) brightness(84%) contrast(98%);
-  transition: filter 180ms ease;
 }
 
-.hero-proof-logos a:hover img {
-  /* Slightly brighter/vibrant red on hover */
-  filter: invert(21%) sepia(95%) saturate(5420%) hue-rotate(348deg) brightness(92%) contrast(105%);
-}
-
-.hero-proof-logos a:nth-child(1) img,
-.hero-proof-logos a:nth-child(2) img {
+.hero-proof-logos a:nth-child(1) svg,
+.hero-proof-logos a:nth-child(2) svg {
   width: 44px;
   height: 44px;
 }
 
-.hero-proof-logos a:nth-child(3) img {
+.hero-proof-logos a:nth-child(3) svg {
   width: 36px;
   height: 36px;
 }
@@ -3660,13 +3655,12 @@
   background-image: linear-gradient(145deg, rgb(25 24 23 / 0.04), transparent 44%), radial-gradient(circle at 75% 25%, rgb(177 14 30 / 0.12), transparent 32%);
 }
 
-.portfolio-shell[data-theme="light"] .hero-proof-logos img {
-  /* Rich branded red in light mode for clear contrast and affordance against warm cream background */
-  filter: invert(16%) sepia(88%) saturate(4621%) hue-rotate(345deg) brightness(84%) contrast(98%);
+.portfolio-shell[data-theme="light"] .hero-proof-logos a {
+  color: #b10e1e !important;
 }
 
-.portfolio-shell[data-theme="light"] .hero-proof-logos a:hover img {
-  filter: invert(21%) sepia(95%) saturate(5420%) hue-rotate(348deg) brightness(92%) contrast(105%);
+.portfolio-shell[data-theme="light"] .hero-proof-logos a:hover {
+  color: #e01e33 !important;
 }
 
 .portfolio-shell[data-theme="light"] .hero-design-guides {
