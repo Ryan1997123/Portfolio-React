@@ -754,6 +754,13 @@ export function AboutPage() {
                 whileHover={prefersReducedMotion ? undefined : { y: -8 }}
                 transition={{ type: "spring", stiffness: 240, damping: 22 }}
               >
+                <svg width="0" height="0" className="sr-only" aria-hidden="true" focusable="false">
+                  <defs>
+                    <clipPath id="about-portrait-popout-clip" clipPathUnits="objectBoundingBox">
+                      <path d="M 0,0.5 A 0.5,0.5 0 0,0 1,0.5 L 1,-0.5 L 0,-0.5 Z" />
+                    </clipPath>
+                  </defs>
+                </svg>
                 <span className="about-portrait-mark" aria-hidden="true">
                   <span className="about-portrait-mark-r">R</span>
                   <span className="about-portrait-mark-m">M</span>
