@@ -49,6 +49,11 @@ regular cover image.
 Gaming Gear's three-phone case-study header is centered and capped at 880px
 wide to reduce thumbnail enlargement, while its Work card and homepage preview
 retain their existing sizing.
+Its final screenshot carousel uses all 20 individual PNG frame exports in
+`src/assets/gaming_gear/`, ordered from onboarding and discovery through filters,
+product details, cart, checkout, and profile. Like IMAAVY, it shows uncropped
+screens with captions, swipe/arrow navigation, and a full-size lightbox before
+the Figma embed.
 
 ICOTYDE HCP also uses `liveUrl` to show the same live-website button beneath its
 header, linking to `https://www.icotydehcp.com/`.

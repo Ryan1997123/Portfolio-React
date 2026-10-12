@@ -7,6 +7,26 @@ import googleWires from "../assets/gaming_gear/Google_wires.png";
 import mazeImage from "../assets/gaming_gear/maze.png";
 import researchStudyPlan from "../assets/gaming_gear/UX Research Study Plan1_Page_1.jpg";
 import sitemapImage from "../assets/gaming_gear/map.png";
+import gamingWelcome from "../assets/gaming_gear/Light.png";
+import gamingSignUp from "../assets/gaming_gear/Light 2.png";
+import gamingSignIn from "../assets/gaming_gear/Mobile.png";
+import gamingVerification from "../assets/gaming_gear/Landing.png";
+import gamingHome from "../assets/gaming_gear/Light 4.png";
+import gamingSearch from "../assets/gaming_gear/Search.png";
+import gamingSearchResults from "../assets/gaming_gear/Searched.png";
+import gamingRecommendations from "../assets/gaming_gear/Searched - RECOMMENDED.png";
+import gamingSortedResults from "../assets/gaming_gear/Searched - SORTED.png";
+import gamingFilters from "../assets/gaming_gear/Filters.png";
+import gamingBrandFilters from "../assets/gaming_gear/Filters - BRANDS.png";
+import gamingFilteredResults from "../assets/gaming_gear/Filtered by alienware brands.png";
+import gamingProduct from "../assets/gaming_gear/Light 3.png";
+import gamingFavorites from "../assets/gaming_gear/Favorites.png";
+import gamingCart from "../assets/gaming_gear/My cart.png";
+import gamingEmptyCart from "../assets/gaming_gear/My cart empty.png";
+import gamingCheckoutDetails from "../assets/gaming_gear/Checkout 1.png";
+import gamingCheckoutPayment from "../assets/gaming_gear/Checkout 2.png";
+import gamingConfirmation from "../assets/gaming_gear/Thank you.png";
+import gamingProfile from "../assets/gaming_gear/Profile.png";
 import aliceImage from "../assets/ectrims_booth/Alice.png";
 import wiresImage from "../assets/ectrims_booth/Wires.png";
 import funcAnnoImage from "../assets/ectrims_booth/funcanno.png";
@@ -69,6 +89,26 @@ const caseStudyImages = {
   maze: mazeImage,
   "research-study-plan": researchStudyPlan,
   sitemap: sitemapImage,
+  "gaming-welcome": gamingWelcome,
+  "gaming-sign-up": gamingSignUp,
+  "gaming-sign-in": gamingSignIn,
+  "gaming-verification": gamingVerification,
+  "gaming-home": gamingHome,
+  "gaming-search": gamingSearch,
+  "gaming-search-results": gamingSearchResults,
+  "gaming-recommendations": gamingRecommendations,
+  "gaming-sorted-results": gamingSortedResults,
+  "gaming-filters": gamingFilters,
+  "gaming-brand-filters": gamingBrandFilters,
+  "gaming-filtered-results": gamingFilteredResults,
+  "gaming-product": gamingProduct,
+  "gaming-favorites": gamingFavorites,
+  "gaming-cart": gamingCart,
+  "gaming-empty-cart": gamingEmptyCart,
+  "gaming-checkout-details": gamingCheckoutDetails,
+  "gaming-checkout-payment": gamingCheckoutPayment,
+  "gaming-confirmation": gamingConfirmation,
+  "gaming-profile": gamingProfile,
   alice: aliceImage,
   wires: wiresImage,
   "func-anno": funcAnnoImage,
