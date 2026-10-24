@@ -1,6 +1,6 @@
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { ScrambleText } from "motion-plus/react";
-import { Children, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
 import googleWires from "../assets/gaming_gear/Google_wires.png";
@@ -249,7 +249,7 @@ export function CaseStudyPage() {
           className={project.slug === "imaavy-caregiver-resource" ? "imaavy-case-study-intro" : ""}
           eyebrow={[project.category, project.year].filter(Boolean).join(" / ")}
           title={project.title}
-          body={project.description}
+          body={project.summary || project.description}
         />
         <section className="case-study-content mx-auto max-w-7xl px-6 pb-24 sm:px-10 lg:px-14">
           <motion.div
@@ -343,7 +343,7 @@ export function CaseStudyPage() {
                 </div>
               )}
               <div className="case-study-meta-impact">
-                <p className="case-study-label">{t("impactHeading")}</p>
+                <p className="case-study-label">{t("outcomesHeading")}</p>
                 <ul>
                   {project.outcomes.map((outcome) => (
                     <li key={outcome}>{outcome}</li>
@@ -352,10 +352,6 @@ export function CaseStudyPage() {
               </div>
             </div>
           </motion.div>
-          <HorizontalScrollSections
-            enabled={project.horizontalSections}
-            prefersReducedMotion={prefersReducedMotion}
-          >
           <CaseStudySection
             number="01"
             title={t("overview").replace(/^01 \/ /, "")}
@@ -538,7 +534,6 @@ export function CaseStudyPage() {
               onOpen={openLightbox}
             />
           )}
-          </HorizontalScrollSections>
           {project.resourceLinks && (
             <div className="case-study-resource-links">
               {project.resourceLinks.map(({ labelKey, href }) => (
@@ -661,140 +656,6 @@ function PasswordGate({ title, onUnlock }) {
           </button>
         </div>
       </form>
-    </div>
-  );
-}
-
-const sectionLabelKeys = ["overview", "challenge", "researchLabel", "processLabel", "solutionLabel", "finalImagesLabel"];
-
-// Short landscape phones keep the stacked layout because a full-height panel would not fit.
-const HORIZONTAL_SCROLL_QUERY =
-  "(min-width: 1024px) and (min-height: 640px), (max-width: 1023px) and (min-height: 500px) and (orientation: portrait)";
-const COMPACT_QUERY = "(max-width: 1023px)";
-
-function HorizontalScrollSections({ enabled, prefersReducedMotion, children }) {
-  const [layout, setLayout] = useState({ active: false, compact: false });
-
-  useEffect(() => {
-    if (!enabled) return undefined;
-    const query = window.matchMedia(HORIZONTAL_SCROLL_QUERY);
-    const compactQuery = window.matchMedia(COMPACT_QUERY);
-    const update = () => setLayout({ active: query.matches, compact: compactQuery.matches });
-    update();
-    query.addEventListener("change", update);
-    compactQuery.addEventListener("change", update);
-    return () => {
-      query.removeEventListener("change", update);
-      compactQuery.removeEventListener("change", update);
-    };
-  }, [enabled]);
-
-  if (!enabled || prefersReducedMotion || !layout.active) return children;
-  return <HorizontalScrollTrack compact={layout.compact}>{children}</HorizontalScrollTrack>;
-}
-
-function HorizontalScrollTrack({ compact, children }) {
-  const { t } = useLanguage();
-  const panels = Children.toArray(children).filter(Boolean);
-  const outerRef = useRef(null);
-  const viewportRef = useRef(null);
-  const trackRef = useRef(null);
-  const [distance, setDistance] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { scrollYProgress } = useScroll({ target: outerRef, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-  const lastIndex = Math.max(panels.length - 1, 1);
-  // Narrow panels give a short swipe per section, so mobile gets extra vertical scroll per panel.
-  const scrollLength = distance * (compact ? 1.75 : 1);
-
-  useEffect(() => {
-    const measure = () => {
-      const lastPanel = trackRef.current?.lastElementChild;
-      if (!lastPanel || !viewportRef.current) return;
-      // Use panel geometry; scrollWidth also includes the translated parallax numbers.
-      setDistance(Math.max(0, lastPanel.offsetLeft + lastPanel.offsetWidth - viewportRef.current.clientWidth));
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(trackRef.current);
-    observer.observe(viewportRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    setActiveIndex(Math.round(value * lastIndex));
-  });
-
-  // Keyboard focus inside an off-screen panel scrolls the page to the matching horizontal position.
-  const handleFocus = (event) => {
-    const panel = event.target.closest("[data-panel-index]");
-    if (!panel || !outerRef.current) return;
-    const index = Number(panel.dataset.panelIndex);
-    const top = outerRef.current.getBoundingClientRect().top + window.scrollY;
-    const target = top + (index / lastIndex) * scrollLength;
-    if (Math.abs(window.scrollY - target) > 2) window.scrollTo({ top: target, behavior: "instant" });
-  };
-
-  return (
-    <div
-      ref={outerRef}
-      className={`case-study-horizontal-scroll${compact ? " case-study-horizontal-scroll-compact" : ""}`}
-      style={{ height: `calc(100svh + ${scrollLength}px)` }}
-    >
-      <div ref={viewportRef} className="case-study-horizontal-viewport" onFocus={handleFocus}>
-        <motion.div ref={trackRef} className="case-study-horizontal-track" style={{ x }}>
-          {panels.map((panel, index) => (
-            <HorizontalScrollPanel
-              key={panel.key ?? index}
-              index={index}
-              lastIndex={lastIndex}
-              progress={scrollYProgress}
-              compact={compact}
-            >
-              {panel}
-            </HorizontalScrollPanel>
-          ))}
-        </motion.div>
-        <div className="case-study-horizontal-progress" aria-hidden="true">
-          <span>
-            {String(activeIndex + 1).padStart(2, "0")} / {String(panels.length).padStart(2, "0")}
-          </span>
-          <span className="case-study-horizontal-progress-label">
-            {t(sectionLabelKeys[activeIndex] ?? sectionLabelKeys[0]).replace(/^\d+ \/ /, "")}
-          </span>
-          <span className="case-study-horizontal-progress-bar">
-            <motion.span style={{ scaleX: scrollYProgress }} />
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function HorizontalScrollPanel({ index, lastIndex, progress, compact, children }) {
-  const center = index / lastIndex;
-  const step = 1 / lastIndex;
-  // Keep offsets inside 0–1 so Motion can hardware-accelerate the scroll timeline.
-  const points = [
-    index > 0 && [center - step, 0],
-    [center, 1],
-    index < lastIndex && [center + step, 2],
-  ].filter(Boolean);
-  const range = points.map(([offset]) => offset);
-  const pick = (values) => points.map(([, slot]) => values[slot]);
-  const contentOffset = compact ? 48 : 120;
-  const numberX = useTransform(progress, range, pick(["45vw", "0vw", "-45vw"]));
-  const contentX = useTransform(progress, range, pick([contentOffset, 0, -contentOffset]));
-  const contentOpacity = useTransform(progress, range, pick([0.35, 1, 0.35]));
-
-  return (
-    <div className="case-study-horizontal-panel" data-panel-index={index}>
-      <motion.span className="case-study-horizontal-number" style={{ x: numberX }} aria-hidden="true">
-        {String(index + 1).padStart(2, "0")}
-      </motion.span>
-      <motion.div className="case-study-horizontal-content" style={{ x: contentX, opacity: contentOpacity }}>
-        {children}
-      </motion.div>
     </div>
   );
 }

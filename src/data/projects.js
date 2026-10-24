@@ -2,7 +2,6 @@ export const projects = [
   {
     slug: 'velocity',
     protected: true,
-    horizontalSections: true,
     title: 'ICOTYDE withMe HCP',
     category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',
     type: 'website',
@@ -30,7 +29,6 @@ export const projects = [
   {
     slug: 'imaavy-caregiver-resource',
     protected: true,
-    horizontalSections: true,
     title: 'IMAAVY Caregiver Resource',
     category: 'PRODUCT DESIGN / RESPONSIVE WEBSITE',
     type: 'website',
@@ -88,7 +86,6 @@ export const projects = [
   },
   {
     slug: 'gaming-gear',
-    horizontalSections: true,
     title: 'Gaming Gear / Google UX Course',
     category: 'PRODUCT DESIGN / MOBILE APP',
     type: 'mobile',
@@ -142,7 +139,6 @@ export const projects = [
   },
   {
     slug: 'gl-hcp-ectrims-booth',
-    horizontalSections: true,
     protected: true,
     title: 'GL HCP ECTRIMS Booth',
     category: 'PRODUCT DESIGN / INTERACTIVE VISUAL AID',
@@ -168,7 +164,6 @@ export const projects = [
   },
   {
     slug: 'lilly-alzheimers-digital-panels',
-    horizontalSections: true,
     protected: true,
     title: 'Lilly Alzheimer\'s Digital Panels',
     category: 'BOOTHS / INTERACTIVE EXPERIENCE',
@@ -224,7 +219,6 @@ export const projects = [
   },
   {
     slug: 'sibos-tote-bag',
-    horizontalSections: true,
     title: 'Sibos 2023 Tote Bag Design',
     category: 'BRANDING & MERCHANDISE / GRAPHIC DESIGN',
     type: 'graphic',
@@ -258,7 +252,6 @@ export const projects = [
   },
   {
     slug: 'secure-file-transfer',
-    horizontalSections: true,
     title: 'Secure File Transfer System',
     category: 'PRODUCT DESIGN / SAAS PLATFORM',
     type: 'saas',
