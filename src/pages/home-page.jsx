@@ -1,4 +1,5 @@
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { AnimatePresence, motion, stagger, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { ScrambleText } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { BehanceIcon, GithubIcon, LinkedinIcon } from "../components/ui/SocialIcons";
@@ -311,8 +312,20 @@ export function HomePage() {
             <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
               AVAILABLE FOR HIRE
             </p>
-            <h1 className="home-hero-title max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">
-              PRODUCT ENGINEER
+            <h1
+              className="home-hero-title max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl"
+              aria-label="PRODUCT ENGINEER"
+            >
+              <ScrambleText
+                as="span"
+                active={!prefersReducedMotion}
+                delay={stagger(0.025, { startDelay: 0.25 })}
+                duration={0.55}
+                chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%+"
+                aria-hidden="true"
+              >
+                PRODUCT ENGINEER
+              </ScrambleText>
             </h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
               {t("heroBody")}
