@@ -341,7 +341,7 @@ export function CaseStudyPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {t("viewLiveWebsite")}
+                  {t(project.liveUrlLabelKey || "viewLiveWebsite")}
                   <span aria-hidden="true"> ↗</span>
                   <span className="sr-only"> ({t("opensInNewTab")})</span>
                 </a>
@@ -741,6 +741,11 @@ function CaseStudySection({
 
 function CaseStudyCopy({ body, prefersReducedMotion, initialX, transition }) {
   const paragraphs = Array.isArray(body) ? body : [body];
+  const combinedCopy = paragraphs.join(" ");
+  const displayedParagraphs =
+    paragraphs.length > 1 && combinedCopy.trim().split(/\s+/).length <= 40
+      ? [combinedCopy]
+      : paragraphs;
 
   return (
     <motion.div
@@ -750,7 +755,7 @@ function CaseStudyCopy({ body, prefersReducedMotion, initialX, transition }) {
       viewport={{ once: true }}
       transition={transition}
     >
-      {paragraphs.map((paragraph, index) => (
+      {displayedParagraphs.map((paragraph, index) => (
         <p key={`${index}-${paragraph}`}>{paragraph}</p>
       ))}
     </motion.div>

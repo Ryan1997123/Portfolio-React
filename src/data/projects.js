@@ -191,7 +191,14 @@ export const projects = [
     description: 'Melody is a social music-sharing app prototype. Users can create an account and custom avatar, add friends, discover music, and share Spotify tracks with a personal note.',
     role: 'UX/UI design and low- and high-fidelity prototyping',
     tools: 'Figma, React prototype',
+    liveUrl: 'https://ryan1997123.github.io/Melody/hifi/#/signin',
+    liveUrlLabelKey: 'viewMelodyHighFidelity',
     color: 'rose',
+    heroImage: 'melody-discover',
+    thumbnail: {
+      mockup: 'phones',
+      screens: ['melody-discover', 'melody-drop-pick-a-song', 'melody-avatar-editor'],
+    },
     outcomes: [
       'Low- and high-fidelity interactive prototypes',
       'A song-sharing flow from track selection to a personal note and recipients',
@@ -228,7 +235,6 @@ export const projects = [
     figmaEmbed: 'https://embed.figma.com/design/Triw1GC8rQLTBvm6hR6Nga/Melody?node-id=1-2&embed-host=share',
     figmaEmbedAtEnd: true,
     resourceLinks: [
-      { labelKey: 'viewMelodyHighFidelity', href: 'https://ryan1997123.github.io/Melody/hifi/#/signin' },
       { labelKey: 'viewMelodyLowFidelity', href: 'https://ryan1997123.github.io/Melody/#/signin' },
       { labelKey: 'viewMelodyFigma', href: 'https://www.figma.com/design/Triw1GC8rQLTBvm6hR6Nga/Melody?node-id=1-2' },
     ],
