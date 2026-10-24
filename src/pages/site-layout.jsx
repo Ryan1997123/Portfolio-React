@@ -559,7 +559,7 @@ export function ProjectCard({ project, index }) {
           <span className="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400">
             0{index + 1}
           </span>
-          <span className="text-sm text-zinc-500">{project.year}</span>
+          {project.year && <span className="text-sm text-zinc-500">{project.year}</span>}
         </div>
         <div className="flex flex-col gap-3">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#B10E1E]">

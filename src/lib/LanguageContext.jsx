@@ -100,6 +100,9 @@ export const translations = {
     viewLiveWebsite: "View live website",
     viewWaihaWebsite: "Explore the wAIHA website",
     viewFigmaDesign: "View the caregiver resource design in Figma",
+    viewMelodyHighFidelity: "Try the high-fidelity prototype",
+    viewMelodyLowFidelity: "Explore the low-fidelity prototype",
+    viewMelodyFigma: "View the Melody Figma file",
     fullDesignHeading: "Explore the full product design and layout",
 
     quickLinks: "QUICK LINKS",
@@ -197,6 +200,9 @@ export const translations = {
     viewLiveWebsite: "公開中のウェブサイトを見る",
     viewWaihaWebsite: "wAIHAウェブサイトを見る",
     viewFigmaDesign: "Figmaで介護者向けリソースのデザインを見る",
+    viewMelodyHighFidelity: "高精細プロトタイプを試す",
+    viewMelodyLowFidelity: "低精細プロトタイプを見る",
+    viewMelodyFigma: "MelodyのFigmaファイルを見る",
     fullDesignHeading: "プロダクトのデザインとレイアウト全体を見る",
 
     quickLinks: "クイックリンク",
@@ -294,6 +300,9 @@ export const translations = {
     viewLiveWebsite: "실제 웹사이트 보기",
     viewWaihaWebsite: "wAIHA 웹사이트 보기",
     viewFigmaDesign: "Figma에서 간병인 리소스 디자인 보기",
+    viewMelodyHighFidelity: "하이파이 프로토타입 사용해 보기",
+    viewMelodyLowFidelity: "로우파이 프로토타입 보기",
+    viewMelodyFigma: "Melody Figma 파일 보기",
     fullDesignHeading: "전체 제품 디자인과 레이아웃 살펴보기",
 
     quickLinks: "빠른 링크",

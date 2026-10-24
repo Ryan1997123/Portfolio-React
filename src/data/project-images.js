@@ -13,6 +13,9 @@ import ectrimsIvaThumb from "../assets/thumbnails/ectrims-iva.webp";
 import gamingSplashThumb from "../assets/thumbnails/gaming-splash.webp";
 import gamingLandingThumb from "../assets/thumbnails/gaming-landing.webp";
 import gamingProductThumb from "../assets/thumbnails/gaming-product.webp";
+import melodyDiscoverThumb from "../assets/melody/discover.png";
+import melodyDropThumb from "../assets/melody/drop-pick-a-song.png";
+import melodyAvatarThumb from "../assets/melody/avatar-editor.png";
 
 export const heroImages = {
   "gaming-gear-highfidelity": gamingGearHighFidelity,
@@ -22,6 +25,7 @@ export const heroImages = {
   "sft-hero": sftHero,
   "lilly-booth-hero": lillyBoothHero,
   "imaavy-caregiver-hero": imaavyCaregiverHero,
+  "melody-discover": melodyDiscoverThumb,
 };
 
 export const thumbnailImages = {
@@ -33,6 +37,9 @@ export const thumbnailImages = {
   "gaming-splash": gamingSplashThumb,
   "gaming-landing": gamingLandingThumb,
   "gaming-product": gamingProductThumb,
+  "melody-discover": melodyDiscoverThumb,
+  "melody-drop-pick-a-song": melodyDropThumb,
+  "melody-avatar-editor": melodyAvatarThumb,
 };
 
 export function getHeroImageSource(heroImage) {

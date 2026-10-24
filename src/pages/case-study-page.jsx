@@ -27,6 +27,17 @@ import gamingCheckoutDetails from "../assets/gaming_gear/Checkout 1.png";
 import gamingCheckoutPayment from "../assets/gaming_gear/Checkout 2.png";
 import gamingConfirmation from "../assets/gaming_gear/Thank you.png";
 import gamingProfile from "../assets/gaming_gear/Profile.png";
+import melodySignIn from "../assets/melody/sign-in.png";
+import melodyDiscover from "../assets/melody/discover.png";
+import melodySongPage from "../assets/melody/song-page.png";
+import melodyDropPick from "../assets/melody/drop-pick-a-song.png";
+import melodyDropWhy from "../assets/melody/drop-say-why.png";
+import melodySendToFriends from "../assets/melody/send-to-friends.png";
+import melodyFriends from "../assets/melody/friends.png";
+import melodyChats from "../assets/melody/chats.png";
+import melodyAvatarEditor from "../assets/melody/avatar-editor.png";
+import melodyLofiDiscover from "../assets/melody/lofi-discover.png";
+import melodyLofiDropPick from "../assets/melody/lofi-drop-pick-a-song.png";
 import aliceImage from "../assets/ectrims_booth/Alice.png";
 import wiresImage from "../assets/ectrims_booth/Wires.png";
 import funcAnnoImage from "../assets/ectrims_booth/funcanno.png";
@@ -109,6 +120,17 @@ const caseStudyImages = {
   "gaming-checkout-payment": gamingCheckoutPayment,
   "gaming-confirmation": gamingConfirmation,
   "gaming-profile": gamingProfile,
+  "melody-sign-in": melodySignIn,
+  "melody-discover": melodyDiscover,
+  "melody-song-page": melodySongPage,
+  "melody-drop-pick-a-song": melodyDropPick,
+  "melody-drop-say-why": melodyDropWhy,
+  "melody-send-to-friends": melodySendToFriends,
+  "melody-friends": melodyFriends,
+  "melody-chats": melodyChats,
+  "melody-avatar-editor": melodyAvatarEditor,
+  "melody-lofi-discover": melodyLofiDiscover,
+  "melody-lofi-drop-pick-a-song": melodyLofiDropPick,
   alice: aliceImage,
   wires: wiresImage,
   "func-anno": funcAnnoImage,
