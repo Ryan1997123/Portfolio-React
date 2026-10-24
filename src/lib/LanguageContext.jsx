@@ -55,7 +55,7 @@ export const translations = {
 
     workEyebrow: "WORK",
     workTitle: "Selected projects.",
-    workBody: "A mix of identity, interaction, and image-making. Open a project to see the thinking behind it.",
+    workBody: "I work across healthcare, digital products, and visual design, helping turn complex ideas into clear, useful experiences.",
     workFilterAll: "All",
     workFilterWebsite: "Websites",
     workFilterMobile: "Mobile Apps",
@@ -152,7 +152,7 @@ export const translations = {
 
     workEyebrow: "WORK",
     workTitle: "主要プロジェクト。",
-    workBody: "アイデンティティ、インタラクション、ビジュアル制作の融合。プロジェクトを開いて背景にある思考をご覧ください。",
+    workBody: "医療、デジタルプロダクト、ビジュアルデザインを中心に、複雑な情報をわかりやすく使いやすい体験へと形にしています。",
     workFilterAll: "すべて",
     workFilterWebsite: "ウェブサイト",
     workFilterMobile: "モバイルアプリ",
@@ -249,7 +249,7 @@ export const translations = {
 
     workEyebrow: "WORK",
     workTitle: "주요 프로젝트.",
-    workBody: "아이덴티티, 인터랙션, 비주얼 제작의 결합. 프로젝트를 열어 그 뒤에 있는 생각을 확인하세요.",
+    workBody: "헬스케어, 디지털 제품, 비주얼 디자인을 중심으로 복잡한 정보를 명확하고 쓰기 쉬운 경험으로 풀어냅니다.",
     workFilterAll: "전체",
     workFilterWebsite: "웹사이트",
     workFilterMobile: "모바일 앱",
