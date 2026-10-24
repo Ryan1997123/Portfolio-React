@@ -7,7 +7,7 @@ import umbrellaStreet from "../assets/aboutme/oT0NlVII6dk9PKKP.jpg";
 import milanGallery from "../assets/aboutme/qvd0dER4TEM79Jds.jpg";
 import londonStreet from "../assets/aboutme/rmicbVaW7DRN3Scb.jpg";
 import meImage from "../assets/aboutme/me2-cutout.png";
-import resumeDocx from "../assets/resume/Ryan_Monaghan_Resume_2026.docx?url";
+import resumePdf from "../assets/resume/Ryan_Monaghan_Resume_2026_Updated.pdf?url";
 import { useLanguage } from "../lib/LanguageContext";
 import { useTheme } from "../lib/ThemeContext";
 import { SiteLayout } from "./site-layout";
@@ -587,8 +587,8 @@ export function AboutPage() {
               <div className="about-actions">
                 <a
                   className="about-action about-action-primary"
-                  href={resumeDocx}
-                  download="Ryan_Monaghan_Resume_2026.docx"
+                  href={resumePdf}
+                  download="Ryan_Monaghan_Resume_2026_Updated.pdf"
                 >
                   <span>{t("downloadResume")}</span>
                   <DownloadSimple size={18} weight="bold" aria-hidden="true" />

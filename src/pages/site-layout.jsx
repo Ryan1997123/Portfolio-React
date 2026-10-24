@@ -3,7 +3,7 @@ import { useInView, useReducedMotion } from "motion/react";
 import { Typewriter } from "motion-plus/react";
 import { Link, useLocation } from "react-router-dom";
 import { DownloadSimple } from "@phosphor-icons/react";
-import resumeDocx from "../assets/resume/Ryan_Monaghan_Resume_2026.docx?url";
+import resumePdf from "../assets/resume/Ryan_Monaghan_Resume_2026_Updated.pdf?url";
 import { BehanceIcon, GithubIcon, LinkedinIcon } from "../components/ui/SocialIcons";
 import mouseIcon from "../assets/mouse_icon.svg";
 import { LanguageSwitcher } from "../components/ui/LanguageSwitcher";
@@ -195,8 +195,8 @@ export function SiteLayout({ children }) {
             </Link>
           ))}
           <a
-            href={resumeDocx}
-            download="Ryan_Monaghan_Resume_2026.docx"
+            href={resumePdf}
+            download="Ryan_Monaghan_Resume_2026_Updated.pdf"
             className="site-nav-resume-btn"
             data-cursor="pointer"
             aria-label={`${t("downloadResume")}`}
@@ -262,8 +262,8 @@ export function SiteLayout({ children }) {
                   style={{ animationDelay: `${0.5 + navItems.length * 0.06}s` }}
                 >
                   <a
-                    href={resumeDocx}
-                    download="Ryan_Monaghan_Resume_2026.docx"
+                    href={resumePdf}
+                    download="Ryan_Monaghan_Resume_2026_Updated.pdf"
                     className="site-nav-resume-btn inline-flex"
                     data-cursor="pointer"
                     onClick={() => setMenuOpen(false)}
