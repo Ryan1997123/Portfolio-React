@@ -3075,6 +3075,226 @@
   height: auto !important;
 }
 
+.photography-gallery-section {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 24px 56px 96px;
+}
+
+.photography-gallery-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgb(245 243 239 / 0.16);
+  padding-bottom: 16px;
+  color: #8a8a85;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.photography-gallery-heading h2 {
+  margin: 0;
+  color: #f5f3ef !important;
+  font-family: var(--font-display) !important;
+  font-size: 28px !important;
+  font-style: normal;
+  line-height: 1;
+}
+
+.photography-gallery-heading sup {
+  color: #b10e1e;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.photography-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.photography-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgb(245 243 239 / 0.16);
+  padding: 0;
+  background: #171717;
+  color: #f5f3ef;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.photography-card::after {
+  position: absolute;
+  inset: 35% 0 0;
+  background: linear-gradient(to bottom, transparent, rgb(10 10 10 / 0.76));
+  content: '';
+  pointer-events: none;
+}
+
+.photography-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photography-card:hover img,
+.photography-card:focus-visible img {
+  transform: scale(1.035);
+}
+
+.photography-card:focus-visible,
+.photography-lightbox-close:focus-visible {
+  outline: 3px solid #b10e1e;
+  outline-offset: 4px;
+}
+
+.photography-card-index,
+.photography-card-label {
+  position: absolute;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.photography-card-index {
+  top: 14px;
+  left: 14px;
+  color: #fff;
+  font-size: 10px;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.7);
+}
+
+.photography-card-label {
+  right: 16px;
+  bottom: 14px;
+  left: 16px;
+  overflow-wrap: anywhere;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.8);
+}
+
+.photography-lightbox-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgb(0 0 0 / 0.88);
+  backdrop-filter: blur(8px);
+}
+
+.photography-lightbox {
+  position: relative;
+  display: flex;
+  width: min(100%, 1200px);
+  max-height: calc(100svh - 48px);
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.photography-lightbox img {
+  display: block;
+  width: 100%;
+  max-height: calc(100svh - 112px);
+  object-fit: contain;
+}
+
+.photography-lightbox p {
+  max-width: 100%;
+  color: #f5f3ef;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.photography-lightbox-close {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  background: rgb(10 10 10 / 0.75);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 1023px) {
+  .photography-gallery-section {
+    padding-inline: 40px;
+  }
+
+  .photography-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .photography-gallery-section {
+    padding: 12px 24px 72px;
+  }
+}
+
+@media (max-width: 520px) {
+  .photography-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .photography-gallery-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .photography-gallery-heading h2 {
+    font-size: 25px !important;
+  }
+
+  .photography-lightbox-backdrop {
+    padding: 12px;
+  }
+
+  .photography-lightbox {
+    max-height: calc(100svh - 24px);
+  }
+
+  .photography-lightbox img {
+    max-height: calc(100svh - 88px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photography-card img {
+    transition: none;
+  }
+}
+
 .work-filter-button {
   min-height: 44px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3398,6 +3618,20 @@
 .portfolio-shell[data-theme="light"] .case-study-visual,
 .portfolio-shell[data-theme="light"] .photography-planes-container {
   background-color: #f5f3ef;
+}
+
+.portfolio-shell[data-theme="light"] .photography-gallery-heading {
+  border-color: rgb(25 24 23 / 0.16);
+  color: #625e58;
+}
+
+.portfolio-shell[data-theme="light"] .photography-gallery-heading h2 {
+  color: #191817 !important;
+}
+
+.portfolio-shell[data-theme="light"] .photography-card {
+  border-color: rgb(25 24 23 / 0.2);
+  background: #e9e4de;
 }
 
 .portfolio-shell[data-theme="light"] .mobile-navigation {
