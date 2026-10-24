@@ -197,6 +197,7 @@ export const projects = [
     heroImage: 'melody-discover',
     thumbnail: {
       mockup: 'phones',
+      statusBar: true,
       screens: ['melody-discover', 'melody-drop-pick-a-song', 'melody-avatar-editor'],
     },
     outcomes: [

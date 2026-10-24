@@ -510,7 +510,7 @@ function MockupPhone({ screen, className = "", statusBar = false, url }) {
 
 // Decorative device frames; the surrounding card or header carries the accessible name.
 export function ProjectMockup({ thumbnail }) {
-  const { mockup, screens, url } = thumbnail;
+  const { mockup, screens, statusBar = false, url } = thumbnail;
 
   return (
     <div className={`project-mockup project-mockup-stage-${mockup}`} aria-hidden="true">
@@ -523,7 +523,12 @@ export function ProjectMockup({ thumbnail }) {
       )}
       {mockup === "phones" &&
         screens.map((screen, index) => (
-          <MockupPhone key={screen} screen={screen} className={`project-mockup-phone-${index + 1}`} />
+          <MockupPhone
+            key={screen}
+            screen={screen}
+            className={`project-mockup-phone-${index + 1}`}
+            statusBar={statusBar}
+          />
         ))}
       {mockup === "tablet" && (
         <div className="project-mockup-tablet">
