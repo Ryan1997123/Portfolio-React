@@ -1,5 +1,5 @@
 import { DownloadSimple } from "@phosphor-icons/react";
-import { animate, motion, stagger, useMotionValue, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { animate, motion, stagger, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { ScrambleText, Ticker } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import colorfulStreet from "../assets/aboutme/1000015242.JPG";
@@ -406,22 +406,7 @@ function LifeSketch() {
   );
 }
 
-// Native scroll-timeline animations snap back outside their keyframes, so hold values across 0..1.
-function fullRange(input, output) {
-  const paddedInput = [...input];
-  const paddedOutput = [...output];
-  if (paddedInput[0] > 0) {
-    paddedInput.unshift(0);
-    paddedOutput.unshift(paddedOutput[0]);
-  }
-  if (paddedInput[paddedInput.length - 1] < 1) {
-    paddedInput.push(1);
-    paddedOutput.push(paddedOutput[paddedOutput.length - 1]);
-  }
-  return [paddedInput, paddedOutput];
-}
-
-function BeatContent({ beat, renderPhoto }) {
+function BeatContent({ beat }) {
   const paragraphs = [].concat(beat.text ?? beat);
   const photos = beat.photos ?? [];
 
@@ -432,252 +417,47 @@ function BeatContent({ beat, renderPhoto }) {
       ))}
       {photos.length > 0 && (
         <div className="about-life-gallery" role="group" aria-label="Travel photos">
-          {photos.map(renderPhoto)}
+          {photos.map((photo) => (
+            <figure key={photo.id} className={`about-life-photo about-life-photo-${photo.id}`}>
+              <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+              <figcaption>{photo.caption}</figcaption>
+            </figure>
+          ))}
         </div>
       )}
     </>
   );
 }
 
-function beatClassName(beat) {
-  return `scroll-story-beat${Array.isArray(beat.text) ? " is-multi" : ""}`;
-}
-
-function ScrollStoryBeat({ progress, index, segment, color, isLast, beat }) {
-  const fade = segment * 0.3;
-  const enter = index * segment;
-  const exit = enter + segment;
-  const isFirst = index === 0;
-
-  // Outgoing text clears before incoming text appears so they never overlap.
-  const opacity = useTransform(
-    progress,
-    ...fullRange(
-      [
-        ...(isFirst ? [] : [enter + fade * 0.2, enter + fade]),
-        ...(isLast ? [] : [exit - fade, exit - fade * 0.6]),
-      ],
-      [...(isFirst ? [] : [0, 1]), ...(isLast ? [] : [1, 0])],
-    ),
-  );
-  // Incoming beats rise vertically and outgoing beats slide left, tracing an L.
-  const y = useTransform(
-    progress,
-    ...fullRange([enter, enter + fade], isFirst ? [0, 0] : [120, 0]),
-  );
-  const x = useTransform(
-    progress,
-    ...fullRange([exit - fade, exit], isLast ? [0, 0] : [0, -160]),
-  );
-
-  return (
-    <motion.div className={beatClassName(beat)} style={{ color, opacity, x, y }}>
-      <BeatContent
-        beat={beat}
-        renderPhoto={(photo, photoIndex) => (
-          <ScrollStoryPhoto
-            key={photo.id}
-            progress={progress}
-            start={enter + fade * 0.2 + photoIndex * segment * 0.04}
-            segment={segment}
-            photo={photo}
-          />
-        )}
-      />
-    </motion.div>
-  );
-}
-
-function ScrollStoryHeading({ progress, start, end, fade, isFirst, isLast, color, children }) {
-  const opacity = useTransform(
-    progress,
-    ...fullRange(
-      [
-        ...(isFirst ? [] : [start + fade * 0.2, start + fade]),
-        ...(isLast ? [] : [end - fade, end - fade * 0.6]),
-      ],
-      [...(isFirst ? [] : [0, 1]), ...(isLast ? [] : [1, 0])],
-    ),
-  );
-  const y = useTransform(
-    progress,
-    ...fullRange(
-      [...(isFirst ? [] : [start, start + fade]), ...(isLast ? [] : [end - fade, end])],
-      [...(isFirst ? [] : [40, 0]), ...(isLast ? [] : [0, -40])],
-    ),
-  );
-
-  return (
-    <motion.div
-      className="about-approach-heading scroll-story-heading"
-      style={{ color, opacity, y }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function ScrollStoryBackdrop({ progress, boundary, fade, background }) {
-  const opacity = useTransform(
-    progress,
-    ...fullRange([boundary - fade * 0.5, boundary + fade * 0.5], [0, 1]),
-  );
-
-  return (
-    <motion.div
-      className="scroll-story-backdrop"
-      aria-hidden="true"
-      style={{ background, opacity }}
-    />
-  );
-}
-
-function ScrollStoryPhoto({ progress, start, segment, photo, isStatic }) {
-  const opacity = useTransform(progress, ...fullRange([start, start + segment * 0.15], [0, 1]));
-  const y = useTransform(progress, ...fullRange([start, start + segment * 0.2], [40, 0]));
-
-  return (
-    <motion.figure
-      className={`about-life-photo about-life-photo-${photo.id}`}
-      style={isStatic ? undefined : { opacity, y }}
-    >
-      <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
-      <figcaption>{photo.caption}</figcaption>
-    </motion.figure>
-  );
-}
-
-function ScrollStory({ chapters }) {
-  const prefersReducedMotion = useReducedMotion();
+function AboutStories({ chapters }) {
   const { theme } = useTheme();
-  const storyRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: storyRef,
-    offset: ["start start", "end end"],
-  });
+  return (
+    <div className="about-story-sections">
+      {chapters.map((chapter) => {
+        const colors = theme === "light"
+          ? { background: "#f5f3ef", color: "#191817" }
+          : storyThemes[chapter.theme];
 
-  const starts = [];
-  let beatCount = 0;
-  for (const chapter of chapters) {
-    starts.push(beatCount);
-    beatCount += chapter.beats.length;
-  }
-  const steps = beatCount;
-  const segment = 1 / steps;
-  const fade = segment * 0.3;
-  const themes = chapters.map((chapter) =>
-    theme === "light"
-      ? { background: "#f5f3ef", color: "#191817" }
-      : storyThemes[chapter.theme],
-  );
-  const boundaries = starts.slice(1).map((start) => start * segment);
-
-  const rule = (
-    <motion.div
-      className="about-approach-rule"
-      initial={{ scaleX: prefersReducedMotion ? 1 : 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: prefersReducedMotion ? 0 : 0.9,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    />
-  );
-
-  if (prefersReducedMotion) {
-    return (
-      <div ref={storyRef} className="scroll-story is-static">
-        {chapters.map((chapter, index) => (
-          <div key={chapter.id} style={themes[index]}>
-            <div className="scroll-story-pin about-approach-inner">
-              {index === 0 && rule}
-              <div className="about-approach-heading scroll-story-heading">
+        return (
+          <section key={chapter.id} className="about-story-chapter" style={colors}>
+            <div className="about-approach-inner">
+              <div className="about-approach-rule" aria-hidden="true" />
+              <div className="about-approach-heading">
                 {chapter.label}
                 {chapter.title}
                 {chapter.visual}
               </div>
-              <div className="scroll-story-stage">
+              <div className="about-story-stage">
                 {chapter.beats.map((beat, beatIndex) => (
-                  <div key={`${chapter.id}-${beatIndex}`} className={beatClassName(beat)}>
-                    <BeatContent
-                      beat={beat}
-                      renderPhoto={(photo) => (
-                        <ScrollStoryPhoto
-                          key={photo.id}
-                          progress={scrollYProgress}
-                          start={0}
-                          segment={segment}
-                          photo={photo}
-                          isStatic
-                        />
-                      )}
-                    />
+                  <div key={`${chapter.id}-${beatIndex}`} className="about-story-beat">
+                    <BeatContent beat={beat} />
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div
-      ref={storyRef}
-      className="scroll-story"
-      style={{
-        "--story-steps": steps,
-        background: themes[0].background,
-        color: themes[0].color,
-      }}
-    >
-      {boundaries.map((boundary, index) => (
-        <ScrollStoryBackdrop
-          key={chapters[index + 1].id}
-          progress={scrollYProgress}
-          boundary={boundary}
-          fade={fade}
-          background={themes[index + 1].background}
-        />
-      ))}
-      <div className="scroll-story-pin about-approach-inner">
-        {rule}
-        <div className="scroll-story-headings">
-          {chapters.map((chapter, index) => (
-            <ScrollStoryHeading
-              key={chapter.id}
-              progress={scrollYProgress}
-              start={starts[index] * segment}
-              end={(starts[index] + chapter.beats.length) * segment}
-              fade={fade}
-              isFirst={index === 0}
-              isLast={index === chapters.length - 1}
-              color={themes[index].color}
-            >
-              {chapter.label}
-              {chapter.title}
-              {chapter.visual}
-            </ScrollStoryHeading>
-          ))}
-        </div>
-        <div className="scroll-story-stage">
-          {chapters.flatMap((chapter, chapterIndex) =>
-            chapter.beats.map((beat, beatIndex) => (
-              <ScrollStoryBeat
-                key={`${chapter.id}-${beatIndex}`}
-                progress={scrollYProgress}
-                index={starts[chapterIndex] + beatIndex}
-                segment={segment}
-                color={themes[chapterIndex].color}
-                isLast={starts[chapterIndex] + beatIndex === beatCount - 1}
-                beat={beat}
-              />
-            )),
-          )}
-        </div>
-      </div>
+          </section>
+        );
+      })}
     </div>
   );
 }
@@ -869,7 +649,7 @@ export function AboutPage() {
           onViewportEnter={() => setApproachVisible(true)}
           viewport={{ once: true, amount: 0.1 }}
         >
-          <ScrollStory
+          <AboutStories
             chapters={[
               {
                 id: "approach",

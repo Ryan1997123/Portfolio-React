@@ -38,6 +38,7 @@ export function WorkPage() {
               type="button"
               data-cursor="pointer"
               className={`work-filter-button ${activeFilter === key ? "is-active" : ""}`}
+              aria-pressed={activeFilter === key}
               onClick={() => setActiveFilter(key)}
             >
               {t(labelKey)}

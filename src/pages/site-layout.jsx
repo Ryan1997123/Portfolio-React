@@ -91,6 +91,7 @@ function usePageSEO() {
 export function SiteLayout({ children }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const { pathname } = useLocation();
   usePageSEO();
   const navItems = [
     ["/", t("home")],
@@ -100,9 +101,25 @@ export function SiteLayout({ children }) {
     ["/contact", t("contact")],
   ];
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuToggleRef = useRef(null);
   const cursorRef = useRef(null);
   const cursorFrameRef = useRef(null);
   const pointerPositionRef = useRef({ x: -100, y: -100 });
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuToggleRef.current?.focus();
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
 
   useEffect(() => {
     const applyCursorPosition = () => {
@@ -168,7 +185,12 @@ export function SiteLayout({ children }) {
           aria-label="Main navigation"
         >
           {navItems.map(([path, label]) => (
-            <Link key={path} to={path} className="site-nav-link text-zinc-400">
+            <Link
+              key={path}
+              to={path}
+              className="site-nav-link text-zinc-400"
+              aria-current={path === "/" ? pathname === path || undefined : pathname.startsWith(path) ? "page" : undefined}
+            >
               {label}
             </Link>
           ))}
@@ -185,15 +207,15 @@ export function SiteLayout({ children }) {
           <ThemeSwitcher />
           <LanguageSwitcher />
         </nav>
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeSwitcher />
           <LanguageSwitcher />
           <button
             type="button"
             data-cursor="pointer"
+            ref={menuToggleRef}
             className="site-menu-toggle relative z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/15 text-zinc-100 md:hidden"
             aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setMenuOpen((open) => !open)}
           >
@@ -228,6 +250,7 @@ export function SiteLayout({ children }) {
                       to={path}
                       data-cursor="pointer"
                       className="block border-b border-white/10 pb-3 text-2xl tracking-tight text-zinc-200 transition-colors hover:text-[#B10E1E]"
+                      aria-current={path === "/" ? pathname === path || undefined : pathname.startsWith(path) ? "page" : undefined}
                       onClick={() => setMenuOpen(false)}
                     >
                       {label}

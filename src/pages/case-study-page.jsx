@@ -156,6 +156,19 @@ const caseStudyImages = {
 
 const PROJECT_PASSWORD = "Ryanswork123@";
 const UNLOCK_STORAGE_KEY = "portfolio-projects-unlocked";
+const PRODUCT_TYPES = {
+  "RESPONSIVE WEBSITE": "Responsive site",
+  "MOBILE APP": "Mobile app",
+  "INTERACTIVE VISUAL AID": "Interactive visual aid",
+  "INTERACTIVE EXPERIENCE": "Interactive experience",
+  "GRAPHIC DESIGN": "Graphic design",
+  "SAAS PLATFORM": "SaaS platform",
+};
+
+function getProductType(category) {
+  const categoryType = category?.split("/").pop()?.trim();
+  return PRODUCT_TYPES[categoryType] || categoryType;
+}
 
 function resolveCaseStudyImage(imageKey) {
   return caseStudyImages[imageKey] || null;
@@ -203,6 +216,8 @@ export function CaseStudyPage() {
       </SiteLayout>
     );
   }
+
+  const productType = getProductType(project.category);
 
   if (project.protected && !unlocked) {
     return (
@@ -315,10 +330,10 @@ export function CaseStudyPage() {
                 <p className="case-study-label">{t("roleHeading")}</p>
                 <p>{project.role}</p>
               </div>
-              {project.timeline && (
+              {productType && (
                 <div>
-                  <p className="case-study-label">{t("timelineHeading")}</p>
-                  <p>{project.timeline}</p>
+                  <p className="case-study-label">{t("productTypeHeading")}</p>
+                  <p>{productType}</p>
                 </div>
               )}
               {project.tools && (

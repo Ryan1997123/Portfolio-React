@@ -1,5 +1,4 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { Typewriter } from "motion-plus/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { BehanceIcon, GithubIcon, LinkedinIcon } from "../components/ui/SocialIcons";
@@ -20,59 +19,6 @@ const skills = [
   "Python",
   "UX Research",
 ];
-
-const HERO_TYPEWRITER_PHRASES = [
-  "PRODUCT DESIGNER",
-  "FRONT-END DEVELOPER",
-  "DESIGNING DIGITAL EXPERIENCES",
-  "PRODUCT DESIGNER",
-];
-
-function HeroRoleTypewriter({ prefersReducedMotion }) {
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
-  const handleComplete = () => {
-    if (phraseIndex < HERO_TYPEWRITER_PHRASES.length - 1) {
-      setTimeout(() => {
-        setPhraseIndex((prev) => prev + 1);
-      }, 1600);
-    }
-  };
-
-  const currentPhrase = prefersReducedMotion
-    ? HERO_TYPEWRITER_PHRASES[0]
-    : HERO_TYPEWRITER_PHRASES[phraseIndex];
-
-  return (
-    <h1
-      className="home-hero-title max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl"
-      aria-label="Product Designer"
-    >
-      {prefersReducedMotion ? (
-        currentPhrase
-      ) : (
-        <Typewriter
-          as="span"
-          speed={110}
-          backspaceFactor={0.4}
-          cursorBlinkDuration={0.6}
-          cursorBlinkRepeat={phraseIndex === HERO_TYPEWRITER_PHRASES.length - 1 ? Infinity : 2}
-          cursorStyle={{
-            backgroundColor: "#B10E1E",
-            width: "3px",
-            height: "0.85em",
-            top: "0.05em",
-            marginLeft: "0.15em",
-          }}
-          textClassName="home-hero-typewriter-text"
-          onComplete={handleComplete}
-        >
-          {currentPhrase}
-        </Typewriter>
-      )}
-    </h1>
-  );
-}
 
 function RotatingIdentity() {
   const { lang, t } = useLanguage();
@@ -365,7 +311,9 @@ export function HomePage() {
             <p className="page-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-[#B10E1E]">
               AVAILABLE FOR HIRE
             </p>
-            <HeroRoleTypewriter prefersReducedMotion={prefersReducedMotion} />
+            <h1 className="home-hero-title max-w-5xl text-balance text-6xl font-medium leading-[0.94] tracking-[-0.07em] sm:text-8xl lg:text-9xl">
+              PRODUCT ENGINEER
+            </h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
               {t("heroBody")}
             </p>
