@@ -768,6 +768,16 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!items || items.length === 0) return null;
+  if (project.finalImageLayout === "screenshots") {
+    return (
+      <CaseStudyScreenshotGrid
+        items={items}
+        project={project}
+        prefersReducedMotion={prefersReducedMotion}
+        onOpen={onOpen}
+      />
+    );
+  }
 
   const goTo = (index) => {
     const clamped = Math.max(0, Math.min(index, items.length - 1));
@@ -785,7 +795,7 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
     <motion.section
       id="case-study-section-06"
       tabIndex={-1}
-      className={`case-study-section case-study-carousel-section${project.finalImageLayout === "screenshots" ? " case-study-screenshot-carousel" : ""}`}
+      className="case-study-section case-study-carousel-section"
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -796,7 +806,7 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
     >
       <div className="case-study-section-heading">
         <p className="case-study-label">{t("finalImagesLabel")}</p>
-        <h2>{t(project.finalImageLayout === "screenshots" ? "selectedFinalImagesSub" : "finalImagesSub")}</h2>
+        <h2>{t("finalImagesSub")}</h2>
       </div>
       <div className="case-study-carousel">
         <button
@@ -845,9 +855,6 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
                 alt={item.label}
                 loading="lazy"
               />
-              {project.finalImageLayout === "screenshots" && (
-                <span className="case-study-carousel-caption">{item.label}</span>
-              )}
             </button>
           ))}
         </div>
@@ -864,6 +871,70 @@ function CaseStudyCarousel({ items, project, prefersReducedMotion, onOpen }) {
       <p className="case-study-carousel-counter font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">
         {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
       </p>
+    </motion.section>
+  );
+}
+
+function CaseStudyScreenshotGrid({ items, project, prefersReducedMotion, onOpen }) {
+  const { t } = useLanguage();
+
+  return (
+    <motion.section
+      id="case-study-section-06"
+      tabIndex={-1}
+      className="case-study-section case-study-screenshot-gallery"
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <div className="case-study-section-heading">
+        <p className="case-study-label">{t("finalImagesLabel")}</p>
+        <h2>{t("selectedFinalImagesSub")}</h2>
+      </div>
+      <div className="case-study-screenshot-grid">
+        {items.map((item, index) => (
+          <motion.button
+            key={item.image}
+            type="button"
+            className="case-study-screenshot-card"
+            data-device={item.device || "phone"}
+            aria-label={`Open ${item.label}`}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+            viewport={{ once: true, amount: 0.12 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.45,
+              delay: prefersReducedMotion ? 0 : (index % 3) * 0.04,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            onClick={() =>
+              onOpen({
+                type: "panel",
+                label: item.label,
+                image: item.image,
+                color: project.color,
+                index,
+              })
+            }
+          >
+            <img
+              src={resolveCaseStudyImage(item.image)}
+              alt={item.label}
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="case-study-screenshot-caption">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {item.label}
+            </span>
+          </motion.button>
+        ))}
+      </div>
     </motion.section>
   );
 }
