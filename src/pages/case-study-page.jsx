@@ -421,18 +421,15 @@ export function CaseStudyPage() {
                 {t("processSub")}
               </motion.h2>
             </div>
-            <motion.p
-              className="case-study-section-copy"
-              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+            <CaseStudyCopy
+              body={project.process}
+              prefersReducedMotion={prefersReducedMotion}
+              initialX={24}
               transition={{
                 ...revealTransition,
                 delay: prefersReducedMotion ? 0 : 0.28,
               }}
-            >
-              {project.process}
-            </motion.p>
+            />
             {project.processImageLayout === "carousel" ? (
               <CaseStudyMediaCarousel
                 items={project.processImages}
@@ -490,18 +487,15 @@ export function CaseStudyPage() {
                 {t("solutionSub")}
               </motion.h2>
             </div>
-            <motion.p
-              className="case-study-section-copy"
-              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+            <CaseStudyCopy
+              body={project.solution}
+              prefersReducedMotion={prefersReducedMotion}
+              initialX={-24}
               transition={{
                 ...revealTransition,
                 delay: prefersReducedMotion ? 0 : 0.28,
               }}
-            >
-              {project.solution}
-            </motion.p>
+            />
             {!project.figmaEmbedAtEnd && (project.figmaEmbed ? (
               <FigmaEmbed
                 src={project.figmaEmbed}
@@ -712,17 +706,32 @@ function CaseStudySection({
           {title}
         </motion.h2>
       </div>
-      <motion.p
-        className="case-study-section-copy"
-        initial={{ opacity: 0, x: prefersReducedMotion ? 0 : direction * 24 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
+      <CaseStudyCopy
+        body={body}
+        prefersReducedMotion={prefersReducedMotion}
+        initialX={direction * 24}
         transition={{ ...transition, delay: prefersReducedMotion ? 0 : 0.26 }}
-      >
-        {body}
-      </motion.p>
+      />
       {children}
     </motion.section>
+  );
+}
+
+function CaseStudyCopy({ body, prefersReducedMotion, initialX, transition }) {
+  const paragraphs = Array.isArray(body) ? body : [body];
+
+  return (
+    <motion.div
+      className="case-study-section-copy"
+      initial={{ opacity: 0, x: prefersReducedMotion ? 0 : initialX }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={transition}
+    >
+      {paragraphs.map((paragraph, index) => (
+        <p key={`${index}-${paragraph}`}>{paragraph}</p>
+      ))}
+    </motion.div>
   );
 }
 

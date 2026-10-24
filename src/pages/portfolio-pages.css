@@ -1933,14 +1933,21 @@
   content: '';
 }
 
-.case-study-section-copy,
-.case-study-section > p:not(.case-study-label) {
+.case-study-section-copy {
   max-width: 42rem;
   margin: 0;
   color: #f5f3ef;
   font-size: 20px;
   line-height: 1.5;
   letter-spacing: 0;
+}
+
+.case-study-section-copy p {
+  margin: 0 0 16px;
+}
+
+.case-study-section-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .case-study-image-grid,

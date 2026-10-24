@@ -18,12 +18,27 @@ export const projects = [
     figmaEmbedAtEnd: true,
     color: 'cyan',
     outcomes: ['Clearer clinical and support information', 'Faster access to enrollment resources', 'More confident prescribing conversations'],
-    overview: 'ICOTYDE withMe HCP simplifies access, support, and enrollment information for dermatologists prescribing ICOTYDE (icotrokinra), helping turn dense clinical and insurance details into a clear, confident experience.',
-    problem: 'Healthcare professionals often face confusion and delays when trying to access patient support, insurance, and enrollment information for prescription treatments. ICOTYDE HCP needed a streamlined way to guide physicians through those resources without adding to their already limited time.',
-    research: 'The project brought together clinical information, access and support resources, prior authorization steps, financial assistance programs, and enrollment forms. The challenge was to make those connected needs easy to find and understand in one experience.',
-    process: 'My team and I worked closely in Figma to build a visual language based on trust and clarity. Across design, content, and development, we refined the page flow, navigation, and visual hierarchy so physicians and their staff could move from clinical data to patient access tools without unnecessary friction.',
+    overview: [
+      'ICOTYDE withMe HCP is a responsive site for dermatologists prescribing ICOTYDE (icotrokinra) for plaque psoriasis. It brings clinical, access, and enrollment information into one experience.',
+      'The design connects prescribing information with practical support resources, helping healthcare professionals move from understanding the treatment to finding the next relevant action.',
+    ],
+    problem: [
+      'Healthcare professionals can lose time navigating clinical information, insurance requirements, and patient support resources for prescription treatments.',
+      'The experience needed to make these connected tasks easy to find and understand, without adding friction to a clinician’s already limited time.',
+    ],
+    research: [
+      'The content included clinical information, access and support resources, prior authorization steps, financial assistance programs, and enrollment forms.',
+      'The work focused on organizing these related needs into a clear information path, so physicians and their staff could locate the right resource without searching across disconnected content.',
+    ],
+    process: [
+      'As part of a three-designer StudioRX team, I worked in Figma with design, content, and development partners to shape the visual language and page flow.',
+      'We refined navigation and hierarchy around trust and clarity, connecting clinical details with the patient access tools staff need to take action.',
+    ],
     processImages: [{ label: 'Visual language and layout studies', image: 'example1.png' }, { label: 'Design system hero + graphics', image: 'example2.png' }],
-    solution: 'Working with UX, development, and product design, we created a friendly, accessible site that communicates ICOTYDE\'s clinical value and supports HCPs in taking real action: prescribing with confidence and helping their patients start treatment sooner. The completed work was handed to Johnson & Johnson\'s development team through Figma for launch.',
+    solution: [
+      'The final design presents ICOTYDE’s clinical value alongside support and enrollment resources in a clear, accessible responsive experience.',
+      'The design was handed to Johnson & Johnson’s development team in Figma for launch, with the goal of helping healthcare professionals move through prescribing and patient-support tasks with confidence.',
+    ],
     solutionImage: 'ICOTYDE withMe HCP final design',
   },
   {
@@ -46,14 +61,29 @@ export const projects = [
       'Consistent desktop and mobile layouts',
       'Infusion-locator design to help patients find care',
     ],
-    overview: 'IMAAVY Caregiver Resource brings condition education and practical support into a responsive website for patients and caregivers. The site includes information about generalized myasthenia gravis (gMG), with the gMG experience intended for patients 12 years and older who are anti-AChR or anti-MuSK antibody-positive, alongside a separate resource pathway for warm autoimmune hemolytic anemia (wAIHA).',
-    problem: 'Patients and caregivers need to understand complex conditions and find help without getting lost in dense medical information. The website needed to balance approachable layouts, accessible navigation, and pharmaceutical content requirements while making support resources and the infusion locator easy to find.',
-    research: 'The design work centered on organizing condition education, treatment information, safety content, and support resources. The sitemap shows the information architecture behind the experience, connecting the site sections and navigation pathways. Clear page hierarchy and navigation were important considerations for making the experience easier to follow across desktop and mobile.',
+    overview: [
+      'IMAAVY Caregiver Resource is a responsive website that brings condition education and practical support together for patients and caregivers.',
+      'It provides separate pathways for generalized myasthenia gravis (gMG) and warm autoimmune hemolytic anemia (wAIHA), with the gMG experience intended for eligible patients aged 12 and older.',
+    ],
+    problem: [
+      'Patients and caregivers need to understand complex conditions and find relevant help without getting lost in dense medical information.',
+      'The site had to balance approachable content, accessible navigation, and pharmaceutical review requirements while making support resources and the infusion locator easy to find.',
+    ],
+    research: [
+      'The information architecture brings together condition education, treatment details, safety content, and support resources. A sitemap mapped how these topics connect across the site.',
+      'The design work focused on clear page hierarchy and navigation, helping patients and caregivers follow the right pathway on desktop or mobile.',
+    ],
     researchImages: [
       { label: 'Sitemap and information architecture', image: 'imaavy-caregiver-sitemap' },
     ],
-    process: 'I partnered with one other designer to lay out the full website and the infusion locator in Figma. We developed desktop and mobile layouts that kept the brand consistent while adapting navigation, content sections, and safety information to smaller screens. Accessibility and pharmaceutical review requirements guided the layout decisions throughout the work.',
-    solution: 'The resulting design creates a clearer path from learning about a condition to finding resources and help. Desktop layouts give information room to breathe, while mobile layouts bring the same content into a focused, single-column experience. The screens below show the responsive design work; the live website and Figma file are linked at the end.',
+    process: [
+      'I partnered with one other designer to lay out the website and infusion locator in Figma, creating desktop and mobile designs for the full experience.',
+      'We adapted navigation, content sections, and safety information for smaller screens while keeping the brand consistent. Accessibility and pharmaceutical review requirements guided the layout decisions.',
+    ],
+    solution: [
+      'The design creates a clearer path from learning about a condition to finding support and care resources, including the infusion locator.',
+      'Desktop layouts give information room to breathe, while mobile layouts use a focused single column. The live site and Figma design are available below.',
+    ],
     heroScreens: [
       { label: 'Desktop landing page', image: 'imaavy-caregiver-desktop-landing', device: 'desktop' },
       { label: 'Mobile landing page', image: 'imaavy-caregiver-mobile-landing', device: 'phone' },
@@ -95,12 +125,24 @@ export const projects = [
     role: 'UX/UI design, user research, and prototyping',
     color: 'amber',
     outcomes: ['Personalized gear recommendations', 'Clear product comparisons', 'A player-led review community'],
-    overview: 'Gaming Gear is a mobile app concept that makes finding gaming equipment more personal, informed, and community-driven.',
+    overview: [
+      'Gaming Gear is a mobile app concept for discovering equipment that fits how a person plays.',
+      'It brings tailored recommendations, peer reviews, product comparisons, and community discussion into one gear-discovery experience.',
+    ],
     heroImage: 'gaming-gear-highfidelity',
     thumbnail: { mockup: 'phones', screens: ['gaming-splash', 'gaming-landing', 'gaming-product'] },
-    problem: 'Shopping for gaming gear often means sorting through broad retail catalogs with little help deciding what actually suits a player. The experience needed to make discovery feel more relevant and trustworthy.',
-    research: 'I explored how players research equipment, compare specifications, and look for real-world feedback before buying. The strongest opportunity was to bring recommendations, peer reviews, and product comparison into one focused flow.',
-    process: 'I mapped the gear-discovery journey, then designed and tested flows for personalized recommendations, side-by-side comparisons, and community discussion. Each iteration prioritized quick decisions without losing the detail players need.',
+    problem: [
+      'Broad retail catalogs can make it difficult for players to find gear that matches their play style and priorities.',
+      'The concept needed to make discovery feel more relevant and trustworthy while giving players enough information to compare options.',
+    ],
+    research: [
+      'I explored how players research equipment, compare specifications, and look for real-world feedback before buying.',
+      'That work pointed to an opportunity to bring personalized recommendations, peer reviews, and product comparison into one focused flow.',
+    ],
+    process: [
+      'I mapped the gear-discovery journey and designed flows for personalized recommendations, side-by-side comparisons, and community discussion.',
+      'I tested and refined those flows to support quicker decisions without removing the product detail players need to make a confident choice.',
+    ],
     researchImages: [
       { label: 'Gaming gear discovery flow', image: 'google-wires' },
       { label: 'Usability study via Maze.co', image: 'maze' },
@@ -111,7 +153,10 @@ export const projects = [
     ],
     figmaEmbed: 'https://embed.figma.com/design/6Iwe4QDjlpNldz9Ouz0oyi/Ryan-Local_Google-Gaming-Gear?node-id=0-1&embed-host=share',
     figmaEmbedAtEnd: true,
-    solution: 'The final concept gives players a clearer path from browsing to confidence. Personalized suggestions surface relevant gear, while reviews, comparisons, and community feedback support more informed decisions.',
+    solution: [
+      'The final concept helps players move from browsing toward a more informed choice with personalized gear suggestions.',
+      'Product comparisons, peer reviews, and community feedback add context to recommendations and help players evaluate their options.',
+    ],
     solutionImage: 'Final Gaming Gear app',
     finalImageLayout: 'screenshots',
     finalImages: [
@@ -149,15 +194,30 @@ export const projects = [
     role: 'UX/UI design, interaction design, on-site content strategy',
     color: 'green',
     outcomes: ['A self-guided booth experience for HCPs', 'Clearer presentation of clinical data', 'A more memorable, hands-on touchpoint at ECTRIMS'],
-    overview: 'GL HCP ECTRIMS Booth turns dense clinical content into an interactive visual aid that HCPs can explore at their own pace on the conference floor.',
+    overview: [
+      'GL HCP ECTRIMS Booth is an interactive touchscreen visual aid for healthcare professionals at the ECTRIMS conference.',
+      'It turns dense clinical and treatment information into short, self-guided modules that attendees can explore at their own pace on the conference floor.',
+    ],
     heroImage: 'ectrims-booth-hero',
     thumbnail: { mockup: 'tablet', screens: ['ectrims-iva'] },
-    problem: 'Conference booths often rely on static posters or rep-led conversations, making it hard for HCPs to engage with clinical information on their own terms in a busy, high-traffic environment.',
-    research: 'I looked at how HCPs move through booths at conferences like ECTRIMS, what pulls their attention in a few seconds, and how much information they realistically absorb standing at a kiosk.',
+    problem: [
+      'Static posters and rep-led conversations can make it difficult for attendees to explore clinical information at their own pace.',
+      'The booth experience needed to work in a busy, high-traffic setting, where people have limited time and may be standing at a kiosk.',
+    ],
+    research: [
+      'I considered how healthcare professionals move through conference booths, what can catch their attention quickly, and how they use a touchscreen kiosk.',
+      'Those constraints informed how much content to present at once and how to make clinical information easier to scan in the booth environment.',
+    ],
     researchImages: [{ label: 'Functional annotations', image: 'func-anno' }, { label: 'Sitemap', image: 'ectrims-sitemap' }],
-    process: 'I designed a touchscreen flow that breaks clinical content into short, visual modules, prioritizing quick orientation over dense reading, then tested pacing and navigation for a booth setting.',
+    process: [
+      'I designed a touchscreen flow that breaks clinical content into short, visual modules, prioritizing quick orientation over dense reading.',
+      'I tested the pacing and navigation for the booth setting so healthcare professionals could explore the information independently and at a comfortable pace.',
+    ],
     processImages: [{ label: 'Patient Alice clicked on', image: 'alice' }, { label: 'Touchscreen wireframes', image: 'wires' }],
-    solution: 'The final experience gives HCPs an interactive, self-paced way to explore clinical information at the booth, making the conversation with reps more focused and the takeaway more memorable.',
+    solution: [
+      'The final experience gives healthcare professionals an interactive, self-paced way to explore clinical information at the booth.',
+      'By letting attendees choose what to explore, the visual aid supports more focused conversations with representatives and a more memorable touchpoint.',
+    ],
     solutionImage: 'Final GL HCP ECTRIMS Booth experience',
     figmaEmbed: 'https://embed.figma.com/design/KsQ7OzQkvb9HgF10CooYHD/Ryan_Local_Toleb-GL_HCP_ECTRIMS_Booth?node-id=93-376&embed-host=share',
     figmaEmbedAtEnd: true,
@@ -183,11 +243,23 @@ export const projects = [
       'Gamified education path with earned blocks across key care categories',
       'A final handoff to Lilly representatives for personalized planning',
     ],
-    overview: 'The Alzheimer\'s Digital Panels experience guided Becker\'s Congress attendees through Alzheimer\'s education in a booth setting. As users progressed through each step and category, they earned blocks that built their personalized pathway and led into a conversation with a Lilly representative.',
-    problem: 'Designing the booth meant balancing accessibility, engagement, and education in one physical space. It needed to be fully wheelchair accessible while also making the experience motivating enough for attendees to explore categories such as assessment and diagnosis.',
-    research: 'The team mapped the booth around how attendees would physically approach, navigate, and complete the touchpad experience in a busy conference environment. The schematic helped align the accessible layout, interaction flow, and rep handoff before the experience moved into build.',
+    overview: [
+      'The Alzheimer’s Digital Panels guided Becker’s Congress attendees through Alzheimer’s education in an interactive booth setting.',
+      'As people explored each step and care category, they earned blocks that formed a personalized pathway and led to a conversation with a Lilly representative.',
+    ],
+    problem: [
+      'The booth needed to balance education and engagement in a physical conference environment while remaining accessible to all attendees.',
+      'The interaction was designed to be wheelchair accessible and make topics such as assessment and diagnosis inviting to explore.',
+    ],
+    research: [
+      'The team mapped how attendees would approach the booth, navigate the touchpad, and complete the experience in a busy conference setting.',
+      'A booth schematic helped align the accessible physical layout, interaction flow, and handoff to Lilly representatives before development.',
+    ],
     researchImages: [{ label: 'Booth schematic and accessible layout', image: 'lilly-booth-schematic' }],
-    process: 'My team and I built the experience around Lilly\'s branding, using their core colors and visual identity to keep the booth cohesive and recognizable. We created an animated prototype to communicate the gamified interaction flow and accessibility requirements to development.',
+    process: [
+      'My team and I used Lilly’s core colors and visual identity to keep the booth cohesive and recognizable.',
+      'We created an animated prototype to communicate the gamified interaction flow and accessibility requirements to the development team.',
+    ],
     processImageLayout: 'carousel',
     processImages: [
       { label: 'Booth screens', image: 'lilly-booth-screen-1' },
@@ -200,7 +272,10 @@ export const projects = [
       { label: 'Booth screens 09', image: 'lilly-booth-screen-9' },
       { label: 'Booth screens 10', image: 'lilly-booth-screen-10' },
     ],
-    solution: 'After several rounds of refinement, the design was approved for distribution and brought to life as a real interactive touchpad booth at Becker\'s Convention. The final experience rewarded curiosity, helped attendees move step by step through key categories, and turned education into a clear next action with Lilly representatives.',
+    solution: [
+      'After several rounds of refinement, the design was approved for distribution and built as an interactive touchpad booth at Becker’s Convention.',
+      'The final experience rewarded exploration across key care categories and gave attendees a clear next step: a personalized planning conversation with a Lilly representative.',
+    ],
     solutionImage: 'Final Lilly Alzheimer\'s Digital Panels booth',
     solutionImageKey: 'lilly-booth-hero',
     finalImages: [
@@ -234,19 +309,34 @@ export const projects = [
       'Integrated QR code driving direct traffic to Premium Technology',
       'Sustainable, ESG-aligned brand merchandise design',
     ],
-    overview: 'Premium Technology, a fintech company based in Jersey City, brought me on to design a sustainable, ESG-themed tote bag for Sibos 2023, the world\'s premier annual conference, exhibition, and networking event for financial leaders across the global financial industry.',
+    overview: [
+      'Premium Technology commissioned a sustainable, ESG-themed tote bag for Sibos 2023, a global conference for financial leaders.',
+      'The design brought the company’s sustainability message into a physical conference touchpoint, extending its brand beyond digital products.',
+    ],
     heroImage: 'sibos-tote-hero',
-    problem: 'The tote bag needed to stand out at a major global fintech convention while representing Premium Technology\'s ESG (Environmental, Social, and Governance) framework and vision for worldwide expansion without feeling overly aggressive or off-brand.',
-    research: 'I studied different bag designs and layouts, print formats, and ESG visual cues, exploring directions ranging from high-contrast orange graphics to more grounded, eco-friendly palettes.',
+    problem: [
+      'The tote needed to stand out at a major fintech convention while representing Premium Technology’s environmental, social, and governance principles.',
+      'The visual direction also needed to support the company’s global outlook without feeling too aggressive or disconnected from its brand identity.',
+    ],
+    research: [
+      'I studied bag layouts, print formats, and visual cues commonly associated with sustainability.',
+      'Early exploration ranged from high-contrast orange graphics to more grounded palettes, helping clarify how to balance visibility with the company’s brand.',
+    ],
     researchImages: [
       { label: 'Initial concept exploration', image: 'sibos-concept1' },
       { label: 'Alternative design direction', image: 'sibos-concept2' },
     ],
-    process: 'While initial concepts were bold, they were ultimately sidelined as the graphics felt too aggressive and strayed from the core brand identity. I shifted to organic, earthy hues and an inviting typeface, incorporating global landmarks like the Statue of Liberty alongside an integrated QR code.',
+    process: [
+      'The first concepts were set aside because their graphics felt too aggressive and strayed from the core brand identity.',
+      'I shifted to organic, earthy hues and an inviting typeface, then combined global landmarks such as the Statue of Liberty with an integrated QR code.',
+    ],
     processImages: [
       { label: 'Final tote bag design & QR code gateway', image: 'sibos-final' },
     ],
-    solution: 'The tote bag design was a smashing success at Sibos 2023. More than 500 bags were given out to convention-goers among 9,000 attending financial professionals, effectively expanding brand presence outside typical app and website mediums.',
+    solution: [
+      'More than 500 bags were distributed to conference visitors at Sibos 2023, which had 9,000 financial professionals in attendance.',
+      'The QR code connected the physical giveaway to Premium Technology’s digital presence, while the sustainable materials and visual direction carried the ESG theme into the event.',
+    ],
     solutionImage: 'Final Sibos 2023 Tote Bag & Premium Technology Team',
     solutionImageKey: 'sibos-premium',
   },
@@ -264,13 +354,28 @@ export const projects = [
     heroImage: 'sft-hero',
     color: 'cyan',
     outcomes: ['A simpler, more approachable internal SaaS tool', 'Accessible navigation for a non-technical business team', 'A redesign shipped within existing engineering constraints'],
-    overview: 'The Secure File Transfer system is an internal SaaS platform built for Premium Technology\'s business team to securely share sensitive client and product data on the backend.',
-    problem: 'Design a new and improved secure and private file transfer system for the Premium Technology business team to share sensitive client and product (FinShare) data files internally on the backend. As the sole designer on this project, and it being my first design for a secure file transfer system, I was excited to take on this large task.',
-    research: 'I began by creating low and high fidelity screens in Figma. I then analyzed the limitations of our current system against other secure file transfer examples online. Finally, I discussed with the development team what limitations we had, and how the structure of the file transfer system would behave in code.',
+    overview: [
+      'The Secure File Transfer system is an internal SaaS platform for Premium Technology’s business team to share sensitive client and product data.',
+      'The redesign focused on making secure file exchange more approachable for the people who use it as part of their internal workflow.',
+    ],
+    problem: [
+      'The existing file-transfer experience needed a clearer, more private way to share client and FinShare product data internally.',
+      'As the sole product designer, I needed to shape the experience around the business team’s needs while accounting for the technical constraints of the existing system.',
+    ],
+    research: [
+      'I created low- and high-fidelity screens in Figma and reviewed other secure file-transfer products to compare their structures and interaction patterns.',
+      'I also worked with the development team to understand the system’s technical limits and how the file-transfer flow would behave in code.',
+    ],
     researchImages: [{ label: 'Low fidelity screens', image: 'sft-lowfi-1' }, { label: 'Low fidelity screens', image: 'sft-lowfi-2' }],
-    process: 'As many of our business team are older, I made sure to incorporate as much simplicity into the design as possible. I used our blue brand colors throughout, while keeping navigation and buttons accessible-friendly.',
+    process: [
+      'I kept the interface simple, using the company’s blue brand colors and familiar patterns to make key actions easier to recognize.',
+      'Navigation and buttons were designed for clarity and accessibility, with the needs of a non-technical business team in mind.',
+    ],
     processImages: [{ label: 'High fidelity dashboard screens', image: 'sft-highfi-1' }],
-    solution: 'The Premium Technology SFT redesign was a success. The only real challenge was working within the code limitations of PT\'s tech team, who were using a very old version of Java for the secure file transfer system.',
+    solution: [
+      'The redesign delivered a simpler internal tool with clearer navigation for the business team.',
+      'The final design worked within the existing engineering constraints, including the secure file-transfer system’s legacy Java implementation.',
+    ],
     solutionImage: 'Final Secure File Transfer system design',
     figmaEmbed: 'https://embed.figma.com/design/646mwFKDNkPaEU7dD6zUmi/SFT-PT-2024?node-id=0-1&embed-host=share',
     figmaEmbedAtEnd: true,
